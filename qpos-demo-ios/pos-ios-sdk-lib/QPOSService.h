@@ -701,5 +701,13 @@ typedef NS_ENUM(NSInteger,DoTradeLog) {
            pinipekcheckValue:(NSString *)pinipekcheckValue
                        block:(void(^)(BOOL isSuccess,NSString *stateStr))EMVBlock;
 -(void)asynresetPosStatus;
+-(void)updateEmvAPP:(NSInteger )operationType data:(NSMutableDictionary*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
+#pragma mark -- updateQuickEMVStatus
+-(void)getQuickEMVStatus:(NSInteger )operationType data:(NSMutableDictionary*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
+#pragma mark init emv app
+
+-(NSMutableDictionary *)getEMVAPPDict;
+#pragma mark init emv capk
+-(NSMutableDictionary *)getEMVCAPK;
 @end
 
