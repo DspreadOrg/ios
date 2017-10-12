@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DSPUtil : NSObject
+@interface Util : NSObject
 
 +(NSString*)byteArray2Hex: (NSData *)data;
 +(NSData *)HexStringToByteArray: (NSString*)hexString;

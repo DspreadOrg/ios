@@ -260,7 +260,7 @@ typedef NS_ENUM(NSInteger,DoTradeLog) {
 @class DoTrade;
 @class GetPosInfo;
 @class WaitSetAmount;
-@class DSPUtil;
+@class Util;
 @class CommandDownlink;
 @class CommandUplink;
 @class CmdId;

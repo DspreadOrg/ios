@@ -10,7 +10,7 @@
 #import "QPOSService.h"
 
 @class QPOSService;
-@class DSPUtil;
+@class Util;
 
 @interface MainDetailViewController : UIViewController<QPOSServiceListener,UIActionSheetDelegate>
 
