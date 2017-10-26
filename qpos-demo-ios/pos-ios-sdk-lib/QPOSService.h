@@ -709,5 +709,6 @@ typedef NS_ENUM(NSInteger,DoTradeLog) {
 -(NSMutableDictionary *)getEMVAPPDict;
 #pragma mark init emv capk
 -(NSMutableDictionary *)getEMVCAPK;
+-(void)setDoTradeMode:(DoTradeMode)doTradeMode;
 @end
 

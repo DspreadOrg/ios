@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "530599986.149211"
+            timestampString = "530614770.05731"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1072"
-            endingLineNumber = "1072"
-            landmarkName = "-doTrade:"
+            startingLineNumber = "441"
+            endingLineNumber = "441"
+            landmarkName = "-onRequestOnlineProcess:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
