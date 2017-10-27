@@ -1076,7 +1076,7 @@
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
     _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
     mTransType = TransactionType_GOODS;
-    _currencyCode = @"704";
+    _currencyCode = @"608";
     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
 //    [pos setCardTradeMode:CardTradeMode_ONLY_TAP_CARD];
     //[pos doTrade:30];
