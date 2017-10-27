@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "530516287.989568"
+            timestampString = "530771269.763773"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1253"
-            endingLineNumber = "1253"
+            startingLineNumber = "1254"
+            endingLineNumber = "1254"
             landmarkName = "-testUpdatePosFirmware"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "530516287.989568"
+            timestampString = "530771269.763773"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1256"
-            endingLineNumber = "1256"
+            startingLineNumber = "1257"
+            endingLineNumber = "1257"
             landmarkName = "-testUpdatePosFirmware"
             landmarkType = "7">
          </BreakpointContent>

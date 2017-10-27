@@ -1076,7 +1076,7 @@
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
     _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
     mTransType = TransactionType_GOODS;
-    _currencyCode = @"608";
+    _currencyCode = @"704";
     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
 //    [pos setCardTradeMode:CardTradeMode_ONLY_TAP_CARD];
     //[pos doTrade:30];
@@ -1096,6 +1096,7 @@
     //    [pos connectBT:bluetoothAddress];
     //    [self testDoTradeNFC];
     //test demo
+    
     //    [pos cbc_mac_cn_all:24 atype:0 otype:0 data:@"536E04870E6EB939492B782291EE4EF5" delay:5 withResultBlock:^(NSString *str) {
     //        NSLog(@"str: %@",str);
     //    }];
