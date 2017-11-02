@@ -442,13 +442,13 @@
 //    NSString * a = @"5F200A424E2F544943203130384F08A0000001523010015F24032508319F160F4243544553542031323334353637389F21031102159A031708239F02060000001000039F03060000000000009F34030203009F120D44494E45525320434C554220319F0607A00000015230105F300206209F4E0F616263640000000000000000000000C408666666FFFFFF1084C10AFFFF9876543210E0003EC708492D77211D0EF0FCC00AFFFF9876543210E00072C2820170208BE628BFA673BBE2D94299CD25943C5DF0FB236F014A548A9D6CB667B30AF3C38FBEDB25321E9DFD1CE45E38ED3EB3206B7BAE79051239D9F6316D62CE8A4C50357DFAA55A6E99B483DD6B7D15778AAB6A8D841A97A273F9EB55E625833AAC8AB38660AD5D09A6661E60F70B0E5DE1930CAED73C2DE88F6513BEE7FF3C8939C6CD68C3DEDEC65A1451EC0AE39E93B00AF5EF434893A0D43C421EE1A1121986987E54E67614510DF4253FD32D88018EA25D53C62C822B75BC032A9A2637DD2AF8A84DF27CF540F896453B7356D32E064B85AC6ED003D7977CB0D55D5EDEB2D6DEC86D8CF0FA01DE14CE6163D584F10D167573E3F42E3054E7C92F68941F961D9B5A5F5211C7B04EC9955DEF466A2C3E7AAC5FE20F4A63DBB616FE3204ED2C5AB6AEFA85287F363C3BA528186264346D6E47FE9926BEA419FEBBA3E762155CDEC740C376D8980E994B755AB4CF3051B40626FA4304EF2F67EFDA079E0E53E85494A7373D155C555B8A7C4E0BD30F34C700";
     NSLog(@"onRequestOnlineProcess =**** %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
     //    [self claMac];
-         [self batchSendAPDU];
+    //    [self batchSendAPDU];
     //    [pos calcMacDouble_all:@"12345678123456781234567812345678" keyIndex:0 delay:5];
     //    [pos pinKey_TDES_all:0 pin:@"1122334455667788" delay:5];
     
  
 
-    
+//    
     NSString *msg = @"Replied success.";
     msgStr = @"Request data to server.";
     [self conductEventByMsg:msgStr];
@@ -1051,9 +1051,24 @@
     
     mTransType = TransactionType_GOODS;
     _currencyCode = @"156";
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-    _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+    //获取系统是24小时制或者12小时制
+    NSString*formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    NSRange containsA =[formatStringForHours rangeOfString:@"a"];
+    BOOL hasAMPM =containsA.location != NSNotFound;
+    //hasAMPM==TURE为12小时制，否则为24小时制
+    if (hasAMPM) {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"yyyyMMddhhmmss"];
+        _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+        
+        
+    }else{
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+         _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+       
+    }
+
     
     NSMutableDictionary *dataDict = [NSMutableDictionary dictionary];
     [dataDict setObject:[NSString stringWithFormat:@"%d",30] forKey:@"timeout"];
@@ -1072,18 +1087,38 @@
 - (IBAction)doTrade:(id)sender {
     self.textViewLog.backgroundColor = [UIColor whiteColor];
     self.textViewLog.text = @"Starting...";
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-    _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+    //获取系统是24小时制或者12小时制
+    NSString*formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    NSRange containsA =[formatStringForHours rangeOfString:@"a"];
+    BOOL hasAMPM =containsA.location != NSNotFound;
+    //hasAMPM==TURE为12小时制，否则为24小时制
+    if (hasAMPM) {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"yyyyMMddhhmmss"];
+         _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+        
+    }else{
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+        _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+        
+    }
+
     mTransType = TransactionType_GOODS;
-    _currencyCode = @"608";
+    _currencyCode = @"484";
     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
+    [pos doTrade:30];
 //    [pos setCardTradeMode:CardTradeMode_ONLY_TAP_CARD];
     //[pos doTrade:30];
      //[pos doCheckCard:30 keyIndex:0];
 //    [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
-    [pos doTrade:30 batchID:@"abcd"];
-    
+//     [pos doTrade:30 batchID:@"abcd"];
+//    [pos doSetBuzzerOperation:30 block:^(BOOL isSuccess, NSString *stateStr) {
+//        if (isSuccess) {
+//            self.textViewLog.text = @"worked";
+//        }
+//    }];
+  
     //    [pos setCardTradeMode:CardTradeMode_UNALLOWED_LOW_TRADE];
     //[pos doTrade:30];
    /* [pos doUpdateIPEKOperation:@"00" tracksn:@"FFFF000000BB81200000" trackipek:@"F24B13AC6F579B929FBBFE58BC2A0647" trackipekCheckValue:@"CDF80B70C3BBCDDC" emvksn:@"FFFF000000BB81200000" emvipek:@"F24B13AC6F579B929FBBFE58BC2A0647" emvipekcheckvalue:@"CDF80B70C3BBCDDC" pinksn:@"FFFF000000BB81200000" pinipek:@"F24B13AC6F579B929FBBFE58BC2A0647" pinipekcheckValue:@"CDF80B70C3BBCDDC" block:^(BOOL isSuccess, NSString *stateStr) {
@@ -1128,14 +1163,14 @@
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
-//    [pos doUpdateIPEKOperation:@"00" tracksn:@"09117101800165000000" trackipek:@"507984DA9470B6267481DF25CDA1D4E2" trackipekCheckValue:@"0F444E0000000000" emvksn:@"09117101800165000000" emvipek:@"507984DA9470B6267481DF25CDA1D4E2" emvipekcheckvalue:@"0F444E0000000000" pinksn:@"09117101800165000000" pinipek:@"507984DA9470B6267481DF25CDA1D4E2" pinipekcheckValue:@"0F444E0000000000" block:^(BOOL isSuccess, NSString *stateStr) {
+//    [pos doUpdateIPEKOperation:@"00" tracksn:@"09117091100141E00002" trackipek:@"B4B53683178E818091A4FE121CA6EE90" trackipekCheckValue:@"25CD3450075041A7" emvksn:@"09117091100141E00002" emvipek:@"B4B53683178E818091A4FE121CA6EE90" emvipekcheckvalue:@"25CD3450075041A7" pinksn:@"09117091100141E00002" pinipek:@"B4B53683178E818091A4FE121CA6EE90" pinipekcheckValue:@"25CD3450075041A7" block:^(BOOL isSuccess, NSString *stateStr) {
 //        if (isSuccess) {
 //            self.textViewLog.text = stateStr;
 //        }
 //    }];
     
 //     [pos udpateWorkKey:@"6801000043B089D1DF287A9F685F0925A9C7D124D2ADDF8EB59467B28EBDA688F50F76B31944C2110CF557E2388014A63E1B1C73CE04653C37BFA281D3687372BA4486EECF312280512E599A6C84DD0E276F8A2D20630A3BAF2312A3C4D1E05F6B166F0582448F9CBE0A073931876C579DC3B6A32E17F10430A0CC29545D60AD9F591EFF6EAA94A7BAE1C5B1F8529B0AD52236A821BF67E561A85D1DE1A12C7D1EF9A7F91414DF5439BCAACAE0897144093292BBAA3F96205A5558A093A62E7C2EA23F8F07B84EB9DD3474937A855AA8C510B92618ACF7867A9ADDE264A3469FAC3BFCDDDC938BF3F6361C384C31A6E902203FF97A9DB998F6293A8DCECF27EE42837E0161A69DA0D321C4CF11C4E10AC366292C214878F42D8536466B31BAAB564339FAE952CD7C9A2857AB6604845DCFDEFB00CD64D6BBC3DA917C6B255A5A884B1E6DB70D32B0FA4BFE01F3AF755FB6AD71A52F245BF5625AEDC2F6A5FF92E48F5DA212BE18A84C42E20DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"];
-    //[pos getQPosInfo];
+    [pos getQPosInfo];
     //[self testUpdatePosFirmware];
     
 }
