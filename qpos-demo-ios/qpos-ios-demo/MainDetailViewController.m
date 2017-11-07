@@ -1087,11 +1087,10 @@
 - (IBAction)doTrade:(id)sender {
     self.textViewLog.backgroundColor = [UIColor whiteColor];
     self.textViewLog.text = @"Starting...";
-    //获取系统是24小时制或者12小时制
+    //get system time,12hrs or 24hrs
     NSString*formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
     NSRange containsA =[formatStringForHours rangeOfString:@"a"];
     BOOL hasAMPM =containsA.location != NSNotFound;
-    //hasAMPM==TURE为12小时制，否则为24小时制
     if (hasAMPM) {
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
         [dateFormatter setDateFormat:@"yyyyMMddhhmmss"];
@@ -1107,12 +1106,12 @@
     mTransType = TransactionType_GOODS;
     _currencyCode = @"484";
     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
-    [pos doTrade:30];
+//    [pos doTrade:30];
 //    [pos setCardTradeMode:CardTradeMode_ONLY_TAP_CARD];
     //[pos doTrade:30];
      //[pos doCheckCard:30 keyIndex:0];
 //    [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
-//     [pos doTrade:30 batchID:@"abcd"];
+      [pos doTrade:30 batchID:@"abcd"];
 //    [pos doSetBuzzerOperation:30 block:^(BOOL isSuccess, NSString *stateStr) {
 //        if (isSuccess) {
 //            self.textViewLog.text = @"worked";
