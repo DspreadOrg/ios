@@ -686,7 +686,7 @@ typedef NS_ENUM(NSInteger,DoTradeLog) {
                                        delay:(NSInteger)timeout
                                        block:(void (^)(BOOL isSuccess, NSString *amountStr))inputAmountBlock;
 
--(void)updateEmvCAPK:(NSInteger )operationType data:(NSString *)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateCAPKBlock;
+-(void)updateEmvCAPK:(NSInteger )operationType data:(NSArray *)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateCAPKBlock;
 -(void)asynResetPosStatusBlock:(void(^)(BOOL isSuccess,NSString *stateStr))resetPosStatusBlock;
 -(void)buildPinBlock:(NSString *)workKey workKeyCheck:(NSString *)workKeyCheck encryptType:(NSInteger)encryptType keyIndex:(NSInteger)keyIndex maxLen:(NSInteger)maxLen typeFace:(NSString *)typeFace cardNo:(NSString *)cardNo date:(NSString *)date delay:(NSInteger)timeout;
 -(void)doUpdateIPEKOperation:(NSString *)groupKey
@@ -701,7 +701,7 @@ typedef NS_ENUM(NSInteger,DoTradeLog) {
            pinipekcheckValue:(NSString *)pinipekcheckValue
                        block:(void(^)(BOOL isSuccess,NSString *stateStr))EMVBlock;
 -(void)asynresetPosStatus;
--(void)updateEmvAPP:(NSInteger )operationType data:(NSMutableDictionary*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
+-(void)updateEmvAPP:(NSInteger )operationType data:(NSArray*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
 #pragma mark -- updateQuickEMVStatus
 -(void)getQuickEMVStatus:(NSInteger )operationType data:(NSMutableDictionary*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
 #pragma mark init emv app
