@@ -34,6 +34,7 @@
     dispatch_queue_t self_queue;
     TransactionType mTransType;
     NSString *msgStr;
+    BOOL doTradeByEnterAmount;
 }
 
 @synthesize bluetoothAddress;
@@ -294,17 +295,24 @@
 //输入金额
 -(void) onRequestSetAmount{
     
-    NSString *msg = @"";
-    mAlertView = [[UIAlertView new]
-                  initWithTitle:@"Please set amount"
-                  message:msg
-                  delegate:self
-                  cancelButtonTitle:@"Confirm"
-                  otherButtonTitles:@"Cancel",
-                  nil ];
-    [mAlertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [mAlertView show];
-    msgStr = @"Please set amount";
+    if (doTradeByEnterAmount) {
+        NSString *msg = @"";
+        mAlertView = [[UIAlertView new]
+                      initWithTitle:@"Please set amount"
+                      message:msg
+                      delegate:self
+                      cancelButtonTitle:@"Confirm"
+                      otherButtonTitles:@"Cancel",
+                      nil ];
+        [mAlertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+        [mAlertView show];
+        msgStr = @"Please set amount";
+    }else{
+        self.amount = @"1";
+        _lableAmount.text = @"$100";
+        [pos setAmount:self.amount aAmountDescribe:@"1000" currency:@"156" transactionType:TransactionType_GOODS];
+    }
+  
 }
 //
 -(void) onRequestSelectEmvApp: (NSArray*)appList{
@@ -678,7 +686,7 @@
 
 -(void) onRequestGetCardNoResult:(NSString *)result{
     self.textViewLog.text = result;
-    [pos pinKey_TDES_all:0 Pan:@"6217850800011191689" Pin:@"1111" TimeOut:5];
+//    [pos pinKey_TDES_all:0 Pan:@"6217850800011191689" Pin:@"1111" TimeOut:5];
 }
 
 
@@ -1103,20 +1111,14 @@
         
     }
 
-    mTransType = TransactionType_GOODS;
-    _currencyCode = @"484";
-    [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
-//    [pos doTrade:30];
-//    [pos setCardTradeMode:CardTradeMode_ONLY_TAP_CARD];
-    //[pos doTrade:30];
-     //[pos doCheckCard:30 keyIndex:0];
-//    [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
-      [pos doTrade:30 batchID:@"abcd"];
-//    [pos doSetBuzzerOperation:30 block:^(BOOL isSuccess, NSString *stateStr) {
-//        if (isSuccess) {
-//            self.textViewLog.text = @"worked";
-//        }
-//    }];
+      mTransType = TransactionType_GOODS;
+      _currencyCode = @"484";
+      [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
+      [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
+      [pos setFormatID:@"08"];
+      doTradeByEnterAmount = false;
+      [pos doTrade:30];
+
   
     //    [pos setCardTradeMode:CardTradeMode_UNALLOWED_LOW_TRADE];
     //[pos doTrade:30];
@@ -1368,6 +1370,7 @@
     //    [pos setQueue:self_queue];
     
     [pos setQueue:nil];
+    doTradeByEnterAmount = true;
     if (_detailItem == nil || [_detailItem  isEqual: @""]) {
         self.bluetoothAddress = @"audioType";
     }
