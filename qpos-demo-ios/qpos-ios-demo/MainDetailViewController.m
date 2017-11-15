@@ -1112,11 +1112,12 @@
     }
 
       mTransType = TransactionType_GOODS;
-      _currencyCode = @"484";
+      _currencyCode = @"840";
       [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
-      [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
-      [pos setFormatID:@"08"];
-      doTradeByEnterAmount = false;
+//      [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
+       [pos setFormatID:@"00"];
+//      doTradeByEnterAmount = false;
+//      [pos setJudgeDebitOrCreditFlag:YES];
       [pos doTrade:30];
 
   

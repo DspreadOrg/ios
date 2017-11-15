@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "532333529.915761"
+            timestampString = "532334779.045991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1291"
-            endingLineNumber = "1291"
+            startingLineNumber = "1292"
+            endingLineNumber = "1292"
             landmarkName = "-testUpdatePosFirmware"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,28 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "532333529.915761"
+            timestampString = "532334779.045991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1294"
-            endingLineNumber = "1294"
+            startingLineNumber = "1295"
+            endingLineNumber = "1295"
             landmarkName = "-onUpdatePosFirmwareResult:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "532332163.52441"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "449"
-            endingLineNumber = "449"
-            landmarkName = "-onRequestOnlineProcess:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
