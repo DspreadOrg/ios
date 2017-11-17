@@ -449,6 +449,8 @@
 -(void) onRequestOnlineProcess: (NSString*) tlv{
        NSDictionary *dict9f01 = [pos getICCTag:0 tagCount:1 tagArrStr:@"5F20"];
     
+    NSString *cardHolderName = [Util asciiFormatString:[Util HexStringToByteArray:@"51492F434849"]];
+    
 //    NSString * a = @"5F200A424E2F544943203130384F08A0000001523010015F24032508319F160F4243544553542031323334353637389F21031102159A031708239F02060000001000039F03060000000000009F34030203009F120D44494E45525320434C554220319F0607A00000015230105F300206209F4E0F616263640000000000000000000000C408666666FFFFFF1084C10AFFFF9876543210E0003EC708492D77211D0EF0FCC00AFFFF9876543210E00072C2820170208BE628BFA673BBE2D94299CD25943C5DF0FB236F014A548A9D6CB667B30AF3C38FBEDB25321E9DFD1CE45E38ED3EB3206B7BAE79051239D9F6316D62CE8A4C50357DFAA55A6E99B483DD6B7D15778AAB6A8D841A97A273F9EB55E625833AAC8AB38660AD5D09A6661E60F70B0E5DE1930CAED73C2DE88F6513BEE7FF3C8939C6CD68C3DEDEC65A1451EC0AE39E93B00AF5EF434893A0D43C421EE1A1121986987E54E67614510DF4253FD32D88018EA25D53C62C822B75BC032A9A2637DD2AF8A84DF27CF540F896453B7356D32E064B85AC6ED003D7977CB0D55D5EDEB2D6DEC86D8CF0FA01DE14CE6163D584F10D167573E3F42E3054E7C92F68941F961D9B5A5F5211C7B04EC9955DEF466A2C3E7AAC5FE20F4A63DBB616FE3204ED2C5AB6AEFA85287F363C3BA528186264346D6E47FE9926BEA419FEBBA3E762155CDEC740C376D8980E994B755AB4CF3051B40626FA4304EF2F67EFDA079E0E53E85494A7373D155C555B8A7C4E0BD30F34C700";
     NSLog(@"onRequestOnlineProcess =**** %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
     //    [self claMac];
@@ -592,6 +594,7 @@
 }
 
 -(void) onRequestDisplay: (Display)displayMsg{
+    NSLog(@"onRequestDisplay");
     NSString *msg = @"";
     if (displayMsg==Display_CLEAR_DISPLAY_MSG) {
         msg = @"";
@@ -688,6 +691,14 @@
 
 -(void) onRequestGetCardNoResult:(NSString *)result{
     self.textViewLog.text = result;
+    NSDictionary *dict5F20 = [pos getICCTag:0 tagCount:1 tagArrStr:@"5F20"];
+    
+    NSString *cardHolderName = [Util asciiFormatString:[Util HexStringToByteArray:@"51492F434849"]];
+    
+    NSDictionary *dict5F24 = [pos getICCTag:0 tagCount:1 tagArrStr:@"5F24"];
+    
+    NSDictionary *dict5A = [pos getICCTag:0 tagCount:1 tagArrStr:@"5A"];
+    
 //    [pos pinKey_TDES_all:0 Pan:@"6217850800011191689" Pin:@"1111" TimeOut:5];
 }
 
@@ -1116,11 +1127,12 @@
       mTransType = TransactionType_GOODS;
       _currencyCode = @"840";
       [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
-//      [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
-//       [pos setFormatID:@"00"];
-//      doTradeByEnterAmount = false;
+      [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
+  
+       [pos setFormatID:@"00"];
+//       doTradeByEnterAmount = false;
 //      [pos setJudgeDebitOrCreditFlag:YES];
-      [pos doTrade:30];
+       [pos doTrade:30];
 
   
     //    [pos setCardTradeMode:CardTradeMode_UNALLOWED_LOW_TRADE];
@@ -1167,6 +1179,7 @@
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
+     [pos getIccCardNo:@"20171116000000"];
 //    [pos doUpdateIPEKOperation:@"00" tracksn:@"09117101800165E00001" trackipek:@"507984DA9470B6267481DF25CDA1D4E2" trackipekCheckValue:@"0F444EF5E7FFAC66" emvksn:@"09117101800165E00001" emvipek:@"507984DA9470B6267481DF25CDA1D4E2" emvipekcheckvalue:@"0F444EF5E7FFAC66" pinksn:@"09117101800165E00001" pinipek:@"507984DA9470B6267481DF25CDA1D4E2" pinipekcheckValue:@"0F444EF5E7FFAC66" block:^(BOOL isSuccess, NSString *stateStr) {
 //        if (isSuccess) {
 //            self.textViewLog.text = stateStr;
@@ -1185,7 +1198,11 @@
     self.textViewLog.backgroundColor = [UIColor whiteColor];
     self.textViewLog.text = @"reset pos ... ";
     
-    [pos asynresetPosStatus];
+    NSDictionary *dict9f01 = [pos getICCTag:0 tagCount:1 tagArrStr:@"5F20"];
+    
+    NSString *cardHolderName = [Util asciiFormatString:[Util HexStringToByteArray:@"51492F434849"]];
+    
+//    [pos asynresetPosStatus];
     
 //    [pos asynResetPosStatusBlock:^(BOOL isSuccess, NSString *stateStr) {
 //        if (isSuccess) {

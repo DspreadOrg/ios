@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "532492586.356881"
+            timestampString = "532580915.730588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1294"
-            endingLineNumber = "1294"
+            startingLineNumber = "1309"
+            endingLineNumber = "1309"
             landmarkName = "-testUpdatePosFirmware"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,28 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "532492586.356881"
+            timestampString = "532580915.730588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1297"
-            endingLineNumber = "1297"
-            landmarkName = "-onUpdatePosFirmwareResult:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "532494705.82351"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "453"
-            endingLineNumber = "453"
-            landmarkName = "-onRequestOnlineProcess:"
+            startingLineNumber = "1312"
+            endingLineNumber = "1312"
+            landmarkName = "-testUpdatePosFirmware"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
