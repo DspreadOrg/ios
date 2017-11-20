@@ -1179,16 +1179,13 @@
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
-     [pos getIccCardNo:@"20171116000000"];
+    [pos getQPosInfo];
+//     [pos getIccCardNo:@"20171116000000"];
 //    [pos doUpdateIPEKOperation:@"00" tracksn:@"09117101800165E00001" trackipek:@"507984DA9470B6267481DF25CDA1D4E2" trackipekCheckValue:@"0F444EF5E7FFAC66" emvksn:@"09117101800165E00001" emvipek:@"507984DA9470B6267481DF25CDA1D4E2" emvipekcheckvalue:@"0F444EF5E7FFAC66" pinksn:@"09117101800165E00001" pinipek:@"507984DA9470B6267481DF25CDA1D4E2" pinipekcheckValue:@"0F444EF5E7FFAC66" block:^(BOOL isSuccess, NSString *stateStr) {
 //        if (isSuccess) {
 //            self.textViewLog.text = stateStr;
 //        }
 //    }];
-    
-//     [pos udpateWorkKey:@"680100006731AA677AD010C6BCEE18937B9B2DBCDFF5120F0B9B44DDEB71DEDF425A9C26903A7DA48E4A1F4656C17766C9C540E8C96D514FA14958FDB6A743ACFAB428D13C3DC2A3A1BFD9FB0C01A6383DE9A149F500AFF755872AD51C99DE18E3BAEB4710641FF9218707B4DB7AD85D9F923C4D546A349F6B1D684D583087F4F8D571E86EAA94A7BAE1C5B1F8529B0AD52236A882069F70AA9BBA520F09B6E73A8E8C341B94F5C5214D1D1BF6CF8BEABE4EA7AC9F890751AB820AF996CCB4BBD7A9CBA0BAB40C26AE6A357EE4841AA796D03593CF6ABC289E5D2CFED30427D2F4CDD7F5DF7BE330B464DA937A8BF4D04330BB3B52B304984AF93DE123D34B11692BBE6E3AC02A6855000EB466234C6C887AC0E26BCF550F06DD86343413F0D02A58D120ED38831E6DDFA866A953CA8A9F16378EC7B3C682D76A526B71D4E47B5BA9FD19D8CF11FEDBE3E144F8A4EFC32BFF2291EF735D092D8F197B4BFAE71E54D2B1C53492B00125E37E57FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"];
-//    [pos getQPosInfo];
-    //[self testUpdatePosFirmware];
     
 }
 
@@ -1198,36 +1195,16 @@
     self.textViewLog.backgroundColor = [UIColor whiteColor];
     self.textViewLog.text = @"reset pos ... ";
     
-    NSDictionary *dict9f01 = [pos getICCTag:0 tagCount:1 tagArrStr:@"5F20"];
-    
-    NSString *cardHolderName = [Util asciiFormatString:[Util HexStringToByteArray:@"51492F434849"]];
-    
-//    [pos asynresetPosStatus];
-    
-//    [pos asynResetPosStatusBlock:^(BOOL isSuccess, NSString *stateStr) {
-//        if (isSuccess) {
-//            self.textViewLog.text = stateStr;
-//        }
-//    }];
-    //[pos resetPosStatus];
-//    NSString *app =[Util byteArray2Hex:[self readLine:@"kernel_app_finexus"]];
-//    NSString *capk =[Util byteArray2Hex:[self readLine:@"capk_finexus"]];
-//    [pos updateEmvConfig:app emvCapk:capk];
-    //self.textViewLog.text = @"reset pos success!";
+    [pos asynResetPosStatusBlock:^(BOOL isSuccess, NSString *stateStr) {
+        if (isSuccess) {
+            self.textViewLog.text = stateStr;
+        }
+    }];
 }
 
 
 - (IBAction)getInputAmount:(id)sender {
     self.textViewLog.backgroundColor = [UIColor whiteColor];
-    //self.textViewLog.text = @"Starting...";
-//  [pos getInputAmountWithSymbol:@"" len:3 customerDisplay:@"customer" delay:30 block:^(BOOL isSuccess, NSString *amountStr) {
-//     if (isSuccess) {
-//         float a = [amountStr floatValue];
-//         float b = a/100;
-//         NSString *ab = [[NSString stringWithFormat:@"%lf",b] substringToIndex:4] ;
-//         self.textViewLog.text = ab;
-//     }
-//  }];
     
     [pos getInputAmountWithSymbolAmountMaxLen:4 customerDisplay:@"geopago" delay:30 block:^(BOOL isSuccess, NSString *amountStr) {
         if (isSuccess) {
