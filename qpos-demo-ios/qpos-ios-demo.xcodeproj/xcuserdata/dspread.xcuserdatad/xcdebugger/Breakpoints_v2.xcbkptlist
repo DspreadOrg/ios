@@ -74,12 +74,12 @@
                   moduleName = "qpos-ios-demo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dspread/Downloads/0330iOSSVN/qpos/gitlabRepo/ios/qpos-demo-ios/qpos-ios-demo/MainDetailViewController.m"
-                  timestampString = "533041965.305391"
+                  timestampString = "533112259.889479"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1236"
-                  endingLineNumber = "1236"
-                  offsetFromSymbolStart = "336">
+                  startingLineNumber = "1242"
+                  endingLineNumber = "1242"
+                  offsetFromSymbolStart = "208">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -89,14 +89,30 @@
                   moduleName = "qpos-ios-demo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dspread/Downloads/0330iOSSVN/qpos/gitlabRepo/ios/qpos-demo-ios/qpos-ios-demo/MainDetailViewController.m"
-                  timestampString = "533041965.307091"
+                  timestampString = "533112259.891138"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1237"
-                  endingLineNumber = "1237"
+                  startingLineNumber = "1243"
+                  endingLineNumber = "1243"
                   offsetFromSymbolStart = "56">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "qpos-ios-demo/MainMasterViewController.m"
+            timestampString = "533112246.137772"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
+            landmarkName = "-bluetoothIsPowerOff2Mode"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

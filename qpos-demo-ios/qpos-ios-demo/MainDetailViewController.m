@@ -1143,7 +1143,7 @@
       mTransType = TransactionType_GOODS;
       _currencyCode = @"840";
       [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
-      [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
+//      [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
 
     
       [pos doTrade:30];
