@@ -29,7 +29,7 @@
 		6B95E13F190F94E500055ACC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B95E13E190F94E500055ACC /* MediaPlayer.framework */; };
 		752514311F556BF100A16DAA /* capk_finexus.bin in Resources */ = {isa = PBXBuildFile; fileRef = 7525142F1F556BF100A16DAA /* capk_finexus.bin */; };
 		752514321F556BF100A16DAA /* kernel_app_finexus.bin in Resources */ = {isa = PBXBuildFile; fileRef = 752514301F556BF100A16DAA /* kernel_app_finexus.bin */; };
-		7526641A1FC2DE4B00EB66D4 /* libqpos-ios-sdk-2.4.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 752664191FC2DE4B00EB66D4 /* libqpos-ios-sdk-2.4.4.a */; };
+		75910B6F1FC67AA000F30A21 /* libqpos-ios-sdk-v2.4.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75910B6E1FC67AA000F30A21 /* libqpos-ios-sdk-v2.4.5.a */; };
 		75C3970E1ECF0B8300682D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75C3970D1ECF0B8300682D13 /* Main.storyboard */; };
 		75FE2A651ECEFC40001DA427 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE2A641ECEFC40001DA427 /* MainViewController.m */; };
 /* End PBXBuildFile section */
@@ -75,7 +75,7 @@
 		6BB1DC081A5942B6009F40CD /* QPOSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
 		7525142F1F556BF100A16DAA /* capk_finexus.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = capk_finexus.bin; sourceTree = "<group>"; };
 		752514301F556BF100A16DAA /* kernel_app_finexus.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = kernel_app_finexus.bin; sourceTree = "<group>"; };
-		752664191FC2DE4B00EB66D4 /* libqpos-ios-sdk-2.4.4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-2.4.4.a"; sourceTree = "<group>"; };
+		75910B6E1FC67AA000F30A21 /* libqpos-ios-sdk-v2.4.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-v2.4.5.a"; sourceTree = "<group>"; };
 		75C378E31F8F71630022B646 /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		75C3970D1ECF0B8300682D13 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		75FE2A631ECEFC40001DA427 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B95E13F190F94E500055ACC /* MediaPlayer.framework in Frameworks */,
-				7526641A1FC2DE4B00EB66D4 /* libqpos-ios-sdk-2.4.4.a in Frameworks */,
+				75910B6F1FC67AA000F30A21 /* libqpos-ios-sdk-v2.4.5.a in Frameworks */,
 				6B2788B71883D4290095A338 /* AudioToolbox.framework in Frameworks */,
 				6B2788B51883D4210095A338 /* AVFoundation.framework in Frameworks */,
 				00A90070183B0B0400D22572 /* CoreBluetooth.framework in Frameworks */,
@@ -208,7 +208,7 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				752664191FC2DE4B00EB66D4 /* libqpos-ios-sdk-2.4.4.a */,
+				75910B6E1FC67AA000F30A21 /* libqpos-ios-sdk-v2.4.5.a */,
 				6BB1DC061A5942B6009F40CD /* BTDeviceFinder.h */,
 				6BB1DC081A5942B6009F40CD /* QPOSService.h */,
 				75C378E31F8F71630022B646 /* Util.h */,

@@ -80,6 +80,18 @@
 - (IBAction)getQposId:(id)sender {
     self.textViewLog.text = @"start ...";
     [pos getQPosId];
+//    NSString * pik = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
+//    NSString * pikCheck = @"82E13665B4624DF5";
+//    
+//    pik = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
+//    pikCheck = @"00962B60AA556E65";
+//    
+//    NSString * trk = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
+//    NSString * trkCheck = @"00962B60AA556E65";
+//    
+//    NSString * mak = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
+//    NSString * makCheck = @"00962B60AA556E65";
+//    [pos udpateWorkKey:pik pinKeyCheck:pikCheck trackKey:trk trackKeyCheck:trkCheck macKey:mak macKeyCheck:makCheck keyIndex:1];
 }
 
 -(void) onQposIdResult: (NSDictionary*)posId{
@@ -212,6 +224,10 @@
         AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
         self.textViewLog.text = msg;
         self.lableAmount.text = @"";
+    
+       
+        
+//         [pos buildPinBlock:@"B4ABA2BB791C50E7B4ABA2BB791C50E7" workKeyCheck:@"0000000000000000" encryptType:1 keyIndex:1 maxLen:6 typeFace:@"Enter PIN" cardNo:a date:@"20170810" delay:15];
         //        dispatch_async(dispatch_get_main_queue(),  ^{
         //            [pos calcMacDouble:@"12345678123456781234567812345678"];
         //         });
@@ -1128,11 +1144,15 @@
       _currencyCode = @"840";
       [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
       [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
-  
-       [pos setFormatID:@"00"];
+
+    
+      [pos doTrade:30];
+//       [pos setFormatID:@"20"];
+    
 //       doTradeByEnterAmount = false;
 //      [pos setJudgeDebitOrCreditFlag:YES];
-       [pos doTrade:30];
+///       [pos doTrade:30];
+//       [pos doCheckCard:30 keyIndex:1];
 
   
     //    [pos setCardTradeMode:CardTradeMode_UNALLOWED_LOW_TRADE];
@@ -1179,13 +1199,26 @@
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
-    [pos getQPosInfo];
+     [pos getQPosInfo];
 //     [pos getIccCardNo:@"20171116000000"];
-//    [pos doUpdateIPEKOperation:@"00" tracksn:@"09117101800165E00001" trackipek:@"507984DA9470B6267481DF25CDA1D4E2" trackipekCheckValue:@"0F444EF5E7FFAC66" emvksn:@"09117101800165E00001" emvipek:@"507984DA9470B6267481DF25CDA1D4E2" emvipekcheckvalue:@"0F444EF5E7FFAC66" pinksn:@"09117101800165E00001" pinipek:@"507984DA9470B6267481DF25CDA1D4E2" pinipekcheckValue:@"0F444EF5E7FFAC66" block:^(BOOL isSuccess, NSString *stateStr) {
+//   [pos doUpdateIPEKOperation:@"00" tracksn:@"09117101800165E00001" trackipek:@"507984DA9470B6267481DF25CDA1D4E2" trackipekCheckValue:@"0F444EF5E7FFAC66" emvksn:@"09117101800165E00001" emvipek:@"507984DA9470B6267481DF25CDA1D4E2" emvipekcheckvalue:@"0F444EF5E7FFAC66" pinksn:@"09117101800165E00001" pinipek:@"507984DA9470B6267481DF25CDA1D4E2" pinipekcheckValue:@"0F444EF5E7FFAC66" block:^(BOOL isSuccess, NSString *stateStr) {
 //        if (isSuccess) {
 //            self.textViewLog.text = stateStr;
 //        }
 //    }];
+    
+//    NSString * pik = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
+//    NSString * pikCheck = @"00962B60AA556E65";
+//    
+//    pik = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
+//    pikCheck = @"00962B60AA556E65";
+//    
+//    NSString * trk = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
+//    NSString * trkCheck = @"00962B60AA556E65";
+//    
+//    NSString * mak = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
+//    NSString * makCheck = @"00962B60AA556E65";
+//    [pos udpateWorkKey:pik pinKeyCheck:pikCheck trackKey:trk trackKeyCheck:trkCheck macKey:mak macKeyCheck:makCheck keyIndex:1];
     
 }
 
@@ -1193,8 +1226,19 @@
 
 - (IBAction)resetpos:(id)sender {
     self.textViewLog.backgroundColor = [UIColor whiteColor];
-    self.textViewLog.text = @"reset pos ... ";
     
+//          NSString *a = [Util byteArray2Hex:[Util stringFormatTAscii:@"622526XXXXXX5453"] ];
+//    [pos getPin:1 keyIndex:1 maxLen:6 typeFace:@"Pls Input Pin" cardNo:a data:@"" delay:30 withResultBlock:^(BOOL isSuccess, NSDictionary *result) {
+//        NSLog(@"result: %@",result);
+//    }];
+    
+//    self.textViewLog.text = @"reset pos ... ";
+//    NSString *a = [Util byteArray2Hex:[Util stringFormatTAscii:@"622526XXXXXX5453"] ];
+//    
+    //507984DA9470B6267481DF25CDA1D4E2,507984DA9470B6267481DF25CDA1D4E2
+    //   [pos doUpdateIPEKOperation:@"00" tracksn:@"FFFF000000BB81200000" trackipek:@"F24B13AC6F579B929FBBFE58BC2A0647" trackipekCheckValue:@"CDF80B70C3BBCDDC"
+//    [pos buildPinBlock:@"F24B13AC6F579B929FBBFE58BC2A0647" workKeyCheck:@"CDF80B70C3BBCDDC" encryptType:1 keyIndex:0 maxLen:6 typeFace:@"pls input pin" cardNo:a date:@"20170810" delay:30];
+//
     [pos asynResetPosStatusBlock:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
             self.textViewLog.text = stateStr;
@@ -1246,7 +1290,7 @@
 //        }
 //        
     //}];
-     [pos buildPinBlock:@"558A532236CB58B30C130D8F8D75C22A" workKeyCheck:@"00F52F1E33BA1002" encryptType:1 keyIndex:0 maxLen:6 typeFace:@"pls input pin" cardNo:a date:@"20170810" delay:30];
+//     [pos buildPinBlock:@"558A532236CB58B30C130D8F8D75C22A" workKeyCheck:@"00F52F1E33BA1002" encryptType:1 keyIndex:0 maxLen:6 typeFace:@"pls input pin" cardNo:a date:@"20170810" delay:30];
     
 }
 - (IBAction)isCardExist:(id)sender {
