@@ -152,6 +152,7 @@ typedef NS_ENUM(NSInteger, TransactionType) {
     TransactionType_ECQ_CASH_LOAD_VOID,//			0x13				/*电子现金圈存撤销*/
     TransactionType_ECQ_INQUIRE_LOG,//	0x0A	/*电子现金日志(和PBOC日志一样)*/
     TransactionType_REFUND,
+    TransactionType_UPDATE_PIN
 };
 
 typedef NS_ENUM(NSInteger, LcdModeAlign) {

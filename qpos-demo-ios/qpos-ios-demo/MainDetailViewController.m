@@ -868,7 +868,7 @@
             NSLog(@"textFieldAmount = %@",inputAmount);
             
             self.lableAmount.text = [NSString stringWithFormat:@"$%@", [self checkAmount:inputAmount]];
-            [pos setAmount:inputAmount aAmountDescribe:@"Cashback" currency:_currencyCode transactionType:mTransType];
+            [pos setAmount:inputAmount aAmountDescribe:@"Cashback" currency:_currencyCode transactionType:TransactionType_GOODS];
             
             self.amount = [NSString stringWithFormat:@"%@", [self checkAmount:inputAmount]];
             self.cashbackAmount = @"Cashback";
