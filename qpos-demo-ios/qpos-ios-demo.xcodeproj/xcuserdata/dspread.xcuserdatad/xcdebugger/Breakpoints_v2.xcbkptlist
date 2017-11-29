@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "533101320.323268"
+            timestampString = "533535896.871379"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1351"
-            endingLineNumber = "1351"
+            startingLineNumber = "1352"
+            endingLineNumber = "1352"
             landmarkName = "-onUpdatePosFirmwareResult:"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qpos-ios-demo/MainDetailViewController.m"
-            timestampString = "533101320.323268"
+            timestampString = "533535896.871379"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1232"
-            endingLineNumber = "1232"
+            startingLineNumber = "1233"
+            endingLineNumber = "1233"
             landmarkName = "-resetpos:"
             landmarkType = "7">
             <Locations>
@@ -74,11 +74,11 @@
                   moduleName = "qpos-ios-demo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dspread/Downloads/0330iOSSVN/qpos/gitlabRepo/ios/qpos-demo-ios/qpos-ios-demo/MainDetailViewController.m"
-                  timestampString = "533468358.887193"
+                  timestampString = "533536808.578062"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1242"
-                  endingLineNumber = "1242"
+                  startingLineNumber = "1243"
+                  endingLineNumber = "1243"
                   offsetFromSymbolStart = "230">
                </Location>
                <Location
@@ -89,11 +89,11 @@
                   moduleName = "qpos-ios-demo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dspread/Downloads/0330iOSSVN/qpos/gitlabRepo/ios/qpos-demo-ios/qpos-ios-demo/MainDetailViewController.m"
-                  timestampString = "533468358.891058"
+                  timestampString = "533536808.579836"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1243"
-                  endingLineNumber = "1243"
+                  startingLineNumber = "1244"
+                  endingLineNumber = "1244"
                   offsetFromSymbolStart = "40">
                </Location>
             </Locations>
@@ -128,6 +128,70 @@
             startingLineNumber = "175"
             endingLineNumber = "175"
             landmarkName = "-onDoTradeResult:DecodeData:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "qpos-ios-demo/MainDetailViewController.m"
+            timestampString = "533536493.535804"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
+            landmarkName = "-onRequestSelectEmvApp:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "qpos-ios-demo/MainDetailViewController.m"
+            timestampString = "533536544.283056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
+            landmarkName = "-onRequestSelectEmvApp:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "qpos-ios-demo/MainDetailViewController.m"
+            timestampString = "533536560.2219"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "923"
+            endingLineNumber = "923"
+            landmarkName = "-actionSheet:clickedButtonAtIndex:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "qpos-ios-demo/MainDetailViewController.m"
+            timestampString = "533536649.577145"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "926"
+            endingLineNumber = "926"
+            landmarkName = "-actionSheet:clickedButtonAtIndex:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
