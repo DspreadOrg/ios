@@ -184,7 +184,7 @@
         self.textViewLog.text = @"Card Inserted (Not ICC)";
     }else if(result==DoTradeResult_MCR){
         //        [pos getCardNo]
-        ;        NSLog(@"decodeData: %@",decodeData);
+        NSLog(@"decodeData: %@",decodeData);
         NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
         NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
         NSString *expiryDate = [NSString stringWithFormat:@"Expiry Date: %@\n",decodeData[@"expiryDate"]];
@@ -232,6 +232,9 @@
         //            [pos calcMacDouble:@"12345678123456781234567812345678"];
         //         });
     }else if(result==DoTradeResult_NFC_OFFLINE || result == DoTradeResult_NFC_ONLINE){
+        
+      NSDictionary *a =  [pos getICCTag:1 tagCount:1 tagArrStr:@"9F6B"];
+      NSDictionary *b =  [pos getICCTag:1 tagCount:1 tagArrStr:@"57"];
         NSLog(@"decodeData: %@",decodeData);
         NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
         NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
@@ -270,6 +273,8 @@
         
         dispatch_async(dispatch_get_main_queue(),  ^{
             NSDictionary *mDic = [pos getNFCBatchData];
+            
+            NSDictionary* mDict = [pos getICCTag:@"0" cardType:1 tagCount:0 tagArrStr:@""];
             NSString *tlv;
             if(mDic !=nil){
                 tlv= [NSString stringWithFormat:@"NFCBatchData: %@\n",mDic[@"tlv"]];
@@ -282,6 +287,8 @@
             AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
             self.textViewLog.text = [msg stringByAppendingString:tlv];
             self.lableAmount.text = @"";
+            
+//            [pos getICCTag:1 tagCount:1 tagArrStr:@"9F6B"];
         });
         
     }else if(result==DoTradeResult_NFC_DECLINED){
@@ -1142,12 +1149,18 @@
 
       mTransType = TransactionType_GOODS;
       _currencyCode = @"840";
-    [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP];
+//      [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP];
+    [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
     
 //      [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
 
+//       [pos setFormatID:@"07"];
+       [pos doTrade:30];
+       //[pos setDesKey:@"0000E68FCB6E9C9F8D064521C87B0000"];
+       //[pos doTrade_QF:0x0F TradeRandomString:@"345" TradeExtraString:@"456"];
     
-      [pos doTrade:30];
+//      [pos setFormatID:@"00"];
+//      [pos doTrade:30];
 //       [pos setFormatID:@"20"];
     
 //       doTradeByEnterAmount = false;
@@ -1200,9 +1213,10 @@
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
-     [pos getQPosInfo];
+//    [pos udpateWorkKey:@"680100005926525B0E2F4135DC01BCE0582DC9B33A6CD9C1C4A4FA2819C90B9B236AFB7FFFE41D93212DD090B764EBB30F2223BE6B364DA4227147AAB4B165E78BD7FFD8613C0FD14A6A47CEA3B68E5EF486C6D545D378DC557FFD5F71DB657B6F98CDB6F38840FA4FC2DCC762814FBF56238D3EE169FBC70A6BB92337A8AAA7BE97C29A10CED8DE5D44DCD3DE90845B7BD4AC8D29B2DADBCCB06A4AADBE7EFC2D5CA7C30F39862D5531ECF3197CDB759A10D292971AAC4FE6C544C3295B77AC11073A30B44F0C343300FDB51013C09DC2D4937A4F97170EA4324332F1254BC41A63A9F61BEBCEB23811531134B0A0BC912E01D0F29747927AEEB31E402EDB19C72F3AAA3EE7DCF0325359153CB1E3ED18E45AF829FA42E7B3BC33A36ADBC56C29FF560BCD3A679C9F51315BB2E80CBC905A60E79AC5529734E253AB113D7B8DCCDA8C1A017B41A8E08FACEAD5A6A74B5086E2B4308E293525131B3D13000D2ECD896A016F8138257243A385FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"];
+//     [pos getQPosInfo];
 //     [pos getIccCardNo:@"20171116000000"];
-//   [pos doUpdateIPEKOperation:@"00" tracksn:@"09117101800165E00001" trackipek:@"507984DA9470B6267481DF25CDA1D4E2" trackipekCheckValue:@"0F444EF5E7FFAC66" emvksn:@"09117101800165E00001" emvipek:@"507984DA9470B6267481DF25CDA1D4E2" emvipekcheckvalue:@"0F444EF5E7FFAC66" pinksn:@"09117101800165E00001" pinipek:@"507984DA9470B6267481DF25CDA1D4E2" pinipekcheckValue:@"0F444EF5E7FFAC66" block:^(BOOL isSuccess, NSString *stateStr) {
+//  [pos doUpdateIPEKOperation:@"00" tracksn:@"10030000000150E00001" trackipek:@"AB052119D30DA81C6D63A496483943D6" trackipekCheckValue:@"D8DB08F99C9EA4E5" emvksn:@"10030000000150E00001" emvipek:@"07E51531687111404A96E8E640DFC76C" emvipekcheckvalue:@"8A9A2DF92ACCF6DA" pinksn:@"10030000000150E00001" pinipek:@"AB052119D30DA81C6D63A496483943D6" pinipekcheckValue:@"D8DB08F99C9EA4E5" block:^(BOOL isSuccess, NSString *stateStr) {
 //        if (isSuccess) {
 //            self.textViewLog.text = stateStr;
 //        }
