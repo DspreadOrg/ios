@@ -66,7 +66,8 @@ typedef NS_ENUM(NSInteger, Error)
     Error_APDU_ERROR,
     Error_ICC_ONLINE_TIMEOUT,
     Error_AMOUNT_OUT_OF_LIMIT,
-    Error_DIGITS_UNAVAILABLE
+    Error_DIGITS_UNAVAILABLE,
+    Error_QPOS_MEMORY_OVERFLOW
 };
 
 typedef NS_ENUM(NSInteger, DHError)
