@@ -27,7 +27,7 @@
 		6B2788B71883D4290095A338 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2788B61883D4290095A338 /* AudioToolbox.framework */; };
 		6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */; };
 		6B95E13F190F94E500055ACC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B95E13E190F94E500055ACC /* MediaPlayer.framework */; };
-		7528FAE91FDB81210014C3C5 /* libqpos-ios-sdk-v2.4.9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7528FAE81FDB81210014C3C5 /* libqpos-ios-sdk-v2.4.9.a */; };
+		751CF1661FE386F400A2D757 /* libqpos-ios-sdk-v2.4.9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751CF1651FE386F400A2D757 /* libqpos-ios-sdk-v2.4.9.a */; };
 		753BD08D1FD9357A00781C4A /* advt_app_6.bin in Resources */ = {isa = PBXBuildFile; fileRef = 753BD08B1FD9357A00781C4A /* advt_app_6.bin */; };
 		753BD08E1FD9357A00781C4A /* advt_capk_6.bin in Resources */ = {isa = PBXBuildFile; fileRef = 753BD08C1FD9357A00781C4A /* advt_capk_6.bin */; };
 		75C3970E1ECF0B8300682D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75C3970D1ECF0B8300682D13 /* Main.storyboard */; };
@@ -73,7 +73,7 @@
 		6B95E13E190F94E500055ACC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		6BB1DC061A5942B6009F40CD /* BTDeviceFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTDeviceFinder.h; sourceTree = "<group>"; };
 		6BB1DC081A5942B6009F40CD /* QPOSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
-		7528FAE81FDB81210014C3C5 /* libqpos-ios-sdk-v2.4.9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-v2.4.9.a"; sourceTree = "<group>"; };
+		751CF1651FE386F400A2D757 /* libqpos-ios-sdk-v2.4.9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-v2.4.9.a"; sourceTree = "<group>"; };
 		753BD08B1FD9357A00781C4A /* advt_app_6.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = advt_app_6.bin; sourceTree = "<group>"; };
 		753BD08C1FD9357A00781C4A /* advt_capk_6.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = advt_capk_6.bin; sourceTree = "<group>"; };
 		75C378E31F8F71630022B646 /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B95E13F190F94E500055ACC /* MediaPlayer.framework in Frameworks */,
-				7528FAE91FDB81210014C3C5 /* libqpos-ios-sdk-v2.4.9.a in Frameworks */,
+				751CF1661FE386F400A2D757 /* libqpos-ios-sdk-v2.4.9.a in Frameworks */,
 				6B2788B71883D4290095A338 /* AudioToolbox.framework in Frameworks */,
 				6B2788B51883D4210095A338 /* AVFoundation.framework in Frameworks */,
 				00A90070183B0B0400D22572 /* CoreBluetooth.framework in Frameworks */,
@@ -208,7 +208,7 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				7528FAE81FDB81210014C3C5 /* libqpos-ios-sdk-v2.4.9.a */,
+				751CF1651FE386F400A2D757 /* libqpos-ios-sdk-v2.4.9.a */,
 				6BB1DC061A5942B6009F40CD /* BTDeviceFinder.h */,
 				6BB1DC081A5942B6009F40CD /* QPOSService.h */,
 				75C378E31F8F71630022B646 /* Util.h */,
@@ -454,7 +454,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "qpos-ios-demo/qpos-ios-demo-Prefix.pch";
 				INFOPLIST_FILE = "qpos-ios-demo/qpos-ios-demo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_SEARCH_PATHS = (
 					"./pos-ios-sdk-lib",
 					"$(PROJECT_DIR)/pos-ios-sdk-lib",
@@ -485,7 +485,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "qpos-ios-demo/qpos-ios-demo-Prefix.pch";
 				INFOPLIST_FILE = "qpos-ios-demo/qpos-ios-demo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_SEARCH_PATHS = (
 					"./pos-ios-sdk-lib",
 					"$(PROJECT_DIR)/pos-ios-sdk-lib",

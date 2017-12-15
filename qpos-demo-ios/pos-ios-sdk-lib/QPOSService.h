@@ -715,5 +715,7 @@ typedef NS_ENUM(NSInteger,DoTradeLog) {
 #pragma mark init emv capk
 -(NSMutableDictionary *)getEMVCAPK;
 -(void)setDoTradeMode:(DoTradeMode)doTradeMode;
+-(void)setIsSaveLog:(BOOL)IsSaveLog
+              block:(void(^)(BOOL isSuccess,NSString *stateStr))IsSaveLogBlock;
 @end
 
