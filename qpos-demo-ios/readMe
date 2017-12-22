@@ -1,0 +1,74 @@
+here is readMe
+
+Update emv config
+
+     You can use the function [pos updateEMVAPP:(operationType) data:data] to set EMV app of your own terminal.
+
+updateEMVAPP
+
+     -(void)updateEmvAPP:(NSInteger )operationType data:(NSMutableDictionary*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
+     
+     Parameters: 
+    
+    1.operationType:
+           EMVOperation_clear:delete all the aids and the related configures
+           EMVOperation_add: add a certain aid and its configures;you can only add one aid each time.
+           EMVOperation_update: update a certain tag
+           EMVOperation_getList:get all the aids in the terminal
+           
+    2.data: The data should be an array.
+            EMVOperation_clear: empty array;
+            
+            EMVOperation_add: To add an aid, pass your value like what the demo shows.
+              
+                   1).init the emvAppDict;
+                
+                    NSMutableDictionary * emvCapkDict = [pos getEMVAPPDict];
+             
+                   2).set your own value in the method like what the demo shows:
+                  
+                     NSString * aid = [[emvCapkDict  valueForKey:@"Application_Identifier_AID_terminal"] stringByAppendingString:[self getEMVStr:@"A0000006351010"]];
+                
+                     NSString * threValue  = [[emvCapkDict valueForKey:@"Threshold_Value_BiasedRandom_Selection"] stringByAppendingString:[self getEMVStr:[self getHexFromIntStr:@"999999"]]];
+                
+                     NSString * IFD = [[emvCapkDict valueForKey:@"Interface_Device_IFD_Serial_Number"] stringByAppendingString:[self getEMVStr:[self getHexFromStr:@"83201ICC"]]];
+                 
+                      ....
+              
+                     and add all these values into an array. 
+                 
+                     NSSArray * aidConfig = @[aid,threValue,IFD...];
+                     
+                     [pos updateEmvAPP:EMVOperation_add data:aidConfig ...];
+             
+            EMVOperation_update: If you want to update the same configure  of all the aid, pls organise the data like this:
+                     
+                     
+                     NSString * ics  =[[emvCapkDict valueForKey:@"ICS"] stringByAppendingString:[self getEMVStr:@"F4F0F0FAAFFE8000"]];
+                     NSString * terminalType  =[[emvCapkDict valueForKey:@"Terminal_type"] stringByAppendingString:[self getEMVStr:@"22"]];
+                     NSString * terminalCapbilities =[[emvCapkDict valueForKey:@"Terminal_Capabilities"] stringByAppendingString:[self getEMVStr:@"60B8C8"]];
+                     ...
+                     
+                      NSArray *commonConfigArr = @[ics,terminalType,terminalCapbilities...];
+    
+                     [pos updateEmvAPP:EMVOperation_update data:commonConfigArr  block:...]
+                      
+                    If you only want to update the configures of a certain aid,add the aid in the data array before all other configures, eg:
+                    
+                     NSString * aid = [[emvCapkDict  valueForKey:@"Application_Identifier_AID_terminal"] stringByAppendingString:[self getEMVStr:@"A0000006351010"]];
+                     NSString * ics  =[[emvCapkDict valueForKey:@"ICS"] stringByAppendingString:[self getEMVStr:@"F4F0F0FAAFFE8000"]];
+                     NSString * terminalType  =[[emvCapkDict valueForKey:@"Terminal_type"] stringByAppendingString:[self getEMVStr:@"22"]];
+                     NSString * terminalCapbilities =[[emvCapkDict valueForKey:@"Terminal_Capabilities"] stringByAppendingString:[self getEMVStr:@"60B8C8"]];
+                     ...
+                     
+                     NSArray *commonConfigArr = @[aid,ics,terminalType,terminalCapbilities...];
+                     
+                     [pos updateEmvAPP:EMVOperation_update data:commonConfigArr  block:...];
+            
+            EMVOperation_getList: empty array.
+                     
+
+
+                    
+                     
+
