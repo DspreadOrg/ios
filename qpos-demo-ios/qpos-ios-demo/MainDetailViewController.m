@@ -79,26 +79,8 @@
 }
 - (IBAction)getQposId:(id)sender {
     self.textViewLog.text = @"start ...";
-//    [pos getQPosId];
-   
-//   NSDictionary* dic = [pos syncDoTradeLogOperation:2 data:0];
-//    NSLog(@"dict == %@",dic);
-//    
-//    NSDictionary* count = [pos syncDoTradeLogOperation:1 data:0];
-//    NSLog(@"dict == %@",count);
-//   self.textViewLog.text = [a objectForKey:@"log"];
-//    NSString * pik = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
-//    NSString * pikCheck = @"82E13665B4624DF5";
-//    
-//    pik = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
-//    pikCheck = @"00962B60AA556E65";
-//    
-//    NSString * trk = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
-//    NSString * trkCheck = @"00962B60AA556E65";
-//    
-//    NSString * mak = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
-//    NSString * makCheck = @"00962B60AA556E65";
-//    [pos udpateWorkKey:pik pinKeyCheck:pikCheck trackKey:trk trackKeyCheck:trkCheck macKey:mak macKeyCheck:makCheck keyIndex:1];
+    [pos getQPosId];
+
 }
 
 -(void) onQposIdResult: (NSDictionary*)posId{
@@ -1183,139 +1165,22 @@
       mTransType = TransactionType_GOODS;
       _currencyCode = @"0604";
      [pos setCardTradeMode:CardTradeMode_SWIPE_INSERT_CARD];
-    [pos setAmountIcon:@"$"];
-//     [pos setFormatID:@"18"];
-//     [pos doTrade:30];
-//    [pos setIsQuickEMV:true];
-//     [pos doTrade:30 batchID:@"abcd"];
-     [pos doCheckCard:30];
-//    __weak typeof(self) weakself = self;
-//    [pos setIsSaveLog:true block:^(BOOL isSuccess, NSString *stateStr) {
-//        if (isSuccess) {
-//           weakself.textViewLog.text = stateStr;
-//        }
-//    }];
+     [pos doTrade:30];
     
-//    [pos doCheckCard:30];
-//    [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
-    
-//      [pos setDoTradeMode:DoTradeMode_CHECK_CARD_NO_IPNUT_PIN];
-
-    
-//       [pos setIsQuickEMV:true];
-       //[pos setDesKey:@"0000E68FCB6E9C9F8D064521C87B0000"];
-       //[pos doTrade_QF:0x0F TradeRandomString:@"345" TradeExtraString:@"456"];
-    
-//      [pos setFormatID:@"00"];
-//      [pos doTrade:30];
-//       [pos setFormatID:@"20"];
-    
-//       doTradeByEnterAmount = false;
-//      [pos setJudgeDebitOrCreditFlag:YES];
-///       [pos doTrade:30];
-//       [pos doCheckCard:30 keyIndex:1];
-
-  
-    //    [pos setCardTradeMode:CardTradeMode_UNALLOWED_LOW_TRADE];
-    //[pos doTrade:30];
-//   [pos doUpdateIPEKOperation:@"00" tracksn:@"FFFF000000BB81200000" trackipek:@"F24B13AC6F579B929FBBFE58BC2A0647" trackipekCheckValue:@"CDF80B70C3BBCDDC" emvksn:@"FFFF000000BB81200000" emvipek:@"F24B13AC6F579B929FBBFE58BC2A0647" emvipekcheckvalue:@"CDF80B70C3BBCDDC" pinksn:@"FFFF000000BB81200000" pinipek:@"F24B13AC6F579B929FBBFE58BC2A0647" pinipekcheckValue:@"CDF80B70C3BBCDDC" block:^(BOOL isSuccess, NSString *stateStr) {
-//        if (isSuccess) {
-//            self.textViewLog.text = stateStr;
-//        }
-//        
-//        
-//    }];
-    //    [pos connectBT:bluetoothAddress];
-    //    [self testDoTradeNFC];
-    //test demo
-    
-    //    [pos cbc_mac_cn_all:24 atype:0 otype:0 data:@"536E04870E6EB939492B782291EE4EF5" delay:5 withResultBlock:^(NSString *str) {
-    //        NSLog(@"str: %@",str);
-    //    }];
-    
-//        [self UpdateEmvCfg];
-    //    pos.doTrade("20140517162926", "000139", "1234567890123456", 0, 30);
-    //    [pos doTrade:@"20140517162926" randomStr:@"000139" TradeExtraString:@"1234567890123456" keyIndex:0 delay:30];
-    
-    //    NSString *key = @"536E04870E6EB939492B782291EE4EF5";
-    //    NSString *checkValue = @"5427AC35904502AF";
-    //    [pos setMasterKey:key checkValue:checkValue];
-    //    [pos setMasterKey:key checkValue:checkValue keyIndex:2];
-    //    [pos setMasterKey:key checkValue:checkValue keyIndex:1 delay:5];
-    //    [pos udpateWorkKey:key pinKeyCheck:checkValue trackKey:key trackKeyCheck:checkValue macKey:key macKeyCheck:checkValue keyIndex:1 delay:5];
-    //    NSString *aStr= @"ffeeddccbbaa00998877665544332211";
-    //    [pos saveUserData:0 userData:aStr];
-    //    [self batchSendAPDU];
-    
-    //    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    //    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-    //    NSString *dateTimeString = [dateFormatter stringFromDate:[NSDate date]];
-    //    [pos setPinPadFlag:NO];
-    //    [pos doTrade:dateTimeString delay:30];
-    
-    //    [pos downloadRsaPublicKey:@"A000000333" keyIndex:@"01" keyModule:@"91FE8E7814C8E0BF879C0ECCBD082F18C88DE26537522FE6F4D5A8037256C668B42E020BDB8C9E73D1B856C3E478308FD48F0C8FD3FEE4341C004BDD4EAEF895861F6E708CA935E72E05ADAF9157840288B30D94020254A3B02A477F47B707060E6BA5DFE7AA64AA1CEB01A0F627909A73C9E4ECABD05DCA2184E997D4B0D8C1" keyExponent:@"010001" delay:10];
     
 }
 
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
-//    NSDictionary *a = [pos syncDoTradeLogOperation:0 data:0];
-//    NSLog(@"a == %@",a);
-//      [pos getQPosInfo];
-//    [self testUpdatePosFirmware];
-//    NSDictionary *dict = [pos syncDoTradeLogOperation:2 data:0];
-//    self.textViewLog.text = [dict objectForKey:@"log"];
-    
-// [pos udpateWorkKey:@"680100003FBF754C132F7EB081870737A7AD41AD5286277C18C16D9515C67FF48785D5B7A37ADD5C5A7BC45957C3C323ED1DD62DB4E93C2009E59D6E83F9C2C578C7E4C4D91A032630B1590E1EF4ABF6453CB611AEBBBFEC49899D4507068694946FE01894D56BB9B93007F6341512B01A539B3C592AE2067502D0CD9A62172B7DB1F8FF10CED8DE5D44DCD3DE90845B7BD4AC8DA2CE3CCBAEB2B6730EC17A02606D332EA17D22A9D5F5EC25DAC790D6F6291C9D5080EE43AB96989E01739F9B0CD116C010CDD70226742CEA50551A899C92B12EE7DB54E7BAE7C4C2DBF89CD75F7890F4BF6C9125B167178196577145F3CE35B535B96CA1F1771C98C8217703443B8272313320EBD205A446242762C6DAA267C8E0727896F5BA5448A3214479B8251B6FAF44630C2BE2EA9A297BEB0603BEE64C9F0EDD0282FC46D5C9865710249F8AD423952C437747F6589C9CDBEB0AE0AABE760D31780F3AFD958213BA1FB55767BA688FD75CC5A4D133FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"];
-    
-//    [self UpdateEmvCfg];
-//     [pos getIccCardNo:@"20171116000000"];
-    
-//         [pos doUpdateIPEKOperation:@"00" tracksn:@"FFFF34B3D00150E00000" trackipek:@"7644FA99B0AEBC20DC890CCAD112E99E" trackipekCheckValue:@"1A23B33B2EDE5C33" emvksn:@"FFFF34B3D00150E00000" emvipek:@"7644FA99B0AEBC20DC890CCAD112E99E" emvipekcheckvalue:@"1A23B33B2EDE5C33" pinksn:@"FFFF34B3D00150E00000"
-//             pinipek:@"7644FA99B0AEBC20DC890CCAD112E99E" pinipekcheckValue:@"1A23B33B2EDE5C33" block:^(BOOL isSuccess, NSString *stateStr) {
-//            if (isSuccess) {
-//                self.textViewLog.text = stateStr;
-//            }
-//           }];
-
-//    [pos setMasterKey:@"6F52171138EDAFBA44BE96CC0C90FF85" checkValue:@"D111ECECCE278E82"];
-//    NSString * pik = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
-//    NSString * pikCheck = @"00962B60AA556E65";
-//    
-//    pik = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
-//    pikCheck = @"00962B60AA556E65";
-//    
-//    NSString * trk = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
-//    NSString * trkCheck = @"00962B60AA556E65";
-//    
-//    NSString * mak = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";
-//    NSString * makCheck = @"00962B60AA556E65";
-//    [pos udpateWorkKey:pik pinKeyCheck:pikCheck trackKey:trk trackKeyCheck:trkCheck macKey:mak macKeyCheck:makCheck keyIndex:1];
+    [pos getQPosInfo];
     
 }
 
 
 
 - (IBAction)resetpos:(id)sender {
-//    self.textViewLog.backgroundColor = [UIColor whiteColor];
-//    NSDictionary* a = [pos syncDoTradeLogOperation:1 data:0];
-//    self.textViewLog.text = [a objectForKey:@"log"];
-
-    //          NSString *a = [Util byteArray2Hex:[Util stringFormatTAscii:@"622526XXXXXX5453"] ];
     
-//    [pos getPin:1 keyIndex:1 maxLen:6 typeFace:@"Pls Input Pin" cardNo:a data:@"" delay:30 withResultBlock:^(BOOL isSuccess, NSDictionary *result) {
-//        NSLog(@"result: %@",result);
-//    }];
-    
-//    self.textViewLog.text = @"reset pos ... ";
-//    NSString *a = [Util byteArray2Hex:[Util stringFormatTAscii:@"622526XXXXXX5453"] ];
-//
-//    //507984DA9470B6267481DF25CDA1D4E2,507984DA9470B6267481DF25CDA1D4E2
-//    //   [pos doUpdateIPEKOperation:@"00" tracksn:@"FFFF000000BB81200000" trackipek:@"F24B13AC6F579B929FBBFE58BC2A0647" trackipekCheckValue:@"CDF80B70C3BBCDDC"
-//    NSString *a = [Util byteArray2Hex:[Util stringFormatTAscii:@"622526XXXXXX5453"] ];
-//    [pos buildPinBlock:@"2632C5C0EAC64536D3C55EBCF76704DA" workKeyCheck:@"0000000000000000" encryptType:1 keyIndex:0 maxLen:6 typeFace:@"pls input pin" cardNo:a date:@"20171213" delay:30];
-//
     [pos asynResetPosStatusBlock:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
             self.textViewLog.text = stateStr;
