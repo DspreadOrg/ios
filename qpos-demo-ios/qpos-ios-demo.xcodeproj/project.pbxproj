@@ -27,10 +27,10 @@
 		6B2788B71883D4290095A338 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2788B61883D4290095A338 /* AudioToolbox.framework */; };
 		6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */; };
 		6B95E13F190F94E500055ACC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B95E13E190F94E500055ACC /* MediaPlayer.framework */; };
+		751619231FF24AE100E6559E /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751619221FF24AE100E6559E /* libqpos-ios-sdk.a */; };
 		752220BB1FDFEC06009B0288 /* A27CAYC_S1(assist)_master.asc in Resources */ = {isa = PBXBuildFile; fileRef = 752220BA1FDFEC06009B0288 /* A27CAYC_S1(assist)_master.asc */; };
 		75281F511FDFF53D00F60FBD /* emvcfg_app.bin in Resources */ = {isa = PBXBuildFile; fileRef = 75281F4F1FDFF53D00F60FBD /* emvcfg_app.bin */; };
 		75281F521FDFF53D00F60FBD /* emvcfg_capk.bin in Resources */ = {isa = PBXBuildFile; fileRef = 75281F501FDFF53D00F60FBD /* emvcfg_capk.bin */; };
-		753180E11FF2479B00326F65 /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 753180E01FF2479B00326F65 /* libqpos-ios-sdk.a */; };
 		753BD08D1FD9357A00781C4A /* advt_app_6.bin in Resources */ = {isa = PBXBuildFile; fileRef = 753BD08B1FD9357A00781C4A /* advt_app_6.bin */; };
 		753BD08E1FD9357A00781C4A /* advt_capk_6.bin in Resources */ = {isa = PBXBuildFile; fileRef = 753BD08C1FD9357A00781C4A /* advt_capk_6.bin */; };
 		75C3970E1ECF0B8300682D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75C3970D1ECF0B8300682D13 /* Main.storyboard */; };
@@ -76,10 +76,10 @@
 		6B95E13E190F94E500055ACC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		6BB1DC061A5942B6009F40CD /* BTDeviceFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTDeviceFinder.h; sourceTree = "<group>"; };
 		6BB1DC081A5942B6009F40CD /* QPOSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
+		751619221FF24AE100E6559E /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
 		752220BA1FDFEC06009B0288 /* A27CAYC_S1(assist)_master.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A27CAYC_S1(assist)_master.asc"; sourceTree = "<group>"; };
 		75281F4F1FDFF53D00F60FBD /* emvcfg_app.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emvcfg_app.bin; sourceTree = "<group>"; };
 		75281F501FDFF53D00F60FBD /* emvcfg_capk.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emvcfg_capk.bin; sourceTree = "<group>"; };
-		753180E01FF2479B00326F65 /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
 		753BD08B1FD9357A00781C4A /* advt_app_6.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = advt_app_6.bin; sourceTree = "<group>"; };
 		753BD08C1FD9357A00781C4A /* advt_capk_6.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = advt_capk_6.bin; sourceTree = "<group>"; };
 		75C378E31F8F71630022B646 /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B95E13F190F94E500055ACC /* MediaPlayer.framework in Frameworks */,
-				753180E11FF2479B00326F65 /* libqpos-ios-sdk.a in Frameworks */,
+				751619231FF24AE100E6559E /* libqpos-ios-sdk.a in Frameworks */,
 				6B2788B71883D4290095A338 /* AudioToolbox.framework in Frameworks */,
 				6B2788B51883D4210095A338 /* AVFoundation.framework in Frameworks */,
 				00A90070183B0B0400D22572 /* CoreBluetooth.framework in Frameworks */,
@@ -214,7 +214,7 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				753180E01FF2479B00326F65 /* libqpos-ios-sdk.a */,
+				751619221FF24AE100E6559E /* libqpos-ios-sdk.a */,
 				75281F4F1FDFF53D00F60FBD /* emvcfg_app.bin */,
 				75281F501FDFF53D00F60FBD /* emvcfg_capk.bin */,
 				752220BA1FDFEC06009B0288 /* A27CAYC_S1(assist)_master.asc */,
