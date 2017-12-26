@@ -279,6 +279,7 @@
             AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
             self.textViewLog.text = [msg stringByAppendingString:tlv];
             self.lableAmount.text = @"";
+            NSLog(@"msg == %@",msg);
             
 //            [pos getICCTag:1 tagCount:1 tagArrStr:@"9F6B"];
         });
