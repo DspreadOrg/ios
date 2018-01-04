@@ -12,6 +12,7 @@
 
 @interface MainDetailViewController ()
 - (void)configureView;
+@property (weak, nonatomic) IBOutlet UILabel *updateProgressLab;
 @property (nonatomic,copy)NSString *terminalTime;
 @property (nonatomic,copy)NSString *currencyCode;
 @property (weak, nonatomic) IBOutlet UILabel *labSDK;
@@ -35,6 +36,10 @@
     TransactionType mTransType;
     NSString *msgStr;
     BOOL doTradeByEnterAmount;
+    UIProgressView* progressView;
+    NSTimer* appearTimer;
+    NSTimer* sendTimer;
+    float _updateProgress;
 }
 
 @synthesize bluetoothAddress;
@@ -1255,7 +1260,7 @@
 
 - (NSData*)readLine:(NSString*)name
 {
-    NSString* file = [[NSBundle mainBundle]pathForResource:name ofType:@".bin"];
+    NSString* file = [[NSBundle mainBundle]pathForResource:name ofType:@".asc"];
     NSFileManager* Manager = [NSFileManager defaultManager];
     NSData* data = [[NSData alloc] init];
     data = [Manager contentsAtPath:file];
@@ -1264,7 +1269,7 @@
 
 
 -(void)testUpdatePosFirmware{
-    NSData *data = [self readLine:@"A27CAYC_S1(assist)_master"];//read a14upgrader.asc
+    NSData *data = [self readLine:@"upgrader"];//read a14upgrader.asc
     
     if (data != nil) {
         [[QPOSService sharedInstance] updatePosFirmware:data address:self.bluetoothAddress];
@@ -1602,6 +1607,48 @@ typedef NS_ENUM(NSInteger, MSG_PRO) {
     [pos powerOffIcc];
 }
 
+- (IBAction)updatePosFirmware:(id)sender {
+    [self testUpdatePosFirmware];
+    self.textViewLog.text = @"firmware updating...";
+    [self updateProgress];
+    appearTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(progressMethod) userInfo:nil repeats:YES];
+}
 
+-(void)updateProgress{
+    //初始化
+    progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    progressView.frame = (CGRect){150,110,160,50};
+    progressView.trackTintColor = [UIColor blackColor];
+    progressView.progress = 0.0;
+    progressView.progressTintColor = [UIColor greenColor];
+    progressView.progressImage = [UIImage imageNamed:@""];
+    [self.view addSubview:progressView];
+    
+}
+
+-(NSInteger)getProgress{
+    return [pos getUpdateProgress];
+}
+-(void)progressMethod{
+    dispatch_async(dispatch_get_main_queue(),  ^{
+        self_queue = dispatch_queue_create("updateProgress",DISPATCH_QUEUE_CONCURRENT);
+        dispatch_sync(self_queue, ^{
+            NSInteger updateProgress =  [self getProgress];
+            NSString *str = [NSString stringWithFormat:@"%ld",(long)updateProgress];
+            float floatString = [str floatValue]/100;
+            if(floatString >0&& floatString< 1 ) {
+                [progressView setProgress:floatString animated:YES];
+                self.updateProgressLab.text = [NSString stringWithFormat:@"progress: %.0f %s",floatString*100,"%"];
+            }if (floatString == 1.0) {
+                [progressView setTrackTintColor:[UIColor greenColor]];
+                [progressView setProgressTintColor:[UIColor greenColor]];
+                self.updateProgressLab.text = @"100%";
+            }
+            
+        });
+        
+    });
+    
+}
 @end
 

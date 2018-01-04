@@ -27,12 +27,8 @@
 		6B2788B71883D4290095A338 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2788B61883D4290095A338 /* AudioToolbox.framework */; };
 		6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */; };
 		6B95E13F190F94E500055ACC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B95E13E190F94E500055ACC /* MediaPlayer.framework */; };
-		751619231FF24AE100E6559E /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 751619221FF24AE100E6559E /* libqpos-ios-sdk.a */; };
-		752220BB1FDFEC06009B0288 /* A27CAYC_S1(assist)_master.asc in Resources */ = {isa = PBXBuildFile; fileRef = 752220BA1FDFEC06009B0288 /* A27CAYC_S1(assist)_master.asc */; };
-		75281F511FDFF53D00F60FBD /* emvcfg_app.bin in Resources */ = {isa = PBXBuildFile; fileRef = 75281F4F1FDFF53D00F60FBD /* emvcfg_app.bin */; };
-		75281F521FDFF53D00F60FBD /* emvcfg_capk.bin in Resources */ = {isa = PBXBuildFile; fileRef = 75281F501FDFF53D00F60FBD /* emvcfg_capk.bin */; };
-		753BD08D1FD9357A00781C4A /* advt_app_6.bin in Resources */ = {isa = PBXBuildFile; fileRef = 753BD08B1FD9357A00781C4A /* advt_app_6.bin */; };
-		753BD08E1FD9357A00781C4A /* advt_capk_6.bin in Resources */ = {isa = PBXBuildFile; fileRef = 753BD08C1FD9357A00781C4A /* advt_capk_6.bin */; };
+		752DD6D11FFDFB7B00AFFD66 /* upgrader.asc in Resources */ = {isa = PBXBuildFile; fileRef = 752DD6D01FFDFB7B00AFFD66 /* upgrader.asc */; };
+		752DD6D31FFDFBCD00AFFD66 /* libqpos-ios-sdk-v2.5.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 752DD6D21FFDFBCD00AFFD66 /* libqpos-ios-sdk-v2.5.1.a */; };
 		75C3970E1ECF0B8300682D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75C3970D1ECF0B8300682D13 /* Main.storyboard */; };
 		75FE2A651ECEFC40001DA427 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE2A641ECEFC40001DA427 /* MainViewController.m */; };
 /* End PBXBuildFile section */
@@ -76,12 +72,8 @@
 		6B95E13E190F94E500055ACC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		6BB1DC061A5942B6009F40CD /* BTDeviceFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTDeviceFinder.h; sourceTree = "<group>"; };
 		6BB1DC081A5942B6009F40CD /* QPOSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
-		751619221FF24AE100E6559E /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
-		752220BA1FDFEC06009B0288 /* A27CAYC_S1(assist)_master.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A27CAYC_S1(assist)_master.asc"; sourceTree = "<group>"; };
-		75281F4F1FDFF53D00F60FBD /* emvcfg_app.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emvcfg_app.bin; sourceTree = "<group>"; };
-		75281F501FDFF53D00F60FBD /* emvcfg_capk.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emvcfg_capk.bin; sourceTree = "<group>"; };
-		753BD08B1FD9357A00781C4A /* advt_app_6.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = advt_app_6.bin; sourceTree = "<group>"; };
-		753BD08C1FD9357A00781C4A /* advt_capk_6.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = advt_capk_6.bin; sourceTree = "<group>"; };
+		752DD6D01FFDFB7B00AFFD66 /* upgrader.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = upgrader.asc; sourceTree = "<group>"; };
+		752DD6D21FFDFBCD00AFFD66 /* libqpos-ios-sdk-v2.5.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-v2.5.1.a"; sourceTree = "<group>"; };
 		75C378E31F8F71630022B646 /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		75C3970D1ECF0B8300682D13 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		75FE2A631ECEFC40001DA427 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -94,7 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B95E13F190F94E500055ACC /* MediaPlayer.framework in Frameworks */,
-				751619231FF24AE100E6559E /* libqpos-ios-sdk.a in Frameworks */,
+				752DD6D31FFDFBCD00AFFD66 /* libqpos-ios-sdk-v2.5.1.a in Frameworks */,
 				6B2788B71883D4290095A338 /* AudioToolbox.framework in Frameworks */,
 				6B2788B51883D4210095A338 /* AVFoundation.framework in Frameworks */,
 				00A90070183B0B0400D22572 /* CoreBluetooth.framework in Frameworks */,
@@ -156,8 +148,7 @@
 		00A90036183B08B100D22572 /* qpos-ios-demo */ = {
 			isa = PBXGroup;
 			children = (
-				753BD08B1FD9357A00781C4A /* advt_app_6.bin */,
-				753BD08C1FD9357A00781C4A /* advt_capk_6.bin */,
+				752DD6D01FFDFB7B00AFFD66 /* upgrader.asc */,
 				6B2EA682183C7C5000E152CD /* iPad */,
 				75FE2A631ECEFC40001DA427 /* MainViewController.h */,
 				75FE2A641ECEFC40001DA427 /* MainViewController.m */,
@@ -214,10 +205,7 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				751619221FF24AE100E6559E /* libqpos-ios-sdk.a */,
-				75281F4F1FDFF53D00F60FBD /* emvcfg_app.bin */,
-				75281F501FDFF53D00F60FBD /* emvcfg_capk.bin */,
-				752220BA1FDFEC06009B0288 /* A27CAYC_S1(assist)_master.asc */,
+				752DD6D21FFDFBCD00AFFD66 /* libqpos-ios-sdk-v2.5.1.a */,
 				6BB1DC061A5942B6009F40CD /* BTDeviceFinder.h */,
 				6BB1DC081A5942B6009F40CD /* QPOSService.h */,
 				75C378E31F8F71630022B646 /* Util.h */,
@@ -306,12 +294,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75281F521FDFF53D00F60FBD /* emvcfg_capk.bin in Resources */,
 				00A9004C183B08B100D22572 /* Images.xcassets in Resources */,
-				75281F511FDFF53D00F60FBD /* emvcfg_app.bin in Resources */,
-				753BD08D1FD9357A00781C4A /* advt_app_6.bin in Resources */,
-				752220BB1FDFEC06009B0288 /* A27CAYC_S1(assist)_master.asc in Resources */,
-				753BD08E1FD9357A00781C4A /* advt_capk_6.bin in Resources */,
+				752DD6D11FFDFB7B00AFFD66 /* upgrader.asc in Resources */,
 				75C3970E1ECF0B8300682D13 /* Main.storyboard in Resources */,
 				00A9003B183B08B100D22572 /* InfoPlist.strings in Resources */,
 				4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */,
