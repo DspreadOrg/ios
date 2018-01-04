@@ -194,6 +194,10 @@ typedef NS_ENUM(NSInteger,DoTradeLog) {
     DoTradeLog_getOneLog = 2
     
 };
+typedef NS_ENUM(NSInteger,EncryptType) {
+    EncryptType_plaintext,
+    EncryptType_encrypted
+};
 
 
 @protocol QPOSServiceListener<NSObject>
@@ -657,7 +661,7 @@ typedef NS_ENUM(NSInteger,DoTradeLog) {
 - (void)cbc_mac_cn_all:(NSInteger)keyLen atype:(NSInteger)algorithmType otype:(NSInteger)operatorType data:(NSString *)dataStr delay:(NSInteger)timeout withResultBlock:(void (^)(NSString *))cbcmacBlock;
 
 -(NSDictionary *)getICCTag:(NSInteger) cardType tagCount:(NSInteger) mTagCount tagArrStr:(NSString*) mTagArrStr;
--(NSDictionary *)getICCTag:(NSString *)encryType cardType:(NSInteger)cardType tagCount:(NSInteger) mTagCount tagArrStr:(NSString*)mTagArrStr;
+-(NSDictionary *)getICCTag:(EncryptType)encryTypeStr cardType:(NSInteger)cardType tagCount:(NSInteger) mTagCount tagArrStr:(NSString*)mTagArrStr;
 -(NSDictionary *)getNFCBatchData;
 -(void)doTradeAll:(NSDictionary *)mDic;
 -(void)doCheckCardAll:(NSDictionary*)mDic;

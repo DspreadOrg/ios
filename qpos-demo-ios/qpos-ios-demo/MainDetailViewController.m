@@ -232,6 +232,7 @@
         
       NSDictionary *a =  [pos getICCTag:1 tagCount:1 tagArrStr:@"9F6B"];
       NSDictionary *b =  [pos getICCTag:1 tagCount:1 tagArrStr:@"57"];
+    NSDictionary *c = [pos getICCTag:EncryptType_encrypted cardType:2 tagCount:1 tagArrStr:@"57"];
         NSLog(@"decodeData: %@",decodeData);
         NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
         NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
@@ -486,6 +487,7 @@
     
     
        NSDictionary *dict9f01 = [pos getICCTag:0 tagCount:1 tagArrStr:@"5F20"];
+       NSDictionary *c = [pos getICCTag:EncryptType_encrypted cardType:2 tagCount:1 tagArrStr:@"57"];
  
     
 //        NSDictionary *dict9F6C = [pos getICCTag:0 tagCount:1 tagArrStr:@"9F6C"];
