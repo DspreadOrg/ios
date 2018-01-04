@@ -230,9 +230,9 @@
         //         });
     }else if(result==DoTradeResult_NFC_OFFLINE || result == DoTradeResult_NFC_ONLINE){
         
-      NSDictionary *a =  [pos getICCTag:1 tagCount:1 tagArrStr:@"9F6B"];
-      NSDictionary *b =  [pos getICCTag:1 tagCount:1 tagArrStr:@"57"];
-    NSDictionary *c = [pos getICCTag:EncryptType_encrypted cardType:2 tagCount:1 tagArrStr:@"57"];
+//      NSDictionary *a =  [pos getICCTag:1 tagCount:1 tagArrStr:@"9F6B"];
+//      NSDictionary *b =  [pos getICCTag:1 tagCount:1 tagArrStr:@"57"];
+//    NSDictionary *c = [pos getICCTag:EncryptType_encrypted cardType:2 tagCount:1 tagArrStr:@"57"];
         NSLog(@"decodeData: %@",decodeData);
         NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
         NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
