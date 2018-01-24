@@ -198,6 +198,15 @@ typedef NS_ENUM(NSInteger,EncryptType) {
     EncryptType_plaintext,
     EncryptType_encrypted
 };
+typedef NS_ENUM(NSInteger,EMVOperation) {
+    EMVOperation_clear,
+    EMVOperation_add,
+    EMVOperation_delete,
+    EMVOperation_getList,
+    EMVOperation_update,
+    EMVOperation_quickemv
+    
+};
 
 
 @protocol QPOSServiceListener<NSObject>

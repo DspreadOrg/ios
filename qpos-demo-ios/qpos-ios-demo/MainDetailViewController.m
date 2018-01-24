@@ -85,6 +85,8 @@
 - (IBAction)getQposId:(id)sender {
     self.textViewLog.text = @"start ...";
     [pos getQPosId];
+    
+  
 
 }
 
@@ -1651,6 +1653,191 @@ typedef NS_ENUM(NSInteger, MSG_PRO) {
         
     });
     
+}
+-(void)addEMVAPP{
+    NSMutableDictionary * emvAPPDict = [pos getEMVAPPDict];
+#pragma mark aid2
+    NSString *AID = @"A0000000044010";
+    NSString * o1  =[[emvAPPDict valueForKey:@"Application_Identifier_AID_terminal"] stringByAppendingString:[self getEMVStr:AID]];
+    NSString * o2 =[[emvAPPDict valueForKey:@"TAC_Default"] stringByAppendingString:[self getEMVStr:@"FC5080A000"]];
+    NSString * o3  =[[emvAPPDict valueForKey:@"TAC_Online"] stringByAppendingString:[self getEMVStr:@"FC5080F800"]];
+    NSString * o4  =[[emvAPPDict valueForKey:@"TAC_Denial"] stringByAppendingString:[self getEMVStr:@"0000000000"]];
+    NSString * o5 =[[emvAPPDict valueForKey:@"Target_Percentage_to_be_Used_for_Random_Selection"] stringByAppendingString:[self getEMVStr:@"00"]];
+    NSString * o6  =[[emvAPPDict valueForKey:@"Maximum_Target_Percentage_to_be_used_for_Biased_Random_Selection"] stringByAppendingString:[self getEMVStr:@"00"]];
+    NSString * o7  =[[emvAPPDict valueForKey:@"Threshold_Value_BiasedRandom_Selection"] stringByAppendingString:[self getEMVStr:[self getHexFromIntStr:@"999999"]]];
+    NSString * o8  =[[emvAPPDict valueForKey:@"Terminal_Floor_Limit"] stringByAppendingString:[self getEMVStr:@"00000000"]];
+    NSString * o9 =[[emvAPPDict valueForKey:@"Application_Version_Number"] stringByAppendingString:[self getEMVStr:@"0002"]];
+    NSString * o10 =[[emvAPPDict valueForKey:@"Point_of_Service_POS_EntryMode"] stringByAppendingString:[self getEMVStr:@"05"]];
+    NSString * o11  =[[emvAPPDict valueForKey:@"Acquirer_Identifier"] stringByAppendingString:[self getEMVStr:@"000000008080"]];
+    NSString * o12 =[[emvAPPDict valueForKey:@"Merchant_Category_Code"] stringByAppendingString:[self getEMVStr:@"1234"]];
+    NSString * o13  =[[emvAPPDict valueForKey:@"Merchant_Identifier"] stringByAppendingString:[self getEMVStr:[self getHexFromStr: @"BCTEST 12345678"]]];
+    NSString * o14  =[[emvAPPDict valueForKey:@"Merchant_Name_and_Location"] stringByAppendingString:[self getEMVStr:[[self getHexFromStr:@"abcd"] stringByAppendingString:@"0000000000000000000000"]]];
+    NSString * o15  = [[emvAPPDict valueForKey:@"Transaction_Currency_Code"] stringByAppendingString:[self getEMVStr:@"0608"]];
+    NSString * o16 = [[emvAPPDict valueForKey:@"Transaction_Currency_Exponent"] stringByAppendingString:[self getEMVStr:@"02"]];
+    NSString * o17  = [[emvAPPDict valueForKey:@"Transaction_Reference_Currency_Code"] stringByAppendingString:[self getEMVStr:@"0608"]];
+    NSString * o18 = [[emvAPPDict valueForKey:@"Transaction_Reference_Currency_Exponent"] stringByAppendingString:[self getEMVStr:@"02"]];
+    NSString * o19  = [[emvAPPDict valueForKey:@"Terminal_Country_Code"] stringByAppendingString:[self getEMVStr:@"0608"]];
+    NSString * o20  = [[emvAPPDict valueForKey:@"Interface_Device_IFD_Serial_Number"] stringByAppendingString:[self getEMVStr:[self getHexFromStr:@"83201ICC"]]];
+    NSString * o21 =[[emvAPPDict valueForKey:@"Terminal_Identification"] stringByAppendingString:[self getEMVStr:[self getHexFromStr:@"NL-GP730"]]];
+    NSString * o22  =[[emvAPPDict valueForKey:@"Default_DDOL"] stringByAppendingString:[self getEMVStr:@"9f3704"]];
+    NSString * o23 =[[emvAPPDict valueForKey:@"Default_Tdol"] stringByAppendingString:[self getEMVStr:@"9F1A0295059A039C01"]];
+    NSString * o24  =[[emvAPPDict valueForKey:@"Application_Selection_Indicator"] stringByAppendingString:[self getEMVStr:@"01"]];
+    
+    NSArray *certainAIDConfigArr = @[o1,o2,o3,o4,o5,o6,o7,o8,o9,o10,o11,o12,o13,o14,o15,o16,o17,o18,o19,o20,o21,o22,o23,o24];
+    [pos updateEmvAPP:EMVOperation_add data:certainAIDConfigArr block:^(BOOL isSuccess, NSString *stateStr) {
+        if (isSuccess) {
+            self.textViewLog.text = stateStr;
+            
+        }else{
+            self.textViewLog.text = [NSString stringWithFormat:@"update aid fail"];
+        }
+    }];
+}
+-(void)deleteEMVAPP{
+    NSArray *certainAIDConfigArr = @[@"A0000000044010"];
+    [pos updateEmvAPP:EMVOperation_delete data:certainAIDConfigArr block:^(BOOL isSuccess, NSString *stateStr) {
+        if (isSuccess) {
+            self.textViewLog.text = stateStr;
+            
+        }else{
+            self.textViewLog.text = [NSString stringWithFormat:@"update aid fail"];
+        }
+    }];
+}
+-(void)updateEMVAPP{
+    
+     NSMutableDictionary * emvAPPDict = [pos getEMVAPPDict];
+
+    NSString *AID = @"A0000000044010";
+    NSString * o1  =[[emvAPPDict valueForKey:@"Application_Identifier_AID_terminal"] stringByAppendingString:[self getEMVStr:AID]];
+    NSString * o2 =[[emvAPPDict valueForKey:@"TAC_Default"] stringByAppendingString:[self getEMVStr:@"FC5080A000"]];
+    NSString * o3  =[[emvAPPDict valueForKey:@"TAC_Online"] stringByAppendingString:[self getEMVStr:@"FC5080F800"]];
+    NSString * o4  =[[emvAPPDict valueForKey:@"TAC_Denial"] stringByAppendingString:[self getEMVStr:@"0000000000"]];
+    NSString * o5 =[[emvAPPDict valueForKey:@"Target_Percentage_to_be_Used_for_Random_Selection"] stringByAppendingString:[self getEMVStr:@"00"]];
+    NSString * o6  =[[emvAPPDict valueForKey:@"Maximum_Target_Percentage_to_be_used_for_Biased_Random_Selection"] stringByAppendingString:[self getEMVStr:@"00"]];
+    NSString * o7  =[[emvAPPDict valueForKey:@"Threshold_Value_BiasedRandom_Selection"] stringByAppendingString:[self getEMVStr:[self getHexFromIntStr:@"999999"]]];
+    NSString * o8  =[[emvAPPDict valueForKey:@"Terminal_Floor_Limit"] stringByAppendingString:[self getEMVStr:@"00000000"]];
+    NSString * o9 =[[emvAPPDict valueForKey:@"Application_Version_Number"] stringByAppendingString:[self getEMVStr:@"0002"]];
+    NSString * o10 =[[emvAPPDict valueForKey:@"Point_of_Service_POS_EntryMode"] stringByAppendingString:[self getEMVStr:@"05"]];
+    NSString * o11  =[[emvAPPDict valueForKey:@"Acquirer_Identifier"] stringByAppendingString:[self getEMVStr:@"000000008080"]];
+    NSString * o12 =[[emvAPPDict valueForKey:@"Merchant_Category_Code"] stringByAppendingString:[self getEMVStr:@"1234"]];
+    NSString * o13  =[[emvAPPDict valueForKey:@"Merchant_Identifier"] stringByAppendingString:[self getEMVStr:[self getHexFromStr: @"BCTEST 12345678"]]];
+    NSString * o14  =[[emvAPPDict valueForKey:@"Merchant_Name_and_Location"] stringByAppendingString:[self getEMVStr:[[self getHexFromStr:@"abcd"] stringByAppendingString:@"0000000000000000000000"]]];
+    NSString * o15  = [[emvAPPDict valueForKey:@"Transaction_Currency_Code"] stringByAppendingString:[self getEMVStr:@"0608"]];
+    NSString * o16 = [[emvAPPDict valueForKey:@"Transaction_Currency_Exponent"] stringByAppendingString:[self getEMVStr:@"02"]];
+    NSString * o17  = [[emvAPPDict valueForKey:@"Transaction_Reference_Currency_Code"] stringByAppendingString:[self getEMVStr:@"0608"]];
+    NSString * o18 = [[emvAPPDict valueForKey:@"Transaction_Reference_Currency_Exponent"] stringByAppendingString:[self getEMVStr:@"02"]];
+    NSString * o19  = [[emvAPPDict valueForKey:@"Terminal_Country_Code"] stringByAppendingString:[self getEMVStr:@"0608"]];
+    NSString * o20  = [[emvAPPDict valueForKey:@"Interface_Device_IFD_Serial_Number"] stringByAppendingString:[self getEMVStr:[self getHexFromStr:@"83201ICC"]]];
+    NSString * o21 =[[emvAPPDict valueForKey:@"Terminal_Identification"] stringByAppendingString:[self getEMVStr:[self getHexFromStr:@"NL-GP730"]]];
+    NSString * o22  =[[emvAPPDict valueForKey:@"Default_DDOL"] stringByAppendingString:[self getEMVStr:@"9f3704"]];
+    NSString * o23 =[[emvAPPDict valueForKey:@"Default_Tdol"] stringByAppendingString:[self getEMVStr:@"9F1A0295059A039C01"]];
+    NSString * o24  =[[emvAPPDict valueForKey:@"Application_Selection_Indicator"] stringByAppendingString:[self getEMVStr:@"01"]];
+    NSString * o25  =[[emvAPPDict valueForKey:@"terminal_contactless_transaction_limit"] stringByAppendingString:[self getEMVStr:@"000000200001"]];
+    NSString * o26  =[[emvAPPDict valueForKey:@"terminal_execute_cvm_limit"] stringByAppendingString:[self getEMVStr:@"000000999999"]];
+    
+     NSArray *certainAIDConfigArr = @[o1,o2,o3,o4,o5,o6,o7,o8,o9,o10,o11,o12,o13,o14,o15,o16,o17,o18,o19,o20,o21,o22,o23,o24,o25,o26];
+    [pos updateEmvAPP:EMVOperation_update data:certainAIDConfigArr block:^(BOOL isSuccess, NSString *stateStr) {
+        if (isSuccess) {
+            self.textViewLog.text = stateStr;
+         
+        }else{
+            self.textViewLog.text = [NSString stringWithFormat:@"update aid fail"];
+        }
+    }];
+}
+
+-(NSString* )getEMVStr:(NSString *)emvStr{
+    NSInteger emvLen = 0;
+    if (emvStr != NULL &&![emvStr  isEqual: @""]) {
+        if ([emvStr length]%2 != 0) {
+            emvStr = [@"0" stringByAppendingString:emvStr];
+        }
+        emvLen = [emvStr length]/2;
+    }else{
+        NSLog(@"init emv app config str could not be empty");
+        return nil;
+    }
+    NSData *emvLenData = [Util IntToHex:emvLen];
+    NSString *totalStr = [[[Util byteArray2Hex:emvLenData] substringFromIndex:2] stringByAppendingString:emvStr];
+    return totalStr;
+}
+
+-(NSString *)getHexFromStr:(NSString *)str{
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *hex = [Util byteArray2Hex:data];
+    return hex ;
+}
+- (NSString *)getHexFromIntStr:(NSString *)tmpidStr
+{
+    NSInteger tmpid = [tmpidStr intValue];
+    NSString *nLetterValue;
+    NSString *str =@"";
+    int ttmpig;
+    for (int i = 0; i<9; i++) {
+        ttmpig=tmpid%16;
+        tmpid=tmpid/16;
+        switch (ttmpig)
+        {
+            case 10:
+                nLetterValue =@"A";break;
+            case 11:
+                nLetterValue =@"B";break;
+            case 12:
+                nLetterValue =@"C";break;
+            case 13:
+                nLetterValue =@"D";break;
+            case 14:
+                nLetterValue =@"E";break;
+            case 15:
+                nLetterValue =@"F";break;
+            default:
+                nLetterValue = [NSString stringWithFormat:@"%u",ttmpig];
+        }
+        str = [nLetterValue stringByAppendingString:str];
+        if (tmpid == 0) {
+            break;
+        }
+    }
+    //不够一个字节凑0
+    if(str.length == 1){
+        return [NSString stringWithFormat:@"0%@",str];
+    }else{
+        if ([str length]<8) {
+            if ([str length] == (8-1)) {
+                str = [@"0" stringByAppendingString:str];
+            }else if ([str length] == (8-2)){
+                str = [@"00" stringByAppendingString:str];
+            }else if  ([str length] == (8-3)){
+                str = [@"000" stringByAppendingString:str];
+            }
+            else if ([str length] == (8-4)) {
+                str = [@"0000" stringByAppendingString:str];
+            } else if([str length] == (8-5)){
+                str = [@"00000" stringByAppendingString:str];
+            }else if([str length] == (8-6)){
+                str = [@"000000" stringByAppendingString:str];
+            }
+        }
+        return str;
+    }
+}
+
+-(void)updateTerminalContactlessFloorLimit{
+    
+    NSMutableDictionary * emvAPPDict = [pos getEMVAPPDict];
+    NSString * contactlessLimit =[[emvAPPDict valueForKey:@"terminal_contactless_transaction_limit"] stringByAppendingString:[self getEMVStr:@"000000200001"]];
+    NSString * cvmlimit  =[[emvAPPDict valueForKey:@"terminal_execute_cvm_limit"] stringByAppendingString:[self getEMVStr:@"000000999999"]];
+    
+    NSArray *certainAIDConfigArr = @[contactlessLimit,cvmlimit];
+    [pos updateEmvAPP:EMVOperation_update data:certainAIDConfigArr block:^(BOOL isSuccess, NSString *stateStr) {
+        if (isSuccess) {
+            self.textViewLog.text = stateStr;
+            
+        }else{
+            self.textViewLog.text = [NSString stringWithFormat:@"update aid fail"];
+        }
+    }];
 }
 @end
 
