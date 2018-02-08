@@ -132,6 +132,15 @@ typedef NS_ENUM(NSInteger, TransactionResult) {
     TransactionResult_TRADE_LOG_FULL
     
 };
+typedef NS_ENUM(NSInteger,DoTradeLog) {
+    DoTradeLog_clear,
+    DoTradeLog_getAllCount,
+    DoTradeLog_getOneLog,
+    DoTradeLog_deleteOneLog,
+    DoTradeLog_deleteLastLog,
+    DoTradeLog_ClearOneByBatchID,
+    DoTradeLog_GetOneByBatchID
+};
 
 typedef NS_ENUM(NSInteger, TransactionType) {
     TransactionType_GOODS, // 货物
@@ -186,13 +195,6 @@ typedef NS_ENUM(NSInteger, DoTradeMode) {//不需要对外提供
     DoTradeMode_COMMON,
     DoTradeMode_CHECK_CARD_NO_IPNUT_PIN,//不输入密码
     DoTradeMode_IS_DEBIT_OR_CREDIT//
-};
-
-typedef NS_ENUM(NSInteger,DoTradeLog) {
-    DoTradeLog_clear = 0,
-    DoTradeLog_getAllCount = 1,
-    DoTradeLog_getOneLog = 2
-    
 };
 typedef NS_ENUM(NSInteger,EncryptType) {
     EncryptType_plaintext,
@@ -692,6 +694,8 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(NSData*)sycnSendApdu:(NSString *)apduStr;
 -(NSDictionary *)syncDoTradeLogOperation:(NSInteger)type
                                     data:(NSInteger)data;
+-(NSDictionary *)syncDoTradeLogOperation:(NSInteger)type
+                                 batchID:(NSString *)batchID;
 -(void)doTrade:(NSInteger) timeout batchID:(NSString *)batchID;
 -(void)setFormatID:(NSString *)formatID;
 
