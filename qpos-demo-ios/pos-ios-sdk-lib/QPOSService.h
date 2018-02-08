@@ -691,6 +691,8 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(NSArray *)getConnectedDevices;
 -(void)setIsQuickEMV:(BOOL)isQuickEMV
                block:(void(^)(BOOL isSuccess,NSString *stateStr))setIsQuickEmvBlock;
+-(void)setIsQuickEMV:(BOOL)isQuickEMV
+               block:(void(^)(BOOL isSuccess,NSString *stateStr))isQuickEMVBlock;
 -(NSData*)sycnSendApdu:(NSString *)apduStr;
 -(NSDictionary *)syncDoTradeLogOperation:(NSInteger)type
                                     data:(NSInteger)data;
