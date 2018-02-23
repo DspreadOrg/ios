@@ -86,7 +86,6 @@
     self.textViewLog.text = @"start ...";
     [pos getQPosId];
 
-//    [self updateTerminalContactlessFloorLimit];
 
 }
 
@@ -1188,7 +1187,6 @@
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
-//    [pos setPosSleepTime:140];
  
     [pos getQPosInfo];
 }
