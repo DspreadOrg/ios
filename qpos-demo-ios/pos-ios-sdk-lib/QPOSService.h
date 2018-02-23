@@ -361,8 +361,6 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(void)doSetSleepModeTime:(NSString *)timeOut  block:(void(^)(BOOL isSuccess,NSString *stateStr))sleepModeBlock;
 
 -(BOOL)getBluetoothState;
--(void)doSetSleepModeTime:(NSString *)timeOut
-                    block:(void(^)(BOOL isSuccess,NSString *stateStr))sleepModeBlock;
 -(NSInteger) getOnLineTime;
 -(BOOL) connectBT: (NSString *)bluetoothName;
 -(void) disconnectBT;
@@ -732,7 +730,7 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 
 -(NSMutableDictionary *)getEMVAPPDict;
 #pragma mark init emv capk
--(NSMutableDictionary *)getEMVCAPK;
+-(NSMutableDictionary *)EmvAppTag;
 -(void)setDoTradeMode:(DoTradeMode)doTradeMode;
 -(void)setIsSaveLog:(BOOL)IsSaveLog
               block:(void(^)(BOOL isSuccess,NSString *stateStr))IsSaveLogBlock;
