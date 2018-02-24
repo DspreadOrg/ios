@@ -96,11 +96,11 @@ NSInteger   scanBluetoothTime = 15;
         [bt setBluetoothDelegate2Mode:self];
         if ([bt getCBCentralManagerState] == CBCentralManagerStateUnknown){
                 mAlertView = [[UIAlertView new]
-                              initWithTitle:@"pls open system bluetooth or use another device"
+                              initWithTitle:@"pls open bluetooth"
                               message:@""
                               delegate:self
                               cancelButtonTitle:@"Confirm"
-                              otherButtonTitles:@"Setting",
+                              otherButtonTitles:nil,
                               nil ];
                 [mAlertView show];
            
@@ -121,13 +121,7 @@ NSInteger   scanBluetoothTime = 15;
 
 -(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0) {
-        NSLog(@"hideAlertView");
-        [mAlertView dismissWithClickedButtonIndex:0 animated:YES];
-  
-    }else{
-         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-    }
+    [mAlertView dismissWithClickedButtonIndex:0 animated:YES];
     
 }
 
