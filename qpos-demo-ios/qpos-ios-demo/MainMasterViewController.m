@@ -94,18 +94,40 @@ NSInteger   scanBluetoothTime = 15;
     if(is2ModeBluetooth){
         NSLog(@"蓝牙状态:%ld",(long)[bt getCBCentralManagerState]);
         [bt setBluetoothDelegate2Mode:self];
-        if ([bt getCBCentralManagerState] == CBCentralManagerStateUnknown) {
+        if ([bt getCBCentralManagerState] == CBCentralManagerStateUnknown){
+                mAlertView = [[UIAlertView new]
+                              initWithTitle:@"pls open system bluetooth or use another device"
+                              message:@""
+                              delegate:self
+                              cancelButtonTitle:@"Confirm"
+                              otherButtonTitles:@"Setting",
+                              nil ];
+                [mAlertView show];
+           
             while ([bt getCBCentralManagerState]!= CBCentralManagerStatePoweredOn) {
                 NSLog(@"Bluetooth state is not power on");
                 [self sleepMs:10];
                 if(delay++==10){
                     return;
                 }
+                
             }
         }
         [bt scanQPos2Mode:scanBluetoothTime];
     }
     
+    
+}
+
+-(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        NSLog(@"hideAlertView");
+        [mAlertView dismissWithClickedButtonIndex:0 animated:YES];
+  
+    }else{
+         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }
     
 }
 

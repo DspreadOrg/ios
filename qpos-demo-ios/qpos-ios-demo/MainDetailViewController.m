@@ -487,18 +487,12 @@
     NSLog(@"onRequestOnlineProcess =**** %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
     
     
-       NSDictionary *dictDF21 = [pos getICCTag:0 tagCount:1 tagArrStr:@"DF21"];
-        NSDictionary *dict9F33 = [pos getICCTag:0 tagCount:1 tagArrStr:@"9F33"];
-      NSDictionary *dict9F34 = [pos getICCTag:0 tagCount:1 tagArrStr:@"9F34"];
-       NSDictionary *cd = [pos getICCTag:EncryptType_encrypted cardType:2 tagCount:1 tagArrStr:@"57"];
- 
-    
-//        NSDictionary *dict9F6C = [pos getICCTag:0 tagCount:1 tagArrStr:@"9F6C"];
-//        NSDictionary *dict82 = [pos getICCTag:0 tagCount:1 tagArrStr:@"82"];
-    
-    NSDictionary *dict9F66 = [pos getICCTag:0 tagCount:1 tagArrStr:@"9F66"];
-
-    NSLog(@"onRequestOnlineProcess =**** %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
+//       NSDictionary *dictDF21 = [pos getICCTag:0 tagCount:1 tagArrStr:@"DF21"];
+//        NSDictionary *dict9F33 = [pos getICCTag:0 tagCount:1 tagArrStr:@"9F33"];
+//      NSDictionary *dict9F34 = [pos getICCTag:0 tagCount:1 tagArrStr:@"9F34"];
+//       NSDictionary *cd = [pos getICCTag:EncryptType_encrypted cardType:2 tagCount:1 tagArrStr:@"57"];
+//
+//        NSDictionary *dict9F66 = [pos getICCTag:0 tagCount:1 tagArrStr:@"9F66"];
     //    [self claMac];
     //    [self batchSendAPDU];
     //    [pos calcMacDouble_all:@"12345678123456781234567812345678" keyIndex:0 delay:5];
