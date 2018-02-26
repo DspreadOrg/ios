@@ -9,6 +9,7 @@
 #import "MainDetailViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "Util.h"
+#import "Print.h"
 
 @interface MainDetailViewController ()
 - (void)configureView;
@@ -221,6 +222,7 @@
         AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
         self.textViewLog.text = msg;
         self.lableAmount.text = @"";
+          [[NSUserDefaults standardUserDefaults]setObject:msg forKey:@"swipeData"];
         
 //        [pos buildPinBlock:@"2632C5C0EAC64536D3C55EBCF76704DA" workKeyCheck:@"0000000000000000" encryptType:1 keyIndex:4 maxLen:6 typeFace:@"pls input pin" cardNo:maskedPAN date:@"20171213" delay:30];
        
@@ -333,7 +335,7 @@
     }else{
         self.amount = @"1";
         _lableAmount.text = @"$100";
-        [pos setAmount:self.amount aAmountDescribe:@"1000" currency:@"156" transactionType:TransactionType_UPDATE_PIN];
+        [pos setAmount:self.amount aAmountDescribe:@"1000" currency:@"156" transactionType:TransactionType_GOODS];
     }
   
 }
@@ -486,7 +488,7 @@
     NSLog(@"tlv == %@",tlv);
     NSLog(@"onRequestOnlineProcess =**** %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
     
-    
+    [[NSUserDefaults standardUserDefaults]setObject:tlv forKey:@"iccData"];
 //       NSDictionary *dictDF21 = [pos getICCTag:0 tagCount:1 tagArrStr:@"DF21"];
 //        NSDictionary *dict9F33 = [pos getICCTag:0 tagCount:1 tagArrStr:@"9F33"];
 //      NSDictionary *dict9F34 = [pos getICCTag:0 tagCount:1 tagArrStr:@"9F34"];
@@ -1164,7 +1166,7 @@
         
     }
 
-      mTransType = TransactionType_UPDATE_PIN;
+      mTransType = TransactionType_GOODS;
       _currencyCode = @"0604";
      [pos setCardTradeMode:CardTradeMode_SWIPE_INSERT_CARD];
      [pos doTrade:30];
@@ -1182,10 +1184,20 @@
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
  
-    [pos getQPosInfo];
+   [pos getQPosInfo];
+   
 }
 
-
+-(void)connectPrinterNoScan{
+     [pos connectBluetoothNoScan:@"S85"];
+}
+-(void)printText{
+    [[Print sharedInstance]  setAsciiWordFormat:0 bold:NO doubleHeight:NO doubleWidth:NO underline:NO];
+    NSString *sData = [[NSUserDefaults standardUserDefaults]objectForKey:@"swipeData"];
+    NSString *iData = [[NSUserDefaults standardUserDefaults]objectForKey:@"iccData"];
+    [[Print sharedInstance]  printTxt:[NSString stringWithFormat:@"%@\n",sData]];
+    [[Print sharedInstance]  printTxt:[NSString stringWithFormat:@"%@\n",iData]];
+}
 
 - (IBAction)resetpos:(id)sender {
     
