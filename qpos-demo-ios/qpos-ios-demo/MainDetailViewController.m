@@ -1170,12 +1170,7 @@
       _currencyCode = @"0604";
      [pos setCardTradeMode:CardTradeMode_SWIPE_INSERT_CARD];
      [pos doTrade:30];
-//    [pos setIsQuickEMV:true block:^(BOOL isSuccess, NSString *stateStr) {
-//        if (isSuccess) {
-//            self.textViewLog.text = stateStr;
-//        }
-//    }];
-//    [pos doTrade:30 batchID:@"iopu"];
+    
     
     
 }
@@ -1185,6 +1180,7 @@
     self.textViewLog.text = @"starting...";
  
    [pos getQPosInfo];
+//    [self getTotalCount];
    
 }
 
@@ -1848,6 +1844,48 @@ typedef NS_ENUM(NSInteger, MSG_PRO) {
             self.textViewLog.text = [NSString stringWithFormat:@"update aid fail"];
         }
     }];
+}
+-(void)doTradeWithBatchID{
+    self.textViewLog.backgroundColor = [UIColor whiteColor];
+    self.textViewLog.text = @"Starting...";
+    //get system time,12hrs or 24hrs
+    NSString*formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    NSRange containsA =[formatStringForHours rangeOfString:@"a"];
+    BOOL hasAMPM =containsA.location != NSNotFound;
+    if (hasAMPM) {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"yyyyMMddhhmmss"];
+        _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+        
+    }else{
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+        _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+        
+    }
+    
+    mTransType = TransactionType_GOODS;
+    _currencyCode = @"0604";
+    [pos setCardTradeMode:CardTradeMode_SWIPE_INSERT_CARD];
+    __weak typeof(self) weakSelf = self;
+    [pos setIsQuickEMV:YES block:^(BOOL isSuccess, NSString *stateStr) {
+        if (isSuccess) {
+            weakSelf.textViewLog.text = stateStr;
+        }
+    }];
+    [pos doTrade:30 batchID:@""];
+}
+-(void)getTotalCount{
+    NSDictionary * aDict = [pos syncDoTradeLogOperation:DoTradeLog_getAllCount data:0];
+    NSLog(@"adict = %@",aDict);
+}
+-(void)deleteOneTrade{
+    NSDictionary * aDict = [pos syncDoTradeLogOperation:DoTradeLog_ClearOneByBatchID batchID:@""];
+    NSLog(@"adict = %@",aDict);
+}
+-(void)getOneTrade{
+    NSDictionary * aDict = [pos syncDoTradeLogOperation:DoTradeLog_GetOneByBatchID batchID:@""];
+    NSLog(@"adict = %@",aDict);
 }
 @end
 

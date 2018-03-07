@@ -35,4 +35,5 @@
 +(NSData *)IntToHexOne: (NSInteger)i;
 +(NSDictionary *)anlysPaddingCommonData:(NSInteger)encryMode data:(NSString *)tlv;
 +(NSDictionary *)anlysPaddingCommonDataByPosid:(NSInteger)encryMode data:(NSString *)tlv qposid:(NSString*)inPosId;
++(NSString *)getReverseData:(NSString *)adStr;
 @end

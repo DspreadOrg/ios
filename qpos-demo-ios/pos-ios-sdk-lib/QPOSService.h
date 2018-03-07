@@ -734,5 +734,6 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(void)setDoTradeMode:(DoTradeMode)doTradeMode;
 -(void)setIsSaveLog:(BOOL)IsSaveLog
               block:(void(^)(BOOL isSuccess,NSString *stateStr))IsSaveLogBlock;
+-(void)getKsn:(void(^)(BOOL isSuccess,NSDictionary *dict))getKsnBlock;
 @end
 
