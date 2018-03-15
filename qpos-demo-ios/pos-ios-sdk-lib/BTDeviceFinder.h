@@ -25,8 +25,6 @@
 -(void)bluetoothIsPowerOn2Mode;
 @end
 
-
-
 @interface BTDeviceFinder : NSObject
 
 //new bluetooth sdk
@@ -34,9 +32,8 @@
 //-(NSArray*)getAllOnlineQPosNameNew;
 //-(void)stopQPosNew;
 //-(void)setBluetoothDelegateNew:(id<BluetoothDelegateNew>)aDelegate;
-
-
 //bluetooth 2Mode
+
 -(void)scanQPos2Mode: (NSInteger)timeout;
 -(NSArray*)getAllOnlineQPosName2Mode;
 -(void)stopQPos2Mode;
