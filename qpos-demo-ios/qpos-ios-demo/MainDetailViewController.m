@@ -1168,7 +1168,7 @@
 
       mTransType = TransactionType_GOODS;
       _currencyCode = @"0604";
-     //[pos setCardTradeMode:CardTradeMode_SWIPE_INSERT_CARD];
+     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
      [pos doTrade:30];
     
     
