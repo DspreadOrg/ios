@@ -1174,7 +1174,30 @@
     
     
 }
-
+-(void)updateEMVAPP{
+    
+    NSMutableDictionary * emvAPPDict = [pos EmvAppTag];
+    
+    //NSString  AID = @"A0000000031010";
+    //NSString * o9  =[[emvAPPDict valueForKey:@"Application_Identifier_AID_terminal"] stringByAppendingString:[self getEMVStr:@"A0000003330101"]];
+    NSString * o1  =[[emvAPPDict valueForKey:@"ICS"] stringByAppendingString:[self getEMVStr:@"F4F070FAAFFE8000"]];
+    NSString * o2 =[[emvAPPDict valueForKey:@"Acquirer_Identifier"] stringByAppendingString:[self getEMVStr:@"000000008080"]];
+    NSString * o3 =[[emvAPPDict valueForKey:@"Merchant_Category_Code"] stringByAppendingString:[self getEMVStr:@"1234"]];
+    NSString * o4  =[[emvAPPDict valueForKey:@"Merchant_Identifier"] stringByAppendingString:[self getEMVStr:[self getHexFromStr: @"BCTEST 12345678"]]];
+    NSString * o5  = [[emvAPPDict valueForKey:@"Transaction_Currency_Code"] stringByAppendingString:[self getEMVStr:@"0840"]];
+    NSString * o6  = [[emvAPPDict valueForKey:@"Terminal_Country_Code"] stringByAppendingString:[self getEMVStr:@"0840"]];
+    NSString * o7  =[[emvAPPDict valueForKey:@"terminal_contactless_transaction_limit"] stringByAppendingString:[self getEMVStr:@"000000001000"]];
+    NSString * o8  =[[emvAPPDict valueForKey:@"terminal_execute_cvm_limit"] stringByAppendingString:[self getEMVStr:@"000000001000"]];
+    NSArray *certainAIDConfigArr = @[o1,o3,o4,o5,o6,o7,o8];
+    [pos updateEmvAPP:EMVOperation_update data:certainAIDConfigArr block:^(BOOL isSuccess, NSString *stateStr) {
+        if (isSuccess) {
+            self.textViewLog.text = stateStr;
+            
+        }else{
+            self.textViewLog.text = [NSString stringWithFormat:@"update aid fail"];
+        }
+    }];
+}
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
