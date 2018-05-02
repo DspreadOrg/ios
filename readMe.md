@@ -34,7 +34,8 @@ Example Code:
    stringByAppendingString:[self getEMVStr:@"60B8C8"]];
    ....
    and add all these values into EMVAIDParamDict. 
-   ##[pos updateEmvAPP:EMVOperation_add data:EMVAIDParamDict ...];
+
+[pos updateEmvAPP:EMVOperation_add data:EMVAIDParamDict ...];
 
 </code> </pre>
 </details>
