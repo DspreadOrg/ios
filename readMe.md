@@ -19,64 +19,24 @@ Parameters:
   EMVOperation_getList:get all the aids in the terminal
 2.data: The data should be an array.
 Example Code:
-1).init the emvAppDict;
-                
-                    NSMutableDictionary * emvCapkDict = [pos getEMVAPPDict];
+1).Init the emvAppDict;
+   NSMutableDictionary * EMVAIDParamDict = [pos getEMVAPPDict];
              
-                   2).set your own value in the method like what the demo shows:
-                  
-                     NSString * aid = [[emvCapkDict  valueForKey:@"Application_Identifier_AID_terminal"] stringByAppendingString:[self getEMVStr:@"A0000006351010"]];
-                
-                     NSString * threValue  = [[emvCapkDict valueForKey:@"Threshold_Value_BiasedRandom_Selection"] stringByAppendingString:[self getEMVStr:[self getHexFromIntStr:@"999999"]]];
-                
-                     NSString * IFD = [[emvCapkDict valueForKey:@"Interface_Device_IFD_Serial_Number"] stringByAppendingString:[self getEMVStr:[self getHexFromStr:@"83201ICC"]]];
-                 
-                      ....
-              
-                     and add all these values into an array. 
-                 
-                     NSSArray * aidConfig = @[aid,threValue,IFD...];
+2).Set your own value in the method like what the demo shows:
+   NSString * ics  =[[EMVAIDParamDict valueForKey:@"ICS"] 
+   stringByAppendingString:[self getEMVStr:@"F4F0F0FAAFFE8000"]];
+   
+   NSString * terminalType  =[[EMVAIDParamDict valueForKey:@"Terminal_type"] 
+   stringByAppendingString:[self getEMVStr:@"22"]];
                      
-                     [pos updateEmvAPP:EMVOperation_add data:aidConfig ...];
+   NSString * terminalCapbilities =[[EMVAIDParamDict valueForKey:@"Terminal_Capabilities"] 
+   stringByAppendingString:[self getEMVStr:@"60B8C8"]];
+   ....
+   and add all these values into EMVAIDParamDict. 
+   ##[pos updateEmvAPP:EMVOperation_add data:EMVAIDParamDict ...];
 
 </code> </pre>
 </details>
-
-     
-     
-
-            EMVOperation_clear: empty array;
-            
-            EMVOperation_add: To add an aid, pass your value like what the demo shows.
-              
-                   
-             
-            EMVOperation_update: If you want to update the same configure  of all the aid, pls organise the data like this:
-                     
-                     
-                     NSString * ics  =[[emvCapkDict valueForKey:@"ICS"] stringByAppendingString:[self getEMVStr:@"F4F0F0FAAFFE8000"]];
-                     NSString * terminalType  =[[emvCapkDict valueForKey:@"Terminal_type"] stringByAppendingString:[self getEMVStr:@"22"]];
-                     NSString * terminalCapbilities =[[emvCapkDict valueForKey:@"Terminal_Capabilities"] stringByAppendingString:[self getEMVStr:@"60B8C8"]];
-                     ...
-                     
-                      NSArray *commonConfigArr = @[ics,terminalType,terminalCapbilities...];
-    
-                     [pos updateEmvAPP:EMVOperation_update data:commonConfigArr  block:...]
-                      
-                    If you only want to update the configures of a certain aid,add the aid in the data array before all other configures, eg:
-                    
-                     NSString * aid = [[emvCapkDict  valueForKey:@"Application_Identifier_AID_terminal"] stringByAppendingString:[self getEMVStr:@"A0000006351010"]];
-                     NSString * ics  =[[emvCapkDict valueForKey:@"ICS"] stringByAppendingString:[self getEMVStr:@"F4F0F0FAAFFE8000"]];
-                     NSString * terminalType  =[[emvCapkDict valueForKey:@"Terminal_type"] stringByAppendingString:[self getEMVStr:@"22"]];
-                     NSString * terminalCapbilities =[[emvCapkDict valueForKey:@"Terminal_Capabilities"] stringByAppendingString:[self getEMVStr:@"60B8C8"]];
-                     ...
-                     
-                     NSArray *commonConfigArr = @[aid,ics,terminalType,terminalCapbilities...];
-                     
-                     [pos updateEmvAPP:EMVOperation_update data:commonConfigArr  block:...];
-            
-            EMVOperation_getList: empty array.
-                     
 
 
                     
