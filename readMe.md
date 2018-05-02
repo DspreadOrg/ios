@@ -12,12 +12,13 @@ You can use the function [pos updateEMVAPP:(operationType) data:data] to set EMV
 <pre> <code>
 -(void)updateEmvAPP:(NSInteger )operationType data:(NSMutableDictionary*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
 Parameters: 
-1.operationType:
-  EMVOperation_clear:delete all the aids and the related configures
-  EMVOperation_add: add a certain aid and its configures;you can only add one aid each time.
-  EMVOperation_update: update a certain tag
-  EMVOperation_getList:get all the aids in the terminal
-2.data: The data should be an array.
+operationType:
+   EMVOperation_clear:delete all the aids and the related configures
+   EMVOperation_add: add a certain aid and its configures;you can only add one aid each time.
+   EMVOperation_update: update a certain tag
+   EMVOperation_getList:get all the aids in the terminal
+data: The data should be an array.
+
 Example Code:
 1).Init the emvAppDict;
    NSMutableDictionary * EMVAIDParamDict = [pos getEMVAPPDict];
