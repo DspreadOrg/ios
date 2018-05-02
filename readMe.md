@@ -1,27 +1,25 @@
-here is readMe
+Version | Author        | Date       | Description
+--------|---------------|------------|----------------
+1.0     | Wenluo Wang   | 2018-05-02 | Initially Added
+1.1     | Wenluo Wang   | 2018-05-02 | Added UpdateEmvApp/UpdateEmvCapk API description
 
-Update emv config
+## Update EMV cards configure API
 
-     You can use the function [pos updateEMVAPP:(operationType) data:data] to set EMV app of your own terminal.
+You can use the function [pos updateEMVAPP:(operationType) data:data] to set EMV app of your own terminal.
 
-updateEMVAPP
-
-     -(void)updateEmvAPP:(NSInteger )operationType data:(NSMutableDictionary*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
-     
-     Parameters: 
-    
-    1.operationType:
-           EMVOperation_clear:delete all the aids and the related configures
-           EMVOperation_add: add a certain aid and its configures;you can only add one aid each time.
-           EMVOperation_update: update a certain tag
-           EMVOperation_getList:get all the aids in the terminal
-           
-    2.data: The data should be an array.
-            EMVOperation_clear: empty array;
-            
-            EMVOperation_add: To add an aid, pass your value like what the demo shows.
-              
-                   1).init the emvAppDict;
+<details>
+<summary>updateEMVAPP</summary>
+<pre> <code>
+-(void)updateEmvAPP:(NSInteger )operationType data:(NSMutableDictionary*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
+Parameters: 
+1.operationType:
+  EMVOperation_clear:delete all the aids and the related configures
+  EMVOperation_add: add a certain aid and its configures;you can only add one aid each time.
+  EMVOperation_update: update a certain tag
+  EMVOperation_getList:get all the aids in the terminal
+2.data: The data should be an array.
+Example Code:
+1).init the emvAppDict;
                 
                     NSMutableDictionary * emvCapkDict = [pos getEMVAPPDict];
              
@@ -40,6 +38,18 @@ updateEMVAPP
                      NSSArray * aidConfig = @[aid,threValue,IFD...];
                      
                      [pos updateEmvAPP:EMVOperation_add data:aidConfig ...];
+
+</code> </pre>
+</details>
+
+     
+     
+
+            EMVOperation_clear: empty array;
+            
+            EMVOperation_add: To add an aid, pass your value like what the demo shows.
+              
+                   
              
             EMVOperation_update: If you want to update the same configure  of all the aid, pls organise the data like this:
                      
