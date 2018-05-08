@@ -620,7 +620,10 @@
     
 }
 - (IBAction)disconnect:(id)sender {
-    [pos disconnectBT];
+    [pos doSetSleepModeTime:2 block:^(BOOL isSuccess, NSString *stateStr) {
+        NSLog(@"%@",stateStr);
+    }];
+    //[pos disconnectBT];
 }
 //pos  连接失败的回调
 -(void) onRequestQposDisconnected{

@@ -358,8 +358,9 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(void)getUpdateCheckValueBlock:(void(^)(BOOL isSuccess,NSString *stateStr))updateCheckValueBlock;
 //设置关机时间
 -(void)doSetShutDownTime:(NSString *)timeOut;
+
 //更新休眠时间
--(void)doSetSleepModeTime:(NSString *)timeOut  block:(void(^)(BOOL isSuccess,NSString *stateStr))sleepModeBlock;
+-(void)doSetSleepModeTime:(NSInteger)timeOut  block:(void(^)(BOOL isSuccess,NSString *stateStr))sleepModeBlock;
 
 -(BOOL)getBluetoothState;
 -(NSInteger) getOnLineTime;
