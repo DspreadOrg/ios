@@ -1167,7 +1167,7 @@
     }
 
       mTransType = TransactionType_GOODS;
-      _currencyCode = @"0604";
+      _currencyCode = @"0156";
      [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
      [pos doTrade:30];
     
@@ -1236,9 +1236,6 @@
             self.textViewLog.text = amountStr;
         }
     }];
-    
-    
-    
     //    [pos resetPosStatus];
     
         NSString *a = [Util byteArray2Hex:[Util stringFormatTAscii:@"622526XXXXXX5453"] ];
@@ -1846,7 +1843,7 @@ typedef NS_ENUM(NSInteger, MSG_PRO) {
     }
     
     mTransType = TransactionType_GOODS;
-    _currencyCode = @"0604";
+    _currencyCode = @"0156";
     //[pos setCardTradeMode:CardTradeMode_SWIPE_INSERT_CARD];
     __weak typeof(self) weakSelf = self;
     [pos setIsQuickEMV:YES block:^(BOOL isSuccess, NSString *stateStr) {

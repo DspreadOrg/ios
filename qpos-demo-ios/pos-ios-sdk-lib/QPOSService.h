@@ -317,6 +317,7 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 @property (nonatomic, copy) NSString * typeFace;
 @property (nonatomic, copy) NSString * cardNo;
 @property (nonatomic, copy) NSString * date;
+@property (nonatomic, copy) NSString *PanCardFormat;
 
 +(QPOSService *)sharedInstance;
 -(void)setDelegate:(id<QPOSServiceListener>)aDelegate;
@@ -388,7 +389,7 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(void)setAmountIcon:(NSString *)aAmountIcon;
 -(void)setAmountIcon:(AmountType) amtType amtIcon:(NSString *)aAmountIcon;
 -(void)getPin:(NSString *)aTransactionData;
-
+-(void)setPanCarFormat:(NSString *)setPanCarFormat;
 
 //add icc apdu 2014-03-11
 -(void)powerOffIcc;
