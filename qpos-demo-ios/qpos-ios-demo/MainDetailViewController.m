@@ -129,45 +129,45 @@
 -(void) onRequestWaitingUser{
     self.textViewLog.text  =@"Please insert/swipe/tap card now.";
 }
--(void) onDHError: (DHError)errorState{
+
+-(void) onError: (Error)errorState{
     NSString *msg = @"";
     
-    if(errorState ==DHError_TIMEOUT) {
+    if(errorState == Error_CMD_NOT_AVAILABLE) {
+        msg = @"Command not available";
+    } else if(errorState == Error_TIMEOUT) {
         msg = @"Pos no response";
-    } else if(errorState == DHError_DEVICE_RESET) {
+    } else if(errorState == Error_DEVICE_RESET) {
         msg = @"Pos reset";
-    } else if(errorState == DHError_UNKNOWN) {
+    } else if(errorState == Error_UNKNOWN) {
         msg = @"Unknown error";
-    } else if(errorState == DHError_DEVICE_BUSY) {
+    } else if(errorState == Error_DEVICE_BUSY) {
         msg = @"Pos Busy";
-    } else if(errorState == DHError_INPUT_OUT_OF_RANGE) {
+    } else if(errorState == Error_INPUT_OUT_OF_RANGE) {
         msg = @"Input out of range.";
-    } else if(errorState == DHError_INPUT_INVALID_FORMAT) {
+    } else if(errorState == Error_INPUT_INVALID_FORMAT) {
         msg = @"Input invalid format.";
-    } else if(errorState == DHError_INPUT_ZERO_VALUES) {
+    } else if(errorState == Error_INPUT_ZERO_VALUES) {
         msg = @"Input are zero values.";
-    } else if(errorState == DHError_INPUT_INVALID) {
+    } else if(errorState == Error_INPUT_INVALID) {
         msg = @"Input invalid.";
-    } else if(errorState == DHError_CASHBACK_NOT_SUPPORTED) {
+    } else if(errorState == Error_CASHBACK_NOT_SUPPORTED) {
         msg = @"Cashback not supported.";
-    } else if(errorState == DHError_CRC_ERROR) {
+    } else if(errorState == Error_CRC_ERROR) {
         msg = @"CRC Error.";
-    } else if(errorState == DHError_COMM_ERROR) {
+    } else if(errorState == Error_COMM_ERROR) {
         msg = @"Communication Error.";
-    }else if(errorState == DHError_MAC_ERROR){
+    }else if(errorState == Error_MAC_ERROR){
         msg = @"MAC Error.";
-    }else if(errorState == DHError_CMD_TIMEOUT){
+    }else if(errorState == Error_CMD_TIMEOUT){
         msg = @"CMD Timeout.";
-    }else if(errorState == DHError_AMOUNT_OUT_OF_LIMIT){
+    }else if(errorState == Error_AMOUNT_OUT_OF_LIMIT){
         msg = @"Amount out of limit.";
-    }else if (errorState == DHError_QPOS_MEMORY_OVERFLOW){
-        msg = @"QPOS memory overflow.Pls clear the trade log";
     }
     
     self.textViewLog.text = msg;
     NSLog(@"onError = %@",msg);
 }
-
 
 //开始执行start 按钮后返回的结果状态
 -(void) onDoTradeResult: (DoTradeResult)result DecodeData:(NSDictionary*)decodeData{
@@ -1203,8 +1203,8 @@
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
- 
-   [pos getQPosInfo];
+    [self updateEMVAPP];
+   //[pos getQPosInfo];
 //    [self getTotalCount];
    
 }
