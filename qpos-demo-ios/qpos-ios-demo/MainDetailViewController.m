@@ -1175,6 +1175,9 @@
     
     
 }
+-(void)setPosSleepTime{
+    [pos setPosSleepTime:65535];
+}
 -(void)updateEMVAPP{
     
     NSMutableDictionary * emvAPPDict = [pos EmvAppTag];
@@ -1203,9 +1206,10 @@
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
-    [self updateEMVAPP];
+
+   // [self setPosSleepTime];
    //[pos getQPosInfo];
-//    [self getTotalCount];
+    [self updateEMVAPP];
    
 }
 
@@ -1712,7 +1716,7 @@ typedef NS_ENUM(NSInteger, MSG_PRO) {
     NSString * o24  =[[emvAPPDict valueForKey:@"Application_Selection_Indicator"] stringByAppendingString:[self getEMVStr:@"01"]];
     
     NSArray *certainAIDConfigArr = @[o1,o2,o3,o4,o5,o6,o7,o8,o9,o10,o11,o12,o13,o14,o15,o16,o17,o18,o19,o20,o21,o22,o23,o24];
-    [pos updateEmvAPP:EMVOperation_add data:certainAIDConfigArr block:^(BOOL isSuccess, NSString *stateStr) {
+    [pos updateEmvAPP:EMVOperation_update data:certainAIDConfigArr block:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
             self.textViewLog.text = stateStr;
             
