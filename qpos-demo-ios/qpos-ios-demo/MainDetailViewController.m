@@ -1206,11 +1206,9 @@
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
-
    // [self setPosSleepTime];
    //[pos getQPosInfo];
     [self updateEMVAPP];
-   
 }
 
 -(void)connectPrinterNoScan{
@@ -1687,7 +1685,7 @@ typedef NS_ENUM(NSInteger, MSG_PRO) {
     
 }
 -(void)addEMVAPP{
-    NSMutableDictionary * emvAPPDict = [pos getEMVAPPDict];
+    NSMutableDictionary * emvAPPDict = [pos EmvAppTag];
 #pragma mark aid2
     NSString *AID = @"A0000000044010";
     NSString * o1  =[[emvAPPDict valueForKey:@"Application_Identifier_AID_terminal"] stringByAppendingString:[self getEMVStr:AID]];

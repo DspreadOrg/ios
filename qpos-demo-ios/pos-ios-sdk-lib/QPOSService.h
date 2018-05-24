@@ -67,7 +67,15 @@ typedef NS_ENUM(NSInteger, Error)
     Error_ICC_ONLINE_TIMEOUT,
     Error_AMOUNT_OUT_OF_LIMIT,
     Error_DIGITS_UNAVAILABLE,
-    Error_QPOS_MEMORY_OVERFLOW
+    Error_QPOS_MEMORY_OVERFLOW,
+    NFC_MIFARE_OK,
+    NFC_MIFARE_PARAM_ERROR,
+    NFC_MIFARE_TIMEOUT_ERROR,
+    NFC_MIFARE_CRC_ERROR,
+    NFC_MIFARE_NACK_ERROR,
+    NFC_MIFARE_POLL_ERROR,
+    NFC_MIFARE_OPERATION_ERROR,
+    NFC_MIFARE_ERROR_END,
 };
 
 typedef NS_ENUM(NSInteger, DHError)
@@ -110,7 +118,18 @@ typedef NS_ENUM(NSInteger, Display)
     Display_MAG_TO_ICC_TRADE,
     Display_INPUT_OFFLINE_PIN_ONLY,
     Display_CARD_REMOVED,
-    Display_MSR_DATA_READY
+    Display_MSR_DATA_READY,
+    Display_QPOS_MEMORY_OVERFLOW
+    
+};
+
+typedef NS_ENUM(NSInteger,EMVOperation) {
+    EMVOperation_clear,
+    EMVOperation_add,
+    EMVOperation_delete,
+    EMVOperation_getList,
+    EMVOperation_update,
+    EMVOperation_quickemv
     
 };
 
@@ -132,15 +151,6 @@ typedef NS_ENUM(NSInteger, TransactionResult) {
     TransactionResult_TRADE_LOG_FULL
     
 };
-typedef NS_ENUM(NSInteger,DoTradeLog) {
-    DoTradeLog_clear,
-    DoTradeLog_getAllCount,
-    DoTradeLog_getOneLog,
-    DoTradeLog_deleteOneLog,
-    DoTradeLog_deleteLastLog,
-    DoTradeLog_ClearOneByBatchID,
-    DoTradeLog_GetOneByBatchID
-};
 
 typedef NS_ENUM(NSInteger, TransactionType) {
     TransactionType_GOODS, // 货物
@@ -152,7 +162,6 @@ typedef NS_ENUM(NSInteger, TransactionType) {
     TransactionType_ADMIN,//管理
     TransactionType_CASHDEPOSIT,//存款
     TransactionType_PAYMENT,// 付款 支付
-    
     //add 2014-04-02
     TransactionType_PBOCLOG,//        0x0A			/*PBOC日志(电子现金日志)*/
     TransactionType_SALE,//           0x0B			/*消费*/
@@ -196,21 +205,26 @@ typedef NS_ENUM(NSInteger, DoTradeMode) {//不需要对外提供
     DoTradeMode_CHECK_CARD_NO_IPNUT_PIN,//不输入密码
     DoTradeMode_IS_DEBIT_OR_CREDIT//
 };
+
+typedef NS_ENUM(NSInteger,DoTradeLog) {
+    DoTradeLog_clear,
+    DoTradeLog_getAllCount,
+    DoTradeLog_getOneLog,
+    DoTradeLog_deleteOneLog,
+    DoTradeLog_deleteLastLog,
+    DoTradeLog_ClearOneByBatchID,
+    DoTradeLog_GetOneByBatchID
+};
 typedef NS_ENUM(NSInteger,EncryptType) {
     EncryptType_plaintext,
     EncryptType_encrypted
 };
-typedef NS_ENUM(NSInteger,EMVOperation) {
-    EMVOperation_clear,
-    EMVOperation_add,
-    EMVOperation_delete,
-    EMVOperation_getList,
-    EMVOperation_update,
-    EMVOperation_quickemv
-    
+
+typedef NS_ENUM(NSInteger,PanStatus) {
+    PanStatus_DEFAULT,
+    PanStatus_PLAINTEXT,
+    PanStatus_ENCRYPTED
 };
-
-
 @protocol QPOSServiceListener<NSObject>
 
 @optional
@@ -227,19 +241,22 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(void) onRequestOnlineProcess: (NSString*) tlv;
 -(void) onRequestTime;
 -(void) onRequestTransactionResult: (TransactionResult)transactionResult;
+-(void) onRequestTransactionResultAndTotalCount:(TransactionResult)transactionResult totalCount:(NSInteger)count;
 -(void) onRequestTransactionLog: (NSString*)tlv;
 -(void) onRequestBatchData: (NSString*)tlv;
 -(void) onRequestQposConnected;
 -(void) onRequestQposDisconnected;
 -(void) onRequestNoQposDetected;
 -(void) onError: (Error)errorState;//pls del this Delegate
--(void) onDHError: (DHError)errorState;//replace function onError
+-(void) onDHError:(DHError)errorState;//replace function onError
 -(void) onRequestDisplay: (Display)displayMsg;
 -(void) onRequestUpdateWorkKeyResult:(UpdateInformationResult)updateInformationResult;
 -(void) onRequestGetCardNoResult:(NSString *)result;
 -(void) onRequestSignatureResult:(NSData *)result;
 -(void) onReturnReversalData: (NSString*)tlv;
 -(void) onReturnGetPinResult:(NSDictionary*)decodeData;
+
+-(void)setPanCarFormat:(NSString *)setPanCarFormat;
 
 //add icc apdu 2014-03-11
 -(void) onReturnPowerOnIccResult:(BOOL) isSuccess  KSN:(NSString *) ksn ATR:(NSString *)atr ATRLen:(NSInteger)atrLen;
@@ -268,6 +285,9 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 
 -(void) onUpdateMasterKeyResult:(BOOL)isSuccess aDic:(NSDictionary *)resultDic;
 -(void) onEmvICCExceptionData: (NSString*)tlv;
+-(void) onAsyncResetPosStatus:(NSString *)isReset;
+-(void) onReturnGetEncryptDataResult:(NSDictionary *)dict;
+-(void) OnReturnAddKsnResult: (NSString *)tlv;
 
 @end
 
@@ -309,16 +329,30 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 @property (nonatomic, assign) BOOL isDebitOrCredit;
 @property (nonatomic, assign) NSInteger onLineTime;
 @property (nonatomic, assign) BOOL isQuickEMV;
+@property (nonatomic, assign) BOOL isSaveLog;
 @property (nonatomic, copy) NSString *batchID;
 @property (nonatomic, copy) NSString *formatID;
+@property (nonatomic, assign) BOOL amoutPoint;
+@property (nonatomic, copy) NSString *amountPointStr;
+@property (nonatomic, copy) NSString *isLogSavedStr;
+@property (nonatomic, copy) NSString * panStatusStr;
+@property (nonatomic, assign) NSInteger panStatus;
 @property (nonatomic, assign) NSInteger encryptType;
 @property (nonatomic, assign) NSInteger keyIndex;
 @property (nonatomic, assign) NSInteger maxLen;
 @property (nonatomic, copy) NSString * typeFace;
 @property (nonatomic, copy) NSString * cardNo;
 @property (nonatomic, copy) NSString * date;
-@property (nonatomic, copy) NSString *PanCardFormat;
-
+@property (nonatomic, copy)NSString *sendOnLineTlv;
+@property (nonatomic, assign) Byte transacType;
+@property (nonatomic, copy) NSString *panCardFormat;
+@property (nonatomic, copy) NSString *keyClass;
+@property (nonatomic, copy) NSString *blockAddr;
+@property (nonatomic, copy) NSString *key;
+@property (nonatomic, copy) NSString *cardData;
+@property (nonatomic, assign) BOOL isReturnTotalCount;
+@property (nonatomic, assign) BOOL isVeritasReturn;
+@property (nonatomic, assign) BOOL isBuildPinFlag;
 +(QPOSService *)sharedInstance;
 -(void)setDelegate:(id<QPOSServiceListener>)aDelegate;
 -(void)setQueue:(dispatch_queue_t)queue;
@@ -337,6 +371,18 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 //蜂鸣器
 - (void)doSetBuzzerOperation:(NSInteger)timeOut
                        block:(void (^)(BOOL isSuccess, NSString*stateStr))buzzerBlock;
+// MifareCard
+-(void)doMifareCard:(NSString*)paras timeout:(NSInteger)timeout block:(void (^)(BOOL isSuccess, NSDictionary*stateStr))MifareBlock;
+// 得到 MifareCard数据 // cmd versionLen cardVersion startAddr endAddr
+
+-(void)setMifareData:(NSString *)keyClass blockAddr:(NSString*) blockAddr key:(NSString*)key cardData:(NSString*)cardData;
+//设置蜂鸣器静音状态
+- (void)setBufferTime:(NSInteger)status block:(void (^)(BOOL isSuccess, NSString*stateStr))buzzerBlock;
+//设置蜂鸣器静音状态
+- (void)getBufferStatus:(NSInteger)status block:(void (^)(BOOL isSuccess, NSString*stateStr))buzzerBlock;
+//蜂鸣器响了多长时间
+- (void)doSetBuzzerRingTime:(NSInteger)timeOut
+                      block:(void (^)(BOOL isSuccess, NSString*stateStr))buzzerBlock;
 //更新EMV 配置
 -(void)updateEMVRID:(NSInteger)operationType
                data:(NSString *)data
@@ -358,7 +404,6 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(void)getUpdateCheckValueBlock:(void(^)(BOOL isSuccess,NSString *stateStr))updateCheckValueBlock;
 //设置关机时间
 -(void)doSetShutDownTime:(NSString *)timeOut;
-
 //更新休眠时间
 -(void)doSetSleepModeTime:(NSInteger)timeOut  block:(void(^)(BOOL isSuccess,NSString *stateStr))sleepModeBlock;
 
@@ -390,12 +435,14 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(void)setAmountIcon:(NSString *)aAmountIcon;
 -(void)setAmountIcon:(AmountType) amtType amtIcon:(NSString *)aAmountIcon;
 -(void)getPin:(NSString *)aTransactionData;
--(void)setPanCarFormat:(NSString *)setPanCarFormat;
+
 
 //add icc apdu 2014-03-11
 -(void)powerOffIcc;
 -(void)powerOnIcc;
 -(void)sendApdu:(NSString *)apduStr;
+
+
 
 //add set the sleep time 2014-03-25
 -(void)setPosSleepTime:(NSInteger)sleepTime;
@@ -537,12 +584,14 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(void) onRequestOnlineProcess: (NSString*) tlv;
 -(void) onRequestTime;
 -(void) onRequestTransactionResult: (TransactionResult)transactionResult;
+-(void) onRequestTransactionResultAndTotalCount:(TransactionResult)transactionResult totalCount:(NSInteger)count;
 -(void) onRequestTransactionLog: (NSString*)tlv;
 -(void) onRequestBatchData: (NSString*)tlv;
 -(void) onRequestQposConnected;
 -(void) onRequestQposDisconnected;
 -(void) onRequestNoQposDetected;
--(void) onError: (Error)errorState;
+-(void) onError:(Error)errorState;
+-(void) onDHError:(DHError)errorState;
 -(void) onRequestDisplay: (Display)displayMsg;
 
 -(void) onRequestUpdateWorkKeyResult: (UpdateInformationResult)updateInformationResult;
@@ -580,6 +629,7 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 -(void) onUpdateMasterKeyResult:(BOOL)isSuccess aDic:(NSDictionary *)resultDic;
 
 -(void) onEmvICCExceptionData: (NSString*)tlv;
+-(void) onReturnGetEncryptDataResult:(NSDictionary*)tlv;
 ///////////////////////////////////////////
 
 - (void)onReturnNFCApduResult:(BOOL)isSuccess
@@ -670,7 +720,6 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
 - (void)cbc_mac_all:(NSInteger)keyLen atype:(NSInteger)algorithmType otype:(NSInteger)operatorType data:(NSString *)dataStr delay:(NSInteger)timeout withResultBlock:(void (^)(NSString *))cbcmacBlock;
 //cbc-mac-NoCheck
 - (void)cbc_mac_cn_all:(NSInteger)keyLen atype:(NSInteger)algorithmType otype:(NSInteger)operatorType data:(NSString *)dataStr delay:(NSInteger)timeout withResultBlock:(void (^)(NSString *))cbcmacBlock;
-
 -(NSDictionary *)getICCTag:(NSInteger) cardType tagCount:(NSInteger) mTagCount tagArrStr:(NSString*) mTagArrStr;
 -(NSDictionary *)getICCTag:(EncryptType)encryTypeStr cardType:(NSInteger)cardType tagCount:(NSInteger) mTagCount tagArrStr:(NSString*)mTagArrStr;
 -(NSDictionary *)getNFCBatchData;
@@ -689,30 +738,24 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
                       data:(NSInteger)data
                      block:(void(^)(BOOL isSuccess,NSInteger markType, NSDictionary *stateStr))doTradeLogBlock;
 -(NSArray *)getConnectedDevices;
--(void)setIsQuickEMV:(BOOL)isQuickEMV
-               block:(void(^)(BOOL isSuccess,NSString *stateStr))setIsQuickEmvBlock;
+-(void)setIsQuickEMV:(BOOL)isQuickEMV;
 -(void)setIsQuickEMV:(BOOL)isQuickEMV
                block:(void(^)(BOOL isSuccess,NSString *stateStr))isQuickEMVBlock;
+-(void)setIsSaveLog:(BOOL)IsSaveLog
+              block:(void(^)(BOOL isSuccess,NSString *stateStr))IsSaveLogBlock;
+-(BOOL)getQuickEMV;
 -(NSData*)sycnSendApdu:(NSString *)apduStr;
 -(NSDictionary *)syncDoTradeLogOperation:(NSInteger)type
                                     data:(NSInteger)data;
 -(NSDictionary *)syncDoTradeLogOperation:(NSInteger)type
                                  batchID:(NSString *)batchID;
+-(void)doTradeWithLogCount:(NSInteger)timeout;
 -(void)doTrade:(NSInteger) timeout batchID:(NSString *)batchID;
 -(void)setFormatID:(NSString *)formatID;
-
+-(void)setAmountPoint:(BOOL)amoutPoint;
 - (NSDictionary*)syncGetPin:(NSInteger)encryptType keyIndex:(NSInteger)keyIndex maxLen:(NSInteger)maxLen typeFace:(NSString *)typeFace cardNo:(NSString *)cardNo date:(NSString *)data delay:(NSInteger)timeout;
 - (void)sendApdu:(NSString *)apdu
            block:(void (^)(BOOL isSuccess, NSData *result))sendApduBlock;
--(BOOL)syncIsCardExist:(NSInteger)timeout;
-- (void)getInputAmountWithSymbolAmountMaxLen:(NSInteger)amountMaxLen
-                             customerDisplay:(NSString *)customerStr
-                                       delay:(NSInteger)timeout
-                                       block:(void (^)(BOOL isSuccess, NSString *amountStr))inputAmountBlock;
-
--(void)updateEmvCAPK:(NSInteger )operationType data:(NSArray *)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateCAPKBlock;
--(void)asynResetPosStatusBlock:(void(^)(BOOL isSuccess,NSString *stateStr))resetPosStatusBlock;
--(void)buildPinBlock:(NSString *)workKey workKeyCheck:(NSString *)workKeyCheck encryptType:(NSInteger)encryptType keyIndex:(NSInteger)keyIndex maxLen:(NSInteger)maxLen typeFace:(NSString *)typeFace cardNo:(NSString *)cardNo date:(NSString *)date delay:(NSInteger)timeout;
 -(void)doUpdateIPEKOperation:(NSString *)groupKey
                      tracksn:(NSString *)trackksn
                    trackipek:(NSString *)trackipek
@@ -724,18 +767,32 @@ typedef NS_ENUM(NSInteger,EMVOperation) {
                      pinipek:(NSString *)pinipek
            pinipekcheckValue:(NSString *)pinipekcheckValue
                        block:(void(^)(BOOL isSuccess,NSString *stateStr))EMVBlock;
+-(BOOL)syncIsCardExist:(NSInteger)timeout;
+- (void)getInputAmountWithSymbolAmountMaxLen:(NSInteger)amountMaxLen
+                             customerDisplay:(NSString *)customerStr
+                                       delay:(NSInteger)timeout
+                                       block:(void (^)(BOOL isSuccess, NSString *amountStr))inputAmountBlock;
+
+-(void)updateEmvCAPK:(NSInteger )operationType data:(NSArray *)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateCAPKBlock;
+-(void)asynResetPosStatusBlock:(void(^)(BOOL isSuccess,NSString *stateStr))resetPosStatusBlock;
+-(void)buildPinBlock:(NSString *)workKey workKeyCheck:(NSString *)workKeyCheck encryptType:(NSInteger)encryptType keyIndex:(NSInteger)keyIndex maxLen:(NSInteger)maxLen typeFace:(NSString *)typeFace cardNo:(NSString *)cardNo date:(NSString *)date delay:(NSInteger)timeout;
 -(void)asynresetPosStatus;
+-(void)addKsn:(NSString *)ksnType
+        block:(void(^)(BOOL isSuccess,NSString* dict))addKsnBlock;
+-(void)getEncryptData:(NSData *)data keyType:(NSString*)keyType keyIndex:(NSString *)keyIndex timeOut:(NSInteger)timeout;
+//-(void)syncAddKsn:(NSString *)ksnType;
+-(void)getKsn:(void(^)(BOOL isSuccess,NSDictionary *dict))getKsnBlock;
 -(void)updateEmvAPP:(NSInteger )operationType data:(NSArray*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
 #pragma mark -- updateQuickEMVStatus
--(void)getQuickEMVStatus:(NSInteger )operationType data:(NSMutableDictionary*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
+-(void)getQuickEMVStatus:(NSInteger )operationType data:(NSMutableArray*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
 #pragma mark init emv app
 
--(NSMutableDictionary *)getEMVAPPDict;
-#pragma mark init emv capk
 -(NSMutableDictionary *)EmvAppTag;
--(void)setDoTradeMode:(DoTradeMode)doTradeMode;
--(void)setIsSaveLog:(BOOL)IsSaveLog
-              block:(void(^)(BOOL isSuccess,NSString *stateStr))IsSaveLogBlock;
--(void)getKsn:(void(^)(BOOL isSuccess,NSDictionary *dict))getKsnBlock;
+#pragma mark init emv capk
+-(NSMutableDictionary *)getEMVCAPKDict;
+-(void)setDoTradeMode:(DoTradeMode)mode;
+-(void)changeTraceGrade:(NSString *)grade block:(void (^)(BOOL isSuccess, NSString *stateStr))changeTraceGradeBlock;
+-(void)setPanStatus:(NSInteger )panStatus;
+
 @end
 
