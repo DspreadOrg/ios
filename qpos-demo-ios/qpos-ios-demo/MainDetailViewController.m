@@ -1684,6 +1684,7 @@ typedef NS_ENUM(NSInteger, MSG_PRO) {
     });
     
 }
+//dsds
 -(void)addEMVAPP{
     NSMutableDictionary * emvAPPDict = [pos EmvAppTag];
 #pragma mark aid2
