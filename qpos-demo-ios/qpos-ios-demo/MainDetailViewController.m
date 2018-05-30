@@ -1169,7 +1169,7 @@
 
       mTransType = TransactionType_GOODS;
       _currencyCode = @"0156";
-     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
+     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP];
      [pos doTrade:30];
     
     
@@ -1849,7 +1849,7 @@ typedef NS_ENUM(NSInteger, MSG_PRO) {
     
     mTransType = TransactionType_GOODS;
     _currencyCode = @"0156";
-    //[pos setCardTradeMode:CardTradeMode_SWIPE_INSERT_CARD];
+    [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP];
     __weak typeof(self) weakSelf = self;
     [pos setIsQuickEMV:YES block:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
