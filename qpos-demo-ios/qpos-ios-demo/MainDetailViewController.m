@@ -1169,7 +1169,7 @@
 
       mTransType = TransactionType_GOODS;
       _currencyCode = @"0156";
-     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP];
+     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
      [pos doTrade:30];
     
     
