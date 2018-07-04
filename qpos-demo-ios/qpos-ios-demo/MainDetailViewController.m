@@ -1167,9 +1167,6 @@
         
     }
 
-      mTransType = TransactionType_GOODS;
-      _currencyCode = @"0156";
-     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
      [pos doTrade:30];
     
     
@@ -1206,9 +1203,7 @@
 - (IBAction)getPosInfo:(id)sender {
     self.textViewLog.backgroundColor = [UIColor yellowColor];
     self.textViewLog.text = @"starting...";
-   // [self setPosSleepTime];
-   //[pos getQPosInfo];
-    [self updateEMVAPP];
+   [pos getQPosInfo];
 }
 
 -(void)connectPrinterNoScan{
