@@ -1166,7 +1166,9 @@
         _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
         
     }
-
+    
+    mTransType = TransactionType_GOODS;
+      _currencyCode = @"0156";
      [pos doTrade:30];
     
     
