@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8749F00E-4E20-4DD1-B949-1C6DEF70E6C1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>qpos-ios-demo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>bddf2e9a-87b6-460c-b737-26ebf69fa1eb++8147</key>
+		<string>svn://192.168.1.22/repository/SoftWare</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios/qpos/qpos-ios-demo/qpos-ios-demo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>bddf2e9a-87b6-460c-b737-26ebf69fa1eb++8147</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>bddf2e9a-87b6-460c-b737-26ebf69fa1eb++8147</key>
+		<string>svn://192.168.1.22/repository</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>svn://192.168.1.22/repository/SoftWare/ios/qpos/qpos-ios-demo/qpos-ios-demo.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>bddf2e9a-87b6-460c-b737-26ebf69fa1eb++8147</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>bddf2e9a-87b6-460c-b737-26ebf69fa1eb++8147</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SoftWare</string>
+		</dict>
+	</array>
+</dict>
+</plist>
