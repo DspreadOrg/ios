@@ -383,8 +383,12 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(NSDictionary *)getNFCBatchData;
 //get ios sdk version
 -(NSString *)getSdkVersion;
-//get pos infomation
+
 -(void)getCardNo;
+-(void)getIccCardNo: (NSString *)aterminalTime;
+-(void)getTrack2Ciphertext: (NSString *)aterminalTime;
+-(void)getHolderNameAndServiceCode: (NSString *)aterminalTime;
+//get pos infomation
 -(void)getQPosInfo;
 -(void)getQPosId;
 
