@@ -384,6 +384,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 //get ios sdk version
 -(NSString *)getSdkVersion;
 //get pos infomation
+-(void)getCardNo;
 -(void)getQPosInfo;
 -(void)getQPosId;
 
