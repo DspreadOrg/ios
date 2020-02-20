@@ -11,23 +11,40 @@
 # https://docs.gitlab.com/runner/security/#usage-of-shell-executor for additional
 # detail on what to keep in mind in this scenario.
 
-stages:
-  - build
-  - test
-  - deploy
+# stages:
+#   - build
+#   - test
+#   - deploy
 
 variables:
   LC_ALL: "en_US.UTF-8"
   LANG: "en_US.UTF-8"
   GIT_STRATEGY: clone
 
-build:
+# build:
+#   stage: build
+#   script:
+#     - cd qpos-ios-demo/
+#     - ls
+#     - bundle install
+#     - bundle exec fastlane build
+#   artifacts:
+#     paths:
+#       - ./*.ipa
+
+stages:
+  - build
+
+build_project:
   stage: build
   script:
     - cd qpos-ios-demo/
-    - ls
-    - bundle install
-    - bundle exec fastlane build
+    - xcodebuild clean -project qpos-ios-demo.xcodeproj -scheme qpos-ios-demo | xcpretty
+    - xcodebuild test -project qpos-ios-demo.xcodeproj -scheme qpos-ios-demo -destination 'platform=iOS Simulator,name=iPhone 6s,OS=9.2' | xcpretty -s
+  tags:
+    - ios_9-2
+    - xcode_7-2
+    - osx_10-11
   artifacts:
     paths:
       - ./*.ipa
