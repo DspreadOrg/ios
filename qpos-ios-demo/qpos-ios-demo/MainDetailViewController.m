@@ -134,9 +134,6 @@ typedef enum : NSUInteger {
 - (IBAction)doTrade:(id)sender {
     self.textViewLog.backgroundColor = [UIColor whiteColor];
     self.textViewLog.text = @"Starting...";
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-    _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
     _currencyCode = @"0156";
     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP];
     [pos doCheckCard];
@@ -358,6 +355,19 @@ typedef enum : NSUInteger {
 
 //send current transaction time to pos
 -(void) onRequestTime{
+    NSString *formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    NSRange containA = [formatStringForHours rangeOfString:@"a"];
+    BOOL hasAMPM = containA.location != NSNotFound;
+    //when phone time is 12h format, need add this judgement.
+    if (hasAMPM) {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"yyyyMMddhhmmss"];
+        _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+    }else{
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+        _terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+    }
     [pos sendTime:_terminalTime];
 }
 
