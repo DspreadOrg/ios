@@ -418,8 +418,6 @@ typedef enum : NSUInteger {
 -(void) onRequestOnlineProcess: (NSString*) tlv{
     NSLog(@"onRequestOnlineProcess = %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
     NSDictionary *dict = [DecryptTLV decryptTLVToDict:tlv];
-    NSString *C0 = [dict objectForKey:@"C0"];
-    NSString *C2 = [dict objectForKey:@"C2"];
  
     NSString *msg = @"Replied success.";
     msgStr = @"Request data to server.";
