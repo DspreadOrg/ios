@@ -1,0 +1,35 @@
+/*
+  Localizable.strings
+  qpos-ios-demo
+
+  Created by fangzhengwei on 2020/3/25.
+  Copyright © 2020 Robin. All rights reserved.
+*/
+
+"stop" = "stop scan";
+"connecting bluetooth..." = "connecting bluetooth...";
+"AudioType connected." = "AudioType connected.";
+"Bluetooth connected." = "Bluetooth connected.";
+"pos disconnected." = "pos disconnected.";
+"No pos detected." = "No pos detected.";
+"Starting..." = "Starting...";
+"Please set amount" = "Please set amount";
+"Confirm" = "Confirm";
+"Cancel" = "Cancel";
+"Confirm amount" = "Confirm amount";
+"Please set pin" = "Please set pin";
+"Please insert/swipe/tap card now." = "Please insert/swipe/tap card now.";
+"please input pin on pos" = "please input pin on pos";
+"Please wait..." = "Please wait...";
+"Please remove card" = "Please remove card";
+"Please try another interface" = "Please try another interface";
+"Terminated" = "Terminated";
+"please insert chip card on pos" = "please insert chip card on pos";
+"please input offline pin only" = "please input offline pin only";
+"Card Removed" = "Card Removed";
+"please input last offline pin" = "please input last offline pin";
+"Please select app" = "Please select app";
+"Request data to server." = "Request data to server.";
+"Transaction Result" = "Transaction Result";
+"Card Swiped:\n" = "Card Swiped:\n";
+"Tap Card:\n" = "Tap Card:\n";
