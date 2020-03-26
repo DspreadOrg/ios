@@ -27,6 +27,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UIButton *btnGetPosId;
 @property (weak, nonatomic) IBOutlet UIButton *btnGetPosInfo;
 @property (weak, nonatomic) IBOutlet UIButton *btnDisconnect;
+@property (nonatomic,assign)BOOL updateFWFlag;
 
 @end
 
@@ -63,7 +64,6 @@ typedef enum : NSUInteger {
     self.btnGetPosId.layer.cornerRadius = 10;
     self.btnGetPosInfo.layer.cornerRadius = 10;
     self.btnResetPos.layer.cornerRadius = 10;
-    self.btnResetPos.layer.cornerRadius = 10;
     
     if (nil == pos) {
         pos = [QPOSService sharedInstance];
@@ -86,7 +86,7 @@ typedef enum : NSUInteger {
     }else{
         mPosType = PosType_BLUETOOTH_2mode;
         [pos setPosType:PosType_BLUETOOTH_2mode];
-        self.textViewLog.text = @"connecting bluetooth...";
+        self.textViewLog.text = NSLocalizedString(@"connecting bluetooth...", nil);
         [pos connectBT:self.bluetoothAddress];
         [pos setBTAutoDetecting:true];
     }
@@ -106,68 +106,51 @@ typedef enum : NSUInteger {
 -(void) onRequestQposConnected{
     NSLog(@"onRequestQposConnected");
     if ([self.bluetoothAddress  isEqual: @"audioType"]) {
-        self.textViewLog.text = @"AudioType connected.";
+        self.textViewLog.text = NSLocalizedString( @"AudioType connected.", nil);
     }else{
-        self.textViewLog.text = @"Bluetooth connected.";
+        self.textViewLog.text = NSLocalizedString(@"Bluetooth connected.", nil);
     }
     
 }
 //disconnect bluetooth
 - (IBAction)disconnect:(id)sender {
-    NSLog(@"disconnect");
     [pos disconnectBT];
 }
 
 //connect lbluttooh fail
 -(void) onRequestQposDisconnected{
     NSLog(@"onRequestQposDisconnected");
-    self.textViewLog.text = @"pos disconnected.";
+    self.textViewLog.text = NSLocalizedString(@"pos disconnected.", nil);
 }
 
 //No Qpos Detected
 -(void) onRequestNoQposDetected{
     NSLog(@"onRequestNoQposDetected");
-    self.textViewLog.text = @"No pos detected.";
+    self.textViewLog.text = NSLocalizedString(@"No pos detected.", nil);
 }
 
 //start do trade button
 - (IBAction)doTrade:(id)sender {
     self.textViewLog.backgroundColor = [UIColor whiteColor];
-    self.textViewLog.text = @"Starting...";
+    self.textViewLog.text = NSLocalizedString(@"Starting...", nil);
     _currencyCode = @"0156";
     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP];
-    [pos doCheckCard];
+    [pos doCheckCard:30];
 }
 
 //input transaction amount
 -(void) onRequestSetAmount{
     NSString *msg = @"";
     mAlertView = [[UIAlertView new]
-                  initWithTitle:@"Please set amount"
+                  initWithTitle:NSLocalizedString(@"Please set amount", nil)
                   message:msg
                   delegate:self
-                  cancelButtonTitle:@"Confirm"
-                  otherButtonTitles:@"Cancel",
+                  cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
+                  otherButtonTitles:NSLocalizedString(@"Cancel", nil),
                   nil ];
     [mAlertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [mAlertView show];
     msgStr = @"Please set amount";
-}
-
--(void) onRequestPinEntry{
-    NSLog(@"onRequestPinEntry");
-    NSString *msg = @"";
-    mAlertView = [[UIAlertView new]
-                  initWithTitle:@"input pin..."
-                  message:msg
-                  delegate:self
-                  cancelButtonTitle:@"Confirm"
-                  otherButtonTitles:@"Cancel",
-                  nil ];
-    [mAlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
-    //UIAlertViewStylePlainTextInput
-    [mAlertView show];
-    msgStr = @"input pin...";
 }
 
 -(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -186,7 +169,6 @@ typedef enum : NSUInteger {
             self.cashbackAmount = @"123";
         }else{
             [pos cancelSetAmount];
-            
         }
         
     }else if ([aTitle isEqualToString:@"Confirm amount"]){
@@ -205,10 +187,9 @@ typedef enum : NSUInteger {
         //transaction fail: [pos sendOnlineProcessResult:[@"8A023035" stringByAppendingFormat:@"ARPC data return by bank]];
         [pos sendOnlineProcessResult:@"8A023030"];
         
-        
     }else if ([aTitle isEqualToString:@"Transaction Result"]){
         
-    }else if ([aTitle isEqualToString:@"input pin..."]) {
+    }else if ([aTitle isEqualToString:@"Please set pin"]) {
         if (buttonIndex==0) {
             UITextField *textFieldAmount =  [alertView textFieldAtIndex:0];
             NSString *pinStr = [textFieldAmount text];
@@ -225,19 +206,36 @@ typedef enum : NSUInteger {
     NSLog(@"onRequestFinalConfirm-------amount = %@",amount);
     NSString *msg = [NSString stringWithFormat:@"Amount: $%@",self.amount];
     mAlertView = [[UIAlertView new]
-                  initWithTitle:@"Confirm amount"
+                  initWithTitle:NSLocalizedString(@"Confirm amount", nil)
                   message:msg
                   delegate:self
-                  cancelButtonTitle:@"Confirm"
-                  otherButtonTitles:@"Cancel",
+                  cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
+                  otherButtonTitles:NSLocalizedString(@"Cancel", nil),
                   nil ];
     [mAlertView show];
     msgStr = @"Confirm amount";
 }
 
+-(void) onRequestPinEntry{
+    NSLog(@"onRequestPinEntry");
+    NSString *msg = @"";
+    mAlertView = [[UIAlertView new]
+                  initWithTitle:NSLocalizedString(@"Please set pin", nil)
+                  message:msg
+                  delegate:self
+                  cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
+                  otherButtonTitles:NSLocalizedString(@"Cancel", nil),
+                  nil ];
+    [mAlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+    //UIAlertViewStylePlainTextInput
+    [mAlertView show];
+    
+    msgStr = @"Please set pin";
+}
+
 // Prompt user to insert/swipe/tap card
 -(void) onRequestWaitingUser{
-    self.textViewLog.text  =@"Please insert/swipe/tap card now.";
+    self.textViewLog.text = NSLocalizedString(@"Please insert/swipe/tap card now.", nil);
 }
 
 //return NFC and swipe card data on this function.
@@ -253,8 +251,8 @@ typedef enum : NSUInteger {
     }else if(result==DoTradeResult_NOT_ICC){
         self.textViewLog.text = @"Card Inserted (Not ICC)";
     }else if(result==DoTradeResult_MCR){
-        NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
         NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
+        NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
         NSString *expiryDate = [NSString stringWithFormat:@"Expiry Date: %@\n",decodeData[@"expiryDate"]];
         NSString *cardHolderName = [NSString stringWithFormat:@"Cardholder Name: %@\n",decodeData[@"cardholderName"]];
         NSString *serviceCode = [NSString stringWithFormat:@"Service Code: %@\n",decodeData[@"serviceCode"]];
@@ -265,7 +263,7 @@ typedef enum : NSUInteger {
         NSString *trackksn = [NSString stringWithFormat:@"Track KSN: %@\n",decodeData[@"trackksn"]];
         NSString *pinBlock = [NSString stringWithFormat:@"pinBlock: %@\n",decodeData[@"pinblock"]];
         NSString *encPAN = [NSString stringWithFormat:@"encPAN: %@\n",decodeData[@"encPAN"]];
-        NSString *msg = [NSString stringWithFormat:@"Card Swiped:\n"];
+        NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Card Swiped:\n", nil)];
         msg = [msg stringByAppendingString:formatID];
         msg = [msg stringByAppendingString:maskedPAN];
         msg = [msg stringByAppendingString:expiryDate];
@@ -278,7 +276,6 @@ typedef enum : NSUInteger {
         msg = [msg stringByAppendingString:encTrack3];
         msg = [msg stringByAppendingString:pinBlock];
         msg = [msg stringByAppendingString:encPAN];
-        
         NSString *a = [QPOSUtil byteArray2Hex:[QPOSUtil stringFormatTAscii:maskedPAN]];
         [pos getPin:1 keyIndex:0 maxLen:6 typeFace:@"Pls Input Pin" cardNo:a data:@"" delay:30 withResultBlock:^(BOOL isSuccess, NSDictionary *result) {
             NSLog(@"result: %@",result);
@@ -288,7 +285,6 @@ typedef enum : NSUInteger {
             self.textViewLog.text = msg;
             self.lableAmount.text = @"";
         }];
-
     }else if(result==DoTradeResult_NFC_OFFLINE || result == DoTradeResult_NFC_ONLINE){
         NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
         NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
@@ -302,7 +298,7 @@ typedef enum : NSUInteger {
         NSString *trackksn = [NSString stringWithFormat:@"Track KSN: %@\n",decodeData[@"trackksn"]];
         NSString *pinBlock = [NSString stringWithFormat:@"pinBlock: %@\n",decodeData[@"pinblock"]];
         NSString *encPAN = [NSString stringWithFormat:@"encPAN: %@\n",decodeData[@"encPAN"]];
-        NSString *msg = [NSString stringWithFormat:@"Tap Card:\n"];
+        NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Tap Card:\n", nil)];
         msg = [msg stringByAppendingString:formatID];
         msg = [msg stringByAppendingString:maskedPAN];
         msg = [msg stringByAppendingString:expiryDate];
@@ -377,32 +373,32 @@ typedef enum : NSUInteger {
     if (displayMsg==Display_CLEAR_DISPLAY_MSG) {
         msg = @"";
     }else if(displayMsg==Display_PLEASE_WAIT){
-        msg = @"Please wait...";
+        msg = NSLocalizedString(@"Please wait...", nil);
     }else if(displayMsg==Display_REMOVE_CARD){
-        msg = @"Please remove card";
+        msg = NSLocalizedString(@"Please remove card", nil);
     }else if (displayMsg==Display_TRY_ANOTHER_INTERFACE){
-        msg = @"Please try another interface";
+        msg = NSLocalizedString(@"Please try another interface", nil);
     }else if (displayMsg == Display_TRANSACTION_TERMINATED){
-        msg = @"Terminated";
+        msg = NSLocalizedString(@"Terminated", nil);
     }else if (displayMsg == Display_PIN_OK){
         msg = @"Pin ok";
     }else if (displayMsg == Display_INPUT_PIN_ING){
-        msg = @"please input pin on pos";
+        msg = NSLocalizedString(@"please input pin on pos", nil);
     }else if (displayMsg == Display_MAG_TO_ICC_TRADE){
-        msg = @"please insert chip card on pos";
+        msg = NSLocalizedString(@"please insert chip card on pos", nil);
     }else if (displayMsg == Display_INPUT_OFFLINE_PIN_ONLY){
-        msg = @"please input offline pin only";
+        msg = NSLocalizedString(@"please input offline pin only", nil);
     }else if(displayMsg == Display_CARD_REMOVED){
-        msg = @"Card Removed";
+        msg = NSLocalizedString(@"Card Removed", nil);
     }else if (displayMsg == Display_INPUT_LAST_OFFLINE_PIN){
-        msg = @"please input last offline pin";
+        msg = NSLocalizedString(@"please input last offline pin", nil);
     }
     self.textViewLog.text = msg;
 }
 
 //Multiple AIDS options
 -(void) onRequestSelectEmvApp: (NSArray*)appList{
-    mActionSheet = [[UIActionSheet new] initWithTitle:@"Please select app" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    mActionSheet = [[UIActionSheet new] initWithTitle:NSLocalizedString(@"Please select app", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
     for (int i=0 ; i<[appList count] ; i++){
         NSString *emvApp = [appList objectAtIndex:i];
@@ -418,14 +414,14 @@ typedef enum : NSUInteger {
 -(void) onRequestOnlineProcess: (NSString*) tlv{
     NSLog(@"onRequestOnlineProcess = %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
     NSDictionary *dict = [DecryptTLV decryptTLVToDict:tlv];
- 
+    
     NSString *msg = @"Replied success.";
     msgStr = @"Request data to server.";
     mAlertView = [[UIAlertView new]
-                  initWithTitle:@"Request data to server."
+                  initWithTitle:NSLocalizedString(@"Request data to server.", nil)
                   message:msg
                   delegate:self
-                  cancelButtonTitle:@"Confirm"
+                  cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
                   otherButtonTitles:nil,
                   nil ];
     [mAlertView show];
@@ -488,10 +484,10 @@ typedef enum : NSUInteger {
     }
     
     mAlertView = [[UIAlertView new]
-                  initWithTitle:@"Transaction Result"
+                  initWithTitle:NSLocalizedString(@"Transaction Result", nil)
                   message:messageTextView
                   delegate:self
-                  cancelButtonTitle:@"Confirm"
+                  cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
                   otherButtonTitles:nil,
                   nil ];
     [mAlertView show];
@@ -504,14 +500,12 @@ typedef enum : NSUInteger {
 -(void) onRequestTransactionLog: (NSString*)tlv{
     NSLog(@"onTransactionLog %@",tlv);
 }
-
 //return transaction batch data
 -(void) onRequestBatchData: (NSString*)tlv{
     NSLog(@"onBatchData %@",tlv);
     tlv = [@"batch data:\n" stringByAppendingString:tlv];
     self.textViewLog.text = tlv;
 }
-
 //return transaction reversal data
 -(void) onReturnReversalData: (NSString*)tlv{
     NSLog(@"onReversalData %@",tlv);
@@ -527,10 +521,10 @@ typedef enum : NSUInteger {
 - (IBAction)resetpos:(id)sender {
     self.textViewLog.backgroundColor = [UIColor whiteColor];
     self.textViewLog.text = @"reset pos ... ";
-    if ([pos resetPosStatus]) {
-       self.textViewLog.text = @"reset pos success!";
+    if([pos resetPosStatus]){
+        self.textViewLog.text = @"reset pos success";
     }else{
-       self.textViewLog.text = @"reset pos failed!";
+        self.textViewLog.text = @"reset pos fail";
     }
 }
 
@@ -570,10 +564,10 @@ typedef enum : NSUInteger {
     self.textViewLog.text = msg;
     NSLog(@"onError = %@",msg);
 }
+
 //get pos id in this function.
 - (IBAction)getQposId:(id)sender {
-    self.textViewLog.text = @"start ...";
-    [pos getQPosId];
+   [pos getQPosId];
 }
 
 // callback function of getQposId api
@@ -609,7 +603,7 @@ typedef enum : NSUInteger {
 
 //get pos info function
 - (IBAction)getPosInfo:(id)sender {
-      [pos getQPosInfo];
+   [pos getQPosInfo];
 }
 
 //callback function of getPosInfo api.
@@ -730,7 +724,7 @@ typedef enum : NSUInteger {
     NSLog(@"result: %@",resutl);
 }
 
-// update ipek function
+
 - (void)updateIpek{
      [pos doUpdateIPEKOperation:@"00" tracksn:@"00000510F462F8400004" trackipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" trackipekCheckValue:@"93906AA157EE2604" emvksn:@"00000510F462F8400004" emvipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" emvipekcheckvalue:@"93906AA157EE2604" pinksn:@"00000510F462F8400004" pinipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" pinipekcheckValue:@"93906AA157EE2604" block:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
@@ -743,31 +737,36 @@ typedef enum : NSUInteger {
 - (void)updatePosFirmware:(UIButton *)sender {
     NSData *data = [self readLine:@"A27CAYC_S1_master"];//read a14upgrader.asc
     if (data != nil) {
-        NSInteger flag = [[QPOSService sharedInstance] updatePosFirmware:data address:self.bluetoothAddress];
+       NSInteger flag = [[QPOSService sharedInstance] updatePosFirmware:data address:self.bluetoothAddress];
         if (flag==-1) {
             [self.textViewLog setText:@"Pos is not plugged in"];
             return;
         }
         
+        self.updateFWFlag = true;
+        
         dispatch_async(dispatch_queue_create(0, 0), ^{
-            
             while (true) {
                 [NSThread sleepForTimeInterval:0.1];
                 NSInteger progress = [pos getUpdateProgress];
                 if (progress < 100) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        self.textViewLog.text = [NSString stringWithFormat:@"%ld%%",(long)progress];
+                        if (!self.updateFWFlag) {
+                            return;
+                        }
+                        self.textViewLog.text = [NSString stringWithFormat:@"Current progress:%ld%%",(long)progress];
                     });
                     continue;
                 }
-                
+
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.textViewLog.text = @"update completed";
+
+                    self.textViewLog.text = @"finish upgrader";
                 });
+
                 break;
             }
         });
-        
     }else{
         self.textViewLog.text = @"pls make sure you have passed the right data";
     }
@@ -776,6 +775,7 @@ typedef enum : NSUInteger {
 // callback function of updatePosFirmware api.
 -(void) onUpdatePosFirmwareResult:(UpdateInformationResult)updateInformationResult{
     NSLog(@"%ld",(long)updateInformationResult);
+    self.updateFWFlag = false;
     if (updateInformationResult==UpdateInformationResult_UPDATE_SUCCESS) {
         self.textViewLog.text = @"Success";
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_FAIL){
@@ -786,6 +786,25 @@ typedef enum : NSUInteger {
         self.textViewLog.text =  @"Packer vefiry error";
     }else{
         self.textViewLog.text = @"firmware updating...";
+    }
+
+}
+
+// get pos upgrade key api.
+- (void)getUpdateKey:(UIButton *)sender {
+    [pos getUpdateCheckValueBlock:^(BOOL isSuccess, NSString *stateStr) {
+        if (isSuccess) {
+            self.textViewLog.text=stateStr;
+        }
+    }];
+}
+
+
+-(void) onLcdShowCustomDisplay: (BOOL)isSuccess{
+    if(isSuccess){
+        self.textViewLog.text = @"Success";
+    }else{
+        self.textViewLog.text =  @"Failed";
     }
 }
 
@@ -994,8 +1013,7 @@ typedef enum : NSUInteger {
     return rs;
 }
 
-- (NSData*)readLine:(NSString*)name
-{
+- (NSData*)readLine:(NSString*)name{
     NSString* binFile = [[NSBundle mainBundle]pathForResource:name ofType:@".bin"];
     NSString* ascFile = [[NSBundle mainBundle]pathForResource:name ofType:@".asc"];
     //NSLog(@"[%@]-- [%@]",name,ascFile);

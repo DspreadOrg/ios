@@ -130,18 +130,7 @@ NSInteger   scanBluetoothTime = 15;
     self.txtField.delegate = self;
     self.txtField.keyboardType = UIKeyboardTypeDefault;
     self.txtField.returnKeyType = UIReturnKeySearch;
-    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(scanBluetooth)];
-    //
-    //    addButton.title = @"Scan";
-    //    self.navigationItem.rightBarButtonItem = addButton;
-    //    self.navigationItem.rightBarButtonItem.title = @"Scan";
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"停止扫描" style:(UIBarButtonItemStyleDone) target:self action:@selector(stopBluetooth)];
-}
-
--(void)onPinKeyTDESResult:(NSString *)encPin{
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"stop", nil) style:(UIBarButtonItemStyleDone) target:self action:@selector(stopBluetooth)];
 }
 
 - (void)didReceiveMemoryWarning

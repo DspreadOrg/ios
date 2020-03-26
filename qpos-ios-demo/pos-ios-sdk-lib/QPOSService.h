@@ -203,7 +203,7 @@ typedef NS_ENUM(NSInteger, CardTradeMode) {
     CardTradeMode_SWIPE_INSERT_CARD,
     CardTradeMode_UNALLOWED_LOW_TRADE,
     CardTradeMode_SWIPE_TAP_INSERT_CARD,// add 20150715
-    CardTradeMode_SWIPE_TAP_INSERT_CARD_UNALLOWED_LOW_TRADE,
+    CardTradeMode_SWIPE_TAP_INSERT_CARD_UNALLOWED_LOW_TRADE,  //no NFC, only swipe and chip.
     CardTradeMode_ONLY_TAP_CARD,
     CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP,
     CardTradeMode_TAP_INSERT_CARD_NOTUP,//
@@ -346,11 +346,13 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)setBTAutoDetecting: (BOOL)flag;
 -(BOOL)connectBT: (NSString *)bluetoothName;
 -(BOOL)connectBT: (NSString *)bluetoothName connectTime:(NSInteger)time;
+-(CBPeripheral*)getConnectedPeripheral:(NSString *)bluetoothName;
 -(BOOL)connectBluetoothByCBPeripheral: ( CBPeripheral*)myCBPeripheral;
 -(BOOL)connectBluetoothNoScan: (NSString*)bluetoothName;
 -(NSArray *)getConnectedDevices;
 -(void)disconnectBT;
 -(BOOL)resetPosStatus;
+-(BOOL)cancelTrade:(BOOL)isUserCancel;
 -(void)asynresetPosStatus;
 //you can set CardTradeMode before calling doTrade.
 -(void)setCardTradeMode:(CardTradeMode) aCardTMode;
@@ -376,18 +378,13 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 //send ARPC to pos api by sendOnlineProcessResult function.
 -(void)sendOnlineProcessResult: (NSString *)tlv;
 -(void)sendOnlineProcessResult: (NSString *)tlv delay:(NSInteger)delay;
--(void) isServerConnected: (BOOL)isConnected;
+-(void)isServerConnected: (BOOL)isConnected;
 // send current time to pos
 -(void)sendTime: (NSString *)aterminalTime;
 //you can use this api to get NFC batch data.
 -(NSDictionary *)getNFCBatchData;
 //get ios sdk version
 -(NSString *)getSdkVersion;
-
--(void)getCardNo;
--(void)getIccCardNo: (NSString *)aterminalTime;
--(void)getTrack2Ciphertext: (NSString *)aterminalTime;
--(void)getHolderNameAndServiceCode: (NSString *)aterminalTime;
 //get pos infomation
 -(void)getQPosInfo;
 -(void)getQPosId;
@@ -414,7 +411,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)udpateWorkKey:(NSString *)pik pinKeyCheck:(NSString *)pikCheck trackKey:(NSString *)trk trackKeyCheck:(NSString *)trkCheck macKey:(NSString *)mak macKeyCheck:(NSString *)makCheck keyIndex:(NSInteger) mKeyIndex;
 -(void)udpateWorkKey:(NSString *)pik pinKeyCheck:(NSString *)pikCheck trackKey:(NSString *)trk trackKeyCheck:(NSString *)trkCheck macKey:(NSString *)mak macKeyCheck:(NSString *)makCheck keyIndex:(NSInteger) mKeyIndex delay:(NSInteger)timeout;
 -(void)udpateWorkKey:(NSString *)pik pinKeyCheck:(NSString *)pikCheck trackKey:(NSString *)trk trackKeyCheck:(NSString *)trkCheck macKey:(NSString *)mak macKeyCheck:(NSString *)makCheck transKey:(NSString *)tnsk transKeyCheck:(NSString *)tnskCheck keyIndex:(NSInteger) mKeyIndex delay:(NSInteger)timeout;
--(void)pinKey_TDES:(NSInteger) keyIndex  pin:(NSString *)inStr delay:(NSInteger)timeout;
+
 // update master key api
 -(void)setMasterKey:(NSString *)key  checkValue:(NSString *)chkValue;
 -(void)setMasterKey:(NSString *)key  checkValue:(NSString *)chkValue keyIndex:(NSInteger) mKeyIndex;

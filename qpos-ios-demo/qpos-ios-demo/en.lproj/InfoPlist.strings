@@ -1,2 +1,9 @@
-/* Localized versions of Info.plist keys */
+/* 
+  InfoPlist.strings
+  qpos-ios-demo
 
+  Created by fangzhengwei on 2020/3/25.
+  Copyright © 2020 Robin. All rights reserved.
+*/
+// Localizable App Name是App在英语环境环境下显示的名称
+CFBundleDisplayName = "qpos-ios-demo";
