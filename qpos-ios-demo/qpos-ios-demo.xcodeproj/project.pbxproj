@@ -25,9 +25,9 @@
 		14598AA92292BDF4006993E7 /* A27CAYC_S1_master.asc in Resources */ = {isa = PBXBuildFile; fileRef = 14598AA82292BDF3006993E7 /* A27CAYC_S1_master.asc */; };
 		146CBAD1211A8DDD0014BE8B /* emv_profile_tlv_20180717.xml in Resources */ = {isa = PBXBuildFile; fileRef = 146CBAD0211A8DDD0014BE8B /* emv_profile_tlv_20180717.xml */; };
 		146CBAD4211AA7420014BE8B /* TagCapk.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CBAD3211AA7420014BE8B /* TagCapk.m */; };
+		149254682435B59C00454885 /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 149254672435B59C00454885 /* libqpos-ios-sdk.a */; };
 		14BBA8812297EA9C00D48460 /* emv_app.bin in Resources */ = {isa = PBXBuildFile; fileRef = 14BBA87F2297EA9C00D48460 /* emv_app.bin */; };
 		14BBA8822297EA9C00D48460 /* emv_capk.bin in Resources */ = {isa = PBXBuildFile; fileRef = 14BBA8802297EA9C00D48460 /* emv_capk.bin */; };
-		14C23FA7242C8AA7001F71B4 /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C23FA6242C8AA7001F71B4 /* libqpos-ios-sdk.a */; };
 		14EFBE072118152E0093681E /* TagApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBE032118152D0093681E /* TagApp.m */; };
 		14EFBE082118152E0093681E /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBE042118152D0093681E /* GDataXMLNode.m */; };
 		14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EFBE09211816B80093681E /* libxml2.tbd */; };
@@ -83,9 +83,9 @@
 		146CBAD0211A8DDD0014BE8B /* emv_profile_tlv_20180717.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = emv_profile_tlv_20180717.xml; sourceTree = "<group>"; };
 		146CBAD2211AA7420014BE8B /* TagCapk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TagCapk.h; sourceTree = "<group>"; };
 		146CBAD3211AA7420014BE8B /* TagCapk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TagCapk.m; sourceTree = "<group>"; };
+		149254672435B59C00454885 /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
 		14BBA87F2297EA9C00D48460 /* emv_app.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emv_app.bin; sourceTree = "<group>"; };
 		14BBA8802297EA9C00D48460 /* emv_capk.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emv_capk.bin; sourceTree = "<group>"; };
-		14C23FA6242C8AA7001F71B4 /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
 		14D12C2422F2B70E00DB0EAB /* QPOSUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSUtil.h; sourceTree = "<group>"; };
 		14EFBE012118152D0093681E /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		14EFBE032118152D0093681E /* TagApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagApp.m; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14C23FA7242C8AA7001F71B4 /* libqpos-ios-sdk.a in Frameworks */,
+				149254682435B59C00454885 /* libqpos-ios-sdk.a in Frameworks */,
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
 			);
@@ -249,7 +249,7 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				14C23FA6242C8AA7001F71B4 /* libqpos-ios-sdk.a */,
+				149254672435B59C00454885 /* libqpos-ios-sdk.a */,
 				14653EB6240E83D40020F788 /* QPOSService.h */,
 				14BBA87F2297EA9C00D48460 /* emv_app.bin */,
 				14BBA8802297EA9C00D48460 /* emv_capk.bin */,
@@ -525,7 +525,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8BWE69EUUJ;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "qpos-ios-demo/qpos-ios-demo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
@@ -558,7 +558,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8BWE69EUUJ;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "qpos-ios-demo/qpos-ios-demo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";

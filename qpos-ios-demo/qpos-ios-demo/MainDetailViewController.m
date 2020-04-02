@@ -235,6 +235,7 @@ typedef enum : NSUInteger {
 
 // Prompt user to insert/swipe/tap card
 -(void) onRequestWaitingUser{
+    NSLog(@"onRequestWaitingUser");
     self.textViewLog.text = NSLocalizedString(@"Please insert/swipe/tap card now.", nil);
 }
 
