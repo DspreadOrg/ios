@@ -216,6 +216,7 @@ typedef enum : NSUInteger {
     msgStr = @"Confirm amount";
 }
 
+//callback of input pin on phone
 -(void) onRequestPinEntry{
     NSLog(@"onRequestPinEntry");
     NSString *msg = @"";
@@ -397,7 +398,7 @@ typedef enum : NSUInteger {
     self.textViewLog.text = msg;
 }
 
-//Multiple AIDS options
+//Multiple AIDS select
 -(void) onRequestSelectEmvApp: (NSArray*)appList{
     mActionSheet = [[UIActionSheet new] initWithTitle:NSLocalizedString(@"Please select app", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
@@ -439,7 +440,6 @@ typedef enum : NSUInteger {
     NSString *messageTextView = @"";
     if (transactionResult==TransactionResult_APPROVED) {
         NSString *message = [NSString stringWithFormat:@"Approved\nAmount: $%@\n",amount];
-        
         if([cashbackAmount isEqualToString:@""]) {
             message = [message stringByAppendingString:@"Cashback: $"];
             message = [message stringByAppendingString:cashbackAmount];
@@ -501,12 +501,14 @@ typedef enum : NSUInteger {
 -(void) onRequestTransactionLog: (NSString*)tlv{
     NSLog(@"onTransactionLog %@",tlv);
 }
+
 //return transaction batch data
 -(void) onRequestBatchData: (NSString*)tlv{
     NSLog(@"onBatchData %@",tlv);
     tlv = [@"batch data:\n" stringByAppendingString:tlv];
     self.textViewLog.text = tlv;
 }
+
 //return transaction reversal data
 -(void) onReturnReversalData: (NSString*)tlv{
     NSLog(@"onReversalData %@",tlv);
@@ -707,6 +709,15 @@ typedef enum : NSUInteger {
     }
 }
 
+//update ipek
+- (void)updateIpek{
+     [pos doUpdateIPEKOperation:@"00" tracksn:@"00000510F462F8400004" trackipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" trackipekCheckValue:@"93906AA157EE2604" emvksn:@"00000510F462F8400004" emvipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" emvipekcheckvalue:@"93906AA157EE2604" pinksn:@"00000510F462F8400004" pinipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" pinipekcheckValue:@"93906AA157EE2604" block:^(BOOL isSuccess, NSString *stateStr) {
+        if (isSuccess) {
+            self.textViewLog.text = stateStr;
+        }
+    }];
+}
+
 //eg: use emv_app.bin and emv_capk.bin file to update emv configure in pos,Update time is about two minutes
 -(void)UpdateEmvCfg{
     NSString *emvAppCfg = [QPOSUtil byteArray2Hex:[self readLine:@"emv_app"]];
@@ -714,7 +725,15 @@ typedef enum : NSUInteger {
     [pos updateEmvConfig:emvAppCfg emvCapk:emvCapkCfg];
 }
 
-// callback function of updateEmvConfig api.
+//eg: read xml file to update emv configure
+- (void)updateEMVConfigByXML{
+    self.textViewLog.text =  @"start update emv configure,pls wait";
+    NSLog(@"start update emv configure,pls wait");
+    NSData *emvData = [self readLine:@"emv_profile_tlv"];
+    [pos updateEMVConfigByXml:emvData];
+}
+
+// callback function of updateEmvConfig and updateEMVConfigByXml api.
 -(void)onReturnCustomConfigResult:(BOOL)isSuccess config:(NSString*)resutl{
     if(isSuccess){
         self.textViewLog.text = @"Success";
@@ -725,13 +744,36 @@ typedef enum : NSUInteger {
     NSLog(@"result: %@",resutl);
 }
 
-
-- (void)updateIpek{
-     [pos doUpdateIPEKOperation:@"00" tracksn:@"00000510F462F8400004" trackipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" trackipekCheckValue:@"93906AA157EE2604" emvksn:@"00000510F462F8400004" emvipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" emvipekcheckvalue:@"93906AA157EE2604" pinksn:@"00000510F462F8400004" pinipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" pinipekcheckValue:@"93906AA157EE2604" block:^(BOOL isSuccess, NSString *stateStr) {
-        if (isSuccess) {
-            self.textViewLog.text = stateStr;
-        }
-    }];
+//update emv configure by TLV data
+-(void)updateEMVConfigByTlv{
+    NSString *appTlvData = @"9F0607A00000000310109F3303E0F8C8";
+    [pos updateEmvAPPByTlv:EMVOperation_update appTlv:appTlvData];
+    
+    NSString *capkTlvData = @"9F0605A0000000039F220107";
+    [pos updateEmvCAPKByTlv:EMVOperation_update capkTlv:capkTlvData];
+}
+//callback of update emv configure api by TLV data
+- (void)onReturnUpdateEMVResult:(BOOL)isSuccess{
+    NSLog(@"onReturnUpdateEMVResult:%d",isSuccess);
+    if (isSuccess) {
+        self.textViewLog.text = @"Success";
+    }else{
+        self.textViewLog.text = @"fail";
+    }
+}
+//callback of update emv configure api by TLV data
+- (void)onReturnGetEMVListResult:(NSString *)result{
+    NSLog(@"%@",result);
+    self.textViewLog.text = result;
+}
+//callback of update emv configure api by TLV data
+- (void)onReturnUpdateEMVRIDResult:(BOOL)isSuccess{
+    NSLog(@"onReturnUpdateEMVRIDResult:%d",isSuccess);
+    if (isSuccess) {
+        self.textViewLog.text = @"Success";
+    }else{
+        self.textViewLog.text = @"fail";
+    }
 }
 
 // update pos firmware api
@@ -743,9 +785,7 @@ typedef enum : NSUInteger {
             [self.textViewLog setText:@"Pos is not plugged in"];
             return;
         }
-        
         self.updateFWFlag = true;
-        
         dispatch_async(dispatch_queue_create(0, 0), ^{
             while (true) {
                 [NSThread sleepForTimeInterval:0.1];
@@ -759,12 +799,9 @@ typedef enum : NSUInteger {
                     });
                     continue;
                 }
-
                 dispatch_async(dispatch_get_main_queue(), ^{
-
                     self.textViewLog.text = @"finish upgrader";
                 });
-
                 break;
             }
         });
@@ -788,25 +825,6 @@ typedef enum : NSUInteger {
     }else{
         self.textViewLog.text = @"firmware updating...";
     }
-
-}
-
-// get pos upgrade key api.
-- (void)getUpdateKey:(UIButton *)sender {
-    [pos getUpdateCheckValueBlock:^(BOOL isSuccess, NSString *stateStr) {
-        if (isSuccess) {
-            self.textViewLog.text=stateStr;
-        }
-    }];
-}
-
-
--(void) onLcdShowCustomDisplay: (BOOL)isSuccess{
-    if(isSuccess){
-        self.textViewLog.text = @"Success";
-    }else{
-        self.textViewLog.text =  @"Failed";
-    }
 }
 
 -(void) onGetPosComm:(NSInteger)mode amount:(NSString *)amt posId:(NSString*)aPosId{
@@ -814,9 +832,6 @@ typedef enum : NSUInteger {
         [pos doTrade:30];
     }
 }
-
-#pragma mark - UIAlertView
-#pragma mark 改写原有的confrim 绑定的方法
 
 -(void)conductEventByMsg:(NSString *)msg{
     if ([msg isEqualToString:@"Online process requested."]){
@@ -833,7 +848,6 @@ typedef enum : NSUInteger {
     [mAlertView dismissWithClickedButtonIndex:0 animated:YES];
 }
 
-
 #pragma mark - UIActionSheet
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSString *aTitle = msgStr;
@@ -849,26 +863,17 @@ typedef enum : NSUInteger {
     [mActionSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
-//update emv app by xml file
+//parse the xml file, update emv app
 - (void)updateEMVCfgByXML{
-    
     NSMutableArray *listArr = [NSMutableArray array];
-    
     NSArray *emvListArr = [self requestXMLData:EMVAppXMl];
-    
     TagApp *tag = emvListArr[4];
-    
     NSDictionary *emvDict = [pos EmvAppTag];
-    
     for (int i = 0 ; i < emvDict.allKeys.count; i++) {
-        
         NSString *key = emvDict.allKeys[i];
         NSString * value = [tag valueForKey:key];
-    
         if (value.length != 0) {
-            
             NSString *tempStr = [[emvDict valueForKey:key] stringByAppendingString:value];
-            
             [listArr addObject:tempStr];
         }
     }
@@ -883,51 +888,41 @@ typedef enum : NSUInteger {
         }
     }];
 }
-//update emv capk by xml file
+
+//parse the xml file,update emv capk
 - (void)updateCAPKConfigByXML{
-    
     NSArray *capkArr = [self requestXMLData:EMVCapkXMl];
     NSMutableArray *capkTempArr = [NSMutableArray array];
-    
     TagCapk *capk = capkArr[1];
-    
     if (capk.Rid.length != 0) {
-        
         NSString *capkStr1 = [NSString stringWithFormat:@"9F06%@",capk.Rid];
         [capkTempArr addObject:capkStr1];
     }
     if (capk.Public_Key_Index.length != 0) {
-        
         NSString *capkStr2 = [NSString stringWithFormat:@"9F22%@",capk.Public_Key_Index];
         [capkTempArr addObject:capkStr2];
     }
     if (capk.Public_Key_Module.length != 0) {
-        
         NSString *capkStr3 = [NSString stringWithFormat:@"DF02%@",capk.Public_Key_Module];
         [capkTempArr addObject:capkStr3];
     }
     if (capk.Public_Key_CheckValue.length != 0) {
-        
         NSString *capkStr4 = [NSString stringWithFormat:@"DF03%@",capk.Public_Key_CheckValue];
         [capkTempArr addObject:capkStr4];
     }
     if (capk.Pk_exponent.length != 0) {
-        
         NSString *capkStr5 = [NSString stringWithFormat:@"DF04%@",capk.Pk_exponent];
         [capkTempArr addObject:capkStr5];
     }
     if (capk.Expired_date.length != 0) {
-        
         NSString *capkStr6 = [NSString stringWithFormat:@"c%@",capk.Expired_date];
         [capkTempArr addObject:capkStr6];
     }
     if (capk.Hash_algorithm_identification.length != 0) {
-        
         NSString *capkStr7 = [NSString stringWithFormat:@"DF06%@",capk.Hash_algorithm_identification];
         [capkTempArr addObject:capkStr7];
     }
     if (capk.Pk_algorithm_identification.length != 0) {
-        
         NSString *capkStr8 = [NSString stringWithFormat:@"DF07%@",capk.Pk_algorithm_identification];
         [capkTempArr addObject:capkStr8];
     }
@@ -935,9 +930,7 @@ typedef enum : NSUInteger {
     [pos updateEmvCAPK:EMVOperation_update data:capkTempArr.copy block:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
             self.textViewLog.text = [NSString stringWithFormat:@"success:%@",stateStr];
-            
         }else{
-            
             NSLog(@"fail:%@",stateStr);
             self.textViewLog.text = [NSString stringWithFormat:@"fail:%@",stateStr];
         }
@@ -1017,7 +1010,7 @@ typedef enum : NSUInteger {
 - (NSData*)readLine:(NSString*)name{
     NSString* binFile = [[NSBundle mainBundle]pathForResource:name ofType:@".bin"];
     NSString* ascFile = [[NSBundle mainBundle]pathForResource:name ofType:@".asc"];
-    //NSLog(@"[%@]-- [%@]",name,ascFile);
+    NSString* xmlFile = [[NSBundle mainBundle]pathForResource:name ofType:@".xml"];
     if (binFile!= nil && ![binFile isEqualToString: @""]) {
         NSFileManager* Manager = [NSFileManager defaultManager];
         NSData* data1 = [[NSData alloc] init];
@@ -1028,6 +1021,11 @@ typedef enum : NSUInteger {
         NSData* data2 = [[NSData alloc] init];
         data2 = [Manager contentsAtPath:ascFile];
         //NSLog(@"----------");
+        return data2;
+    }else if (xmlFile!= nil && ![xmlFile isEqualToString: @""]){
+        NSFileManager* Manager = [NSFileManager defaultManager];
+        NSData* data2 = [[NSData alloc] init];
+        data2 = [Manager contentsAtPath:xmlFile];
         return data2;
     }
     return nil;

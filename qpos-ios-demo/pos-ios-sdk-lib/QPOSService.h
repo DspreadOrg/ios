@@ -396,10 +396,15 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 //Set the currency identifier displayed by the POS. For example: $
 -(void)setAmountIcon:(NSString *)aAmountIcon;
 -(void)setAmountIcon:(AmountType) amtType amtIcon:(NSString *)aAmountIcon;
-//update emv configure api
+//update emv configure api by bin file
 -(void)updateEmvConfig:(NSString *)emvAppCfg emvCapk:(NSString*)emvCapkCfg;
 -(void)readEmvAppConfig;
 -(void)readEmvCapkConfig;
+//update emv configure api by xml file
+-(void)updateEMVConfigByXml:(NSData *)xmlData;
+//update emv configure api by TLV
+-(void)updateEmvAPPByTlv:(EMVOperation)emvOperation appTlv:(NSString *)appTlv;//appTlv更新emv配置
+-(void)updateEmvCAPKByTlv:(EMVOperation)emvOperation capkTlv:(NSString *)capkTlv;//capkTlv更新emv配置
 //update emv app configure
 -(void)updateEmvCAPK:(NSInteger )operationType data:(NSArray *)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateCAPKBlock;
 -(void)updateEmvAPP:(NSInteger )operationType data:(NSArray*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
@@ -446,8 +451,6 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(NSMutableDictionary *)EmvAppTag;
 -(void)getKeyCheckValue:(CHECKVALUE_KEYTYPE)checkValueType keyIndex:(NSInteger)keyIndex;
 -(void)setBuzzerStatus:(NSInteger)status;//Set whether the buzzer is muted, 0 is not muted, other values are muted
--(void)updateEmvAPPByTlv:(EMVOperation)emvOperation appTlv:(NSString *)appTlv;//appTlv更新emv配置
--(void)updateEmvCAPKByTlv:(EMVOperation)emvOperation capkTlv:(NSString *)capkTlv;//capkTlv更新emv配置
 -(void)setAESKey:(NSString *)AESCiphertext CRC:(NSString *)CRC timeout:(NSInteger)timeout;
 -(void)getAESTransmissionKey:(NSInteger)timeout;
 -(void)getShutDownTime;
