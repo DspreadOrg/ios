@@ -368,6 +368,9 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)doCheckCard;
 -(void)doCheckCard:(NSInteger) timeout;
 -(void)doCheckCard:(NSInteger) timeout keyIndex:(NSInteger) mKeyIndex;
+//open quick emv
+-(void)setIsQuickEMV:(BOOL)isQuickEMV;
+-(BOOL)getQuickEMV;
 -(void)doEmvApp: (EmvOption)aemvOption;
 -(void)setAmount: (NSString *)aAmount aAmountDescribe:(NSString *)aAmountDescribe currency:(NSString *)currency transactionType:(TransactionType)transactionType;
 -(void)cancelSetAmount;
