@@ -13,6 +13,7 @@
 #import "TagApp.h"
 #import "TagCapk.h"
 #import "DecryptTLV.h"
+#import <CommonCrypto/CommonCrypto.h>
 
 typedef enum : NSUInteger {
     EMVAppXMl,
@@ -28,6 +29,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UIButton *btnGetPosInfo;
 @property (weak, nonatomic) IBOutlet UIButton *btnDisconnect;
 @property (nonatomic,assign)BOOL updateFWFlag;
+@property (nonatomic,strong)NSDictionary *pinDataDict;
 
 @end
 
@@ -64,7 +66,7 @@ typedef enum : NSUInteger {
     self.btnGetPosId.layer.cornerRadius = 10;
     self.btnGetPosInfo.layer.cornerRadius = 10;
     self.btnResetPos.layer.cornerRadius = 10;
-    
+    self.pinDataDict = [NSDictionary dictionary];
     if (nil == pos) {
         pos = [QPOSService sharedInstance];
     }
@@ -198,6 +200,19 @@ typedef enum : NSUInteger {
         }else{
             [pos cancelPinEntry];
         }
+    }else if ([aTitle isEqualToString:@"Please set cvm pin"]) {
+        if (buttonIndex==0) {
+           UITextField *textFieldAmount =  [alertView textFieldAtIndex:0];
+           NSString *pinStr = [textFieldAmount text];
+           NSString *R2 = [self.pinDataDict objectForKey:@"R2"];
+           NSString *AESKey = [self.pinDataDict objectForKey:@"AESKey"];
+           NSString *pan = [self.pinDataDict objectForKey:@"pan"];
+           NSLog(@"pinStr = %@",pinStr);
+           NSString *pinblock = [self encryptedPinBlock:pinStr pan:pan random:R2 aesKey:AESKey];
+           [pos sendCvmPin:pinblock isEncrypted:YES];
+        }else {
+            [pos cancelPinEntry];
+        }
     }
     [self hideAlertView];
 }
@@ -232,6 +247,30 @@ typedef enum : NSUInteger {
     [mAlertView show];
     
     msgStr = @"Please set pin";
+}
+
+//new callback of input pin on phone
+- (void)onRequestCvmApp:(NSDictionary *)dataArr{
+    NSLog(@"onRequestCvmApp");
+    self.pinDataDict = dataArr;
+    NSNumber *offlinePinCount = [dataArr objectForKey:@"offlinePinCount"];
+    NSString *title = NSLocalizedString(@"Please set cvm pin", nil);
+    if (offlinePinCount != nil) {
+       title = [title stringByAppendingFormat:@"(%@)",offlinePinCount];
+    }
+    
+    NSString *msg = @"";
+    mAlertView = [[UIAlertView new]
+                 initWithTitle:title
+                 message:msg
+                 delegate:self
+                 cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
+                 otherButtonTitles:NSLocalizedString(@"Cancel", nil),
+                 nil ];
+    [mAlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+    //UIAlertViewStylePlainTextInput
+    [mAlertView show];
+    msgStr = @"Please set cvm pin";
 }
 
 // Prompt user to insert/swipe/tap card
@@ -323,7 +362,6 @@ typedef enum : NSUInteger {
             }else{
                 tlv = @"";
             }
-            
             self.textViewLog.backgroundColor = [UIColor greenColor];
             [self playAudio];
             AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
@@ -1027,6 +1065,87 @@ typedef enum : NSUInteger {
         NSData* data2 = [[NSData alloc] init];
         data2 = [Manager contentsAtPath:xmlFile];
         return data2;
+    }
+    return nil;
+}
+// use iso-4 format to encrypt pin
+- (NSString *)encryptedPinBlock:(NSString *)pin pan:(NSString *)pan random:(NSString *)random aesKey:(NSString *)aesKey{
+    NSString *pinStr=@"4";
+    NSString *pinLen = [NSString stringWithFormat:@"%lu", (unsigned long)pin.length];
+    pinStr = [[pinStr stringByAppendingString:pinLen] stringByAppendingString:pin];
+    NSInteger pinStrLen = 16 - pinStr.length;
+    for (int i = 0; i < pinStrLen; i++) {
+        pinStr = [pinStr stringByAppendingString:@"A"];
+    }
+    NSString *newRandom = [random substringToIndex:16];
+    pinStr = [pinStr stringByAppendingString:newRandom];
+    NSString *panStr = @"";
+    NSString *panLen = [NSString stringWithFormat:@"%lu", (unsigned long)pan.length - 12];
+    panStr = [panStr stringByAppendingString:panLen];
+    panStr = [panStr stringByAppendingString:pan];
+    NSInteger panStrLen = 32-panStr.length;
+    for (int i = 0; i < panStrLen; i++) {
+       panStr = [panStr stringByAppendingString:@"0"];
+    }
+    NSString *blockA = [self encryptOperation:kCCEncrypt value:pinStr key:aesKey];
+    NSString *blockB = [self pinxCreator:panStr withPinv:blockA];
+    NSString *pinblock = [self encryptOperation:kCCEncrypt value:blockB key:aesKey];
+    return pinblock;
+}
+
+- (NSString *)pinxCreator:(NSString *)pan withPinv:(NSString *)pinv{
+    if (pan.length != pinv.length){
+        return nil;
+    }
+    const char *panchar = [pan UTF8String];
+    const char *pinvchar = [pinv UTF8String];
+    NSString *temp = [[NSString alloc] init];
+    for (int i = 0; i < pan.length; i++){
+        int panValue = [self charToint:panchar[i]];
+        int pinvValue = [self charToint:pinvchar[i]];
+        temp = [temp stringByAppendingString:[NSString stringWithFormat:@"%X",panValue^pinvValue]];
+    }
+    return temp;
+}
+- (int)charToint:(char)tempChar{
+    if (tempChar >= '0' && tempChar <='9'){
+        return tempChar - '0';
+    }
+    else if (tempChar >= 'A' && tempChar <= 'F'){
+        return tempChar - 'A' + 10;
+    }
+    return 0;
+}
+
+- (NSString *)encryptOperation:(CCOperation)operation value:(NSString *)data key:(NSString *)key{
+    NSUInteger blockSize = kCCBlockSizeAES128;
+    NSUInteger dataLength = data.length;
+    size_t bufferSize = dataLength + blockSize;
+    void * buffer = malloc(bufferSize);
+    size_t numBytesDecrypted = 0;
+    NSData *dataKey = [QPOSUtil HexStringToByteArray:key];
+    NSData *dataIn = [QPOSUtil HexStringToByteArray:data];
+    CCCryptorStatus cryptStatus = CCCrypt(operation,
+                                          kCCAlgorithmAES128,
+                                          0x0000 | kCCOptionECBMode,
+                                          dataKey.bytes,
+                                          dataKey.length,
+                                          0,
+                                          dataIn.bytes,
+                                          dataIn.length,
+                                          buffer,
+                                          bufferSize,
+                                          &numBytesDecrypted);
+    if (cryptStatus == kCCSuccess) {
+        NSData * result = [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
+        if (result != nil) {
+            return [QPOSUtil byteArray2Hex:result];
+        }
+    } else {
+        if (buffer) {
+            free(buffer);
+            buffer = NULL;
+        }
     }
     return nil;
 }

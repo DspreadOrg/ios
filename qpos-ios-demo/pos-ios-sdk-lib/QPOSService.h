@@ -298,6 +298,7 @@ typedef NS_ENUM(NSInteger,SessionKeyType) {
 -(void)onGetDevicePublicKey:(NSString *)clearKeys;
 -(void)onQposGenerateSessionKeysResult:(NSDictionary *)result;
 -(void)onDoSetRsaPublicKey:(BOOL)result;
+-(void)onRequestCvmApp:(NSDictionary *)dataArr;
 @end
 
 @interface QPOSService : NSObject
@@ -461,5 +462,6 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)getDevicePublicKey:(NSInteger)timeout;
 -(void)generateSessionKeys:(SessionKeyType)keyType;
 -(void)updateRSA:(NSString *)pemFile;
+-(void)sendCvmPin:(NSString *)pin isEncrypted:(BOOL)isEncrypted;
 @end
 
