@@ -405,7 +405,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)readEmvAppConfig;
 -(void)readEmvCapkConfig;
 //update emv configure api by xml file
--(void)updateEMVConfigByXml:(NSData *)xmlData;
+-(void)updateEMVConfigByXml:(NSString *)xmlStr;
 //update emv configure api by TLV
 -(void)updateEmvAPPByTlv:(EMVOperation)emvOperation appTlv:(NSString *)appTlv;//appTlv更新emv配置
 -(void)updateEmvCAPKByTlv:(EMVOperation)emvOperation capkTlv:(NSString *)capkTlv;//capkTlv更新emv配置

@@ -608,7 +608,7 @@ typedef enum : NSUInteger {
 
 //get pos id in this function.
 - (IBAction)getQposId:(id)sender {
-   [pos getQPosId];
+    [pos getQPosId];
 }
 
 // callback function of getQposId api
@@ -768,7 +768,8 @@ typedef enum : NSUInteger {
     self.textViewLog.text =  @"start update emv configure,pls wait";
     NSLog(@"start update emv configure,pls wait");
     NSData *emvData = [self readLine:@"emv_profile_tlv"];
-    [pos updateEMVConfigByXml:emvData];
+    NSString *tempStr = [QPOSUtil asciiFormatString:emvData];
+    [pos updateEMVConfigByXml:tempStr];
 }
 
 // callback function of updateEmvConfig and updateEMVConfigByXml api.
