@@ -768,8 +768,8 @@ typedef enum : NSUInteger {
     self.textViewLog.text =  @"start update emv configure,pls wait";
     NSLog(@"start update emv configure,pls wait");
     NSData *emvData = [self readLine:@"emv_profile_tlv"];
-    NSString *tempStr = [QPOSUtil asciiFormatString:emvData];
-    [pos updateEMVConfigByXml:tempStr];
+    NSString *xmlStr = [QPOSUtil asciiFormatString:emvData];
+    [pos updateEMVConfigByXml:xmlStr];
 }
 
 // callback function of updateEmvConfig and updateEMVConfigByXml api.
