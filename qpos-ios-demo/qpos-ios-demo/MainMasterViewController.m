@@ -108,7 +108,6 @@ NSInteger   scanBluetoothTime = 15;
 -(void)stopBluetooth{
     if(is2ModeBluetooth){
         [bt stopQPos2Mode];
-        [bt setBluetoothDelegate2Mode:nil];
     }
     [waitScanBT stopAnimating];
 }
