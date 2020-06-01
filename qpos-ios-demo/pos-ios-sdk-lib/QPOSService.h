@@ -147,7 +147,8 @@ typedef NS_ENUM(NSInteger, TransactionResult) {
     TransactionResult_INVALID_ICC_DATA,
     TransactionResult_FALLBACK,
     TransactionResult_NFC_TERMINATED,
-    TransactionResult_TRADE_LOG_FULL
+    TransactionResult_TRADE_LOG_FULL,
+    TransactionResult_CONTACTLESS_TRANSACTION_NOT_ALLOW
     
 };
 typedef NS_ENUM(NSInteger,DoTradeLog) {
@@ -299,6 +300,8 @@ typedef NS_ENUM(NSInteger,SessionKeyType) {
 -(void)onQposGenerateSessionKeysResult:(NSDictionary *)result;
 -(void)onDoSetRsaPublicKey:(BOOL)result;
 -(void)onRequestCvmApp:(NSDictionary *)dataArr;
+-(void)onReturnSetConnectedShutDownTimeResult:(BOOL)isSuccess;
+-(void)onReturnGetConnectedShutDownTimeResult:(NSString *)time;
 @end
 
 @interface QPOSService : NSObject
@@ -464,5 +467,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)generateSessionKeys:(SessionKeyType)keyType;
 -(void)updateRSA:(NSString *)pemFile;
 -(void)sendCvmPin:(NSString *)pin isEncrypted:(BOOL)isEncrypted;
+-(void)setShutDownTimeOnConnected:(NSInteger)time;
+-(void)getShutDownTimeOnConnected;
 @end
 

@@ -211,7 +211,7 @@ typedef enum : NSUInteger {
            NSString *pinblock = [self encryptedPinBlock:pinStr pan:pan random:R2 aesKey:AESKey];
            [pos sendCvmPin:pinblock isEncrypted:YES];
         }else {
-            [pos cancelPinEntry];
+           [pos cancelPinEntry];
         }
     }
     [self hideAlertView];
@@ -475,6 +475,7 @@ typedef enum : NSUInteger {
 
 // transaction result callback function
 -(void) onRequestTransactionResult: (TransactionResult)transactionResult{
+    [mActionSheet dismissWithClickedButtonIndex:0 animated:YES];
     NSString *messageTextView = @"";
     if (transactionResult==TransactionResult_APPROVED) {
         NSString *message = [NSString stringWithFormat:@"Approved\nAmount: $%@\n",amount];
@@ -520,6 +521,9 @@ typedef enum : NSUInteger {
     }else if(transactionResult == TransactionResult_NFC_TERMINATED) {
         [self clearDisplay];
         messageTextView = @"NFC Terminated";
+    }else if(transactionResult == TransactionResult_CONTACTLESS_TRANSACTION_NOT_ALLOW) {
+        [self clearDisplay];
+        messageTextView = @"TRANS NOT ALLOW";
     }
     
     mAlertView = [[UIAlertView new]
