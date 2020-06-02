@@ -24,7 +24,6 @@
 		1420B1542446E88F00129C44 /* emv_profile_tlv.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1420B1532446E88F00129C44 /* emv_profile_tlv.xml */; };
 		143A25BC215A44E600503E0E /* DecryptTLV.m in Sources */ = {isa = PBXBuildFile; fileRef = 143A25BA215A44E600503E0E /* DecryptTLV.m */; };
 		14598AA92292BDF4006993E7 /* A27CAYC_S1_master.asc in Resources */ = {isa = PBXBuildFile; fileRef = 14598AA82292BDF3006993E7 /* A27CAYC_S1_master.asc */; };
-		146CBAD1211A8DDD0014BE8B /* emv_profile_tlv_20180717.xml in Resources */ = {isa = PBXBuildFile; fileRef = 146CBAD0211A8DDD0014BE8B /* emv_profile_tlv_20180717.xml */; };
 		146CBAD4211AA7420014BE8B /* TagCapk.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CBAD3211AA7420014BE8B /* TagCapk.m */; };
 		14ABA8E524811F1D00308AFF /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ABA8E424811F1D00308AFF /* libqpos-ios-sdk.a */; };
 		14BBA8812297EA9C00D48460 /* emv_app.bin in Resources */ = {isa = PBXBuildFile; fileRef = 14BBA87F2297EA9C00D48460 /* emv_app.bin */; };
@@ -82,7 +81,6 @@
 		143A25BB215A44E600503E0E /* DecryptTLV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecryptTLV.h; sourceTree = "<group>"; };
 		14598AA82292BDF3006993E7 /* A27CAYC_S1_master.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = A27CAYC_S1_master.asc; sourceTree = "<group>"; };
 		14653EB6240E83D40020F788 /* QPOSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
-		146CBAD0211A8DDD0014BE8B /* emv_profile_tlv_20180717.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = emv_profile_tlv_20180717.xml; sourceTree = "<group>"; };
 		146CBAD2211AA7420014BE8B /* TagCapk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TagCapk.h; sourceTree = "<group>"; };
 		146CBAD3211AA7420014BE8B /* TagCapk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TagCapk.m; sourceTree = "<group>"; };
 		14ABA8E424811F1D00308AFF /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 		14EFBE002118152D0093681E /* decryptXml */ = {
 			isa = PBXGroup;
 			children = (
-				146CBAD0211A8DDD0014BE8B /* emv_profile_tlv_20180717.xml */,
 				14EFBE012118152D0093681E /* GDataXMLNode.h */,
 				14EFBE042118152D0093681E /* GDataXMLNode.m */,
 				14EFBE052118152D0093681E /* TagApp.h */,
@@ -345,7 +342,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A9004C183B08B100D22572 /* Images.xcassets in Resources */,
-				146CBAD1211A8DDD0014BE8B /* emv_profile_tlv_20180717.xml in Resources */,
 				1404A643242B424900899293 /* Localizable.strings in Resources */,
 				14BBA8812297EA9C00D48460 /* emv_app.bin in Resources */,
 				14598AA92292BDF4006993E7 /* A27CAYC_S1_master.asc in Resources */,
