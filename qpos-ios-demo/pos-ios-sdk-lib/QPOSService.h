@@ -469,5 +469,6 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)sendCvmPin:(NSString *)pin isEncrypted:(BOOL)isEncrypted;
 -(void)setShutDownTimeOnConnected:(NSInteger)time;
 -(void)getShutDownTimeOnConnected;
+-(NSInteger)getCvmPinTryLimit;
 @end
 
