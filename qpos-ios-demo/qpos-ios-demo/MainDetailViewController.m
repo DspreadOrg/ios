@@ -200,19 +200,6 @@ typedef enum : NSUInteger {
         }else{
             [pos cancelPinEntry];
         }
-    }else if ([aTitle isEqualToString:@"Please set cvm pin"]) {
-        if (buttonIndex==0) {
-           UITextField *textFieldAmount =  [alertView textFieldAtIndex:0];
-           NSString *pinStr = [textFieldAmount text];
-           NSString *R2 = [self.pinDataDict objectForKey:@"R2"];
-           NSString *AESKey = [self.pinDataDict objectForKey:@"AESKey"];
-           NSString *pan = [self.pinDataDict objectForKey:@"pan"];
-           NSLog(@"pinStr = %@",pinStr);
-           NSString *pinblock = [self encryptedPinBlock:pinStr pan:pan random:R2 aesKey:AESKey];
-           [pos sendCvmPin:pinblock isEncrypted:YES];
-        }else {
-           [pos cancelPinEntry];
-        }
     }
     [self hideAlertView];
 }
@@ -247,30 +234,6 @@ typedef enum : NSUInteger {
     [mAlertView show];
     
     msgStr = @"Please set pin";
-}
-
-//new callback of input pin on phone
-- (void)onRequestCvmApp:(NSDictionary *)dataArr{
-    NSLog(@"onRequestCvmApp");
-    self.pinDataDict = dataArr;
-    NSNumber *offlinePinCount = [dataArr objectForKey:@"offlinePinCount"];
-    NSString *title = NSLocalizedString(@"Please set cvm pin", nil);
-    if (offlinePinCount != nil) {
-       title = [title stringByAppendingFormat:@"(%@)",offlinePinCount];
-    }
-    
-    NSString *msg = @"";
-    mAlertView = [[UIAlertView new]
-                 initWithTitle:title
-                 message:msg
-                 delegate:self
-                 cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
-                 otherButtonTitles:NSLocalizedString(@"Cancel", nil),
-                 nil ];
-    [mAlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
-    //UIAlertViewStylePlainTextInput
-    [mAlertView show];
-    msgStr = @"Please set cvm pin";
 }
 
 // Prompt user to insert/swipe/tap card
