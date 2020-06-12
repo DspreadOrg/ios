@@ -148,7 +148,8 @@ typedef NS_ENUM(NSInteger, TransactionResult) {
     TransactionResult_FALLBACK,
     TransactionResult_NFC_TERMINATED,
     TransactionResult_TRADE_LOG_FULL,
-    TransactionResult_CONTACTLESS_TRANSACTION_NOT_ALLOW
+    TransactionResult_CONTACTLESS_TRANSACTION_NOT_ALLOW,
+    TransactionResult_CARD_BLOCKED
     
 };
 typedef NS_ENUM(NSInteger,DoTradeLog) {

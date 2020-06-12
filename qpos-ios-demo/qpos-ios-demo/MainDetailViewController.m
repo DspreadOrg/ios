@@ -487,6 +487,9 @@ typedef enum : NSUInteger {
     }else if(transactionResult == TransactionResult_CONTACTLESS_TRANSACTION_NOT_ALLOW) {
         [self clearDisplay];
         messageTextView = @"TRANS NOT ALLOW";
+    }else if(transactionResult == TransactionResult_CARD_BLOCKED) {
+        [self clearDisplay];
+        messageTextView = @"Card Blocked";
     }
     
     mAlertView = [[UIAlertView new]
