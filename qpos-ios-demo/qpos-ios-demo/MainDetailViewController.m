@@ -112,8 +112,8 @@ typedef enum : NSUInteger {
     }else{
         self.textViewLog.text = NSLocalizedString(@"Bluetooth connected.", nil);
     }
-    
 }
+
 //disconnect bluetooth
 - (IBAction)disconnect:(id)sender {
     [pos disconnectBT];
