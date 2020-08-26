@@ -20,8 +20,8 @@
 		1404A635242B3BE900899293 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1404A637242B3BE900899293 /* InfoPlist.strings */; };
 		1404A639242B3EF300899293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1404A63B242B3EF300899293 /* Main.storyboard */; };
 		1404A643242B424900899293 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1404A645242B424900899293 /* Localizable.strings */; };
-		14059C0724BC6A6E00D65130 /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14059C0624BC6A6E00D65130 /* libqpos-ios-sdk.a */; };
 		141825E02154E75000E77EB4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 141825DF2154E75000E77EB4 /* Security.framework */; };
+		141C67F724F6690D0015AB63 /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 141C67F624F6690D0015AB63 /* libqpos-ios-sdk.a */; };
 		1420B1542446E88F00129C44 /* emv_profile_tlv.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1420B1532446E88F00129C44 /* emv_profile_tlv.xml */; };
 		143A25BC215A44E600503E0E /* DecryptTLV.m in Sources */ = {isa = PBXBuildFile; fileRef = 143A25BA215A44E600503E0E /* DecryptTLV.m */; };
 		14598AA92292BDF4006993E7 /* A27CAYC_S1_master.asc in Resources */ = {isa = PBXBuildFile; fileRef = 14598AA82292BDF3006993E7 /* A27CAYC_S1_master.asc */; };
@@ -76,8 +76,8 @@
 		1404A640242B413B00899293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		1404A644242B424900899293 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1404A646242B424A00899293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		14059C0624BC6A6E00D65130 /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
 		141825DF2154E75000E77EB4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		141C67F624F6690D0015AB63 /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
 		1420B1532446E88F00129C44 /* emv_profile_tlv.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = emv_profile_tlv.xml; sourceTree = "<group>"; };
 		143A25BA215A44E600503E0E /* DecryptTLV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DecryptTLV.m; sourceTree = "<group>"; };
 		143A25BB215A44E600503E0E /* DecryptTLV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecryptTLV.h; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14059C0724BC6A6E00D65130 /* libqpos-ios-sdk.a in Frameworks */,
+				141C67F724F6690D0015AB63 /* libqpos-ios-sdk.a in Frameworks */,
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
 			);
@@ -255,7 +255,7 @@
 				14653EB6240E83D40020F788 /* QPOSService.h */,
 				14BBA87F2297EA9C00D48460 /* emv_app.bin */,
 				14BBA8802297EA9C00D48460 /* emv_capk.bin */,
-				14059C0624BC6A6E00D65130 /* libqpos-ios-sdk.a */,
+				141C67F624F6690D0015AB63 /* libqpos-ios-sdk.a */,
 				14598AA82292BDF3006993E7 /* A27CAYC_S1_master.asc */,
 				6BB1DC061A5942B6009F40CD /* BTDeviceFinder.h */,
 				14D12C2422F2B70E00DB0EAB /* QPOSUtil.h */,

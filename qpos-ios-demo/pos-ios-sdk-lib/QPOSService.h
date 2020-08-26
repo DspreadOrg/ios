@@ -448,6 +448,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 //you can use this api to get value of special emv tag.
 -(NSDictionary *)getICCTag:(NSInteger) cardType tagCount:(NSInteger) mTagCount tagArrStr:(NSString*) mTagArrStr;
 -(NSDictionary *)getICCTag:(EncryptType)encryTypeStr cardType:(NSInteger)cardType tagCount:(NSInteger) mTagCount tagArrStr:(NSString*)mTagArrStr;
+-(NSDictionary *)getICCTagNew:(EncryptType)encryTypeStr cardType:(NSInteger)cardType tagCount:(NSInteger)mTagCount tagArrStr:(NSString *)mTagArrStr;
 //you can use api to custom input on pos.
 -(void)customInputDisplay:(NSInteger)operationType displayType:(NSInteger)dispType maxLen:(NSInteger)maxLen DisplayString:(NSString *)displayStr delay:(NSInteger)timeout withResultBlock:(void (^)(BOOL isSuccess, NSString * result))customInputDisplayResult;
 
