@@ -363,6 +363,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 //you can set DoTradeMode before calling doTrade.
 -(void)setDoTradeMode:(DoTradeMode)doTradeMode;
 -(void)setFormatID:(NSString *)formatID;
+-(void)setAmountPoint:(BOOL)amoutPoint;
 -(void)startAudio;
 -(void)stopAudio;
 //start trade api
