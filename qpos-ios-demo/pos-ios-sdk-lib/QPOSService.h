@@ -149,9 +149,10 @@ typedef NS_ENUM(NSInteger, TransactionResult) {
     TransactionResult_NFC_TERMINATED,
     TransactionResult_TRADE_LOG_FULL,
     TransactionResult_CONTACTLESS_TRANSACTION_NOT_ALLOW,
-    TransactionResult_CARD_BLOCKED
-    
+    TransactionResult_CARD_BLOCKED,
+    TransactionResult_TOKEN_INVALID
 };
+
 typedef NS_ENUM(NSInteger,DoTradeLog) {
     DoTradeLog_clear,
     DoTradeLog_getAllCount,
@@ -302,6 +303,7 @@ typedef NS_ENUM(NSInteger,SessionKeyType) {
 -(void)onDoSetRsaPublicKey:(BOOL)result;
 -(void)onReturnSetConnectedShutDownTimeResult:(BOOL)isSuccess;
 -(void)onReturnGetConnectedShutDownTimeResult:(NSString *)time;
+-(void)onReturnUpdateKeyByTR_31Result:(BOOL)result;
 @end
 
 @interface QPOSService : NSObject
@@ -471,5 +473,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)setShutDownTimeOnConnected:(NSInteger)time;
 -(void)getShutDownTimeOnConnected;
 -(NSInteger)getCvmPinTryLimit;
+-(void)updateKeyByTR_31:(NSInteger)keyIndex keyBlock:(NSString *)keyBlock;
+-(void)updateKeyByTR_31:(NSInteger)keyIndex keyBlock:(NSString *)keyBlock timeout:(NSInteger)timeout;
 @end
 

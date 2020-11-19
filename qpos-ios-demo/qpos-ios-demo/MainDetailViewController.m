@@ -490,6 +490,9 @@ typedef enum : NSUInteger {
     }else if(transactionResult == TransactionResult_CARD_BLOCKED) {
         [self clearDisplay];
         messageTextView = @"Card Blocked";
+    }else if(transactionResult == TransactionResult_TOKEN_INVALID) {
+        [self clearDisplay];
+        messageTextView = @"Token Invalid";
     }
     
     mAlertView = [[UIAlertView new]
