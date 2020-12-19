@@ -468,12 +468,12 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)getShutDownTime;
 -(void)setPanStatus:(NSInteger )panStatus;
 -(void)getDevicePublicKey:(NSInteger)timeout;
--(void)generateSessionKeys:(SessionKeyType)keyType;
--(void)updateRSA:(NSString *)pemFile;
 -(void)setShutDownTimeOnConnected:(NSInteger)time;
 -(void)getShutDownTimeOnConnected;
 -(NSInteger)getCvmPinTryLimit;
 -(void)updateKeyByTR_31:(NSInteger)keyIndex keyBlock:(NSString *)keyBlock;
 -(void)updateKeyByTR_31:(NSInteger)keyIndex keyBlock:(NSString *)keyBlock timeout:(NSInteger)timeout;
+-(void)generateSessionKeys;
+-(void)updateRSA:(NSString *)publicKey pemFile:(NSString *)pemFile;
 @end
 

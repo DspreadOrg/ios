@@ -839,6 +839,32 @@ typedef enum : NSUInteger {
     }
 }
 
+//update public key into pos
+- (void)updateRSATest{
+    NSString *pemStr = [QPOSUtil asciiFormatString: [self readLine:@"rsa_public_key_pkcs8_test"]];
+    NSLog(@"pemStr: %@", pemStr);
+    [pos updateRSA:pemStr pemFile:@"rsa_public_key_pkcs8_test.pem"];
+}
+
+// callback function of updateRSA function
+-(void)onDoSetRsaPublicKey:(BOOL)result{
+    NSLog(@"onDoSetRsaPublicKey: %d", result);
+    if (result) {
+        self.textViewLog.text = @"success";
+    }else{
+        self.textViewLog.text = @"fail";
+    }
+}
+
+//generate Session Keys from pos
+- (void)generateSessionKeysTest{
+    [pos generateSessionKeys];
+}
+
+-(void)onQposGenerateSessionKeysResult:(NSDictionary *)result{
+    NSLog(@"onQposGenerateSessionKeysResult: %@", result);
+}
+
 -(void) onGetPosComm:(NSInteger)mode amount:(NSString *)amt posId:(NSString*)aPosId{
     if(mode == 1){
         [pos doTrade:30];
@@ -1023,6 +1049,7 @@ typedef enum : NSUInteger {
     NSString* binFile = [[NSBundle mainBundle]pathForResource:name ofType:@".bin"];
     NSString* ascFile = [[NSBundle mainBundle]pathForResource:name ofType:@".asc"];
     NSString* xmlFile = [[NSBundle mainBundle]pathForResource:name ofType:@".xml"];
+    NSString* pemFile = [[NSBundle mainBundle]pathForResource:name ofType:@".pem"];
     if (binFile!= nil && ![binFile isEqualToString: @""]) {
         NSFileManager* Manager = [NSFileManager defaultManager];
         NSData* data1 = [[NSData alloc] init];
@@ -1032,16 +1059,22 @@ typedef enum : NSUInteger {
         NSFileManager* Manager = [NSFileManager defaultManager];
         NSData* data2 = [[NSData alloc] init];
         data2 = [Manager contentsAtPath:ascFile];
-        //NSLog(@"----------");
         return data2;
     }else if (xmlFile!= nil && ![xmlFile isEqualToString: @""]){
         NSFileManager* Manager = [NSFileManager defaultManager];
         NSData* data2 = [[NSData alloc] init];
         data2 = [Manager contentsAtPath:xmlFile];
         return data2;
+    }else if (pemFile!= nil && ![pemFile isEqualToString: @""]){
+        NSFileManager* Manager = [NSFileManager defaultManager];
+        NSData* data2 = [[NSData alloc] init];
+        data2 = [Manager contentsAtPath:pemFile];
+        NSLog(@"pemFile: %@", pemFile);
+        return data2;
     }
     return nil;
 }
+
 // use iso-4 format to encrypt pin
 - (NSString *)encryptedPinBlock:(NSString *)pin pan:(NSString *)pan random:(NSString *)random aesKey:(NSString *)aesKey{
     NSString *pinStr=@"4";
