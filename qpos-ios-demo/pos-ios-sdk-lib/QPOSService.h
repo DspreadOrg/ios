@@ -475,5 +475,6 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)updateKeyByTR_31:(NSInteger)keyIndex keyBlock:(NSString *)keyBlock timeout:(NSInteger)timeout;
 -(void)generateSessionKeys;
 -(void)updateRSA:(NSString *)publicKey pemFile:(NSString *)pemFile;
+-(void)getEncryptData:(NSData *)data keyType:(NSString*)keyType keyIndex:(NSString *)keyIndex timeOut:(NSInteger)timeout;
 @end
 
