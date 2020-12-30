@@ -839,6 +839,16 @@ typedef enum : NSUInteger {
     }
 }
 
+//get encrypt data function
+- (void)getEncryptData{
+    NSData *data = [@"123456789" dataUsingEncoding:NSUTF8StringEncoding];;
+    [pos getEncryptData:data keyType:@"2" keyIndex:@"0" timeOut:10];
+}
+
+- (void)onReturnGetEncryptDataResult:(NSDictionary *)tlv{
+    NSLog(@"onReturnGetEncryptDataResult: %@", tlv);
+}
+
 //update public key into pos
 - (void)updateRSATest{
     NSString *pemStr = [QPOSUtil asciiFormatString: [self readLine:@"rsa_public_key_pkcs8_test"]];

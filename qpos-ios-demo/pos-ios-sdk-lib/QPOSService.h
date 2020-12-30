@@ -304,6 +304,7 @@ typedef NS_ENUM(NSInteger,SessionKeyType) {
 -(void)onReturnSetConnectedShutDownTimeResult:(BOOL)isSuccess;
 -(void)onReturnGetConnectedShutDownTimeResult:(NSString *)time;
 -(void)onReturnUpdateKeyByTR_31Result:(BOOL)result;
+-(void)onReturnGetEncryptDataResult:(NSDictionary*)tlv;
 @end
 
 @interface QPOSService : NSObject

@@ -25,9 +25,9 @@
 		143A25BC215A44E600503E0E /* DecryptTLV.m in Sources */ = {isa = PBXBuildFile; fileRef = 143A25BA215A44E600503E0E /* DecryptTLV.m */; };
 		14598AA92292BDF4006993E7 /* A27CAYC_S1_master.asc in Resources */ = {isa = PBXBuildFile; fileRef = 14598AA82292BDF3006993E7 /* A27CAYC_S1_master.asc */; };
 		146CBAD4211AA7420014BE8B /* TagCapk.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CBAD3211AA7420014BE8B /* TagCapk.m */; };
-		147C1755258DF251000C9097 /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 147C1754258DF251000C9097 /* libqpos-ios-sdk.a */; };
 		147C1757258DF283000C9097 /* rsa_public_key_pkcs8_test.pem in Resources */ = {isa = PBXBuildFile; fileRef = 147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */; };
 		147EF1D32486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml in Resources */ = {isa = PBXBuildFile; fileRef = 147EF1D22486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml */; };
+		149F7AE2259C85530099E464 /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 149F7AE1259C85530099E464 /* libqpos-ios-sdk.a */; };
 		14BBA8812297EA9C00D48460 /* emv_app.bin in Resources */ = {isa = PBXBuildFile; fileRef = 14BBA87F2297EA9C00D48460 /* emv_app.bin */; };
 		14BBA8822297EA9C00D48460 /* emv_capk.bin in Resources */ = {isa = PBXBuildFile; fileRef = 14BBA8802297EA9C00D48460 /* emv_capk.bin */; };
 		14EFBE072118152E0093681E /* TagApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBE032118152D0093681E /* TagApp.m */; };
@@ -85,9 +85,9 @@
 		14653EB6240E83D40020F788 /* QPOSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
 		146CBAD2211AA7420014BE8B /* TagCapk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TagCapk.h; sourceTree = "<group>"; };
 		146CBAD3211AA7420014BE8B /* TagCapk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TagCapk.m; sourceTree = "<group>"; };
-		147C1754258DF251000C9097 /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
 		147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_public_key_pkcs8_test.pem; sourceTree = "<group>"; };
 		147EF1D22486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "emv_profile_tlv_20180717.xml 14-27-29-797.xml"; sourceTree = "<group>"; };
+		149F7AE1259C85530099E464 /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
 		14BBA87F2297EA9C00D48460 /* emv_app.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emv_app.bin; sourceTree = "<group>"; };
 		14BBA8802297EA9C00D48460 /* emv_capk.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emv_capk.bin; sourceTree = "<group>"; };
 		14D12C2422F2B70E00DB0EAB /* QPOSUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSUtil.h; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				147C1755258DF251000C9097 /* libqpos-ios-sdk.a in Frameworks */,
+				149F7AE2259C85530099E464 /* libqpos-ios-sdk.a in Frameworks */,
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
 			);
@@ -255,8 +255,8 @@
 			children = (
 				147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */,
 				1420B1532446E88F00129C44 /* emv_profile_tlv.xml */,
-				147C1754258DF251000C9097 /* libqpos-ios-sdk.a */,
 				14653EB6240E83D40020F788 /* QPOSService.h */,
+				149F7AE1259C85530099E464 /* libqpos-ios-sdk.a */,
 				14BBA87F2297EA9C00D48460 /* emv_app.bin */,
 				14BBA8802297EA9C00D48460 /* emv_capk.bin */,
 				14598AA82292BDF3006993E7 /* A27CAYC_S1_master.asc */,
