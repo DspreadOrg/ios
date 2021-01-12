@@ -729,6 +729,16 @@ typedef enum : NSUInteger {
     }];
 }
 
+//update ipek by key type
+- (void)updateIpekByKeyType{
+     [pos updateIPEKOperationByKeyType:@"00" tracksn:@"00000510F462F8400004" trackipek:@"98357D2CA022B6E298357D2CA022B6E2" trackipekCheckValue:@"82E13665B4624DF5" emvksn:@"00000510F462F8400004" emvipek:@"98357D2CA022B6E298357D2CA022B6E2" emvipekcheckvalue:@"82E13665B4624DF5" pinksn:@"" pinipek:@"" pinipekcheckValue:@"" block:^(BOOL isSuccess, NSString *stateStr) {
+        if (isSuccess) {
+            self.textViewLog.text = stateStr;
+        }
+    }];
+}
+
+
 //eg: use emv_app.bin and emv_capk.bin file to update emv configure in pos,Update time is about two minutes
 -(void)UpdateEmvCfg{
     NSString *emvAppCfg = [QPOSUtil byteArray2Hex:[self readLine:@"emv_app"]];

@@ -324,6 +324,19 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
             pinipek:(NSString *)pinipek
   pinipekcheckValue:(NSString *)pinipekcheckValue
               block:(void(^)(BOOL isSuccess,NSString *stateStr))EMVBlock;
+
+- (void)updateIPEKOperationByKeyType:(NSString *)groupKey
+                     tracksn:(NSString *)trackksn
+                   trackipek:(NSString *)trackipek
+         trackipekCheckValue:(NSString *)trackipekCheckValue
+                      emvksn:(NSString *)emvksn
+                     emvipek:(NSString *)emvipek
+           emvipekcheckvalue:(NSString *)emvipekcheckvalue
+                      pinksn:(NSString *)pinksn
+                     pinipek:(NSString *)pinipek
+           pinipekcheckValue:(NSString *)pinipekcheckValue
+                       block:(void(^)(BOOL isSuccess,NSString *stateStr))EMVBlock;
+
 //buzzer
 -(void)doSetBuzzerOperation:(NSInteger)timeOut
                       block:(void (^)(BOOL isSuccess, NSString*stateStr))buzzerBlock;
