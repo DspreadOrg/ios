@@ -340,6 +340,10 @@ typedef enum : NSUInteger {
         self.textViewLog.text = @"Bad Swipe. \nPlease swipe again and press check card.";
     }else if(result==DoTradeResult_NO_UPDATE_WORK_KEY){
         self.textViewLog.text = @"device not update work key";
+    }else if(result==DoTradeResult_CARD_NOT_SUPPORT){
+        self.textViewLog.text = @"card not support";
+    }else if(result==DoTradeResult_PLS_SEE_PHONE){
+        self.textViewLog.text = @"pls see phone";
     }
 }
 
@@ -493,6 +497,9 @@ typedef enum : NSUInteger {
     }else if(transactionResult == TransactionResult_TOKEN_INVALID) {
         [self clearDisplay];
         messageTextView = @"Token Invalid";
+    }else if(transactionResult == TransactionResult_APP_BLOCKED) {
+        [self clearDisplay];
+        messageTextView = @"APP Blocked";
     }
     
     mAlertView = [[UIAlertView new]

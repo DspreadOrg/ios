@@ -25,8 +25,7 @@ typedef NS_ENUM(NSInteger, UpdateInformationResult) {
     UpdateInformationResult_UPDATING
 };
 
-typedef NS_ENUM(NSInteger, DoTradeResult)
-{
+typedef NS_ENUM(NSInteger, DoTradeResult){
     DoTradeResult_NONE,
     DoTradeResult_MCR,
     DoTradeResult_ICC,
@@ -37,10 +36,12 @@ typedef NS_ENUM(NSInteger, DoTradeResult)
     DoTradeResult_NFC_ONLINE,   // add 20150715
     DoTradeResult_NFC_OFFLINE,
     DoTradeResult_NFC_DECLINED,
+    DoTradeResult_TRY_ANOTHER_INTERFACE,
+    DoTradeResult_CARD_NOT_SUPPORT,
+    DoTradeResult_PLS_SEE_PHONE
 };
 
-typedef NS_ENUM(NSInteger, CHECKVALUE_KEYTYPE)
-{
+typedef NS_ENUM(NSInteger, CHECKVALUE_KEYTYPE){
     MKSK_TMK,
     MKSK_PIK,
     MKSK_TDK,
@@ -56,13 +57,11 @@ typedef NS_ENUM(NSInteger, CHECKVALUE_KEYTYPE)
     DUKPT_MKSK_ALLTYPE
 };
 
-typedef NS_ENUM(NSInteger, EmvOption)
-{
+typedef NS_ENUM(NSInteger, EmvOption){
     EmvOption_START, EmvOption_START_WITH_FORCE_ONLINE
 };
 
-typedef NS_ENUM(NSInteger, Error)
-{
+typedef NS_ENUM(NSInteger, Error){
     Error_TIMEOUT,
     Error_MAC_ERROR,
     Error_CMD_NOT_AVAILABLE,
@@ -87,8 +86,7 @@ typedef NS_ENUM(NSInteger, Error)
     Error_QPOS_MEMORY_OVERFLOW
 };
 
-typedef NS_ENUM(NSInteger, DHError)
-{
+typedef NS_ENUM(NSInteger, DHError){
     DHError_TIMEOUT,
     DHError_MAC_ERROR,
     DHError_CMD_NOT_AVAILABLE,
@@ -114,8 +112,7 @@ typedef NS_ENUM(NSInteger, DHError)
 };
 
 
-typedef NS_ENUM(NSInteger, Display)
-{
+typedef NS_ENUM(NSInteger, Display){
     Display_TRY_ANOTHER_INTERFACE,
     Display_PLEASE_WAIT,
     Display_REMOVE_CARD,
@@ -150,7 +147,8 @@ typedef NS_ENUM(NSInteger, TransactionResult) {
     TransactionResult_TRADE_LOG_FULL,
     TransactionResult_CONTACTLESS_TRANSACTION_NOT_ALLOW,
     TransactionResult_CARD_BLOCKED,
-    TransactionResult_TOKEN_INVALID
+    TransactionResult_TOKEN_INVALID,
+    TransactionResult_APP_BLOCKED
 };
 
 typedef NS_ENUM(NSInteger,DoTradeLog) {
