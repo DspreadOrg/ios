@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class CBPeripheral;
-
+typedef void (^MPUInfoBlock)(NSDictionary *mpuInfoDict);
 typedef NS_ENUM(NSInteger, PosType) {
     PosType_AUDIO,
     PosType_BLUETOOTH,
@@ -488,5 +488,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)generateSessionKeys;
 -(void)updateRSA:(NSString *)publicKey pemFile:(NSString *)pemFile;
 -(void)getEncryptData:(NSData *)data keyType:(NSString*)keyType keyIndex:(NSString *)keyIndex timeOut:(NSInteger)timeout;
+-(void)getMPUCardInfo:(MPUInfoBlock)mpuInfoBlock;
+-(void)getMIccCardData:(NSString *)transactionTime;
 @end
 
