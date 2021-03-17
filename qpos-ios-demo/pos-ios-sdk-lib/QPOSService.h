@@ -387,6 +387,8 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)doCheckCard;
 -(void)doCheckCard:(NSInteger) timeout;
 -(void)doCheckCard:(NSInteger) timeout keyIndex:(NSInteger) mKeyIndex;
+-(void)doTrade_QF:(NSInteger)tradeMode TradeRandomString:(NSString *)randomString TradeExtraString:(NSString *)extraString;
+-(void)doTrade_QF:(NSInteger)tradeMode TradeRandomString:(NSString *)randomString TradeExtraString:(NSString *)extraString timeout:(NSInteger) delay;
 //open quick emv
 -(void)setIsQuickEMV:(BOOL)isQuickEMV;
 -(BOOL)getQuickEMV;
