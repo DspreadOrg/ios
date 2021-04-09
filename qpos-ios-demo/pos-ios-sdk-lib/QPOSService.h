@@ -303,6 +303,7 @@ typedef NS_ENUM(NSInteger,SessionKeyType) {
 -(void)onReturnGetConnectedShutDownTimeResult:(NSString *)time;
 -(void)onReturnUpdateKeyByTR_31Result:(BOOL)result;
 -(void)onReturnGetEncryptDataResult:(NSDictionary*)tlv;
+-(void)onReturnBatchSendAPDUResult:(NSDictionary *)apduResponses;
 @end
 
 @interface QPOSService : NSObject
@@ -412,6 +413,14 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 //get pos infomation
 -(void)getQPosInfo;
 -(void)getQPosId;
+//add icc apdu 2014-03-11
+-(void)powerOffIcc;
+-(void)powerOnIcc;
+-(void)sendApdu:(NSString *)apduStr;
+//nfc
+-(void)powerOffNFC:(NSInteger) timeout withBlock:(void (^)(BOOL isSuccess))onPowerOffNFCResultBlock;
+-(void)sendApduByNFC:(NSString *)apduString delay:(NSInteger)timeout withBlock:(void (^)(BOOL isSuccess, NSString *apdu, NSInteger apduLen))onNFCApduResultBlock;
+-(void)powerOnNFC:(NSInteger) isEncrypt delay:(NSInteger) timeout withBlock:(void (^)(BOOL isSuccess, NSString *ksn, NSString *atr, NSInteger atrLen))onPowerOnNFCResultBlock;
 
 -(void)sendPinEntryResult:(NSString *)pin;
 -(void)cancelPinEntry;
