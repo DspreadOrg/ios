@@ -332,6 +332,9 @@ typedef enum : NSUInteger {
             self.lableAmount.text = @"";
         });
         
+//    [pos getICCTag:EncryptType_plaintext cardType:1 tagCount:1 tagArrStr:@"5F20"];  get 5F20 tag of plaintext or ciphertext
+//    [pos getICCTag:EncryptType_plaintext cardType:1 tagCount:2 tagArrStr:@"5F205F24"]; get 5F20&5F24 tag of plaintext or ciphertext
+        
     }else if(result==DoTradeResult_NFC_DECLINED){
         self.textViewLog.text = @"Tap Card Declined";
     }else if (result==DoTradeResult_NO_RESPONSE){
@@ -421,7 +424,8 @@ typedef enum : NSUInteger {
 -(void) onRequestOnlineProcess: (NSString*) tlv{
     NSLog(@"onRequestOnlineProcess = %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
     NSDictionary *dict = [DecryptTLV decryptTLVToDict:tlv];
-    
+//    [pos getICCTag:EncryptType_plaintext cardType:0 tagCount:1 tagArrStr:@"5F20"];  get 5F20 tag of plaintext or ciphertext
+//    [pos getICCTag:EncryptType_plaintext cardType:0 tagCount:2 tagArrStr:@"5F205F24"]; get 5F20&5F24 tag of plaintext or ciphertext
     NSString *msg = @"Replied success.";
     msgStr = @"Request data to server.";
     mAlertView = [[UIAlertView new]
