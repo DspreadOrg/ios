@@ -136,7 +136,6 @@ typedef enum : NSUInteger {
     self.textViewLog.backgroundColor = [UIColor whiteColor];
     self.textViewLog.text = NSLocalizedString(@"Starting...", nil);
     _currencyCode = @"0156";
-    [pos setFormatID:@"0000"];
     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP];
     [pos doCheckCard:30];
 }
