@@ -57,8 +57,12 @@ typedef NS_ENUM(NSInteger, CHECKVALUE_KEYTYPE){
     DUKPT_MKSK_ALLTYPE
 };
 
-typedef NS_ENUM(NSInteger, EmvOption){
-    EmvOption_START, EmvOption_START_WITH_FORCE_ONLINE
+typedef NS_ENUM(NSInteger, EmvOption)
+{
+    EmvOption_START,
+    EmvOption_START_WITH_FORCE_ONLINE,
+    EmvOption_START_WITH_FORCE_PIN,
+    EmvOption_START_WITH_FORCE_ONLINE_FORCE_PIN
 };
 
 typedef NS_ENUM(NSInteger, Error){
