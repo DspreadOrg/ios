@@ -112,7 +112,8 @@ typedef NS_ENUM(NSInteger, DHError){
     DHError_ICC_ONLINE_TIMEOUT,
     DHError_AMOUNT_OUT_OF_LIMIT,
     DHError_DIGITS_UNAVAILABLE,
-    DHError_QPOS_MEMORY_OVERFLOW
+    DHError_QPOS_MEMORY_OVERFLOW,
+    DHError_SELECT_APP_TIMEOUT
 };
 
 
@@ -129,8 +130,8 @@ typedef NS_ENUM(NSInteger, Display){
     Display_INPUT_OFFLINE_PIN_ONLY,
     Display_INPUT_LAST_OFFLINE_PIN,
     Display_CARD_REMOVED,
-    Display_MSR_DATA_READY
-    
+    Display_MSR_DATA_READY,
+    Display_QPOS_MEMORY_OVERFLOW
 };
 
 typedef NS_ENUM(NSInteger, TransactionResult) {
@@ -214,7 +215,9 @@ typedef NS_ENUM(NSInteger, CardTradeMode) {
     CardTradeMode_TAP_INSERT_CARD_NOTUP,//
     CardTradeMode_TAP_INSERT_CARD_TUP,//
     CardTradeMode_SWIPE_TAP_INSERT_CARD_Down,//下翻建
-    CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP_UNALLOWED_LOW_TRADE
+    CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP_UNALLOWED_LOW_TRADE,
+    CardTradeMode_SWIPE_INSERT_CARD_UNALLOWED_LOW_TRADE,
+    CardTradeMode_SWIPE_TAP_INSERT_CARD_UNALLOWED_LOW_TRADE_NEW
 };
 
 

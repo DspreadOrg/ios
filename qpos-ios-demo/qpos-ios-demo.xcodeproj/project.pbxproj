@@ -17,7 +17,6 @@
 		00A90054183B08B100D22572 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A90030183B08B100D22572 /* Foundation.framework */; };
 		00A90055183B08B100D22572 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A90034183B08B100D22572 /* UIKit.framework */; };
 		00A9005F183B08B100D22572 /* qpos_ios_demoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A9005E183B08B100D22572 /* qpos_ios_demoTests.m */; };
-		140385DE26804EA100219B72 /* libqpos-ios-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 140385DD26804EA100219B72 /* libqpos-ios-sdk.a */; };
 		1404A635242B3BE900899293 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1404A637242B3BE900899293 /* InfoPlist.strings */; };
 		1404A639242B3EF300899293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1404A63B242B3EF300899293 /* Main.storyboard */; };
 		1404A643242B424900899293 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1404A645242B424900899293 /* Localizable.strings */; };
@@ -28,6 +27,7 @@
 		146CBAD4211AA7420014BE8B /* TagCapk.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CBAD3211AA7420014BE8B /* TagCapk.m */; };
 		147C1757258DF283000C9097 /* rsa_public_key_pkcs8_test.pem in Resources */ = {isa = PBXBuildFile; fileRef = 147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */; };
 		147EF1D32486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml in Resources */ = {isa = PBXBuildFile; fileRef = 147EF1D22486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml */; };
+		14B9847F270EF8A1008B934A /* libqpos-ios-sdk-v3.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B9847E270EF8A1008B934A /* libqpos-ios-sdk-v3.2.0.a */; };
 		14BBA8812297EA9C00D48460 /* emv_app.bin in Resources */ = {isa = PBXBuildFile; fileRef = 14BBA87F2297EA9C00D48460 /* emv_app.bin */; };
 		14BBA8822297EA9C00D48460 /* emv_capk.bin in Resources */ = {isa = PBXBuildFile; fileRef = 14BBA8802297EA9C00D48460 /* emv_capk.bin */; };
 		14EFBE072118152E0093681E /* TagApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBE032118152D0093681E /* TagApp.m */; };
@@ -69,7 +69,6 @@
 		00A9005A183B08B100D22572 /* qpos-ios-demoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "qpos-ios-demoTests-Info.plist"; sourceTree = "<group>"; };
 		00A9005E183B08B100D22572 /* qpos_ios_demoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = qpos_ios_demoTests.m; sourceTree = "<group>"; };
 		00A9006F183B0B0400D22572 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		140385DD26804EA100219B72 /* libqpos-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk.a"; sourceTree = "<group>"; };
 		1404A631242B3AE400899293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		1404A636242B3BE900899293 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1404A638242B3BEF00899293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -88,6 +87,7 @@
 		146CBAD3211AA7420014BE8B /* TagCapk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TagCapk.m; sourceTree = "<group>"; };
 		147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_public_key_pkcs8_test.pem; sourceTree = "<group>"; };
 		147EF1D22486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "emv_profile_tlv_20180717.xml 14-27-29-797.xml"; sourceTree = "<group>"; };
+		14B9847E270EF8A1008B934A /* libqpos-ios-sdk-v3.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-v3.2.0.a"; sourceTree = "<group>"; };
 		14BBA87F2297EA9C00D48460 /* emv_app.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emv_app.bin; sourceTree = "<group>"; };
 		14BBA8802297EA9C00D48460 /* emv_capk.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emv_capk.bin; sourceTree = "<group>"; };
 		14D12C2422F2B70E00DB0EAB /* QPOSUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSUtil.h; sourceTree = "<group>"; };
@@ -111,9 +111,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				140385DE26804EA100219B72 /* libqpos-ios-sdk.a in Frameworks */,
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
+				14B9847F270EF8A1008B934A /* libqpos-ios-sdk-v3.2.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,8 +255,8 @@
 			children = (
 				147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */,
 				1420B1532446E88F00129C44 /* emv_profile_tlv.xml */,
+				14B9847E270EF8A1008B934A /* libqpos-ios-sdk-v3.2.0.a */,
 				14653EB6240E83D40020F788 /* QPOSService.h */,
-				140385DD26804EA100219B72 /* libqpos-ios-sdk.a */,
 				14BBA87F2297EA9C00D48460 /* emv_app.bin */,
 				14BBA8802297EA9C00D48460 /* emv_capk.bin */,
 				14598AA82292BDF3006993E7 /* A27CAYC_S1_master.asc */,
