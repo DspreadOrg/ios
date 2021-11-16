@@ -1,33 +1,38 @@
 //
-//  DecryptTLV.m
-//  DecrypTLVdemo
+//  TLVParser.m
+//  qpos-ios-demo
 //
-//  Created by 方正伟 on 2018/8/3.
-//  Copyright © 2018年 方正伟. All rights reserved.
+//  Created by fangzhengwei on 2021/11/16.
+//  Copyright © 2021 Robin. All rights reserved.
 //
 
-#import "DecryptTLV.h"
+#import "TLVParser.h"
 
-@implementation DecryptTLV
-
-+ (NSDictionary *)decryptTLVToDict:(NSString *)tlvStr{
-    
-   return [self decryptTLVData:tlvStr];
+@implementation TLVParser
++ (NSArray<TLV *> *)parse:(NSString *)tlv{
+    return [self decryptTLVData:tlv];
 }
 
-+ (NSMutableDictionary *)decryptTLVData:(NSString *)tlvStr{
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    
++ (TLV *)searchTLV:(NSArray<TLV *> *)tlvList searchTag:(NSString *)searchTag{
+    for (TLV *tlvTag in tlvList) {
+        if ([tlvTag.tag caseInsensitiveCompare:searchTag] == NSOrderedSame) {
+            return tlvTag;
+        }
+    }
+    return nil;
+}
+
++ (NSArray<TLV *> *)decryptTLVData:(NSString *)tlvStr{
+    NSMutableArray<TLV *> *dict = [NSMutableArray array];
     for (; ;) {
-        
+        TLV *tlv = [TLV new];
         if (tlvStr.length < [self currentCharacterNum:tlvStr] * 2) {
-            return dict;
+            return dict.copy;
         }
         NSString *tagStr = [tlvStr substringToIndex:[self currentCharacterNum:tlvStr] * 2];
         tlvStr = [tlvStr substringFromIndex:[self currentCharacterNum:tlvStr] * 2];
         if (tlvStr.length < 3) {
-            return dict;
+            return dict.copy;
         }
         NSString *lengStr = [tlvStr substringToIndex:2];
         NSString *hex2Str = [self getBinaryByHex:lengStr];
@@ -41,31 +46,28 @@
             tlvStr = [tlvStr substringFromIndex:2];
             
             if (tlvStr.length < sonCharacterNum * 2) {
-                return dict;
+                return dict.copy;
             }
-            NSString *lengthStr = [tlvStr substringToIndex:sonCharacterNum * 2];
-            length = [self ToHex:lengthStr];
-            
+            lengStr = [tlvStr substringToIndex:sonCharacterNum * 2];
+            length = [self ToHex:lengStr];
             tlvStr = [tlvStr substringFromIndex:sonCharacterNum * 2];
-            
         }else{
-            
             length = [self ToHex:lengStr];
             tlvStr = [tlvStr substringFromIndex:2];
         }
-        
         //获取value
         if (tlvStr.length < length * 2) {
-            return dict;
+            return dict.copy;
         }
         NSString *strValue = [tlvStr substringToIndex:length * 2];
-        
-        [dict setValue:strValue forKey:tagStr];
+//        [dict setValue:strValue forKey:tagStr];
+        tlv.tag = tagStr;
+        tlv.length = lengStr;
+        tlv.value = strValue;
+        [dict addObject:tlv];
         
         tlvStr = [tlvStr substringFromIndex:length * 2];
-        
         if (tagStr.length == 2 && [self judgeIsCompoundTag:tagStr]) {
-    
             tlvStr = [NSString stringWithFormat:@"%@%@",strValue,tlvStr];
         }
     }
@@ -212,5 +214,4 @@
     }
     return decimal;
 }
-
 @end

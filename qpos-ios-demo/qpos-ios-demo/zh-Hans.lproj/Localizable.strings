@@ -33,3 +33,4 @@
 "Transaction Result" = "交易结果";
 "Card Swiped:\n" = "刷卡数据:\n";
 "Tap Card:\n" = "拍卡数据:\n";
+"processing..." = "处理中...";

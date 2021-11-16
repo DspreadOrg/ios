@@ -12,7 +12,7 @@
 #import "GDataXMLNode.h"
 #import "TagApp.h"
 #import "TagCapk.h"
-#import "DecryptTLV.h"
+#import "TLVParser.h"
 #import <CommonCrypto/CommonCrypto.h>
 
 typedef enum : NSUInteger {
@@ -133,6 +133,7 @@ typedef enum : NSUInteger {
 
 //start do trade button
 - (IBAction)doTrade:(id)sender {
+    NSLog(@"doTrade");
     self.textViewLog.backgroundColor = [UIColor whiteColor];
     self.textViewLog.text = NSLocalizedString(@"Starting...", nil);
     _currencyCode = @"0156";
@@ -142,6 +143,7 @@ typedef enum : NSUInteger {
 
 //input transaction amount
 -(void) onRequestSetAmount{
+    NSLog(@"onRequestSetAmount");
     NSString *msg = @"";
     mAlertView = [[UIAlertView new]
                   initWithTitle:NSLocalizedString(@"Please set amount", nil)
@@ -157,13 +159,11 @@ typedef enum : NSUInteger {
 
 -(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSString *aTitle = msgStr;
-    NSLog(@"alertView.title = %@",aTitle);
     if ([aTitle isEqualToString:@"Please set amount"]) {
         if (buttonIndex==0) {
             UITextField *textFieldAmount =  [alertView textFieldAtIndex:0];
             NSString *inputAmount = [textFieldAmount text];
-            NSLog(@"textFieldAmount = %@",inputAmount);
-            
+            NSLog(@"inputAmount = %@",inputAmount);
             self.lableAmount.text = [NSString stringWithFormat:@"$%@", [self checkAmount:inputAmount]];
             [pos setAmount:inputAmount aAmountDescribe:@"123" currency:_currencyCode transactionType:mTransType];
             
@@ -171,6 +171,7 @@ typedef enum : NSUInteger {
             self.cashbackAmount = @"123";
         }else{
             [pos cancelSetAmount];
+            NSLog(@"cancel Set Amount");
         }
         
     }else if ([aTitle isEqualToString:@"Confirm amount"]){
@@ -244,7 +245,6 @@ typedef enum : NSUInteger {
 
 //return NFC and swipe card data on this function.
 -(void) onDoTradeResult: (DoTradeResult)result DecodeData:(NSDictionary*)decodeData{
-    NSLog(@"onDoTradeResult?>> result %ld",(long)result);
     if (result == DoTradeResult_NONE) {
         self.textViewLog.text = @"No card detected. Please insert or swipe card again and press check card.";
         [pos doTrade:30];
@@ -348,6 +348,7 @@ typedef enum : NSUInteger {
     }else if(result==DoTradeResult_PLS_SEE_PHONE){
         self.textViewLog.text = @"pls see phone";
     }
+    NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
 }
 
 - (void)playAudio{
@@ -361,6 +362,7 @@ typedef enum : NSUInteger {
 
 //send current transaction time to pos
 -(void) onRequestTime{
+    NSLog(@"onRequestTime");
     NSString *formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
     NSRange containA = [formatStringForHours rangeOfString:@"a"];
     BOOL hasAMPM = containA.location != NSNotFound;
@@ -402,12 +404,16 @@ typedef enum : NSUInteger {
         msg = NSLocalizedString(@"Card Removed", nil);
     }else if (displayMsg == Display_INPUT_LAST_OFFLINE_PIN){
         msg = NSLocalizedString(@"please input last offline pin", nil);
+    }else if (displayMsg == Display_PROCESSING){
+        msg = NSLocalizedString(@"processing...", nil);
     }
     self.textViewLog.text = msg;
+    NSLog(@"onRequestDisplay: %@", msg);
 }
 
 //Multiple AIDS select
 -(void) onRequestSelectEmvApp: (NSArray*)appList{
+    NSLog(@"onRequestSelectEmvApp: %@", appList);
     mActionSheet = [[UIActionSheet new] initWithTitle:NSLocalizedString(@"Please select app", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
     for (int i=0 ; i<[appList count] ; i++){
@@ -423,7 +429,10 @@ typedef enum : NSUInteger {
 //return chip card tlv data on this function
 -(void) onRequestOnlineProcess: (NSString*) tlv{
     NSLog(@"onRequestOnlineProcess = %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
-    NSDictionary *dict = [DecryptTLV decryptTLVToDict:tlv];
+//    NSArray *dict = [TLVParser parse:tlv];
+//    for (TLV *tlv in dict) {
+//        NSLog(@"tag: %@ length: %@ value: %@",tlv.tag,tlv.length,tlv.value);
+//    }
 //    [pos getICCTag:EncryptType_plaintext cardType:0 tagCount:1 tagArrStr:@"5F20"];  get 5F20 tag of plaintext or ciphertext
 //    [pos getICCTag:EncryptType_plaintext cardType:0 tagCount:2 tagArrStr:@"5F205F24"]; get 5F20&5F24 tag of plaintext or ciphertext
     NSString *msg = @"Replied success.";
@@ -518,6 +527,7 @@ typedef enum : NSUInteger {
     self.cashbackAmount = @"";
     self.lableAmount.text = @"";
     msgStr = @"Transaction Result";
+    NSLog(@"onRequestTransactionResult: %@",messageTextView);
 }
 
 -(void) onRequestTransactionLog: (NSString*)tlv{
@@ -544,6 +554,7 @@ typedef enum : NSUInteger {
 
 //cancel transaction api.
 - (IBAction)resetpos:(id)sender {
+    NSLog(@"resetpos");
     self.textViewLog.backgroundColor = [UIColor whiteColor];
     self.textViewLog.text = @"reset pos ... ";
     if([pos resetPosStatus]){
@@ -592,6 +603,7 @@ typedef enum : NSUInteger {
 
 //get pos id in this function.
 - (IBAction)getQposId:(id)sender {
+    NSLog(@"getQposId");
     [pos getQPosId];
 }
 
@@ -624,16 +636,17 @@ typedef enum : NSUInteger {
     aStr = [aStr stringByAppendingString:temp];
     
     self.textViewLog.text = aStr;
+    NSLog(@"onQposIdResult: %@",aStr);
 }
 
 //get pos info function
 - (IBAction)getPosInfo:(id)sender {
+    NSLog(@"getPosInfo");
    [pos getQPosInfo];
 }
 
 //callback function of getPosInfo api.
 -(void) onQposInfoResult: (NSDictionary*)posInfoData{
-    NSLog(@"onQposInfoResult: %@",posInfoData);
     NSString *aStr = @"Bootloader Version: ";
     aStr = [aStr stringByAppendingString:posInfoData[@"bootloaderVersion"]];
     
@@ -681,10 +694,12 @@ typedef enum : NSUInteger {
     aStr = [aStr stringByAppendingString:posInfoData[@"updateWorkKeyFlag"]];
     
     self.textViewLog.text = aStr;
+    NSLog(@"onQposInfoResult: %@",aStr);
 }
 
 //eg: update TMK api in pos.
 -(void)setMasterKey:(NSInteger)keyIndex{
+    NSLog(@"setMasterKey");
     NSString *pik = @"89EEF94D28AA2DC189EEF94D28AA2DC1";//111111111111111111111111
     NSString *pikCheck = @"82E13665B4624DF5";
     pik = @"F679786E2411E3DEF679786E2411E3DE";//33333333333333333333333333333
@@ -699,10 +714,12 @@ typedef enum : NSUInteger {
     }else{
         self.textViewLog.text =  @"Failed";
     }
+    NSLog(@"onReturnSetMasterKeyResult: %@",self.textViewLog.text);
 }
 
 //eg: update work key in pos.
 -(void)updateWorkKey:(NSInteger)keyIndex{
+    NSLog(@"updateWorkKey");
     NSString * pik = @"89EEF94D28AA2DC189EEF94D28AA2DC1";
     NSString * pikCheck = @"82E13665B4624DF5";
     
@@ -719,7 +736,6 @@ typedef enum : NSUInteger {
 
 // callback function of updateWorkKey api.
 -(void) onRequestUpdateWorkKeyResult:(UpdateInformationResult)updateInformationResult{
-    NSLog(@"onRequestUpdateWorkKeyResult %ld",(long)updateInformationResult);
     if (updateInformationResult==UpdateInformationResult_UPDATE_SUCCESS) {
         self.textViewLog.text = @" update workkey Success";
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_FAIL){
@@ -729,10 +745,12 @@ typedef enum : NSUInteger {
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_PACKET_VEFIRY_ERROR){
         self.textViewLog.text =  @"Packet vefiry error";
     }
+    NSLog(@"onRequestUpdateWorkKeyResult %@",self.textViewLog.text);
 }
 
 //update ipek
 - (void)updateIpek{
+    NSLog(@"updateIpek");
      [pos doUpdateIPEKOperation:@"00" tracksn:@"00000510F462F8400004" trackipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" trackipekCheckValue:@"93906AA157EE2604" emvksn:@"00000510F462F8400004" emvipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" emvipekcheckvalue:@"93906AA157EE2604" pinksn:@"00000510F462F8400004" pinipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" pinipekcheckValue:@"93906AA157EE2604" block:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
             self.textViewLog.text = stateStr;
@@ -742,6 +760,7 @@ typedef enum : NSUInteger {
 
 //update ipek by key type
 - (void)updateIpekByKeyType{
+    NSLog(@"updateIpekByKeyType");
      [pos updateIPEKOperationByKeyType:@"00" tracksn:@"00000510F462F8400004" trackipek:@"98357D2CA022B6E298357D2CA022B6E2" trackipekCheckValue:@"82E13665B4624DF5" emvksn:@"00000510F462F8400004" emvipek:@"98357D2CA022B6E298357D2CA022B6E2" emvipekcheckvalue:@"82E13665B4624DF5" pinksn:@"" pinipek:@"" pinipekcheckValue:@"" block:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
             self.textViewLog.text = stateStr;
@@ -752,6 +771,7 @@ typedef enum : NSUInteger {
 
 //eg: use emv_app.bin and emv_capk.bin file to update emv configure in pos,Update time is about two minutes
 -(void)UpdateEmvCfg{
+    NSLog(@"UpdateEmvCfg");
     NSString *emvAppCfg = [QPOSUtil byteArray2Hex:[self readLine:@"emv_app"]];
     NSString *emvCapkCfg = [QPOSUtil byteArray2Hex:[self readLine:@"emv_capk"]];
     [pos updateEmvConfig:emvAppCfg emvCapk:emvCapkCfg];
@@ -760,7 +780,7 @@ typedef enum : NSUInteger {
 //eg: read xml file to update emv configure
 - (void)updateEMVConfigByXML{
     self.textViewLog.text =  @"start update emv configure,pls wait";
-    NSLog(@"start update emv configure,pls wait");
+    NSLog(@"updateEMVConfigByXML,pls wait");
     NSData *xmlData = [self readLine:@"emv_profile_tlv"];
     NSString *xmlStr = [QPOSUtil asciiFormatString:xmlData];
     [pos updateEMVConfigByXml:xmlStr];
@@ -774,7 +794,7 @@ typedef enum : NSUInteger {
     }else{
         self.textViewLog.text =  @"Failed";
     }
-    NSLog(@"result: %@",resutl);
+    NSLog(@"onReturnCustomConfigResult: %@",self.textViewLog.text);
 }
 
 //update emv configure by TLV data
@@ -913,7 +933,6 @@ typedef enum : NSUInteger {
 }
 
 - (void)hideAlertView{
-    NSLog(@"hideAlertView");
     [mAlertView dismissWithClickedButtonIndex:0 animated:YES];
 }
 
@@ -1048,17 +1067,18 @@ typedef enum : NSUInteger {
 -(NSString *)checkAmount:(NSString *)tradeAmount{
     NSString *rs = @"";
     NSInteger a = 0;
-    
-    NSLog(@"tradeAmount = %@",tradeAmount);
     if (tradeAmount==nil || [tradeAmount isEqualToString:@""]) {
+        NSLog(@"trade amount is nil or empty");
         return rs;
     }
 
     if ([tradeAmount hasPrefix:@"0"]) {
+        NSLog(@"trade amount is invalid");
         return rs;
     }
     
     if (![QPOSUtil isPureInt:tradeAmount]) {
+        NSLog(@"trade amount is invalid");
         return rs;
     }
     
@@ -1072,7 +1092,6 @@ typedef enum : NSUInteger {
         rs = [rs stringByAppendingString:@"."];
         rs = [rs stringByAppendingString: [tradeAmount substringWithRange:NSMakeRange(a-2,2)]];
     }
-    NSLog(@"trade amount = %@",rs);
     return rs;
 }
 

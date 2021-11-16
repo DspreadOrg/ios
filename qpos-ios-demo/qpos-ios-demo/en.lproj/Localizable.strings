@@ -34,4 +34,5 @@
 "Card Swiped:\n" = "Card Swiped:\n";
 "Tap Card:\n" = "Tap Card:\n";
 "Please set cvm pin" = "Please set cvm pin";
-"Please set cvm pin" = "请输入密码";
+"processing..." = "processing...";
+

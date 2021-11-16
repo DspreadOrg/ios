@@ -26,7 +26,7 @@
     [self performSegueWithIdentifier:@"AudioTypeDetail" sender:sender];
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    NSLog(@"+++prepareForSegue ");
+    //NSLog(@"+++prepareForSegue ");
    
     if ([[segue identifier] isEqualToString:@"AudioTypeDetail"]) {
 

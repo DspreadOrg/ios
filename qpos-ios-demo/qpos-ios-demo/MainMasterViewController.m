@@ -293,7 +293,7 @@ NSInteger   scanBluetoothTime = 15;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"+++prepareForSegue ");
+    //NSLog(@"+++prepareForSegue ");
     [self stopBluetooth];
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -310,7 +310,7 @@ NSInteger   scanBluetoothTime = 15;
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-    NSLog(@"main  master viewDidDisappear");
+    NSLog(@"MainMasterViewController viewDidDisappear");
 }
 
 -(void)onBluetoothNameNew:(NSString *)bluetoothName{
@@ -322,7 +322,6 @@ NSInteger   scanBluetoothTime = 15;
     //    [self timerFired];
     [self stopBluetooth];
 }
-
 
 -(void)onBluetoothName2Mode:(NSString *)bluetoothName{
     NSLog(@"+++onBluetoothName2Mode %@",bluetoothName);
