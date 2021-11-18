@@ -508,5 +508,6 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)getEncryptData:(NSData *)data keyType:(NSString*)keyType keyIndex:(NSString *)keyIndex timeOut:(NSInteger)timeout;
 -(void)getMPUCardInfo:(MPUInfoBlock)mpuInfoBlock;
 -(void)getMIccCardData:(NSString *)transactionTime;
+-(void)updateKeyByTR_31VersionD:(NSInteger)keyIndex ksn:(NSString *)ksn keyBlock:(NSString *)keyBlock;
 @end
 
