@@ -487,6 +487,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 
 -(void)isCardExist:(NSInteger)timeout withResultBlock:(void (^)(BOOL))isCardExistBlock;
 -(void)isCardExistInOnlineProcess:(NSInteger)timeout withResultBlock:(void (^)(BOOL))isCardExistBlock;
+- (void)cbc_mac_cn_all:(NSInteger)keyLen atype:(NSInteger)algorithmType otype:(NSInteger)operatorType data:(NSString *)dataStr delay:(NSInteger)timeout withResultBlock:(void (^)(NSString *))cbcmacBlock;
 #pragma mark init emv app
 -(NSMutableDictionary *)getEMVAPPDict;
 #pragma mark init emv capk
