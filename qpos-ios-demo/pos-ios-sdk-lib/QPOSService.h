@@ -252,6 +252,22 @@ typedef NS_ENUM(NSInteger,SessionKeyType) {
     SessionKeyType_PINKEY_TRACKKEY
 };
 
+typedef NS_ENUM(NSInteger,FelicaOpMode){
+    FelicaOpMode_POWER_ON,
+    FelicaOpMode_SEND_APDU,
+    FelicaOpMode_POWER_OFF
+};
+
+typedef NS_ENUM(NSInteger,FelicaStatusCode){
+    FelicaStatusCode_NFC_FELICA_SUCCESS,
+    FelicaStatusCode_NFC_FELICA_PARAM_ERROR,
+    FelicaStatusCode_NFC_FELICA_POLL_ERROR,
+    FelicaStatusCode_NFC_FELICA_OPERATION_ERROR,
+    FelicaStatusCode_NFC_FELICA_RAW_TRANS_ERROR,
+    FelicaStatusCode_NFC_FELICA_TIMEOUT,
+    FelicaStatusCode_NFC_FELICA_ERROR_END,
+};
+
 @protocol QPOSServiceListener<NSObject>
 
 @optional
@@ -311,6 +327,9 @@ typedef NS_ENUM(NSInteger,SessionKeyType) {
 -(void)onReturnUpdateKeyByTR_31Result:(BOOL)result;
 -(void)onReturnGetEncryptDataResult:(NSDictionary*)tlv;
 -(void)onReturnBatchSendAPDUResult:(NSDictionary *)apduResponses;
+-(void)onReturnPowerOnFelicaResult:(FelicaStatusCode)result;
+-(void)onReturnPowerOffFelicaResult:(FelicaStatusCode)result;
+-(void)onReturnSendApduFelicaResult:(FelicaStatusCode)result responseLen:(NSString *)responseLen responseData:(NSString *)responseData;
 @end
 
 @interface QPOSService : NSObject
@@ -512,5 +531,8 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)getMPUCardInfo:(MPUInfoBlock)mpuInfoBlock;
 -(void)getMIccCardData:(NSString *)transactionTime;
 -(void)updateKeyByTR_31VersionD:(NSInteger)keyIndex ksn:(NSString *)ksn keyBlock:(NSString *)keyBlock;
+-(void)powerOnFelica:(NSInteger)timeout;
+-(void)powerOffFelica:(NSInteger)timeout;
+-(void)sendApduByFelica:(NSString *)apduString timeout:(NSInteger)timeout;
 @end
 
