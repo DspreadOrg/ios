@@ -153,7 +153,8 @@ typedef NS_ENUM(NSInteger, TransactionResult) {
     TransactionResult_CONTACTLESS_TRANSACTION_NOT_ALLOW,
     TransactionResult_CARD_BLOCKED,
     TransactionResult_TOKEN_INVALID,
-    TransactionResult_APP_BLOCKED
+    TransactionResult_APP_BLOCKED,
+    TransactionResult_MULTIPLE_CARDS,
 };
 
 typedef NS_ENUM(NSInteger,DoTradeLog) {

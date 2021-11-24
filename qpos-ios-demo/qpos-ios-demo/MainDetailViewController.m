@@ -347,6 +347,8 @@ typedef enum : NSUInteger {
         self.textViewLog.text = @"card not support";
     }else if(result==DoTradeResult_PLS_SEE_PHONE){
         self.textViewLog.text = @"pls see phone";
+    }else if(result==DoTradeResult_TRY_ANOTHER_INTERFACE){
+        self.textViewLog.text = @"pls try another interface";
     }
     NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
 }
@@ -513,6 +515,9 @@ typedef enum : NSUInteger {
     }else if(transactionResult == TransactionResult_APP_BLOCKED) {
         [self clearDisplay];
         messageTextView = @"APP Blocked";
+    }else if(transactionResult == TransactionResult_MULTIPLE_CARDS) {
+        [self clearDisplay];
+        messageTextView = @"Multiple Cards";
     }
     
     mAlertView = [[UIAlertView new]
