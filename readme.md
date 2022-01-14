@@ -37,7 +37,7 @@ To avoid the application block and improve the speed of  data interaction betwee
 
 The Class named ‘QPOSService’ is the core of SDK library. Before the APP create this core instance with the parameter of “Pos Type”, the APP must register all the delegate method in ‘QPOSService’. Below code snipplet shows how to init the SDK.
 
-```java
+```objc
 	pos = [QPOSService sharedInstance];
 	[pos setDelegate:self];
 	[pos setQueue:nil];
@@ -48,10 +48,10 @@ The Class named ‘QPOSService’ is the core of SDK library. Before the APP cre
 
 The PosType can be 
 
-```java
+```objc
 	typedef NS_ENUM(NSInteger, PosType) {
-    	PosType_AUDIO,
-    	PosType_BLUETOOTH_2mode //bluetooth 2 mode
+    		PosType_AUDIO,
+    		PosType_BLUETOOTH_2mode //bluetooth 2 mode
 	};
 ```
 The app should choose appropriate pos type depend on it's hardware configuration.
@@ -61,60 +61,58 @@ Note, in the example above the app should realize the delegate methods of QPOSSe
 
 The app can get the EMV cardreader information by issuing:
 
-```java
-		[pos getQPosInfo];
+```objc
+	[pos getQPosInfo];
 ```
 Note the pos is the instance of QPOSService, the app get it during the initialization process.
 
 The device information will be returned on the below call back:
-```java
-		-(void) onQposInfoResult: (NSDictionary*)posInfoData{
-    		NSString *aStr = @"Bootloader Version: ";
-    		aStr = [aStr stringByAppendingString:posInfoData[@"bootloaderVersion"]];
-    
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:@"Firmware Version: "];
-    		aStr = [aStr stringByAppendingString:posInfoData[@"firmwareVersion"]];
-    
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:@"Hardware Version: "];
-    		aStr = [aStr stringByAppendingString:posInfoData[@"hardwareVersion"]];
-    
-    		NSString *batteryPercentage = posInfoData[@"batteryPercentage"];
-    		if (batteryPercentage==nil || [@"" isEqualToString:batteryPercentage]) {
-        		aStr = [aStr stringByAppendingString:@"\n"];
-        		aStr = [aStr stringByAppendingString:@"Battery Level: "];
-        		aStr = [aStr stringByAppendingString:posInfoData[@"batteryLevel"]];
-        
-    		}else{
-        		aStr = [aStr stringByAppendingString:@"\n"];
-        		aStr = [aStr stringByAppendingString:@"Battery Percentage: "];
-        		aStr = [aStr stringByAppendingString:posInfoData[@"batteryPercentage"]];
-    		}
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:@"Charge: "];
-    		aStr = [aStr stringByAppendingString:posInfoData[@"isCharging"]];
-    
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:@"USB: "];
-    		aStr = [aStr stringByAppendingString:posInfoData[@"isUsbConnected"]];
-    
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:@"Track 1 Supported: "];
-    		aStr = [aStr stringByAppendingString:posInfoData[@"isSupportedTrack1"]];
-    
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:@"Track 2 Supported: "];
-    		aStr = [aStr stringByAppendingString:posInfoData[@"isSupportedTrack2"]];
-    
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:@"Track 3 Supported: "];
-    		aStr = [aStr stringByAppendingString:posInfoData[@"isSupportedTrack3"]];
-    
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:@"updateWorkKeyFlag: "];
-    		aStr = [aStr stringByAppendingString:posInfoData[@"updateWorkKeyFlag"]];
+```objc
+	-(void) onQposInfoResult: (NSDictionary*)posInfoData{
+		NSString *aStr = @"Bootloader Version: ";
+		aStr = [aStr stringByAppendingString:posInfoData[@"bootloaderVersion"]];
+		
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:@"Firmware Version: "];
+		aStr = [aStr stringByAppendingString:posInfoData[@"firmwareVersion"]];
+		
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:@"Hardware Version: "];
+		aStr = [aStr stringByAppendingString:posInfoData[@"hardwareVersion"]];
+
+		NSString *batteryPercentage = posInfoData[@"batteryPercentage"];
+		if (batteryPercentage==nil || [@"" isEqualToString:batteryPercentage]) {
+			aStr = [aStr stringByAppendingString:@"\n"];
+			aStr = [aStr stringByAppendingString:@"Battery Level: "];
+			aStr = [aStr stringByAppendingString:posInfoData[@"batteryLevel"]];
+		}	else{
+			aStr = [aStr stringByAppendingString:@"\n"];
+			aStr = [aStr stringByAppendingString:@"Battery Percentage: "];
+			Str = [aStr stringByAppendingString:posInfoData[@"batteryPercentage"]];
 		}
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:@"Charge: "];
+		aStr = [aStr stringByAppendingString:posInfoData[@"isCharging"]];
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:@"USB: "];
+		aStr = [aStr stringByAppendingString:posInfoData[@"isUsbConnected"]];
+		
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:@"Track 1 Supported: "];
+		aStr = [aStr stringByAppendingString:posInfoData[@"isSupportedTrack1"]];
+		
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:@"Track 2 Supported: "];
+		aStr = [aStr stringByAppendingString:posInfoData[@"isSupportedTrack2"]];
+		
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:@"Track 3 Supported: "];
+		aStr = [aStr stringByAppendingString:posInfoData[@"isSupportedTrack3"]];
+		
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:@"updateWorkKeyFlag: "];
+		aStr = [aStr stringByAppendingString:posInfoData[@"updateWorkKeyFlag"]];
+	}
 
 ```
 App can knows the hardware , firmware version and hardware configuration based on the returned information.
@@ -124,41 +122,40 @@ App can knows the hardware , firmware version and hardware configuration based o
 
 The device ID is use to indentifying one paticular EMV card reader. The app use below method to get the device ID:
 
-```java
-		[pos getQPosId];
+```objc
+	[pos getQPosId];
 ```
 
 The Device ID is returned to the app by below call back.
 
-```java
-		-(void) onQposIdResult: (NSDictionary*)posId{
-    		NSString *aStr = [@"posId:" stringByAppendingString:posId[@"posId"]];
-    
-    		NSString *temp = [@"psamId:" stringByAppendingString:posId[@"psamId"]];
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:temp];
-    
-    		temp = [@"merchantId:" stringByAppendingString:posId[@"merchantId"]];
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:temp];
-    
-    		temp = [@"vendorCode:" stringByAppendingString:posId[@"vendorCode"]];
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:temp];
-    
-    		temp = [@"deviceNumber:" stringByAppendingString:posId[@"deviceNumber"]];
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:temp];
-    
-    		temp = [@"psamNo:" stringByAppendingString:posId[@"psamNo"]];
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:temp];
-    
-    		temp = [@"isSupportNFC:" stringByAppendingString:posId[@"isSupportNFC"]];
-    		aStr = [aStr stringByAppendingString:@"\n"];
-    		aStr = [aStr stringByAppendingString:temp];
-    
-		}
+```objc
+	-(void) onQposIdResult: (NSDictionary*)posId{
+		NSString *aStr = [@"posId:" stringByAppendingString:posId[@"posId"]];
+		
+		NSString *temp = [@"psamId:" stringByAppendingString:posId[@"psamId"]];
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:temp];
+		
+		temp = [@"merchantId:" stringByAppendingString:posId[@"merchantId"]];
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:temp];
+		
+		temp = [@"vendorCode:" stringByAppendingString:posId[@"vendorCode"]];
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:temp];
+		
+		temp = [@"deviceNumber:" stringByAppendingString:posId[@"deviceNumber"]];
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:temp];
+		
+		temp = [@"psamNo:" stringByAppendingString:posId[@"psamNo"]];
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:temp];
+		
+		temp = [@"isSupportNFC:" stringByAppendingString:posId[@"isSupportNFC"]];
+		aStr = [aStr stringByAppendingString:@"\n"];
+		aStr = [aStr stringByAppendingString:temp];
+	}
 
 ```
 
@@ -166,8 +163,8 @@ The Device ID is returned to the app by below call back.
 ## Start Transaction
 
 The app can start a magnatic swipe card transaction, or an EMV chip card transaction, by below method:
-```java
-		[pos doTrade(60)];
+```objc
+	[pos doTrade(60)];
 ```
 The only paramter is the time out value in second. If the user is using magnatic swipe card, after timeout seconds, the transaction will be timed out.
 
@@ -175,16 +172,16 @@ The only paramter is the time out value in second. If the user is using magnatic
 
 The transaction amount can be set by:
 
-```java
-		[pos setAmount:amount aAmountDescribe:cashbackAmount currency:currencyCode transactionType:TransactionType_GOODS];
+```objc
+	[pos setAmount:amount aAmountDescribe:cashbackAmount currency:currencyCode transactionType:TransactionType_GOODS];
 ```
 
 the setAmount method can be called before start a transaction. If it was not called, a call back will be invoked by the SDK, giving app another chance to enter the transaction amount.
 
-```java
-		-(void) onRequestSetAmount{
+```objc
+	-(void) onRequestSetAmount{
     		[pos setAmount:amount aAmountDescribe:cashbackAmount currency:currencyCode transactionType:TransactionType_GOODS];
-		}
+	}
 ```
 
 The setAmount method has below parameters: 
@@ -193,28 +190,27 @@ The setAmount method has below parameters:
 3. currency code : US Dollar,  CNY, etc
 4. transactionType : which kind of transaction to be started. The transaction type can be:
 
-```java
-
+```objc
 	typedef NS_ENUM(NSInteger, TransactionType) {
-    	TransactionType_GOODS, 
-    	TransactionType_SERVICES,
-    	TransactionType_CASH,
-    	TransactionType_CASHBACK,
-    	TransactionType_INQUIRY,
-    	TransactionType_TRANSFER,
-    	TransactionType_ADMIN,
-    	TransactionType_CASHDEPOSIT,
-    	TransactionType_PAYMENT,
-    	TransactionType_PBOCLOG,
-    	TransactionType_SALE,
-    	TransactionType_PREAUTH,
-    	TransactionType_ECQ_DESIGNATED_LOAD,
-    	TransactionType_ECQ_UNDESIGNATED_LOAD,
-    	TransactionType_ECQ_CASH_LOAD,
-    	TransactionType_ECQ_CASH_LOAD_VOID,
-    	TransactionType_ECQ_INQUIRE_LOG,
-    	TransactionType_REFUND,
-    	TransactionType_UPDATE_PIN
+    		TransactionType_GOODS, 
+    		TransactionType_SERVICES,
+    		TransactionType_CASH,
+    		TransactionType_CASHBACK,
+    		TransactionType_INQUIRY,
+    		TransactionType_TRANSFER,
+    		TransactionType_ADMIN,
+    		TransactionType_CASHDEPOSIT,
+    		TransactionType_PAYMENT,
+    		TransactionType_PBOCLOG,
+    		TransactionType_SALE,
+    		TransactionType_PREAUTH,
+    		TransactionType_ECQ_DESIGNATED_LOAD,
+    		TransactionType_ECQ_UNDESIGNATED_LOAD,
+    		TransactionType_ECQ_CASH_LOAD,
+    		TransactionType_ECQ_CASH_LOAD_VOID,
+    		TransactionType_ECQ_INQUIRE_LOG,
+    		TransactionType_REFUND,
+    		TransactionType_UPDATE_PIN
 	};
 ```
 Transaction type is used mainly by the EMV Chip card transaction, for magnetic card, app can always use GOODS.
@@ -224,85 +220,84 @@ Transaction type is used mainly by the EMV Chip card transaction, for magnetic c
 Magstripe card transaction is pretty simple. 
 After the app start a transaction, if the user use a magnatic card, below callback will be called feeding the app magnatic card related information. The app then use the information returned for further processing.
 
-```java
-		-(void) onDoTradeResult: (DoTradeResult)result DecodeData:(NSDictionary*)decodeData{
-    		if (result == DoTradeResult_NONE) {
-        	self.textViewLog.text = @"No card detected. Please insert or swipe card again and press check card.";
-        	[pos doTrade:30];
-    	}else if (result==DoTradeResult_ICC) {
-        	self.textViewLog.text = @"ICC Card Inserted";
-       		 //Use this API to activate chip card transactions
-        	[pos doEmvApp:EmvOption_START];
-    	}else if(result==DoTradeResult_NOT_ICC){
-        	self.textViewLog.text = @"Card Inserted (Not ICC)";
-    	}else if(result==DoTradeResult_MCR){
-        	NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
-        	NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
-        	NSString *expiryDate = [NSString stringWithFormat:@"Expiry Date: %@\n",decodeData[@"expiryDate"]];
-        	NSString *cardHolderName = [NSString stringWithFormat:@"Cardholder Name: %@\n",decodeData[@"cardholderName"]];
-        	NSString *serviceCode = [NSString stringWithFormat:@"Service Code: %@\n",decodeData[@"serviceCode"]];
-        	NSString *encTrack1 = [NSString stringWithFormat:@"Encrypted Track 1: %@\n",decodeData[@"encTrack1"]];
-        	NSString *encTrack2 = [NSString stringWithFormat:@"Encrypted Track 2: %@\n",decodeData[@"encTrack2"]];
-        	NSString *encTrack3 = [NSString stringWithFormat:@"Encrypted Track 3: %@\n",decodeData[@"encTrack3"]];
-        	NSString *pinKsn = [NSString stringWithFormat:@"PIN KSN: %@\n",decodeData[@"pinKsn"]];
-        	NSString *trackksn = [NSString stringWithFormat:@"Track KSN: %@\n",decodeData[@"trackksn"]];
-        	NSString *pinBlock = [NSString stringWithFormat:@"pinBlock: %@\n",decodeData[@"pinblock"]];
-        	NSString *encPAN = [NSString stringWithFormat:@"encPAN: %@\n",decodeData[@"encPAN"]];
-        	NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Card Swiped:\n", nil)];
-        	NSString *a = [QPOSUtil byteArray2Hex:[QPOSUtil stringFormatTAscii:maskedPAN]];
-        	[pos getPin:1 keyIndex:0 maxLen:6 typeFace:@"Pls Input Pin" cardNo:a data:@"" delay:30 withResultBlock:^(BOOL isSuccess, NSDictionary *result) {
-            	NSLog(@"result: %@",result);
-            	self.textViewLog.backgroundColor = [UIColor greenColor];
-            	[self playAudio];
-            	AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
-            	self.textViewLog.text = msg;
-            	self.lableAmount.text = @"";
-        }];
-    }else if(result==DoTradeResult_NFC_OFFLINE || result == DoTradeResult_NFC_ONLINE){
-        NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
-        NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
-        NSString *expiryDate = [NSString stringWithFormat:@"Expiry Date: %@\n",decodeData[@"expiryDate"]];
-        NSString *cardHolderName = [NSString stringWithFormat:@"Cardholder Name: %@\n",decodeData[@"cardholderName"]];
-        NSString *serviceCode = [NSString stringWithFormat:@"Service Code: %@\n",decodeData[@"serviceCode"]];
-        NSString *encTrack1 = [NSString stringWithFormat:@"Encrypted Track 1: %@\n",decodeData[@"encTrack1"]];
-        NSString *encTrack2 = [NSString stringWithFormat:@"Encrypted Track 2: %@\n",decodeData[@"encTrack2"]];
-        NSString *encTrack3 = [NSString stringWithFormat:@"Encrypted Track 3: %@\n",decodeData[@"encTrack3"]];
-        NSString *pinKsn = [NSString stringWithFormat:@"PIN KSN: %@\n",decodeData[@"pinKsn"]];
-        NSString *trackksn = [NSString stringWithFormat:@"Track KSN: %@\n",decodeData[@"trackksn"]];
-        NSString *pinBlock = [NSString stringWithFormat:@"pinBlock: %@\n",decodeData[@"pinblock"]];
-        NSString *encPAN = [NSString stringWithFormat:@"encPAN: %@\n",decodeData[@"encPAN"]];
-        NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Tap Card:\n", nil)];
-        dispatch_async(dispatch_get_main_queue(),  ^{
-            NSDictionary *mDic = [pos getNFCBatchData];
-            NSString *tlv;
-            if(mDic !=nil){
-                tlv= [NSString stringWithFormat:@"NFCBatchData: %@\n",mDic[@"tlv"]];
-                NSLog(@"--------nfc:tlv%@",tlv);
-            }else{
-                tlv = @"";
-            }
-            self.textViewLog.backgroundColor = [UIColor greenColor];
-            [self playAudio];
-            AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
-            self.textViewLog.text = [msg stringByAppendingString:tlv];
-            self.lableAmount.text = @"";
-        });
-    }else if(result==DoTradeResult_NFC_DECLINED){
-        self.textViewLog.text = @"Tap Card Declined";
-    }else if (result==DoTradeResult_NO_RESPONSE){
-        self.textViewLog.text = @"Check card no response";
-    }else if(result==DoTradeResult_BAD_SWIPE){
-        self.textViewLog.text = @"Bad Swipe. \nPlease swipe again and press check card.";
-    }else if(result==DoTradeResult_NO_UPDATE_WORK_KEY){
-        self.textViewLog.text = @"device not update work key";
-    }else if(result==DoTradeResult_CARD_NOT_SUPPORT){
-        self.textViewLog.text = @"card not support";
-    }else if(result==DoTradeResult_PLS_SEE_PHONE){
-        self.textViewLog.text = @"pls see phone";
-    }else if(result==DoTradeResult_TRY_ANOTHER_INTERFACE){
-        self.textViewLog.text = @"pls try another interface";
-    }
-}
+```objc
+	-(void) onDoTradeResult: (DoTradeResult)result DecodeData:(NSDictionary*)decodeData{
+		if (result == DoTradeResult_NONE) {
+			self.textViewLog.text = @"No card detected. Please insert or swipe card again and press check card.";
+			[pos doTrade:30];
+		}else if (result==DoTradeResult_ICC) {
+			self.textViewLog.text = @"ICC Card Inserted";
+			//Use this API to activate chip card transactions
+			[pos doEmvApp:EmvOption_START];
+		}else if(result==DoTradeResult_NOT_ICC){
+			self.textViewLog.text = @"Card Inserted (Not ICC)";
+		}else if(result==DoTradeResult_MCR){
+			NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
+			NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
+			NSString *expiryDate = [NSString stringWithFormat:@"Expiry Date: %@\n",decodeData[@"expiryDate"]];
+			NSString *cardHolderName = [NSString stringWithFormat:@"Cardholder Name: %@\n",decodeData[@"cardholderName"]];
+			NSString *serviceCode = [NSString stringWithFormat:@"Service Code: %@\n",decodeData[@"serviceCode"]];
+			NSString *encTrack1 = [NSString stringWithFormat:@"Encrypted Track 1: %@\n",decodeData[@"encTrack1"]];
+			NSString *encTrack2 = [NSString stringWithFormat:@"Encrypted Track 2: %@\n",decodeData[@"encTrack2"]];
+			NSString *encTrack3 = [NSString stringWithFormat:@"Encrypted Track 3: %@\n",decodeData[@"encTrack3"]];
+			NSString *pinKsn = [NSString stringWithFormat:@"PIN KSN: %@\n",decodeData[@"pinKsn"]];
+			NSString *trackksn = [NSString stringWithFormat:@"Track KSN: %@\n",decodeData[@"trackksn"]];
+			NSString *pinBlock = [NSString stringWithFormat:@"pinBlock: %@\n",decodeData[@"pinblock"]];
+			NSString *encPAN = [NSString stringWithFormat:@"encPAN: %@\n",decodeData[@"encPAN"]];
+			NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Card Swiped:\n", nil)];
+			NSString *a = [QPOSUtil byteArray2Hex:[QPOSUtil stringFormatTAscii:maskedPAN]];
+			[pos getPin:1 keyIndex:0 maxLen:6 typeFace:@"Pls Input Pin" cardNo:a data:@"" delay:30 withResultBlock:^(BOOL isSuccess, NSDictionary *result) {
+				self.textViewLog.backgroundColor = [UIColor greenColor];
+				[self playAudio];
+				AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+				self.textViewLog.text = msg;
+				self.lableAmount.text = @"";
+			}];
+		}else if(result==DoTradeResult_NFC_OFFLINE || result == DoTradeResult_NFC_ONLINE){
+			NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
+			NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
+			NSString *expiryDate = [NSString stringWithFormat:@"Expiry Date: %@\n",decodeData[@"expiryDate"]];
+			NSString *cardHolderName = [NSString stringWithFormat:@"Cardholder Name: %@\n",decodeData[@"cardholderName"]];
+			NSString *serviceCode = [NSString stringWithFormat:@"Service Code: %@\n",decodeData[@"serviceCode"]];
+			NSString *encTrack1 = [NSString stringWithFormat:@"Encrypted Track 1: %@\n",decodeData[@"encTrack1"]];
+			NSString *encTrack2 = [NSString stringWithFormat:@"Encrypted Track 2: %@\n",decodeData[@"encTrack2"]];
+			NSString *encTrack3 = [NSString stringWithFormat:@"Encrypted Track 3: %@\n",decodeData[@"encTrack3"]];
+			NSString *pinKsn = [NSString stringWithFormat:@"PIN KSN: %@\n",decodeData[@"pinKsn"]];
+			NSString *trackksn = [NSString stringWithFormat:@"Track KSN: %@\n",decodeData[@"trackksn"]];
+			NSString *pinBlock = [NSString stringWithFormat:@"pinBlock: %@\n",decodeData[@"pinblock"]];
+			NSString *encPAN = [NSString stringWithFormat:@"encPAN: %@\n",decodeData[@"encPAN"]];
+			NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Tap Card:\n", nil)];
+			dispatch_async(dispatch_get_main_queue(),  ^{
+				NSDictionary *mDic = [pos getNFCBatchData];
+				NSString *tlv;
+				if(mDic !=nil){
+					tlv= [NSString stringWithFormat:@"NFCBatchData: %@\n",mDic[@"tlv"]];
+					NSLog(@"--------nfc:tlv%@",tlv);
+				}else{
+					tlv = @"";
+				}
+				self.textViewLog.backgroundColor = [UIColor greenColor];
+				[self playAudio];
+				AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+				self.textViewLog.text = [msg stringByAppendingString:tlv];
+				self.lableAmount.text = @"";
+			});
+		}else if(result==DoTradeResult_NFC_DECLINED){
+			self.textViewLog.text = @"Tap Card Declined";
+		}else if (result==DoTradeResult_NO_RESPONSE){
+			self.textViewLog.text = @"Check card no response";
+		}else if(result==DoTradeResult_BAD_SWIPE){
+			self.textViewLog.text = @"Bad Swipe. \nPlease swipe again and press check card.";
+		}else if(result==DoTradeResult_NO_UPDATE_WORK_KEY){
+			self.textViewLog.text = @"device not update work key";
+		}else if(result==DoTradeResult_CARD_NOT_SUPPORT){
+			self.textViewLog.text = @"card not support";
+		}else if(result==DoTradeResult_PLS_SEE_PHONE){
+			self.textViewLog.text = @"pls see phone";
+		}else if(result==DoTradeResult_TRY_ANOTHER_INTERFACE){
+			self.textViewLog.text = @"pls try another interface";
+		}
+     }
 ```
 
 Below table describes the meaning of each data element SDK returned:
@@ -557,60 +552,60 @@ EMV Chip card transaction is much more complicate than magnatic swipe card trans
 ### Start Chip Card Transaction
 
 The app start the EMV transaction by calling
-```java
+```objc
 	[pos doEmvApp:EmvOption_START];
 ```
 This is usually happens inside the call back of onDoTradeResult(), as below demo code shows:
 
-```java
-		-(void) onDoTradeResult: (DoTradeResult)result DecodeData:(NSDictionary*)decodeData{
-    		if (result == DoTradeResult_NONE) {
-        	self.textViewLog.text = @"No card detected. Please insert or swipe card again and press check card.";
-        	[pos doTrade:30];
-    	}else if (result==DoTradeResult_ICC) {
-        	self.textViewLog.text = @"ICC Card Inserted";
-       		 //Use this API to activate chip card transactions
-        	[pos doEmvApp:EmvOption_START];
-    	}else if(result==DoTradeResult_NOT_ICC){
-        	self.textViewLog.text = @"Card Inserted (Not ICC)";
-    	}else if(result==DoTradeResult_MCR){
-        	self.textViewLog.text = @"MSR";
-    	}else if(result==DoTradeResult_NFC_OFFLINE || result == DoTradeResult_NFC_ONLINE){
-            self.textViewLog.text = @"NFC";
-    	}else if(result==DoTradeResult_NFC_DECLINED){
-        	self.textViewLog.text = @"Tap Card Declined";
-    	}else if (result==DoTradeResult_NO_RESPONSE){
-        	self.textViewLog.text = @"Check card no response";
-    	}else if(result==DoTradeResult_BAD_SWIPE){
-        	self.textViewLog.text = @"Bad Swipe. \nPlease swipe again and press check card.";
-    	}else if(result==DoTradeResult_NO_UPDATE_WORK_KEY){
-        	self.textViewLog.text = @"device not update work key";
-    	}else if(result==DoTradeResult_CARD_NOT_SUPPORT){
-        	self.textViewLog.text = @"card not support";
-    	}else if(result==DoTradeResult_PLS_SEE_PHONE){
-        	self.textViewLog.text = @"pls see phone";
-    	}else if(result==DoTradeResult_TRY_ANOTHER_INTERFACE){
-        	self.textViewLog.text = @"pls try another interface";
-    	}
+```objc
+	-(void) onDoTradeResult: (DoTradeResult)result DecodeData:(NSDictionary*)decodeData{
+		if (result == DoTradeResult_NONE) {
+			self.textViewLog.text = @"No card detected. Please insert or swipe card again and press check card.";
+			[pos doTrade:30];
+		}else if (result==DoTradeResult_ICC) {
+			self.textViewLog.text = @"ICC Card Inserted";
+			[pos doEmvApp:EmvOption_START];
+		}else if(result==DoTradeResult_NOT_ICC){
+			self.textViewLog.text = @"Card Inserted (Not ICC)";
+		}else if(result==DoTradeResult_MCR){
+			self.textViewLog.text = @"MSR";
+		}else if(result==DoTradeResult_NFC_OFFLINE || result == DoTradeResult_NFC_ONLINE){
+			self.textViewLog.text = @"NFC";
+		}else if(result==DoTradeResult_NFC_DECLINED){
+			self.textViewLog.text = @"Tap Card Declined";
+		}else if (result==DoTradeResult_NO_RESPONSE){
+			self.textViewLog.text = @"Check card no response";
+		}else if(result==DoTradeResult_BAD_SWIPE){
+			self.textViewLog.text = @"Bad Swipe. \nPlease swipe again and press check card.";
+		}else if(result==DoTradeResult_NO_UPDATE_WORK_KEY){
+			self.textViewLog.text = @"device not update work key";
+		}else if(result==DoTradeResult_CARD_NOT_SUPPORT){
+			self.textViewLog.text = @"card not support";
+		}else if(result==DoTradeResult_PLS_SEE_PHONE){
+			self.textViewLog.text = @"pls see phone";
+		}else if(result==DoTradeResult_TRY_ANOTHER_INTERFACE){
+			self.textViewLog.text = @"pls try another interface";
+		}
+	}
 ```
 
 ### Input PIN 
 
 The PIN information can be sent to the EMV kernel by:
-```java
-		-(void) onRequestPinEntry{
-            [pos sendPinEntryResult:pinStr];
-		}
+```objc
+	-(void) onRequestPinEntry{
+		[pos sendPinEntryResult:pinStr];
+	}
 ```
 Note, the kernel will not call the callback if PIN is not required for the transaction, or if the QPOS itself is with an embedded PINPAD.
 
 If the user do not want to input PIN, the applicaiton can bypass PIN enter by calling 
 
-```java
+```objc
 	[pos bypassPinEntry];
 ```
 if the user want to cancel the transaction, the app should call
-```java
+```objc
 	[pos cancelPinEntry];
 ```
 
@@ -618,58 +613,54 @@ if the user want to cancel the transaction, the app should call
 
 The current time information can be sent to the EMV kernel by:
 
-```java
-		-(void) onRequestTime{
-    		NSString *formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
-    		NSRange containA = [formatStringForHours rangeOfString:@"a"];
-    		BOOL hasAMPM = containA.location != NSNotFound;
-    		//when phone time is 12h format, need add this judgement.
-    		if (hasAMPM) {
-        		NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        		[dateFormatter setDateFormat:@"yyyyMMddhhmmss"];
-        		_terminalTime = [dateFormatter stringFromDate:[NSDate date]];
-    		}else{
-        		NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        		[dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-        		_terminalTime = [dateFormatter stringFromDate:[NSDate date]];
-    		}
-    		[pos sendTime:_terminalTime];
+```objc
+	-(void) onRequestTime{
+		NSString *formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+		NSRange containA = [formatStringForHours rangeOfString:@"a"];
+		BOOL hasAMPM = containA.location != NSNotFound;
+		//when phone time is 12h format, need add this judgement.
+		if (hasAMPM) {
+			NSDateFormatter *dateFormatter = [NSDateFormatter new];
+			[dateFormatter setDateFormat:@"yyyyMMddhhmmss"];
+			terminalTime = [dateFormatter stringFromDate:[NSDate date]];
+		}else{
+			NSDateFormatter *dateFormatter = [NSDateFormatter new];
+			[dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+			_terminalTime = [dateFormatter stringFromDate:[NSDate date]];
 		}
+		[pos sendTime:_terminalTime];
+	}
 ```
 
 ### Select EMV Application
 
 If there is multiple EMV applications inside one Chip card, the SDK will ask the user to choose one application from a list:
-
-```java
-		-(void) onRequestSelectEmvApp: (NSArray*)appList{
+```objc
+	-(void) onRequestSelectEmvApp: (NSArray*)appList{
    
-		}
-
+	}
 ```
 
 The chosen application is sending to the EMV kernel by 
-```java
-		[pos selectEmvApp:buttonIndex];
+```objc
+	[pos selectEmvApp:buttonIndex];
 ```
 
 If the user want to cancel select application, app should call 
-```java
-		[pos cancelSelectEmvApp];
+```objc
+	[pos cancelSelectEmvApp];
 ```
 
 ### Online Request
 
 If the EMV kernel found the transaction need to go online, below call back will be called.
-
-
-```java
-		-(void) onRequestOnlineProcess: (NSString*) tlv{
-             //sending online message tlv data to issuer
-             ....
-             //send the received online processing result to POS
-             [pos sendOnlineProcessResult(@"8A023030")];
-        }
+```objc
+	-(void) onRequestOnlineProcess: (NSString*) tlv{
+		//sending online message tlv data to issuer
+		....
+		//send the received online processing result to POS
+		[pos sendOnlineProcessResult(@"8A023030")];
+	}
 ```
 
 Below is an exmple of tlv data received by onRequestOnlineProcess:
@@ -757,25 +748,25 @@ All the online message in embedded inside tag 0x70, the ending 00 are paddings f
 
 The application will be notified by the SDK regarding the transaction result by:
 
-```java
-		-(void) onRequestTransactionResult: (TransactionResult)transactionResult{
-        	if (transactionResult == TransactionResult.APPROVED) {
-            } else if (transactionResult == TransactionResult.TERMINATED) {
-			} else if (transactionResult == TransactionResult.DECLINED) {
-			} else if (transactionResult == TransactionResult.CANCEL) {
-			} else if (transactionResult == TransactionResult.CAPK_FAIL) {
-			} else if (transactionResult == TransactionResult.NOT_ICC) {
-			} else if (transactionResult == TransactionResult.SELECT_APP_FAIL) {
-			} else if (transactionResult == TransactionResult.DEVICE_ERROR) {
-			} else if (transactionResult == TransactionResult.CARD_NOT_SUPPORTED) {
-			} else if (transactionResult == TransactionResult.MISSING_MANDATORY_DATA) {
-			} else if (transactionResult == TransactionResult.CARD_BLOCKED_OR_NO_EMV_APPS) {
-			} else if (transactionResult == TransactionResult.INVALID_ICC_DATA) {
-			} else if(transactionResult == TransactionResult_CARD_BLOCKED) {
-    		} else if(transactionResult == TransactionResult_APP_BLOCKED) {;
-    		} else if(transactionResult == TransactionResult_MULTIPLE_CARDS) {
-    		}      
-        }
+```objc
+	-(void) onRequestTransactionResult: (TransactionResult)transactionResult{
+		if (transactionResult == TransactionResult.APPROVED) {
+		} else if (transactionResult == TransactionResult.TERMINATED) {
+		} else if (transactionResult == TransactionResult.DECLINED) {
+		} else if (transactionResult == TransactionResult.CANCEL) {
+		} else if (transactionResult == TransactionResult.CAPK_FAIL) {
+		} else if (transactionResult == TransactionResult.NOT_ICC) {
+		} else if (transactionResult == TransactionResult.SELECT_APP_FAIL) {
+		} else if (transactionResult == TransactionResult.DEVICE_ERROR) {
+		} else if (transactionResult == TransactionResult.CARD_NOT_SUPPORTED) {
+		} else if (transactionResult == TransactionResult.MISSING_MANDATORY_DATA) {
+		} else if (transactionResult == TransactionResult.CARD_BLOCKED_OR_NO_EMV_APPS) {
+		} else if (transactionResult == TransactionResult.INVALID_ICC_DATA) {
+		} else if(transactionResult == TransactionResult_CARD_BLOCKED) {
+		} else if(transactionResult == TransactionResult_APP_BLOCKED) {;
+		} else if(transactionResult == TransactionResult_MULTIPLE_CARDS) {
+		}      
+    }
     
 ```
 
@@ -783,9 +774,10 @@ The application will be notified by the SDK regarding the transaction result by:
 
 When the transaction is finished. The batch data will be returned to the application by below callback.
 
-```java
-		-(void) onRequestBatchData: (NSString*)tlv
-		}
+```objc
+	-(void) onRequestBatchData: (NSString*)tlv
+		...
+	}
 ```
 Note, if there is issuer's script result inside the tlv, the mobile app need to feedback it to the bank.
 Decoding the tlv inside onRequestBatchData is similar to decoding onRequestOnlineProcess. 
@@ -794,34 +786,34 @@ Decoding the tlv inside onRequestBatchData is similar to decoding onRequestOnlin
 
 If the EMV chip card refuse the transaction, but the transaction was approved by the issuer. A reversal procedure should be initiated by the mobile app. The requred data for doing reversal can be got by below call back:
 
-```java
-		-(void) onReturnReversalData: (NSString*)tlv{
-			...
-		}
+```objc
+	-(void) onReturnReversalData: (NSString*)tlv{
+		...
+	}
 ```
 
 ## Error Notification
 
 During the transaction, if there is anything abnormal happened, the onError callback will be called.
 
-```java
-		-(void) onDHError: (DHError)errorState{
-			if (errorState == Error.CMD_NOT_AVAILABLE) {
-			} else if (errorState == Error.TIMEOUT) {
-			} else if (errorState == Error.DEVICE_RESET) {
-			} else if (errorState == Error.UNKNOWN) {
-			} else if (errorState == Error.DEVICE_BUSY) {
-			} else if (errorState == Error.INPUT_OUT_OF_RANGE) {
-			} else if (errorState == Error.INPUT_INVALID_FORMAT) {
-			} else if (errorState == Error.INPUT_ZERO_VALUES) {
-			} else if (errorState == Error.INPUT_INVALID) {
-			} else if (errorState == Error.CASHBACK_NOT_SUPPORTED) {
-			} else if (errorState == Error.CRC_ERROR) {
-			} else if (errorState == Error.COMM_ERROR) {
-			} else if (errorState == Error.MAC_ERROR) {
-			} else if (errorState == Error.CMD_TIMEOUT) {
-			}
+```objc
+	-(void) onDHError: (DHError)errorState{
+		if (errorState == Error.CMD_NOT_AVAILABLE) {
+		} else if (errorState == Error.TIMEOUT) {
+		} else if (errorState == Error.DEVICE_RESET) {
+		} else if (errorState == Error.UNKNOWN) {
+		} else if (errorState == Error.DEVICE_BUSY) {
+		} else if (errorState == Error.INPUT_OUT_OF_RANGE) {
+		} else if (errorState == Error.INPUT_INVALID_FORMAT) {
+		} else if (errorState == Error.INPUT_ZERO_VALUES) {
+		} else if (errorState == Error.INPUT_INVALID) {
+		} else if (errorState == Error.CASHBACK_NOT_SUPPORTED) {
+		} else if (errorState == Error.CRC_ERROR) {
+		} else if (errorState == Error.COMM_ERROR) {
+		} else if (errorState == Error.MAC_ERROR) {
+		} else if (errorState == Error.CMD_TIMEOUT) {
 		}
+	}
 
 ```
 
