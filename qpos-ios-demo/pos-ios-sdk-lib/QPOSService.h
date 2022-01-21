@@ -218,7 +218,8 @@ typedef NS_ENUM(NSInteger, CardTradeMode) {
     CardTradeMode_SWIPE_TAP_INSERT_CARD_Down,//下翻建
     CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP_UNALLOWED_LOW_TRADE,
     CardTradeMode_SWIPE_INSERT_CARD_UNALLOWED_LOW_TRADE,
-    CardTradeMode_SWIPE_TAP_INSERT_CARD_UNALLOWED_LOW_TRADE_NEW
+    CardTradeMode_SWIPE_TAP_INSERT_CARD_UNALLOWED_LOW_TRADE_NEW,
+    CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP_DELAY,
 };
 
 
@@ -536,5 +537,16 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)powerOnFelica:(NSInteger)timeout;
 -(void)powerOffFelica:(NSInteger)timeout;
 -(void)sendApduByFelica:(NSString *)apduString timeout:(NSInteger)timeout;
+-(void)generateTransportKey:(NSInteger)timeout dataBlock:(void(^)(NSDictionary *))dataBlock;
+-(void)updateIPEKByTransportKey:(NSString *)groupKey tracksn:(NSString *)trackksn trackipek:(NSString *)trackipek trackipekCheckValue:(NSString *)trackipekCheckValue emvksn:(NSString *)emvksn emvipek:(NSString *)emvipek emvipekcheckvalue:(NSString *)emvipekcheckvalue pinksn:(NSString *)pinksn pinipek:(NSString *)pinipek pinipekcheckValue:(NSString *)pinipekcheckValue block:(void(^)(BOOL isSuccess))resultBlock;
+-(void)updateWorkKeyByTransportKey:(NSString *)pik pinKeyCheck:(NSString *)pikCheck trackKey:(NSString *)trk trackKeyCheck:(NSString *)trkCheck macKey:(NSString *)mak macKeyCheck:(NSString *)makCheck keyIndex:(NSInteger) mKeyIndex timeout:(NSInteger)timeout block:(void(^)(BOOL isSuccess))resultBlock;
+-(void)sendCVV:(NSString *)cvvStr resultBlock:(void(^)(BOOL))resultBlock;
+-(void)getEncryptedDataBlock:(NSInteger)keyIndex dataBlock:(void(^)(NSDictionary *))dataBlock;
+-(void)setIsSaveLog:(BOOL)IsSaveLog
+              block:(void(^)(BOOL isSuccess,NSString *stateStr))IsSaveLogBlock;
+-(void)doTradeLogOperation:(NSInteger)operationType
+                      data:(NSInteger)data
+                     block:(void(^)(BOOL isSuccess,NSInteger markType, NSDictionary *stateStr))doTradeLogBlock;
+
 @end
 
