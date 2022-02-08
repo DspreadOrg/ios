@@ -773,7 +773,6 @@ typedef enum : NSUInteger {
     }];
 }
 
-
 //eg: use emv_app.bin and emv_capk.bin file to update emv configure in pos,Update time is about two minutes
 -(void)UpdateEmvCfg{
     NSLog(@"UpdateEmvCfg");
