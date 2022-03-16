@@ -521,7 +521,8 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)setAESKey:(NSString *)AESCiphertext CRC:(NSString *)CRC timeout:(NSInteger)timeout;
 -(void)getAESTransmissionKey:(NSInteger)timeout;
 -(void)getShutDownTime;
--(void)setPanStatus:(NSInteger )panStatus;
+-(void)setPanStatus:(PanStatus)panStatus;
+-(void)setPanMaskFormat:(NSInteger)frontLength backLength:(NSInteger)backLength;
 -(void)getDevicePublicKey:(NSInteger)timeout;
 -(void)setShutDownTimeOnConnected:(NSInteger)time;
 -(void)getShutDownTimeOnConnected;
