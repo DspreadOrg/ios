@@ -270,6 +270,22 @@ typedef NS_ENUM(NSInteger,FelicaStatusCode){
     FelicaStatusCode_NFC_FELICA_ERROR_END,
 };
 
+typedef NS_ENUM(NSInteger,MifareCardType){
+    MifareCardType_CLASSIC,
+    MifareCardType_ULTRALIGHT,
+};
+
+typedef NS_ENUM(NSInteger,MifareKeyType){
+    MifareKeyType_KEY_A,
+    MifareKeyType_KEY_B,
+};
+
+typedef NS_ENUM(NSInteger,MifareCardOperationType){
+    MifareCardOperationType_ADD,
+    MifareCardOperationType_REDUCE,
+    MifareCardOperationType_RESTORE,
+};
+
 @protocol QPOSServiceListener<NSObject>
 
 @optional
@@ -548,6 +564,12 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)doTradeLogOperation:(NSInteger)operationType
                       data:(NSInteger)data
                      block:(void(^)(BOOL isSuccess,NSInteger markType, NSDictionary *stateStr))doTradeLogBlock;
+-(void)pollOnMifareCard:(NSInteger)timeout dataBlock:(void(^)(NSDictionary *))dataBlock;
+-(void)authenticateMifareCard:(MifareCardType)mifareCardType keyType:(MifareKeyType)keyType block:(NSString *)block keyValue:(NSString *)keyValue timeout:(NSInteger)timeout resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)operateMifareCardData:(MifareCardOperationType)operationType block:(NSString *)block data:(NSString *)data timeout:(NSInteger)timeout dataBlock:(void(^)(NSDictionary *))dataBlock;
+-(void)readMifareCard:(MifareCardType)mifareCardType block:(NSString *)block timeout:(NSInteger)timeout dataBlock:(void(^)(NSDictionary *))dataBlock;
+-(void)writeMifareCard:(MifareCardType)mifareCardType block:(NSString *)block data:(NSString *)data timeout:(NSInteger)timeout resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)finishMifareCard:(NSInteger)timeout resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 
 @end
 
