@@ -748,7 +748,9 @@ typedef enum : NSUInteger {
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_PACKET_LEN_ERROR){
         self.textViewLog.text =  @"Packet len error";
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_PACKET_VEFIRY_ERROR){
-        self.textViewLog.text =  @"Packet vefiry error";
+        [pos getUpdateCheckValueBlock:^(BOOL isSuccess, NSString *stateStr) {
+            self.textViewLog.text = [@"Packet vefiry error " stringByAppendingString:stateStr];
+        }];
     }
     NSLog(@"onRequestUpdateWorkKeyResult %@",self.textViewLog.text);
 }
