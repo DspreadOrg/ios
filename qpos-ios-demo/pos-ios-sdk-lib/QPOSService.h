@@ -439,6 +439,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(BOOL)getQuickEMV;
 -(void)doEmvApp: (EmvOption)aemvOption;
 -(void)setAmount: (NSString *)aAmount aAmountDescribe:(NSString *)aAmountDescribe currency:(NSString *)currency transactionType:(TransactionType)transactionType;
+-(void)setAmount:(NSString *)aAmount aAmountDescribe:(NSString *)aAmountDescribe currency:(NSString *)currency transactionType:(TransactionType)transactionType posDisplayAmount:(BOOL)flag; 
 -(void)cancelSetAmount;
 -(void)finalConfirm: (BOOL)isConfirmed;
 //Multiple AIDs options
