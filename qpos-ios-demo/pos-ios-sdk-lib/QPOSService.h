@@ -523,6 +523,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 //you can use api to custom input on pos.
 -(void)customInputDisplay:(NSInteger)operationType displayType:(NSInteger)dispType maxLen:(NSInteger)maxLen DisplayString:(NSString *)displayStr delay:(NSInteger)timeout withResultBlock:(void (^)(BOOL isSuccess, NSString * result))customInputDisplayResult;
 -(void)buildPinBlock:(NSString *)workKey workKeyCheck:(NSString *)workKeyCheck encryptType:(NSInteger)encryptType keyIndex:(NSInteger)keyIndex maxLen:(NSInteger)maxLen typeFace:(NSString *)typeFace cardNo:(NSString *)cardNo date:(NSString *)date delay:(NSInteger)timeout;
+-(BOOL)syncIsCardExist:(NSInteger)timeout;
 -(void)isCardExist:(NSInteger)timeout withResultBlock:(void (^)(BOOL))isCardExistBlock;
 -(void)isCardExistInOnlineProcess:(NSInteger)timeout withResultBlock:(void (^)(BOOL))isCardExistBlock;
 -(void)cbc_mac_cn_all:(NSInteger)keyLen atype:(NSInteger)algorithmType otype:(NSInteger)operatorType data:(NSString *)dataStr delay:(NSInteger)timeout withResultBlock:(void (^)(NSString *))cbcmacBlock;
