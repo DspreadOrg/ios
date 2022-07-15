@@ -29,7 +29,7 @@
 		147EF1D32486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml in Resources */ = {isa = PBXBuildFile; fileRef = 147EF1D22486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml */; };
 		14BBA8812297EA9C00D48460 /* emv_app.bin in Resources */ = {isa = PBXBuildFile; fileRef = 14BBA87F2297EA9C00D48460 /* emv_app.bin */; };
 		14BBA8822297EA9C00D48460 /* emv_capk.bin in Resources */ = {isa = PBXBuildFile; fileRef = 14BBA8802297EA9C00D48460 /* emv_capk.bin */; };
-		14D9458A27F58F0C008D2443 /* libqpos-ios-release-sdk-v3.3.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D9458927F58F0C008D2443 /* libqpos-ios-release-sdk-v3.3.6.a */; };
+		14DA5F252881175400A60024 /* libqpos-ios-release-sdk-v3.4.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DA5F242881175400A60024 /* libqpos-ios-release-sdk-v3.4.2.a */; };
 		14EFBE072118152E0093681E /* TagApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBE032118152D0093681E /* TagApp.m */; };
 		14EFBE082118152E0093681E /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBE042118152D0093681E /* GDataXMLNode.m */; };
 		14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EFBE09211816B80093681E /* libxml2.tbd */; };
@@ -91,7 +91,7 @@
 		14BBA87F2297EA9C00D48460 /* emv_app.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emv_app.bin; sourceTree = "<group>"; };
 		14BBA8802297EA9C00D48460 /* emv_capk.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emv_capk.bin; sourceTree = "<group>"; };
 		14D12C2422F2B70E00DB0EAB /* QPOSUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSUtil.h; sourceTree = "<group>"; };
-		14D9458927F58F0C008D2443 /* libqpos-ios-release-sdk-v3.3.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-release-sdk-v3.3.6.a"; sourceTree = "<group>"; };
+		14DA5F242881175400A60024 /* libqpos-ios-release-sdk-v3.4.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-release-sdk-v3.4.2.a"; sourceTree = "<group>"; };
 		14EFBE012118152D0093681E /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		14EFBE032118152D0093681E /* TagApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagApp.m; sourceTree = "<group>"; };
 		14EFBE042118152D0093681E /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
@@ -112,8 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14D9458A27F58F0C008D2443 /* libqpos-ios-release-sdk-v3.3.6.a in Frameworks */,
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
+				14DA5F252881175400A60024 /* libqpos-ios-release-sdk-v3.4.2.a in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,8 +256,8 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
+				14DA5F242881175400A60024 /* libqpos-ios-release-sdk-v3.4.2.a */,
 				147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */,
-				14D9458927F58F0C008D2443 /* libqpos-ios-release-sdk-v3.3.6.a */,
 				1420B1532446E88F00129C44 /* emv_profile_tlv.xml */,
 				14653EB6240E83D40020F788 /* QPOSService.h */,
 				14BBA87F2297EA9C00D48460 /* emv_app.bin */,
