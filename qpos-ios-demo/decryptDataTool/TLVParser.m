@@ -74,24 +74,38 @@
     return nil;
 }
 
+
 + (int)ToHex:(NSString*)tmpid{
+
     int result = 0;
+    
     for (int i = 0; i < tmpid.length; i++) {
+        
         NSString *str = [tmpid substringWithRange:NSMakeRange(i, 1)];
         int indexNum = (int)(tmpid.length - 1 - i);
+        
         if ([str isEqualToString:@"A"]) {
+            
             result  = result + 10 *pow(16, indexNum);
+            
         }else if ([str isEqualToString:@"B"]){
+            
             result  = result + 11 *pow(16, indexNum);
         }else if ([str isEqualToString:@"C"]){
+            
             result  = result + 12 *pow(16, indexNum);
         }else if ([str isEqualToString:@"D"]){
+            
             result  = result + 13 *pow(16, indexNum);
         }else if ([str isEqualToString:@"E"]){
+            
             result  = result + 14 *pow(16, indexNum);
         }else if ([str isEqualToString:@"F"]){
+            
             result  = result + 15 *pow(16, indexNum);
+            
         }else{
+            
             result = result + [str intValue]*pow(16, indexNum);
         }
     }
@@ -100,9 +114,19 @@
 
 //判断tag是两位还是四位
 + (NSInteger)currentCharacterNum:(NSString *)tlvStr{
+    
     if ([self judgmentTagCharacterNum:tlvStr]) {
-        return 2;
+    
+        NSString *newTLVstr = [tlvStr substringFromIndex:2];
+        
+        if ([self judgmentTagCharacterNum:newTLVstr]) {
+            
+        }else{
+            
+            return 2;
+        }
     }else{
+        
         return 1;
     }
     return 0;
