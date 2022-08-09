@@ -8,12 +8,17 @@
 
 #import <Foundation/Foundation.h>
 @class CBPeripheral;
-typedef void (^MPUInfoBlock)(NSDictionary *mpuInfoDict);
 typedef NS_ENUM(NSInteger, PosType) {
     PosType_AUDIO,
     PosType_BLUETOOTH,
-    PosType_BLUETOOTH_new, //new bluetooth mode
+    PosType_BLUETOOTH_new, // delete this mode
     PosType_BLUETOOTH_2mode //bluetooth 2 mode
+};
+
+typedef NS_ENUM(NSInteger, resetState) {
+    resetState_INIT,
+    resetState_RESETING,
+    resetState_RESETED
 };
 
 typedef NS_ENUM(NSInteger, UpdateInformationResult) {
@@ -22,10 +27,18 @@ typedef NS_ENUM(NSInteger, UpdateInformationResult) {
     UpdateInformationResult_UPDATE_PACKET_VEFIRY_ERROR,
     UpdateInformationResult_UPDATE_PACKET_LEN_ERROR,
     UpdateInformationResult_UPDATE_LOWPOWER,
-    UpdateInformationResult_UPDATING
+    UpdateInformationResult_UPDATING,
+    UpdateInformationResult_UPDATE_CMD_ERROR,
+    UpdateInformationResult_UPDATE_SIGNATURE_ERROR,
+    UpdateInformationResult_UPDATE_FRAME_LENGTH_ERROR,
+    UpdateInformationResult_UPDATE_DATA_FORMAT_ERROR,
+    UpdateInformationResult_UPDATE_WRITE_VALUE_ERROR,
+    UpdateInformationResult_UPDATE_NOT_FINISH,
+    UpdateInformationResult_UPDATE_PLEASE_PLUG_INTO_POWER,
 };
 
-typedef NS_ENUM(NSInteger, DoTradeResult){
+typedef NS_ENUM(NSInteger, DoTradeResult)
+{
     DoTradeResult_NONE,
     DoTradeResult_MCR,
     DoTradeResult_ICC,
@@ -41,7 +54,17 @@ typedef NS_ENUM(NSInteger, DoTradeResult){
     DoTradeResult_PLS_SEE_PHONE
 };
 
-typedef NS_ENUM(NSInteger, CHECKVALUE_KEYTYPE){
+typedef NS_ENUM(NSInteger, EmvOption)
+{
+    EmvOption_START,
+    EmvOption_START_WITH_FORCE_ONLINE,
+    EmvOption_START_WITH_FORCE_PIN,
+    EmvOption_START_WITH_FORCE_ONLINE_FORCE_PIN
+    
+};
+
+typedef NS_ENUM(NSInteger, CHECKVALUE_KEYTYPE)
+{
     MKSK_TMK,
     MKSK_PIK,
     MKSK_TDK,
@@ -57,15 +80,8 @@ typedef NS_ENUM(NSInteger, CHECKVALUE_KEYTYPE){
     DUKPT_MKSK_ALLTYPE
 };
 
-typedef NS_ENUM(NSInteger, EmvOption)
+typedef NS_ENUM(NSInteger, Error)
 {
-    EmvOption_START,
-    EmvOption_START_WITH_FORCE_ONLINE,
-    EmvOption_START_WITH_FORCE_PIN,
-    EmvOption_START_WITH_FORCE_ONLINE_FORCE_PIN
-};
-
-typedef NS_ENUM(NSInteger, Error){
     Error_TIMEOUT,
     Error_MAC_ERROR,
     Error_CMD_NOT_AVAILABLE,
@@ -87,10 +103,12 @@ typedef NS_ENUM(NSInteger, Error){
     Error_ICC_ONLINE_TIMEOUT,
     Error_AMOUNT_OUT_OF_LIMIT,
     Error_DIGITS_UNAVAILABLE,
-    Error_QPOS_MEMORY_OVERFLOW
+    Error_QPOS_MEMORY_OVERFLOW,
+    Error_SELECT_APP_TIMEOUT
 };
 
-typedef NS_ENUM(NSInteger, DHError){
+typedef NS_ENUM(NSInteger, DHError)
+{
     DHError_TIMEOUT,
     DHError_MAC_ERROR,
     DHError_CMD_NOT_AVAILABLE,
@@ -117,7 +135,8 @@ typedef NS_ENUM(NSInteger, DHError){
 };
 
 
-typedef NS_ENUM(NSInteger, Display){
+typedef NS_ENUM(NSInteger, Display)
+{
     Display_TRY_ANOTHER_INTERFACE,
     Display_PLEASE_WAIT,
     Display_REMOVE_CARD,
@@ -132,6 +151,7 @@ typedef NS_ENUM(NSInteger, Display){
     Display_CARD_REMOVED,
     Display_MSR_DATA_READY,
     Display_QPOS_MEMORY_OVERFLOW
+    
 };
 
 typedef NS_ENUM(NSInteger, TransactionResult) {
@@ -157,36 +177,25 @@ typedef NS_ENUM(NSInteger, TransactionResult) {
     TransactionResult_MULTIPLE_CARDS,
 };
 
-typedef NS_ENUM(NSInteger,DoTradeLog) {
-    DoTradeLog_clear,
-    DoTradeLog_getAllCount,
-    DoTradeLog_getOneLog,
-    DoTradeLog_deleteOneLog,
-    DoTradeLog_deleteLastLog,
-    DoTradeLog_ClearOneByBatchID,
-    DoTradeLog_GetOneByBatchID
-};
-
 typedef NS_ENUM(NSInteger, TransactionType) {
-    TransactionType_GOODS, // GOODS
-    TransactionType_SERVICES, // SERVICES
-    TransactionType_CASH,//CASH
-    TransactionType_CASHBACK, // CASH BACK
-    TransactionType_INQUIRY, // INQUIRY
-    TransactionType_TRANSFER, // TRANSFER
-    TransactionType_ADMIN,// MANAGEMENT
-    TransactionType_CASHDEPOSIT,//DEPOSIT
-    TransactionType_PAYMENT,// PAYMENT
-    
+    TransactionType_GOODS, // 货物
+    TransactionType_SERVICES, // 服务
+    TransactionType_CASH,//现金
+    TransactionType_CASHBACK, // 退货 返现
+    TransactionType_INQUIRY, // 查询
+    TransactionType_TRANSFER, // 转账
+    TransactionType_ADMIN,//管理
+    TransactionType_CASHDEPOSIT,//存款
+    TransactionType_PAYMENT,// 付款 支付
     //add 2014-04-02
-    TransactionType_PBOCLOG,//        0x0A            /*PBOCLog(electronic cash log)*/
-    TransactionType_SALE,//           0x0B            /*CONSUMPTION*/
-    TransactionType_PREAUTH,//        0x0C            /*PRE-AUTHORIZATION*/
-    TransactionType_ECQ_DESIGNATED_LOAD,//        0x10                /*Electronic cash Q designated account deposit*/
-    TransactionType_ECQ_UNDESIGNATED_LOAD,//    0x11                /*Electronic cash fee is not specified in the account*/
-    TransactionType_ECQ_CASH_LOAD,//    0x12    /*Electronic cash fee cash deposit*/
-    TransactionType_ECQ_CASH_LOAD_VOID,//            0x13                /*Electronic cash deposit cancellation*/
-    TransactionType_ECQ_INQUIRE_LOG,//    0x0A    /*Electronic cash log (same as PBOC log)*/
+    TransactionType_PBOCLOG,//        0x0A            /*PBOC日志(电子现金日志)*/
+    TransactionType_SALE,//           0x0B            /*消费*/
+    TransactionType_PREAUTH,//        0x0C            /*预授权*/
+    TransactionType_ECQ_DESIGNATED_LOAD,//        0x10                /*电子现金Q指定账户圈存*/
+    TransactionType_ECQ_UNDESIGNATED_LOAD,//    0x11                /*电子现金费非指定账户圈存*/
+    TransactionType_ECQ_CASH_LOAD,//    0x12    /*电子现金费现金圈存*/
+    TransactionType_ECQ_CASH_LOAD_VOID,//            0x13                /*电子现金圈存撤销*/
+    TransactionType_ECQ_INQUIRE_LOG,//    0x0A    /*电子现金日志(和PBOC日志一样)*/
     TransactionType_REFUND,
     TransactionType_UPDATE_PIN
 };
@@ -210,11 +219,11 @@ typedef NS_ENUM(NSInteger, CardTradeMode) {
     CardTradeMode_SWIPE_INSERT_CARD,
     CardTradeMode_UNALLOWED_LOW_TRADE,
     CardTradeMode_SWIPE_TAP_INSERT_CARD,// add 20150715
-    CardTradeMode_SWIPE_TAP_INSERT_CARD_UNALLOWED_LOW_TRADE,  //no NFC, only swipe and chip.
+    CardTradeMode_SWIPE_TAP_INSERT_CARD_UNALLOWED_LOW_TRADE,
     CardTradeMode_ONLY_TAP_CARD,
     CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP,
-    CardTradeMode_TAP_INSERT_CARD_NOTUP,//
-    CardTradeMode_TAP_INSERT_CARD_TUP,//
+    CardTradeMode_TAP_INSERT_CARD_NOTUP,//无上翻键
+    CardTradeMode_TAP_INSERT_CARD_TUP,//有上翻键
     CardTradeMode_SWIPE_TAP_INSERT_CARD_Down,//下翻建
     CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP_UNALLOWED_LOW_TRADE,
     CardTradeMode_SWIPE_INSERT_CARD_UNALLOWED_LOW_TRADE,
@@ -222,24 +231,24 @@ typedef NS_ENUM(NSInteger, CardTradeMode) {
     CardTradeMode_SWIPE_TAP_INSERT_CARD_NOTUP_DELAY,
 };
 
-
-typedef NS_ENUM(NSInteger, DoTradeMode) {
+typedef NS_ENUM(NSInteger, DoTradeMode) {//不需要对外提供
     DoTradeMode_COMMON,
-    DoTradeMode_CHECK_CARD_NO_IPNUT_PIN,
-    DoTradeMode_IS_DEBIT_OR_CREDIT
+    DoTradeMode_CHECK_CARD_NO_IPNUT_PIN,//不输入密码
+    DoTradeMode_IS_DEBIT_OR_CREDIT//
 };
 
+typedef NS_ENUM(NSInteger,DoTradeLog) {
+    DoTradeLog_clear,
+    DoTradeLog_getAllCount,
+    DoTradeLog_getOneLog,
+    DoTradeLog_deleteOneLog,
+    DoTradeLog_deleteLastLog,
+    DoTradeLog_ClearOneByBatchID,
+    DoTradeLog_GetOneByBatchID
+};
 typedef NS_ENUM(NSInteger,EncryptType) {
     EncryptType_plaintext,
     EncryptType_encrypted
-};
-typedef NS_ENUM(NSInteger,EMVOperation) {
-    EMVOperation_clear,
-    EMVOperation_add,
-    EMVOperation_delete,
-    EMVOperation_getList,
-    EMVOperation_update,
-    EMVOperation_quickemv
 };
 
 typedef NS_ENUM(NSInteger,PanStatus) {
@@ -248,10 +257,20 @@ typedef NS_ENUM(NSInteger,PanStatus) {
     PanStatus_ENCRYPTED
 };
 
-typedef NS_ENUM(NSInteger,SessionKeyType) {
-    SessionKeyType_PINKEY,
-    SessionKeyType_TRACKKEY,
-    SessionKeyType_PINKEY_TRACKKEY
+typedef NS_ENUM(NSInteger,EMVOperation) {
+    EMVOperation_clear,
+    EMVOperation_add,
+    EMVOperation_delete,
+    EMVOperation_getList,
+    EMVOperation_update,
+    EMVOperation_quickemv//EMVOperation_getEmv
+};
+
+typedef NS_ENUM(NSInteger,Cmd1620Status){
+    Cmd1620Status_NONE,
+    Cmd1620Status_EXECUTING,
+    Cmd1620Status_QUERY,
+    Cmd1620Status_EXECUTED
 };
 
 typedef NS_ENUM(NSInteger,FelicaOpMode){
@@ -285,6 +304,33 @@ typedef NS_ENUM(NSInteger,MifareCardOperationType){
     MifareCardOperationType_REDUCE,
     MifareCardOperationType_RESTORE,
 };
+
+typedef NS_ENUM(NSInteger,LEDType){
+    LEDType_FIXED_COLOR,
+    LEDType_RGB_COLOR,
+};
+
+typedef NS_ENUM(NSInteger,LEDStatus){
+    LEDStatus_ON,
+    LEDStatus_OFF,
+    LEDStatus_BLINKS,
+};
+
+typedef NS_ENUM(NSInteger,LEDDirection){
+    LEDDirection_ALL,
+    LEDDirection_LEFT,
+    LEDDirection_RIGHT,
+    LEDDirection_UP,
+    LEDDirection_DOWN,
+};
+
+typedef NS_ENUM(NSInteger,BuzzerType){
+    BuzzerType_COMMON,
+    BuzzerType_PAYMENT_SUCCESS,
+    BuzzerType_PAYMENT_ERROR,
+    BuzzerType_PAIRING_SUCCESS,
+};
+
 
 @protocol QPOSServiceListener<NSObject>
 
@@ -475,7 +521,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)setAmountIcon:(NSString *)aAmountIcon;
 -(void)setAmountIcon:(AmountType) amtType amtIcon:(NSString *)aAmountIcon;
 //update emv configure api by bin file
--(void)updateEmvConfig:(NSString *)emvAppCfg emvCapk:(NSString*)emvCapkCfg;
+-(void)updateEmvConfig:(NSString *)emvAppCfg emvCapk:(NSString*)emvCapkCfg DEPRECATED_MSG_ATTRIBUTE("Please use [pos updateEMVConfigByXml]");
 -(void)readEmvAppConfig;
 -(void)readEmvCapkConfig;
 //update emv configure api by xml file
@@ -484,9 +530,8 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)updateEmvAPPByTlv:(EMVOperation)emvOperation appTlv:(NSString *)appTlv;//appTlv更新emv配置
 -(void)updateEmvCAPKByTlv:(EMVOperation)emvOperation capkTlv:(NSString *)capkTlv;//capkTlv更新emv配置
 //update emv app configure
--(void)updateEmvCAPK:(NSInteger )operationType data:(NSArray *)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateCAPKBlock;
--(void)updateEmvAPP:(NSInteger )operationType data:(NSArray*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock;
-
+-(void)updateEmvCAPK:(NSInteger )operationType data:(NSArray *)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateCAPKBlock DEPRECATED_MSG_ATTRIBUTE("Please use [pos updateEmvCAPKByTlv]");
+-(void)updateEmvAPP:(NSInteger )operationType data:(NSArray*)data  block:(void (^)(BOOL isSuccess, NSString *stateStr))updateEMVAPPBlock DEPRECATED_MSG_ATTRIBUTE("Please use [pos updateEmvAPPByTlv]");
 //update workkey api
 -(void)udpateWorkKey:(NSString *)updateKey;
 -(void)udpateWorkKey:(NSString *)pik pinKeyCheck:(NSString *)pikCheck trackKey:(NSString *)trk trackKeyCheck:(NSString *)trkCheck macKey:(NSString *)mak macKeyCheck:(NSString *)makCheck;
@@ -550,7 +595,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)generateSessionKeys;
 -(void)updateRSA:(NSString *)publicKey pemFile:(NSString *)pemFile;
 -(void)getEncryptData:(NSData *)data keyType:(NSString*)keyType keyIndex:(NSString *)keyIndex timeOut:(NSInteger)timeout;
--(void)getMPUCardInfo:(MPUInfoBlock)mpuInfoBlock;
+-(void)getMPUCardInfo:(void(^)(NSDictionary *dict))mpuInfoBlock;
 -(void)getMIccCardData:(NSString *)transactionTime;
 -(void)updateKeyByTR_31VersionD:(NSInteger)keyIndex ksn:(NSString *)ksn keyBlock:(NSString *)keyBlock;
 -(void)powerOnFelica:(NSInteger)timeout;
@@ -574,6 +619,11 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)finishMifareCard:(NSInteger)timeout resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)setIsOperateMifare:(BOOL)isOperateMifare;
 -(void)setIsSupportClsSelectEmvApp:(BOOL)isSupportClsSelectEmvApp;
-
+-(NSDictionary *)getEncryptDataDict;
+-(void)sendCvmPin:(NSString *)pin isEncrypted:(BOOL)isEncrypted;
+-(NSString *)getCvmKeyList;
+-(NSString *)buildCvmPinBlock:(NSDictionary *)encryptedDataDict pin:(NSString *)pin;
+-(void)operateLEDByType:(LEDType)ledType colorValue:(NSString *)colorValue ledDirection:(LEDDirection)ledDirection ledStatus:(LEDStatus)ledStatus lightTime:(NSInteger)lightTime lightOffTime:(NSInteger)lightOffTime blinksTimes:(NSInteger)blinksTimes resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)playBuzzerByType:(BuzzerType)buzzerType buzzerOnTime:(NSInteger)buzzerOnTime buzzerOffTime:(NSInteger)buzzerOffTime buzzerTimes:(NSInteger)buzzerTimes resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 @end
 

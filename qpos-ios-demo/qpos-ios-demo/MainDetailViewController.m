@@ -166,24 +166,20 @@ typedef enum : NSUInteger {
             NSLog(@"inputAmount = %@",inputAmount);
             self.lableAmount.text = [NSString stringWithFormat:@"$%@", [self checkAmount:inputAmount]];
             [pos setAmount:inputAmount aAmountDescribe:@"123" currency:_currencyCode transactionType:mTransType];
-            
             self.amount = [NSString stringWithFormat:@"%@", [self checkAmount:inputAmount]];
             self.cashbackAmount = @"123";
         }else{
             [pos cancelSetAmount];
             NSLog(@"cancel Set Amount");
         }
-        
     }else if ([aTitle isEqualToString:@"Confirm amount"]){
         if (buttonIndex==0) {
             [pos finalConfirm:YES];
         }else{
             [pos finalConfirm:NO];
         }
-        
     }else if ([aTitle isEqualToString:@"Online process requested."]){
         [pos isServerConnected:YES];
-        
     }else if ([aTitle isEqualToString:@"Request data to server."]){
         //Send the ARPC returned by the bank to pos via this API
         //transaction success: [pos sendOnlineProcessResult:[@"8A023030" stringByAppendingFormat:@"ARPC data return by bank]];
@@ -233,7 +229,6 @@ typedef enum : NSUInteger {
     [mAlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
     //UIAlertViewStylePlainTextInput
     [mAlertView show];
-    
     msgStr = @"Please set pin";
 }
 
@@ -300,7 +295,7 @@ typedef enum : NSUInteger {
         NSString *encTrack3 = [NSString stringWithFormat:@"Encrypted Track 3: %@\n",decodeData[@"encTrack3"]];
         NSString *pinKsn = [NSString stringWithFormat:@"PIN KSN: %@\n",decodeData[@"pinKsn"]];
         NSString *trackksn = [NSString stringWithFormat:@"Track KSN: %@\n",decodeData[@"trackksn"]];
-        NSString *pinBlock = [NSString stringWithFormat:@"pinBlock: %@\n",decodeData[@"pinblock"]];
+        NSString *pinBlock = [NSString stringWithFormat:@"pinBlock: %@\n",decodeData[@"pinBlock"]];
         NSString *encPAN = [NSString stringWithFormat:@"encPAN: %@\n",decodeData[@"encPAN"]];
         NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Tap Card:\n", nil)];
         msg = [msg stringByAppendingString:formatID];
@@ -316,25 +311,18 @@ typedef enum : NSUInteger {
         msg = [msg stringByAppendingString:pinBlock];
         msg = [msg stringByAppendingString:encPAN];
         
-        dispatch_async(dispatch_get_main_queue(),  ^{
-            NSDictionary *mDic = [pos getNFCBatchData];
-            NSString *tlv;
-            if(mDic !=nil){
-                tlv= [NSString stringWithFormat:@"NFCBatchData: %@\n",mDic[@"tlv"]];
-                NSLog(@"--------nfc:tlv%@",tlv);
-            }else{
-                tlv = @"";
-            }
-            self.textViewLog.backgroundColor = [UIColor greenColor];
-            [self playAudio];
-            AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
-            self.textViewLog.text = [msg stringByAppendingString:tlv];
-            self.lableAmount.text = @"";
-        });
-        
-//    [pos getICCTag:EncryptType_plaintext cardType:1 tagCount:1 tagArrStr:@"5F20"];  get 5F20 tag of plaintext or ciphertext
-//    [pos getICCTag:EncryptType_plaintext cardType:1 tagCount:2 tagArrStr:@"5F205F24"]; get 5F20&5F24 tag of plaintext or ciphertext
-        
+        NSDictionary *mDic = [pos getNFCBatchData];
+        NSString *tlv;
+        if(mDic !=nil){
+            tlv= [NSString stringWithFormat:@"NFCBatchData: %@\n",mDic[@"tlv"]];
+        }else{
+            tlv = @"";
+        }
+        self.textViewLog.backgroundColor = [UIColor greenColor];
+        [self playAudio];
+        AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+        self.textViewLog.text = [msg stringByAppendingString:tlv];
+        self.lableAmount.text = @"";
     }else if(result==DoTradeResult_NFC_DECLINED){
         self.textViewLog.text = @"Tap Card Declined";
     }else if (result==DoTradeResult_NO_RESPONSE){
@@ -435,8 +423,6 @@ typedef enum : NSUInteger {
 //    for (TLV *tlv in dict) {
 //        NSLog(@"tag: %@ length: %@ value: %@",tlv.tag,tlv.length,tlv.value);
 //    }
-//    [pos getICCTag:EncryptType_plaintext cardType:0 tagCount:1 tagArrStr:@"5F20"];  get 5F20 tag of plaintext or ciphertext
-//    [pos getICCTag:EncryptType_plaintext cardType:0 tagCount:2 tagArrStr:@"5F205F24"]; get 5F20&5F24 tag of plaintext or ciphertext
     NSString *msg = @"Replied success.";
     msgStr = @"Request data to server.";
     mAlertView = [[UIAlertView new]
@@ -839,11 +825,7 @@ typedef enum : NSUInteger {
 - (void)updatePosFirmware:(UIButton *)sender {
     NSData *data = [self readLine:@"A27CAYC_S1_master"];//read a14upgrader.asc
     if (data != nil) {
-       NSInteger flag = [[QPOSService sharedInstance] updatePosFirmware:data address:self.bluetoothAddress];
-        if (flag==-1) {
-            [self.textViewLog setText:@"Pos is not plugged in"];
-            return;
-        }
+        [pos updatePosFirmware:data address:self.bluetoothAddress];
         self.updateFWFlag = true;
         dispatch_async(dispatch_queue_create(0, 0), ^{
             while (true) {
@@ -881,6 +863,8 @@ typedef enum : NSUInteger {
         self.textViewLog.text =  @"Packet len error";
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_PACKET_VEFIRY_ERROR){
         self.textViewLog.text =  @"Packer vefiry error";
+    }else if(updateInformationResult==UpdateInformationResult_UPDATE_PLEASE_PLUG_INTO_POWER){
+        self.textViewLog.text =  @"Please plug into power";
     }else{
         self.textViewLog.text = @"firmware updating...";
     }
@@ -946,7 +930,7 @@ typedef enum : NSUInteger {
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSString *aTitle = msgStr;
     NSInteger cancelIndex = actionSheet.cancelButtonIndex;
-    NSLog(@"selectEmvApp cancelIndex = %d , index = %d",cancelIndex,buttonIndex);
+    NSLog(@"selectEmvApp cancelIndex = %ld , index = %ld",(long)cancelIndex,(long)buttonIndex);
     if ([aTitle isEqualToString:@"Please select app"]){
         if (buttonIndex==cancelIndex) {
             [pos cancelSelectEmvApp];
