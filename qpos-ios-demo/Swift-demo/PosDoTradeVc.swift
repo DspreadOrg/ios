@@ -516,11 +516,11 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
     }
     
     //use bin file to update emv config
-    func updateEMVConfigByBinFile(){
-        let emvAppCfg = QPOSUtil.byteArray2Hex(readLine(name: "emv_app"));
-        let emvCapkCfg = QPOSUtil.byteArray2Hex(readLine(name: "emv_capk"));
-        pos?.updateEmvConfig(emvAppCfg, emvCapk: emvCapkCfg);
-    }
+//    func updateEMVConfigByBinFile(){
+//        let emvAppCfg = QPOSUtil.byteArray2Hex(readLine(name: "emv_app"));
+//        let emvCapkCfg = QPOSUtil.byteArray2Hex(readLine(name: "emv_capk"));
+//        pos?.updateEmvConfig(emvAppCfg, emvCapk: emvCapkCfg);
+//    }
     
     func onReturnUpdateEMVResult(_ isSuccess: Bool) {
         if isSuccess {
