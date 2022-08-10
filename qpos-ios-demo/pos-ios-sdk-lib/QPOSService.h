@@ -499,6 +499,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)sendTime: (NSString *)aterminalTime;
 //you can use this api to get NFC batch data.
 -(NSDictionary *)getNFCBatchData;
+-(void)getNFCBatchData:(void(^)(NSDictionary *dict))nfcBatchDataBlock;
 //get ios sdk version
 -(NSString *)getSdkVersion;
 //get pos infomation
@@ -622,6 +623,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(NSDictionary *)getEncryptDataDict;
 -(void)sendCvmPin:(NSString *)pin isEncrypted:(BOOL)isEncrypted;
 -(NSString *)getCvmKeyList;
+-(NSArray *)getCvmKeyListArr;
 -(NSString *)buildCvmPinBlock:(NSDictionary *)encryptedDataDict pin:(NSString *)pin;
 -(void)operateLEDByType:(LEDType)ledType colorValue:(NSString *)colorValue ledDirection:(LEDDirection)ledDirection ledStatus:(LEDStatus)ledStatus lightTime:(NSInteger)lightTime lightOffTime:(NSInteger)lightOffTime blinksTimes:(NSInteger)blinksTimes resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)playBuzzerByType:(BuzzerType)buzzerType buzzerOnTime:(NSInteger)buzzerOnTime buzzerOffTime:(NSInteger)buzzerOffTime buzzerTimes:(NSInteger)buzzerTimes resultBlock:(void(^)(BOOL isSuccess))resultBlock;

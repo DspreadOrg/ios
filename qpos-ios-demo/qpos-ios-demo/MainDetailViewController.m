@@ -218,6 +218,7 @@ typedef enum : NSUInteger {
 //callback of input pin on phone
 -(void) onRequestPinEntry{
     NSLog(@"onRequestPinEntry");
+    NSLog(@"getCvmKeyListArr = %@",[pos getCvmKeyListArr]);
     NSString *msg = @"";
     mAlertView = [[UIAlertView new]
                   initWithTitle:NSLocalizedString(@"Please set pin", nil)
@@ -242,13 +243,16 @@ typedef enum : NSUInteger {
 -(void) onDoTradeResult: (DoTradeResult)result DecodeData:(NSDictionary*)decodeData{
     if (result == DoTradeResult_NONE) {
         self.textViewLog.text = @"No card detected. Please insert or swipe card again and press check card.";
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
         [pos doTrade:30];
     }else if (result==DoTradeResult_ICC) {
         self.textViewLog.text = @"ICC Card Inserted";
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
         //Use this API to activate chip card transactions
         [pos doEmvApp:EmvOption_START];
     }else if(result==DoTradeResult_NOT_ICC){
         self.textViewLog.text = @"Card Inserted (Not ICC)";
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
     }else if(result==DoTradeResult_MCR){
         NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
         NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
@@ -284,6 +288,7 @@ typedef enum : NSUInteger {
             self.textViewLog.text = msg;
             self.lableAmount.text = @"";
         }];
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
     }else if(result==DoTradeResult_NFC_OFFLINE || result == DoTradeResult_NFC_ONLINE){
         NSString *formatID = [NSString stringWithFormat:@"Format ID: %@\n",decodeData[@"formatID"]] ;
         NSString *maskedPAN = [NSString stringWithFormat:@"Masked PAN: %@\n",decodeData[@"maskedPAN"]];
@@ -311,34 +316,42 @@ typedef enum : NSUInteger {
         msg = [msg stringByAppendingString:pinBlock];
         msg = [msg stringByAppendingString:encPAN];
         
-        NSDictionary *mDic = [pos getNFCBatchData];
-        NSString *tlv;
-        if(mDic !=nil){
-            tlv= [NSString stringWithFormat:@"NFCBatchData: %@\n",mDic[@"tlv"]];
-        }else{
-            tlv = @"";
-        }
-        self.textViewLog.backgroundColor = [UIColor greenColor];
-        [self playAudio];
-        AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
-        self.textViewLog.text = [msg stringByAppendingString:tlv];
-        self.lableAmount.text = @"";
+        [pos getNFCBatchData:^(NSDictionary *dict) {
+            NSString *tlv;
+            if(dict !=nil){
+                tlv= [NSString stringWithFormat:@"NFCBatchData: %@\n",dict[@"tlv"]];
+            }else{
+                tlv = @"";
+            }
+            self.textViewLog.backgroundColor = [UIColor greenColor];
+            [self playAudio];
+            AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+            self.textViewLog.text = [msg stringByAppendingString:tlv];
+            self.lableAmount.text = @"";
+            NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
+        }];
     }else if(result==DoTradeResult_NFC_DECLINED){
         self.textViewLog.text = @"Tap Card Declined";
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
     }else if (result==DoTradeResult_NO_RESPONSE){
         self.textViewLog.text = @"Check card no response";
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
     }else if(result==DoTradeResult_BAD_SWIPE){
         self.textViewLog.text = @"Bad Swipe. \nPlease swipe again and press check card.";
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
     }else if(result==DoTradeResult_NO_UPDATE_WORK_KEY){
         self.textViewLog.text = @"device not update work key";
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
     }else if(result==DoTradeResult_CARD_NOT_SUPPORT){
         self.textViewLog.text = @"card not support";
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
     }else if(result==DoTradeResult_PLS_SEE_PHONE){
         self.textViewLog.text = @"pls see phone";
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
     }else if(result==DoTradeResult_TRY_ANOTHER_INTERFACE){
         self.textViewLog.text = @"pls try another interface";
+        NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
     }
-    NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
 }
 
 - (void)playAudio{
@@ -762,12 +775,12 @@ typedef enum : NSUInteger {
 }
 
 //eg: use emv_app.bin and emv_capk.bin file to update emv configure in pos,Update time is about two minutes
--(void)UpdateEmvCfg{
-    NSLog(@"UpdateEmvCfg");
-    NSString *emvAppCfg = [QPOSUtil byteArray2Hex:[self readLine:@"emv_app"]];
-    NSString *emvCapkCfg = [QPOSUtil byteArray2Hex:[self readLine:@"emv_capk"]];
-    [pos updateEmvConfig:emvAppCfg emvCapk:emvCapkCfg];
-}
+//-(void)UpdateEmvCfg{
+//    NSLog(@"UpdateEmvCfg");
+//    NSString *emvAppCfg = [QPOSUtil byteArray2Hex:[self readLine:@"emv_app"]];
+//    NSString *emvCapkCfg = [QPOSUtil byteArray2Hex:[self readLine:@"emv_capk"]];
+//    [pos updateEmvConfig:emvAppCfg emvCapk:emvCapkCfg];
+//}
 
 //eg: read xml file to update emv configure
 - (void)updateEMVConfigByXML{
@@ -942,78 +955,78 @@ typedef enum : NSUInteger {
 }
 
 //parse the xml file, update emv app
-- (void)updateEMVCfgByXML{
-    NSMutableArray *listArr = [NSMutableArray array];
-    NSArray *emvListArr = [self requestXMLData:EMVAppXMl];
-    TagApp *tag = emvListArr[4];
-    NSDictionary *emvDict = [pos EmvAppTag];
-    for (int i = 0 ; i < emvDict.allKeys.count; i++) {
-        NSString *key = emvDict.allKeys[i];
-        NSString * value = [tag valueForKey:key];
-        if (value.length != 0) {
-            NSString *tempStr = [[emvDict valueForKey:key] stringByAppendingString:value];
-            [listArr addObject:tempStr];
-        }
-    }
-    
-    NSLog(@"===%@===数量：%lu",listArr,(unsigned long)listArr.count);
-    [pos updateEmvAPP:EMVOperation_update data:listArr block:^(BOOL isSuccess, NSString *stateStr) {
-        if (isSuccess) {
-            self.textViewLog.text = [NSString stringWithFormat:@"success:%@",stateStr];
-        }else{
-            NSLog(@"fail:%@",stateStr);
-            self.textViewLog.text = [NSString stringWithFormat:@"fail:%@",stateStr];
-        }
-    }];
-}
+//- (void)updateEMVCfgByXML{
+//    NSMutableArray *listArr = [NSMutableArray array];
+//    NSArray *emvListArr = [self requestXMLData:EMVAppXMl];
+//    TagApp *tag = emvListArr[4];
+//    NSDictionary *emvDict = [pos EmvAppTag];
+//    for (int i = 0 ; i < emvDict.allKeys.count; i++) {
+//        NSString *key = emvDict.allKeys[i];
+//        NSString * value = [tag valueForKey:key];
+//        if (value.length != 0) {
+//            NSString *tempStr = [[emvDict valueForKey:key] stringByAppendingString:value];
+//            [listArr addObject:tempStr];
+//        }
+//    }
+//
+//    NSLog(@"===%@===数量：%lu",listArr,(unsigned long)listArr.count);
+//    [pos updateEmvAPP:EMVOperation_update data:listArr block:^(BOOL isSuccess, NSString *stateStr) {
+//        if (isSuccess) {
+//            self.textViewLog.text = [NSString stringWithFormat:@"success:%@",stateStr];
+//        }else{
+//            NSLog(@"fail:%@",stateStr);
+//            self.textViewLog.text = [NSString stringWithFormat:@"fail:%@",stateStr];
+//        }
+//    }];
+//}
 
 //parse the xml file,update emv capk
-- (void)updateCAPKConfigByXML{
-    NSArray *capkArr = [self requestXMLData:EMVCapkXMl];
-    NSMutableArray *capkTempArr = [NSMutableArray array];
-    TagCapk *capk = capkArr[1];
-    if (capk.Rid.length != 0) {
-        NSString *capkStr1 = [NSString stringWithFormat:@"9F06%@",capk.Rid];
-        [capkTempArr addObject:capkStr1];
-    }
-    if (capk.Public_Key_Index.length != 0) {
-        NSString *capkStr2 = [NSString stringWithFormat:@"9F22%@",capk.Public_Key_Index];
-        [capkTempArr addObject:capkStr2];
-    }
-    if (capk.Public_Key_Module.length != 0) {
-        NSString *capkStr3 = [NSString stringWithFormat:@"DF02%@",capk.Public_Key_Module];
-        [capkTempArr addObject:capkStr3];
-    }
-    if (capk.Public_Key_CheckValue.length != 0) {
-        NSString *capkStr4 = [NSString stringWithFormat:@"DF03%@",capk.Public_Key_CheckValue];
-        [capkTempArr addObject:capkStr4];
-    }
-    if (capk.Pk_exponent.length != 0) {
-        NSString *capkStr5 = [NSString stringWithFormat:@"DF04%@",capk.Pk_exponent];
-        [capkTempArr addObject:capkStr5];
-    }
-    if (capk.Expired_date.length != 0) {
-        NSString *capkStr6 = [NSString stringWithFormat:@"c%@",capk.Expired_date];
-        [capkTempArr addObject:capkStr6];
-    }
-    if (capk.Hash_algorithm_identification.length != 0) {
-        NSString *capkStr7 = [NSString stringWithFormat:@"DF06%@",capk.Hash_algorithm_identification];
-        [capkTempArr addObject:capkStr7];
-    }
-    if (capk.Pk_algorithm_identification.length != 0) {
-        NSString *capkStr8 = [NSString stringWithFormat:@"DF07%@",capk.Pk_algorithm_identification];
-        [capkTempArr addObject:capkStr8];
-    }
-    
-    [pos updateEmvCAPK:EMVOperation_update data:capkTempArr.copy block:^(BOOL isSuccess, NSString *stateStr) {
-        if (isSuccess) {
-            self.textViewLog.text = [NSString stringWithFormat:@"success:%@",stateStr];
-        }else{
-            NSLog(@"fail:%@",stateStr);
-            self.textViewLog.text = [NSString stringWithFormat:@"fail:%@",stateStr];
-        }
-    }];
-}
+//- (void)updateCAPKConfigByXML{
+//    NSArray *capkArr = [self requestXMLData:EMVCapkXMl];
+//    NSMutableArray *capkTempArr = [NSMutableArray array];
+//    TagCapk *capk = capkArr[1];
+//    if (capk.Rid.length != 0) {
+//        NSString *capkStr1 = [NSString stringWithFormat:@"9F06%@",capk.Rid];
+//        [capkTempArr addObject:capkStr1];
+//    }
+//    if (capk.Public_Key_Index.length != 0) {
+//        NSString *capkStr2 = [NSString stringWithFormat:@"9F22%@",capk.Public_Key_Index];
+//        [capkTempArr addObject:capkStr2];
+//    }
+//    if (capk.Public_Key_Module.length != 0) {
+//        NSString *capkStr3 = [NSString stringWithFormat:@"DF02%@",capk.Public_Key_Module];
+//        [capkTempArr addObject:capkStr3];
+//    }
+//    if (capk.Public_Key_CheckValue.length != 0) {
+//        NSString *capkStr4 = [NSString stringWithFormat:@"DF03%@",capk.Public_Key_CheckValue];
+//        [capkTempArr addObject:capkStr4];
+//    }
+//    if (capk.Pk_exponent.length != 0) {
+//        NSString *capkStr5 = [NSString stringWithFormat:@"DF04%@",capk.Pk_exponent];
+//        [capkTempArr addObject:capkStr5];
+//    }
+//    if (capk.Expired_date.length != 0) {
+//        NSString *capkStr6 = [NSString stringWithFormat:@"c%@",capk.Expired_date];
+//        [capkTempArr addObject:capkStr6];
+//    }
+//    if (capk.Hash_algorithm_identification.length != 0) {
+//        NSString *capkStr7 = [NSString stringWithFormat:@"DF06%@",capk.Hash_algorithm_identification];
+//        [capkTempArr addObject:capkStr7];
+//    }
+//    if (capk.Pk_algorithm_identification.length != 0) {
+//        NSString *capkStr8 = [NSString stringWithFormat:@"DF07%@",capk.Pk_algorithm_identification];
+//        [capkTempArr addObject:capkStr8];
+//    }
+//
+//    [pos updateEmvCAPK:EMVOperation_update data:capkTempArr.copy block:^(BOOL isSuccess, NSString *stateStr) {
+//        if (isSuccess) {
+//            self.textViewLog.text = [NSString stringWithFormat:@"success:%@",stateStr];
+//        }else{
+//            NSLog(@"fail:%@",stateStr);
+//            self.textViewLog.text = [NSString stringWithFormat:@"fail:%@",stateStr];
+//        }
+//    }];
+//}
 
 //Analysis xml
 - (NSArray *)requestXMLData:(EMVXML)appOrCapk {
