@@ -90,7 +90,6 @@ typedef enum : NSUInteger {
         [pos setPosType:PosType_BLUETOOTH_2mode];
         self.textViewLog.text = NSLocalizedString(@"connecting bluetooth...", nil);
         [pos connectBT:self.bluetoothAddress];
-        [pos setBTAutoDetecting:true];
     }
 }
 

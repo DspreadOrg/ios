@@ -558,14 +558,18 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 //you can use this api to upgrade pos firmware.
 -(NSInteger)getUpdateProgress;
 -(NSInteger)updatePosFirmware:(NSData*)aData address:(NSString*)devAddress;
+-(NSInteger)updateMPPosFirmware:(NSData*)aData address:(NSString*)devAddress;
 //you can use this api to get pinblock and pinksn
 -(void)getPin:(NSInteger)encryptType keyIndex:(NSInteger)keyIndex maxLen:(NSInteger)maxLen typeFace:(NSString *)typeFace cardNo:(NSString *)cardNo data:(NSString *)data delay:(NSInteger)timeout withResultBlock:(void (^)(BOOL isSuccess, NSDictionary * result))getPinBlock;
 -(NSDictionary*)syncGetPin:(NSInteger)encryptType keyIndex:(NSInteger)keyIndex maxLen:(NSInteger)maxLen typeFace:(NSString *)typeFace cardNo:(NSString *)cardNo date:(NSString *)data delay:(NSInteger)timeout;
 
 //you can use this api to get value of special emv tag.
--(NSDictionary *)getICCTag:(NSInteger) cardType tagCount:(NSInteger) mTagCount tagArrStr:(NSString*) mTagArrStr;
--(NSDictionary *)getICCTag:(EncryptType)encryTypeStr cardType:(NSInteger)cardType tagCount:(NSInteger) mTagCount tagArrStr:(NSString*)mTagArrStr;
+-(NSDictionary *)getICCTag:(NSInteger)cardType tagCount:(NSInteger)mTagCount tagArrStr:(NSString*)mTagArrStr;
+-(void)getICCTag:(NSInteger)cardType tagCount:(NSInteger)mTagCount tagArrStr:(NSString*)mTagArrStr tagArrBlock:(void(^)(NSDictionary *dict))tagArrBlock;
+-(NSDictionary *)getICCTag:(EncryptType)encryTypeStr cardType:(NSInteger)cardType tagCount:(NSInteger)mTagCount tagArrStr:(NSString*)mTagArrStr;
+-(void)getICCTag:(EncryptType)encryTypeStr cardType:(NSInteger)cardType tagCount:(NSInteger)mTagCount tagArrStr:(NSString*)mTagArrStr tagArrBlock:(void(^)(NSDictionary *dict))tagArrBlock;
 -(NSDictionary *)getICCTagNew:(EncryptType)encryTypeStr cardType:(NSInteger)cardType tagCount:(NSInteger)mTagCount tagArrStr:(NSString *)mTagArrStr;
+-(void)getICCTagNew:(EncryptType)encryTypeStr cardType:(NSInteger)cardType tagCount:(NSInteger)mTagCount tagArrStr:(NSString *)mTagArrStr tagArrBlock:(void(^)(NSDictionary *dict))tagArrBlock;
 //you can use api to custom input on pos.
 -(void)customInputDisplay:(NSInteger)operationType displayType:(NSInteger)dispType maxLen:(NSInteger)maxLen DisplayString:(NSString *)displayStr delay:(NSInteger)timeout withResultBlock:(void (^)(BOOL isSuccess, NSString * result))customInputDisplayResult;
 -(void)buildPinBlock:(NSString *)workKey workKeyCheck:(NSString *)workKeyCheck encryptType:(NSInteger)encryptType keyIndex:(NSInteger)keyIndex maxLen:(NSInteger)maxLen typeFace:(NSString *)typeFace cardNo:(NSString *)cardNo date:(NSString *)date delay:(NSInteger)timeout;
