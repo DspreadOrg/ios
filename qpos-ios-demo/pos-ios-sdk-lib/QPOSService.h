@@ -594,7 +594,6 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)getDevicePublicKey:(NSInteger)timeout;
 -(void)setShutDownTimeOnConnected:(NSInteger)time;
 -(void)getShutDownTimeOnConnected;
--(NSInteger)getCvmPinTryLimit;
 -(void)updateKeyByTR_31:(NSInteger)keyIndex keyBlock:(NSString *)keyBlock;
 -(void)updateKeyByTR_31:(NSInteger)keyIndex keyBlock:(NSString *)keyBlock timeout:(NSInteger)timeout;
 -(void)generateSessionKeys;
@@ -628,6 +627,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)sendCvmPin:(NSString *)pin isEncrypted:(BOOL)isEncrypted;
 -(NSString *)getCvmKeyList;
 -(NSArray *)getCvmKeyListArr;
+-(NSInteger)getCvmPinTryLimit;
 -(NSString *)buildCvmPinBlock:(NSDictionary *)encryptedDataDict pin:(NSString *)pin;
 -(void)operateLEDByType:(LEDType)ledType colorValue:(NSString *)colorValue ledDirection:(LEDDirection)ledDirection ledStatus:(LEDStatus)ledStatus lightTime:(NSInteger)lightTime lightOffTime:(NSInteger)lightOffTime blinksTimes:(NSInteger)blinksTimes resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)playBuzzerByType:(BuzzerType)buzzerType buzzerOnTime:(NSInteger)buzzerOnTime buzzerOffTime:(NSInteger)buzzerOffTime buzzerTimes:(NSInteger)buzzerTimes resultBlock:(void(^)(BOOL isSuccess))resultBlock;

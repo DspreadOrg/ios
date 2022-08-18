@@ -217,7 +217,7 @@ typedef enum : NSUInteger {
 //callback of input pin on phone
 -(void) onRequestPinEntry{
     NSLog(@"onRequestPinEntry");
-    NSLog(@"getCvmKeyListArr = %@",[pos getCvmKeyListArr]);
+    NSLog(@"getCvmPinTryLimit = %ld",(long)[pos getCvmPinTryLimit]);
     NSString *msg = @"";
     mAlertView = [[UIAlertView new]
                   initWithTitle:NSLocalizedString(@"Please set pin", nil)
