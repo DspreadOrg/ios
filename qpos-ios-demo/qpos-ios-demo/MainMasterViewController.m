@@ -33,7 +33,6 @@ NSInteger   scanBluetoothTime = 15;
     NSTimer *mNSTimer;
     QPOSService *mQPOSService;
     NSString *searchKey;
-    UIAlertView *mAlertView;
     NSString *sourceFlag;
 }
 

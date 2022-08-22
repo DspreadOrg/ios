@@ -35,8 +35,6 @@ typedef enum : NSUInteger {
 
 @implementation MainDetailViewController{
     QPOSService *pos;
-    UIAlertView *mAlertView;
-    UIActionSheet *mActionSheet;
     PosType     mPosType;
     dispatch_queue_t self_queue;
     TransactionType mTransType;
@@ -70,7 +68,6 @@ typedef enum : NSUInteger {
     if (nil == pos) {
         pos = [QPOSService sharedInstance];
     }
-    
     [pos setDelegate:self];
     self.labSDK.text =[@"V" stringByAppendingString:[pos getSdkVersion]];
     
@@ -143,93 +140,43 @@ typedef enum : NSUInteger {
 //input transaction amount
 -(void) onRequestSetAmount{
     NSLog(@"onRequestSetAmount");
-    NSString *msg = @"";
-    mAlertView = [[UIAlertView new]
-                  initWithTitle:NSLocalizedString(@"Please set amount", nil)
-                  message:msg
-                  delegate:self
-                  cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
-                  otherButtonTitles:NSLocalizedString(@"Cancel", nil),
-                  nil ];
-    [mAlertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [mAlertView show];
     msgStr = @"Please set amount";
-}
-
--(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSString *aTitle = msgStr;
-    if ([aTitle isEqualToString:@"Please set amount"]) {
-        if (buttonIndex==0) {
-            UITextField *textFieldAmount =  [alertView textFieldAtIndex:0];
-            NSString *inputAmount = [textFieldAmount text];
-            NSLog(@"inputAmount = %@",inputAmount);
-            self.lableAmount.text = [NSString stringWithFormat:@"$%@", [self checkAmount:inputAmount]];
-            [pos setAmount:inputAmount aAmountDescribe:@"123" currency:_currencyCode transactionType:mTransType];
-            self.amount = [NSString stringWithFormat:@"%@", [self checkAmount:inputAmount]];
-            self.cashbackAmount = @"123";
-        }else{
-            [pos cancelSetAmount];
-            NSLog(@"cancel Set Amount");
-        }
-    }else if ([aTitle isEqualToString:@"Confirm amount"]){
-        if (buttonIndex==0) {
-            [pos finalConfirm:YES];
-        }else{
-            [pos finalConfirm:NO];
-        }
-    }else if ([aTitle isEqualToString:@"Online process requested."]){
-        [pos isServerConnected:YES];
-    }else if ([aTitle isEqualToString:@"Request data to server."]){
-        //Send the ARPC returned by the bank to pos via this API
-        //transaction success: [pos sendOnlineProcessResult:[@"8A023030" stringByAppendingFormat:@"ARPC data return by bank]];
-        //transaction fail: [pos sendOnlineProcessResult:[@"8A023035" stringByAppendingFormat:@"ARPC data return by bank]];
-        [pos sendOnlineProcessResult:@"8A023030"];
-        
-    }else if ([aTitle isEqualToString:@"Transaction Result"]){
-        
-    }else if ([aTitle isEqualToString:@"Please set pin"]) {
-        if (buttonIndex==0) {
-            UITextField *textFieldAmount =  [alertView textFieldAtIndex:0];
-            NSString *pinStr = [textFieldAmount text];
-            NSLog(@"pinStr = %@",pinStr);
-            [pos sendPinEntryResult:pinStr];
-        }else{
-            [pos cancelPinEntry];
-        }
-    }
-    [self hideAlertView];
-}
-
--(void) onRequestFinalConfirm{
-    NSLog(@"onRequestFinalConfirm-------amount = %@",amount);
-    NSString *msg = [NSString stringWithFormat:@"Amount: $%@",self.amount];
-    mAlertView = [[UIAlertView new]
-                  initWithTitle:NSLocalizedString(@"Confirm amount", nil)
-                  message:msg
-                  delegate:self
-                  cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
-                  otherButtonTitles:NSLocalizedString(@"Cancel", nil),
-                  nil ];
-    [mAlertView show];
-    msgStr = @"Confirm amount";
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Please set amount", nil) message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [pos cancelSetAmount];
+        NSLog(@"cancel Set Amount");
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //获取第1个输入框；
+        UITextField *titleTextField = alertController.textFields.firstObject;
+        NSString *inputAmount = titleTextField.text;
+        NSLog(@"inputAmount = %@",inputAmount);
+        self.lableAmount.text = [NSString stringWithFormat:@"$%@", [self checkAmount:inputAmount]];
+        [pos setAmount:inputAmount aAmountDescribe:@"123" currency:_currencyCode transactionType:mTransType];
+        self.amount = [NSString stringWithFormat:@"%@", [self checkAmount:inputAmount]];
+        self.cashbackAmount = @"123";
+    }]];
+    [alertController addTextFieldWithConfigurationHandler:nil];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 //callback of input pin on phone
 -(void) onRequestPinEntry{
     NSLog(@"onRequestPinEntry");
-    NSLog(@"getCvmPinTryLimit = %ld",(long)[pos getCvmPinTryLimit]);
-    NSString *msg = @"";
-    mAlertView = [[UIAlertView new]
-                  initWithTitle:NSLocalizedString(@"Please set pin", nil)
-                  message:msg
-                  delegate:self
-                  cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
-                  otherButtonTitles:NSLocalizedString(@"Cancel", nil),
-                  nil ];
-    [mAlertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
-    //UIAlertViewStylePlainTextInput
-    [mAlertView show];
-    msgStr = @"Please set pin";
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Please set pin", nil) message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [pos cancelPinEntry];
+        NSLog(@"cancel pin entry");
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //获取第1个输入框；
+        UITextField *titleTextField = alertController.textFields.firstObject;
+        NSString *pinStr = titleTextField.text;
+        NSLog(@"pinStr = %@",pinStr);
+        [pos sendPinEntryResult:pinStr];
+    }]];
+    [alertController addTextFieldWithConfigurationHandler:nil];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 // Prompt user to insert/swipe/tap card
@@ -416,16 +363,20 @@ typedef enum : NSUInteger {
 //Multiple AIDS select
 -(void) onRequestSelectEmvApp: (NSArray*)appList{
     NSLog(@"onRequestSelectEmvApp: %@", appList);
-    mActionSheet = [[UIActionSheet new] initWithTitle:NSLocalizedString(@"Please select app", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
-    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Please select app", nil) message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"cancel select app");
+        [pos cancelSelectEmvApp];
+    }]];
     for (int i=0 ; i<[appList count] ; i++){
+        NSLog(@"i = %d", i);
         NSString *emvApp = [appList objectAtIndex:i];
-        [mActionSheet addButtonWithTitle:emvApp];
+        [alertController addAction:[UIAlertAction actionWithTitle:emvApp style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"action: %@ i = %d", action.title, i);
+            [pos selectEmvApp:i];
+        }]];
     }
-    [mActionSheet addButtonWithTitle:@"Cancel"];
-    [mActionSheet setCancelButtonIndex:[appList count]];
-    [mActionSheet showInView:[UIApplication sharedApplication].keyWindow];
-    msgStr=@"Please select app";
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 //return chip card tlv data on this function
@@ -435,27 +386,16 @@ typedef enum : NSUInteger {
 //    for (TLV *tlv in dict) {
 //        NSLog(@"tag: %@ length: %@ value: %@",tlv.tag,tlv.length,tlv.value);
 //    }
-    NSString *msg = @"Replied success.";
-    msgStr = @"Request data to server.";
-    mAlertView = [[UIAlertView new]
-                  initWithTitle:NSLocalizedString(@"Request data to server.", nil)
-                  message:msg
-                  delegate:self
-                  cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
-                  otherButtonTitles:nil,
-                  nil ];
-    [mAlertView show];
-}
-
--(void) onRequestIsServerConnected{
-    NSString *msg = @"Replied connected.";
-    msgStr = @"Online process requested.";
-    [self conductEventByMsg:msgStr];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Request data to server.", nil) message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //send transaction to bank and request bank approval
+        [pos sendOnlineProcessResult:@"8A023030"];
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 // transaction result callback function
 -(void) onRequestTransactionResult: (TransactionResult)transactionResult{
-    [mActionSheet dismissWithClickedButtonIndex:0 animated:YES];
     NSString *messageTextView = @"";
     if (transactionResult==TransactionResult_APPROVED) {
         NSString *message = [NSString stringWithFormat:@"Approved\nAmount: $%@\n",amount];
@@ -517,15 +457,9 @@ typedef enum : NSUInteger {
         [self clearDisplay];
         messageTextView = @"Multiple Cards";
     }
-    
-    mAlertView = [[UIAlertView new]
-                  initWithTitle:NSLocalizedString(@"Transaction Result", nil)
-                  message:messageTextView
-                  delegate:self
-                  cancelButtonTitle:NSLocalizedString(@"Confirm", nil)
-                  otherButtonTitles:nil,
-                  nil ];
-    [mAlertView show];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Transaction Result", nil) message:messageTextView preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alertController animated:YES completion:nil];
     self.amount = @"";
     self.cashbackAmount = @"";
     self.lableAmount.text = @"";
@@ -602,6 +536,11 @@ typedef enum : NSUInteger {
     }
     self.textViewLog.text = msg;
     NSLog(@"onError = %@",msg);
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:msg message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alertController dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 //get pos id in this function.
@@ -932,25 +871,6 @@ typedef enum : NSUInteger {
     }else if ([msg isEqualToString:@"Transaction Result"]){
         
     }
-}
-
-- (void)hideAlertView{
-    [mAlertView dismissWithClickedButtonIndex:0 animated:YES];
-}
-
-#pragma mark - UIActionSheet
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSString *aTitle = msgStr;
-    NSInteger cancelIndex = actionSheet.cancelButtonIndex;
-    NSLog(@"selectEmvApp cancelIndex = %ld , index = %ld",(long)cancelIndex,(long)buttonIndex);
-    if ([aTitle isEqualToString:@"Please select app"]){
-        if (buttonIndex==cancelIndex) {
-            [pos cancelSelectEmvApp];
-        }else{
-            [pos selectEmvApp:buttonIndex];
-        }
-    }
-    [mActionSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 //parse the xml file, update emv app
