@@ -26,15 +26,18 @@
     NSMutableArray<TLV *> *dict = [NSMutableArray array];
     for (; ;) {
         TLV *tlv = [TLV new];
-        if (tlvStr.length < [self currentCharacterNum:tlvStr] * 2) {
+        NSInteger tagNum = [self judgmentTagCharacterNum:tlvStr] * 2;
+        if (!tagNum) {
             return dict.copy;
         }
-        NSString *tagStr = [tlvStr substringToIndex:[self currentCharacterNum:tlvStr] * 2];
-        tlvStr = [tlvStr substringFromIndex:[self currentCharacterNum:tlvStr] * 2];
-        if (tlvStr.length < 3) {
+        NSString *tagStr = [tlvStr substringToIndex:tagNum];
+        tlvStr = [tlvStr substringFromIndex:tagNum];
+        NSString *lengStr = @"";
+        if (tlvStr.length >= 2) {
+            lengStr = [tlvStr substringToIndex:2];
+        }else{
             return dict.copy;
         }
-        NSString *lengStr = [tlvStr substringToIndex:2];
         NSString *hex2Str = [self getBinaryByHex:lengStr];
         int length = 0;
         
@@ -74,24 +77,38 @@
     return nil;
 }
 
+
 + (int)ToHex:(NSString*)tmpid{
+
     int result = 0;
+    
     for (int i = 0; i < tmpid.length; i++) {
+        
         NSString *str = [tmpid substringWithRange:NSMakeRange(i, 1)];
         int indexNum = (int)(tmpid.length - 1 - i);
+        
         if ([str isEqualToString:@"A"]) {
+            
             result  = result + 10 *pow(16, indexNum);
+            
         }else if ([str isEqualToString:@"B"]){
+            
             result  = result + 11 *pow(16, indexNum);
         }else if ([str isEqualToString:@"C"]){
+            
             result  = result + 12 *pow(16, indexNum);
         }else if ([str isEqualToString:@"D"]){
+            
             result  = result + 13 *pow(16, indexNum);
         }else if ([str isEqualToString:@"E"]){
+            
             result  = result + 14 *pow(16, indexNum);
         }else if ([str isEqualToString:@"F"]){
+            
             result  = result + 15 *pow(16, indexNum);
+            
         }else{
+            
             result = result + [str intValue]*pow(16, indexNum);
         }
     }
@@ -100,12 +117,7 @@
 
 //判断tag是两位还是四位
 + (NSInteger)currentCharacterNum:(NSString *)tlvStr{
-    if ([self judgmentTagCharacterNum:tlvStr]) {
-        return 2;
-    }else{
-        return 1;
-    }
-    return 0;
+    return [self judgmentTagCharacterNum:tlvStr];
 }
 
 //判断是复合tag还是非复合tag
@@ -123,23 +135,47 @@
 }
 
 //判断是否有字节
-+ (BOOL)judgmentTagCharacterNum:(NSString *)tlvStr{
-    
-    if (tlvStr.length < 3) {
-        return NO;
-    }
++ (NSInteger)judgmentTagCharacterNum:(NSString *)tlvStr{
+    NSInteger tagLen = 1;
+    NSInteger index = 0;
     //取前两位
-    NSString *tagTwo = [tlvStr substringToIndex:2];
+    NSString *tagTwo = @"";
+    if (tlvStr.length > index + 2) {
+        tagTwo = [tlvStr substringWithRange:NSMakeRange(index, 2)];
+    }else{
+        return 0;
+    }
+    index += 2;
     //转为二进制
     NSString *hex2Str = [self getBinaryByHex:tagTwo];
     //截取后五位
     NSString *backFiveStr = [hex2Str substringFromIndex:3];
-    
     if ([backFiveStr isEqualToString:@"11111"]) {
-        
-        return YES;
+        tagLen++;
+        BOOL continueFlag = TRUE;
+        while(continueFlag){
+            if (tlvStr.length > index + 2) {
+                tagTwo = [tlvStr substringWithRange:NSMakeRange(index, 2)];
+            }else{
+                continueFlag = false;
+                break;
+            }
+            index += 2;
+            //转为二进制
+            hex2Str = [self getBinaryByHex:tagTwo];
+            if([hex2Str hasPrefix:@"1"]){
+                backFiveStr = [hex2Str substringFromIndex:1];
+                if ([backFiveStr containsString: @"1"]) {
+                    tagLen++;
+                }else{
+                    continueFlag = false;
+                }
+            }else{
+                continueFlag = false;
+            }
+        }
     }
-    return NO;
+    return tagLen;
 }
 
 //16进制转二进制
