@@ -382,10 +382,15 @@ typedef enum : NSUInteger {
 //return chip card tlv data on this function
 -(void) onRequestOnlineProcess: (NSString*) tlv{
     NSLog(@"onRequestOnlineProcess = %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
-//    NSArray *dict = [TLVParser parse:tlv];
-//    for (TLV *tlv in dict) {
-//        NSLog(@"tag: %@ length: %@ value: %@",tlv.tag,tlv.length,tlv.value);
-//    }
+/*
+    NSArray *dict = [TLVParser parse:tlv];
+    for (TLV *tlv in dict) {
+        NSLog(@"tag: %@ length: %@ value: %@",tlv.tag,tlv.length,tlv.value);
+    }
+    [pos getEncryptedTrack2Data:^(NSString *ksn, NSString *track2Data) {
+        NSLog(@"ksn: %@ track2Data: %@",ksn,track2Data);
+    }];
+*/
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Request data to server.", nil) message:@"" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //send transaction to bank and request bank approval
