@@ -633,5 +633,8 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)playBuzzerByType:(BuzzerType)buzzerType buzzerOnTime:(NSInteger)buzzerOnTime buzzerOffTime:(NSInteger)buzzerOffTime buzzerTimes:(NSInteger)buzzerTimes resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(NSDictionary *)getEncryptedTrack2Data;
 -(void)getEncryptedTrack2Data:(void(^)(NSString *ksn, NSString *track2Data))resultBlock;
+-(void)setCustomLogoDisplay:(LcdModeAlign)alcdModeAlign customLogoStr:(NSString *)customLogoStr timeout:(NSInteger)timeout resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(NSString *)getRandomNumByLen:(NSInteger)length;
+-(void)getRandomNumByLen:(NSInteger)length resultBlock:(void(^)(NSString *randomStr))resultBlock;
 @end
 
