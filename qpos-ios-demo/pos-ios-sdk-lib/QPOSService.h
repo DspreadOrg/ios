@@ -150,7 +150,8 @@ typedef NS_ENUM(NSInteger, Display)
     Display_INPUT_LAST_OFFLINE_PIN,
     Display_CARD_REMOVED,
     Display_MSR_DATA_READY,
-    Display_QPOS_MEMORY_OVERFLOW
+    Display_QPOS_MEMORY_OVERFLOW,
+    Display_NOT_ALLOWED_LOW_TRADE,
     
 };
 
