@@ -28,6 +28,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UIButton *btnGetPosId;
 @property (weak, nonatomic) IBOutlet UIButton *btnGetPosInfo;
 @property (weak, nonatomic) IBOutlet UIButton *btnDisconnect;
+@property (weak, nonatomic) IBOutlet UIButton *btnUpdateEMV;
 @property (nonatomic,assign)BOOL updateFWFlag;
 @property (nonatomic,strong)NSDictionary *pinDataDict;
 
@@ -64,6 +65,7 @@ typedef enum : NSUInteger {
     self.btnGetPosId.layer.cornerRadius = 10;
     self.btnGetPosInfo.layer.cornerRadius = 10;
     self.btnResetPos.layer.cornerRadius = 10;
+    self.btnUpdateEMV.layer.cornerRadius = 10;
     self.pinDataDict = [NSDictionary dictionary];
     if (nil == pos) {
         pos = [QPOSService sharedInstance];
@@ -130,7 +132,6 @@ typedef enum : NSUInteger {
 //start do trade button
 - (IBAction)doTrade:(id)sender {
     NSLog(@"doTrade");
-    self.textViewLog.backgroundColor = [UIColor whiteColor];
     self.textViewLog.text = NSLocalizedString(@"Starting...", nil);
     _currencyCode = @"0156";
     [pos setCardTradeMode:CardTradeMode_SWIPE_TAP_INSERT_CARD];
@@ -497,7 +498,7 @@ typedef enum : NSUInteger {
 //cancel transaction api.
 - (IBAction)resetpos:(id)sender {
     NSLog(@"resetpos");
-    self.textViewLog.backgroundColor = [UIColor whiteColor];
+    self.textViewLog.backgroundColor = [UIColor greenColor];
     self.textViewLog.text = @"reset pos ... ";
     if([pos resetPosStatus]){
         self.textViewLog.text = @"reset pos success";
@@ -715,6 +716,9 @@ typedef enum : NSUInteger {
             self.textViewLog.text = stateStr;
         }
     }];
+}
+- (IBAction)updateEMVConfig:(id)sender {
+    [self updateEMVConfigByXML];
 }
 
 //eg: use emv_app.bin and emv_capk.bin file to update emv configure in pos,Update time is about two minutes
