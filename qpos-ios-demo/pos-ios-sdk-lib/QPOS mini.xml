@@ -10,14 +10,14 @@
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>0000000000000000</9F1C> <!--Terminal Identification-->
     <9F1E>0000000000000000</9F1E> <!--Interface Device (IFD) Serial Number-->
-    <9F33>E0B8C8</9F33> <!--Terminal Capabilities-->
+    <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>00</9F39> <!--Point-of-Service (POS) Entry Mode-->
     <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Application Reference Currency-->
     <9F40>F000F0A001</9F40> <!--Additional Terminal Capabilities-->
     <9F4E></9F4E> <!--Merchant Name and Location，add 0x00 if the digits is not enough-->
-    <9F66>32C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
+    <9F66>36C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
     <9F73>000000</9F73> <!--Currency Conversion Factor-->
     <9F7B>000000001388</9F7B> <!--Electronic Cash Terminal Transaction Limit-->
     <DF01>01</DF01> <!--Application Selection Indicator-->
@@ -37,7 +37,7 @@
     <DF75>01</DF75> <!--Terminal Status Check，Default value = 0-->
     <DF76></DF76> <!--Default Tdol-->
     <DF78>000000000000</DF78> <!--Contactless CVM Required limit-->
-    <DF79>E0B8C8</DF79> <!--Contactless Terminal Capabilities-->
+    <DF79>E0F8C8</DF79> <!--Contactless Terminal Capabilities-->
     <DF7A>F000F0A001</DF7A> <!--Contactless Additional Terminal Capabilities-->
 </app>
 
@@ -53,14 +53,14 @@
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
-    <9F33>E0B8C8</9F33> <!--Terminal Capabilities-->
+    <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
     <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--Additional Terminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
-    <9F66>32E04000</9F66> <!--Terminal Default Transaction Qualifiers-->
+    <9F66>36E04000</9F66> <!--Terminal Default Transaction Qualifiers-->
     <9F73>000000</9F73> <!--Currency Conversion Factor-->
     <9F7B>000000001388</9F7B> <!--Electronic Cash Terminal Transaction Limit-->
     <DF01>01</DF01> <!--Application Selection Indicator-->
@@ -80,7 +80,7 @@
     <DF75>01</DF75> <!--Terminal Status Check，Default value = 0-->
     <DF76>9F1A0295059A039C01</DF76> <!--Default Tdol-->    
     <DF78>000000000000</DF78> <!--ContactlessTerminal Execute Cvm Limit-->
-    <DF79>E0B8C8</DF79> <!--ContactlessTerminal Capabilities-->
+    <DF79>E0F8C8</DF79> <!--ContactlessTerminal Capabilities-->
     <DF7A>F000F0A001</DF7A> <!--ContactlessAdditionalTerminal Capabilities-->
 </app>
 
@@ -96,14 +96,14 @@
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
-    <9F33>E0B8C8</9F33> <!--Terminal Capabilities-->
+    <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
     <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
-    <9F66>32E04000</9F66> <!--Terminal Default Transaction Qualifiers-->
+    <9F66>36E04000</9F66> <!--Terminal Default Transaction Qualifiers-->
     <9F73>000000</9F73> <!--Currency Conversion Factor-->
     <9F7B>000000001388</9F7B> <!--Electronic Cash Terminal Transaction Limit-->
     <DF01>01</DF01> <!--Application Selection Indicator-->
@@ -123,7 +123,7 @@
     <DF75>01</DF75> <!--Terminal Status Check，Default value = 0-->
     <DF76>9F1A0295059A039C01</DF76> <!--Default Tdol-->
     <DF78>000000000000</DF78> <!--ContactlessTerminal Execute Cvm Limit-->
-    <DF79>E0B8C8</DF79> <!--ContactlessTerminal Capabilities-->
+    <DF79>E0F8C8</DF79> <!--ContactlessTerminal Capabilities-->
     <DF7A>F000F0A001</DF7A> <!--ContactlessAdditionalTerminal Capabilities-->
 </app>
 
@@ -139,14 +139,14 @@
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
-    <9F33>E0B8C8</9F33> <!--Terminal Capabilities-->
+    <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
     <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
-    <9F66>32E04000</9F66> <!--Terminal Default Transaction Qualifiers-->
+    <9F66>36E04000</9F66> <!--Terminal Default Transaction Qualifiers-->
     <9F73>000000</9F73> <!--Currency Conversion Factor-->
     <9F7B>000000001388</9F7B> <!--Electronic Cash Terminal Transaction Limit-->
     <DF01>01</DF01> <!--Application Selection Indicator-->
@@ -166,7 +166,7 @@
     <DF75>01</DF75> <!--Terminal Status Check，Default value = 0-->
     <DF76>9F1A0295059A039C01</DF76> <!--Default Tdol-->
     <DF78>000000000000</DF78> <!--ContactlessTerminal Execute Cvm Limit-->
-    <DF79>E0B8C8</DF79> <!--ContactlessTerminal Capabilities-->
+    <DF79>E0F8C8</DF79> <!--ContactlessTerminal Capabilities-->
     <DF7A>F000F0A001</DF7A> <!--ContactlessAdditionalTerminal Capabilities-->
 </app>
 
@@ -183,14 +183,14 @@
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
 	<9F1D>6C00800000000000</9F1D>
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
-    <9F33>E0B8C8</9F33> <!--Terminal Capabilities-->
+    <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
     <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
-    <9F66>32C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
+    <9F66>36C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
     <9F73>000000</9F73> <!--Currency Conversion Factor-->
     <9F7B>000000001388</9F7B> <!--Electronic Cash Terminal Transaction Limit-->
     <DF01>01</DF01> <!--Application Selection Indicator-->
@@ -210,10 +210,10 @@
     <DF75>01</DF75> <!--Terminal Status Check，Default value = 0-->
     <DF76>9F1A0295059A039C01</DF76> <!--Default Tdol-->
     <DF78>000000050000</DF78> <!--ContactlessTerminal Execute Cvm Limit-->
-    <DF79>E0B8C8</DF79> <!--ContactlessTerminal Capabilities-->
+    <DF79>E0F8C8</DF79> <!--ContactlessTerminal Capabilities-->
     <DF7A>F000F0A001</DF7A> <!--ContactlessAdditionalTerminal Capabilities-->
 	<DF7F>30</DF7F> <!--Contactless Kernel Configuration-->
-    <7F10>DF81180120DF81190108</7F10>
+    <7F10>DF81180160DF81190108</7F10>
 </app>
 
 
@@ -229,14 +229,14 @@
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
-    <9F33>E0B8C8</9F33> <!--Terminal Capabilities-->
+    <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
     <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
-    <9F66>32C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
+    <9F66>36C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
     <9F73>000000</9F73> <!--Currency Conversion Factor-->
     <9F7B>000000001388</9F7B> <!--Electronic Cash Terminal Transaction Limit-->
     <DF01>01</DF01> <!--Application Selection Indicator-->
@@ -256,7 +256,7 @@
     <DF75>01</DF75> <!--Terminal Status Check，Default value = 0-->
     <DF76>9F1A0295059A039C01</DF76> <!--Default Tdol-->
     <DF78>000000001388</DF78> <!--ContactlessTerminal Execute Cvm Limit-->
-    <DF79>E0B8C8</DF79> <!--ContactlessTerminal Capabilities-->
+    <DF79>E0F8C8</DF79> <!--ContactlessTerminal Capabilities-->
     <DF7A>F000F0A001</DF7A> <!--ContactlessAdditionalTerminal Capabilities-->
 	<7F10>9F6D01C09F820A060000000000009F6E04D8A000009F824001019F821801E0</7F10><!--Additional Tag-->
 </app>
@@ -273,14 +273,14 @@
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
-    <9F33>E0B8C8</9F33> <!--Terminal Capabilities-->
+    <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
     <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
-    <9F66>32C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
+    <9F66>36C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
     <9F73>000000</9F73> <!--Currency Conversion Factor-->
     <9F7B>000000001388</9F7B> <!--Electronic Cash Terminal Transaction Limit-->
     <DF01>01</DF01> <!--Application Selection Indicator-->
@@ -300,7 +300,7 @@
     <DF75>01</DF75> <!--Terminal Status Check，Default value = 0-->
     <DF76>9F1A0295059A039C01</DF76> <!--Default Tdol-->
     <DF78>000000000000</DF78> <!--ContactlessTerminal Execute Cvm Limit-->
-    <DF79>E0B8C8</DF79> <!--ContactlessTerminal Capabilities-->
+    <DF79>E0F8C8</DF79> <!--ContactlessTerminal Capabilities-->
     <DF7A>F000F0A001</DF7A> <!--ContactlessAdditionalTerminal Capabilities-->
 </app>
 
@@ -316,14 +316,14 @@
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
-    <9F33>E0B8C8</9F33> <!--Terminal Capabilities-->
+    <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
     <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
-    <9F66>32C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
+    <9F66>36C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
     <9F73>000000</9F73> <!--Currency Conversion Factor-->
     <9F7B>000000001388</9F7B> <!--Electronic Cash Terminal Transaction Limit-->
     <DF01>01</DF01> <!--Application Selection Indicator-->
@@ -343,7 +343,7 @@
     <DF75>01</DF75> <!--Terminal Status Check，Default value = 0-->
     <DF76>9F1A0295059A039C01</DF76> <!--Default Tdol-->
     <DF78>000000000000</DF78> <!--ContactlessTerminal Execute Cvm Limit-->
-    <DF79>E0B8C8</DF79> <!--ContactlessTerminal Capabilities-->
+    <DF79>E0F8C8</DF79> <!--ContactlessTerminal Capabilities-->
     <DF7A>F000F0A001</DF7A> <!--ContactlessAdditionalTerminal Capabilities-->
 </app>
 
@@ -359,14 +359,14 @@
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
-    <9F33>E0B8C8</9F33> <!--Terminal Capabilities-->
+    <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
     <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
     <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
-    <9F66>32C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
+    <9F66>36C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
     <9F73>000000</9F73> <!--Currency Conversion Factor-->
     <9F7B>000000001388</9F7B> <!--Electronic Cash Terminal Transaction Limit-->
     <DF01>01</DF01> <!--Application Selection Indicator-->
@@ -386,7 +386,7 @@
     <DF75>01</DF75> <!--Terminal Status Check，Default value = 0-->
     <DF76>9F1A0295059A039C01</DF76> <!--Default Tdol-->
     <DF78>000000000000</DF78> <!--ContactlessTerminal Execute Cvm Limit-->
-    <DF79>E0B8C8</DF79> <!--ContactlessTerminal Capabilities-->
+    <DF79>E0F8C8</DF79> <!--ContactlessTerminal Capabilities-->
     <DF7A>F000F0A001</DF7A> <!--ContactlessAdditionalTerminal Capabilities-->
 </app>
 
@@ -402,14 +402,14 @@
     <9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
     <9F1C>4E4C2D4750373330</9F1C> <!--Terminal Identification-->
     <9F1E>3833323031494343</9F1E> <!--Interface Device (IFD) Serial Number-->
-    <9F33>E0B8C8</9F33> <!--Terminal Capabilities-->
-    <9F35>21</9F35> <!--Terminal Type-->
+    <9F33>E0F8C8</9F33> <!--Terminal Capabilities-->
+    <9F35>22</9F35> <!--Terminal Type-->
     <9F39>05</9F39> <!--Point-of-Service (POS) Entry Mode-->
     <9F3C>0484</9F3C> <!--Transaction Reference Currency Code-->
     <9F3D>00</9F3D> <!--Transaction Reference Currency Exponent-->
     <9F40>F000F0A001</9F40> <!--AdditionalTerminal Capabilities-->
     <9F4E>61626364</9F4E> <!--Merchant Name and Location，add 0x00 if not enough-->
-    <9F66>32C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
+    <9F66>36C04000</9F66> <!--Terminal Default Transaction Qualifiers-->
     <9F73>000000</9F73> <!--Currency Conversion Factor-->
     <9F7B>000000001388</9F7B> <!--Electronic Cash Terminal Transaction Limit-->
     <DF01>01</DF01> <!--Application Selection Indicator-->
@@ -429,7 +429,7 @@
     <DF75>01</DF75> <!--Terminal Status Check，Default value = 0-->
     <DF76>9F1A0295059A039C01</DF76> <!--Default Tdol-->
     <DF78>000000000000</DF78> <!--ContactlessTerminal Execute Cvm Limit-->
-    <DF79>E0B8C8</DF79> <!--ContactlessTerminal Capabilities-->
+    <DF79>E0F8C8</DF79> <!--ContactlessTerminal Capabilities-->
     <DF7A>F000F0A001</DF7A> <!--ContactlessAdditionalTerminal Capabilities-->
 </app>
 

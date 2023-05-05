@@ -8,7 +8,7 @@
 	<9F1A>0484</9F1A><!--Terminal Country Code-->
 	<9F1C>0000000000000000</9F1C><!--Terminal Identification-->
 	<9F1E>0000000000000000</9F1E><!--Interface Device (IFD) Serial Number-->
-	<9F33>E0B8C8</9F33><!--Terminal Capabilities-->
+	<9F33>E0F8C8</9F33><!--Terminal Capabilities-->
 	<9F35>22</9F35><!--Terminal Type-->
 	<9F39>00</9F39><!--Point-of-Service (POS) Entry Mode-->
 	<9F40>F000F0A001</9F40><!--Additional Terminal Capabilities-->
@@ -28,7 +28,7 @@
 	<DF01>00</DF01> <!--Application Selection Indicator-->
 	<9F09>0096</9F09> <!--Terminal Application Version Number-->
 	<9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
-	<9F66>32E04000</9F66> <!--Contactless Terminal Transaction Qualifiers-->
+	<9F66>36E04000</9F66> <!--Contactless Terminal Transaction Qualifiers-->
 	<9F8125>9F3704</9F8125> <!--Contact Default Dynamic Data Authentication Data Object List (DDOL)-->
 	<9F8127>00</9F8127> <!--Contact Maximum Target Percentage to be Used for Biased Random Selection-->
 	<9F8128>00</9F8128> <!--Contact Target Percentage to Be Used for Random Selection-->
@@ -49,7 +49,7 @@
 	<DF01>00</DF01> <!--Application Selection Indicator-->
 	<9F09>0096</9F09> <!--Terminal Application Version Number-->
 	<9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
-	<9F66>32E04000</9F66> <!--Contactless Terminal Transaction Qualifiers-->
+	<9F66>36E04000</9F66> <!--Contactless Terminal Transaction Qualifiers-->
 	<9F8125>9F3704</9F8125> <!--Contact Default Dynamic Data Authentication Data Object List (DDOL)-->
 	<9F8127>00</9F8127> <!--Contact Maximum Target Percentage to be Used for Biased Random Selection-->
 	<9F8128>00</9F8128> <!--Contact Target Percentage to Be Used for Random Selection-->
@@ -70,7 +70,7 @@
 	<DF01>00</DF01> <!--Application Selection Indicator-->
 	<9F09>0096</9F09> <!--Terminal Application Version Number-->
 	<9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
-	<9F66>32E04000</9F66> <!--Contactless Terminal Transaction Qualifiers-->
+	<9F66>36E04000</9F66> <!--Contactless Terminal Transaction Qualifiers-->
 	<9F8125>9F3704</9F8125> <!--Contact Default Dynamic Data Authentication Data Object List (DDOL)-->
 	<9F8127>00</9F8127> <!--Contact Maximum Target Percentage to be Used for Biased Random Selection-->
 	<9F8128>00</9F8128> <!--Contact Target Percentage to Be Used for Random Selection-->
@@ -111,7 +111,7 @@
 	<DF810C>02</DF810C> <!--Contactless Kernel ID-->
 	<DF810D>02</DF810D> <!--Contactless DSVN Term-->
 	<DF8117>20</DF8117> <!--Contactless Card Data Input Capability-->
-	<DF8118>20</DF8118> <!--Contactless CVM Capability – CVM Required-->
+	<DF8118>60</DF8118> <!--Contactless CVM Capability – CVM Required-->
 	<DF8119>08</DF8119> <!--Contactless CVM Capability – No CVM Required-->
 	<DF811A>9F6A04</DF811A> <!--Contactless Default UDOL-->
 	<DF811B>B0</DF811B> <!--Contactless Kernel Configuration-->
@@ -172,7 +172,7 @@
 	<DF01>00</DF01> <!--Application Selection Indicator-->
 	<9F09>0096</9F09> <!--Terminal Application Version Number-->
 	<9F1B>00000000</9F1B> <!--Terminal Floor Limit-->
-	<9F66>32E0C000</9F66> <!--Contactless Terminal Transaction Qualifiers-->
+	<9F66>36E04000</9F66> <!--Contactless Terminal Transaction Qualifiers-->
 	<9F8125>9F3704</9F8125> <!--Contact Default Dynamic Data Authentication Data Object List (DDOL)-->
 	<9F8127>00</9F8127> <!--Contact Maximum Target Percentage to be Used for Biased Random Selection-->
 	<9F8128>00</9F8128> <!--Contact Target Percentage to Be Used for Random Selection-->
@@ -186,57 +186,6 @@
 	<9F92810D>999999999999</9F92810D> <!--Contactless Amount Limit-->
 	<9F92810E>000000000000</9F92810E> <!--Contactless CVM Amount Limit-->
 	<9F92810F>000000000000</9F92810F> <!--Contactless Terminal Offline Floor Limit-->
-</app>
-
-<app><!--16-->
-</app>
-
-<app><!--17-->
-</app>
-
-<app><!--18-->
-</app>
-
-<app><!--19-->
-</app>
-
-<app><!--20-->
-</app>
-
-<app><!--21-->
-</app>
-
-<app><!--22-->
-</app>
-
-<app><!--23-->
-</app>
-
-<app><!--24-->
-</app>
-
-<app><!--25-->
-</app>
-
-<app><!--26-->
-</app>
-
-<app><!--27-->
-</app>
-
-<app><!--28-->
-</app>
-
-<app><!--29-->
-</app>
-
-<app><!--30-->
-</app>
-
-<app><!--31-->
-</app>
-
-<app><!--32-->
 </app>
 
 <capk><!--1:A000000003 07-->
