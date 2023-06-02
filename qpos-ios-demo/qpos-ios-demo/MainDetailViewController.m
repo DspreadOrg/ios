@@ -721,14 +721,6 @@ typedef enum : NSUInteger {
     [self updateEMVConfigByXML];
 }
 
-//eg: use emv_app.bin and emv_capk.bin file to update emv configure in pos,Update time is about two minutes
-//-(void)UpdateEmvCfg{
-//    NSLog(@"UpdateEmvCfg");
-//    NSString *emvAppCfg = [QPOSUtil byteArray2Hex:[self readLine:@"emv_app"]];
-//    NSString *emvCapkCfg = [QPOSUtil byteArray2Hex:[self readLine:@"emv_capk"]];
-//    [pos updateEmvConfig:emvAppCfg emvCapk:emvCapkCfg];
-//}
-
 //eg: read xml file to update emv configure
 - (void)updateEMVConfigByXML{
     self.textViewLog.text =  @"start update emv configure,pls wait";
@@ -747,38 +739,6 @@ typedef enum : NSUInteger {
         self.textViewLog.text =  @"Failed";
     }
     NSLog(@"onReturnCustomConfigResult: %@",self.textViewLog.text);
-}
-
-//update emv configure by TLV data
--(void)updateEMVConfigByTlv{
-    NSString *appTlvData = @"9F0607A00000000310109F3303E0F8C8";
-    [pos updateEmvAPPByTlv:EMVOperation_update appTlv:appTlvData];
-    
-    NSString *capkTlvData = @"9F0605A0000000039F220107";
-    [pos updateEmvCAPKByTlv:EMVOperation_update capkTlv:capkTlvData];
-}
-//callback of update emv configure api by TLV data
-- (void)onReturnUpdateEMVResult:(BOOL)isSuccess{
-    NSLog(@"onReturnUpdateEMVResult:%d",isSuccess);
-    if (isSuccess) {
-        self.textViewLog.text = @"Success";
-    }else{
-        self.textViewLog.text = @"fail";
-    }
-}
-//callback of update emv configure api by TLV data
-- (void)onReturnGetEMVListResult:(NSString *)result{
-    NSLog(@"%@",result);
-    self.textViewLog.text = result;
-}
-//callback of update emv configure api by TLV data
-- (void)onReturnUpdateEMVRIDResult:(BOOL)isSuccess{
-    NSLog(@"onReturnUpdateEMVRIDResult:%d",isSuccess);
-    if (isSuccess) {
-        self.textViewLog.text = @"Success";
-    }else{
-        self.textViewLog.text = @"fail";
-    }
 }
 
 // update pos firmware api
@@ -870,125 +830,6 @@ typedef enum : NSUInteger {
     if(mode == 1){
         [pos doTrade:30];
     }
-}
-
--(void)conductEventByMsg:(NSString *)msg{
-    if ([msg isEqualToString:@"Online process requested."]){
-        [pos isServerConnected:YES];
-    }else if ([msg isEqualToString:@"Request data to server."]){
-        [pos sendOnlineProcessResult:@"8A023030"];
-    }else if ([msg isEqualToString:@"Transaction Result"]){
-        
-    }
-}
-
-//parse the xml file, update emv app
-//- (void)updateEMVCfgByXML{
-//    NSMutableArray *listArr = [NSMutableArray array];
-//    NSArray *emvListArr = [self requestXMLData:EMVAppXMl];
-//    TagApp *tag = emvListArr[4];
-//    NSDictionary *emvDict = [pos EmvAppTag];
-//    for (int i = 0 ; i < emvDict.allKeys.count; i++) {
-//        NSString *key = emvDict.allKeys[i];
-//        NSString * value = [tag valueForKey:key];
-//        if (value.length != 0) {
-//            NSString *tempStr = [[emvDict valueForKey:key] stringByAppendingString:value];
-//            [listArr addObject:tempStr];
-//        }
-//    }
-//
-//    NSLog(@"===%@===数量：%lu",listArr,(unsigned long)listArr.count);
-//    [pos updateEmvAPP:EMVOperation_update data:listArr block:^(BOOL isSuccess, NSString *stateStr) {
-//        if (isSuccess) {
-//            self.textViewLog.text = [NSString stringWithFormat:@"success:%@",stateStr];
-//        }else{
-//            NSLog(@"fail:%@",stateStr);
-//            self.textViewLog.text = [NSString stringWithFormat:@"fail:%@",stateStr];
-//        }
-//    }];
-//}
-
-//parse the xml file,update emv capk
-//- (void)updateCAPKConfigByXML{
-//    NSArray *capkArr = [self requestXMLData:EMVCapkXMl];
-//    NSMutableArray *capkTempArr = [NSMutableArray array];
-//    TagCapk *capk = capkArr[1];
-//    if (capk.Rid.length != 0) {
-//        NSString *capkStr1 = [NSString stringWithFormat:@"9F06%@",capk.Rid];
-//        [capkTempArr addObject:capkStr1];
-//    }
-//    if (capk.Public_Key_Index.length != 0) {
-//        NSString *capkStr2 = [NSString stringWithFormat:@"9F22%@",capk.Public_Key_Index];
-//        [capkTempArr addObject:capkStr2];
-//    }
-//    if (capk.Public_Key_Module.length != 0) {
-//        NSString *capkStr3 = [NSString stringWithFormat:@"DF02%@",capk.Public_Key_Module];
-//        [capkTempArr addObject:capkStr3];
-//    }
-//    if (capk.Public_Key_CheckValue.length != 0) {
-//        NSString *capkStr4 = [NSString stringWithFormat:@"DF03%@",capk.Public_Key_CheckValue];
-//        [capkTempArr addObject:capkStr4];
-//    }
-//    if (capk.Pk_exponent.length != 0) {
-//        NSString *capkStr5 = [NSString stringWithFormat:@"DF04%@",capk.Pk_exponent];
-//        [capkTempArr addObject:capkStr5];
-//    }
-//    if (capk.Expired_date.length != 0) {
-//        NSString *capkStr6 = [NSString stringWithFormat:@"c%@",capk.Expired_date];
-//        [capkTempArr addObject:capkStr6];
-//    }
-//    if (capk.Hash_algorithm_identification.length != 0) {
-//        NSString *capkStr7 = [NSString stringWithFormat:@"DF06%@",capk.Hash_algorithm_identification];
-//        [capkTempArr addObject:capkStr7];
-//    }
-//    if (capk.Pk_algorithm_identification.length != 0) {
-//        NSString *capkStr8 = [NSString stringWithFormat:@"DF07%@",capk.Pk_algorithm_identification];
-//        [capkTempArr addObject:capkStr8];
-//    }
-//
-//    [pos updateEmvCAPK:EMVOperation_update data:capkTempArr.copy block:^(BOOL isSuccess, NSString *stateStr) {
-//        if (isSuccess) {
-//            self.textViewLog.text = [NSString stringWithFormat:@"success:%@",stateStr];
-//        }else{
-//            NSLog(@"fail:%@",stateStr);
-//            self.textViewLog.text = [NSString stringWithFormat:@"fail:%@",stateStr];
-//        }
-//    }];
-//}
-
-//Analysis xml
-- (NSArray *)requestXMLData:(EMVXML)appOrCapk {
-    NSString *xml_Path = [[NSBundle mainBundle] pathForResource:@"emv_profile_tlv_20180717" ofType:@"xml"];
-    NSData *xml_data = [[NSData alloc] initWithContentsOfFile:xml_Path];;
-    GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithData:xml_data error:NULL];
-    GDataXMLElement *rootElement = document.rootElement;
-    NSMutableArray *modelArray = [NSMutableArray array];
-    for (GDataXMLElement *videoElement in rootElement.children) {
-        if (appOrCapk == EMVAppXMl) {
-            if ([videoElement.name isEqualToString:@"app"]) {
-               TagApp *video = [[TagApp alloc] init];
-                for (GDataXMLNode *attribute in videoElement.attributes) {
-                    [video setValue:attribute.stringValue forKey:attribute.name];
-                }
-                for (GDataXMLElement *subVideoElement in videoElement.children) {
-                    [video setValue:subVideoElement.stringValue forKey:subVideoElement.name];
-                }
-                [modelArray addObject:video];
-            }
-        }else{
-            if ([videoElement.name isEqualToString:@"capk"]) {
-               TagCapk *video = [[TagCapk alloc] init];
-                for (GDataXMLNode *attribute in videoElement.attributes) {
-                    [video setValue:attribute.stringValue forKey:attribute.name];
-                }
-                for (GDataXMLElement *subVideoElement in videoElement.children) {
-                    [video setValue:subVideoElement.stringValue forKey:subVideoElement.name];
-                }
-                [modelArray addObject:video];
-            }
-        }
-    }
-    return modelArray.copy;
 }
 
 -(void)clearDisplay{
