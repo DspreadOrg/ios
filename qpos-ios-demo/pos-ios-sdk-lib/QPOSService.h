@@ -577,6 +577,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(BOOL)syncIsCardExist:(NSInteger)timeout;
 -(void)isCardExist:(NSInteger)timeout withResultBlock:(void (^)(BOOL))isCardExistBlock;
 -(void)isCardExistInOnlineProcess:(NSInteger)timeout withResultBlock:(void (^)(BOOL))isCardExistBlock;
+-(void)cbc_mac:(NSInteger)keyLen atype:(NSInteger)algorithmType otype:(NSInteger)operatorType data:(NSString *)dataStr delay:(NSInteger)timeout withResultBlock:(void (^)(NSString *))cbcmacBlock;
 -(void)cbc_mac_cn_all:(NSInteger)keyLen atype:(NSInteger)algorithmType otype:(NSInteger)operatorType data:(NSString *)dataStr delay:(NSInteger)timeout withResultBlock:(void (^)(NSString *))cbcmacBlock;
 -(void)getKsn:(void(^)(BOOL isSuccess,NSDictionary *dict))getKsnBlock;
 -(void)getIccCardNo: (NSString *)aterminalTime;
