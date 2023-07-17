@@ -22,7 +22,7 @@
 -(NSArray*)getAllOnlineQPosName2Mode;
 -(void)stopQPos2Mode;
 -(void)setBluetoothDelegate2Mode:(id<BluetoothDelegate2Mode>)aDelegate;
--(CBCentralManagerState)getCBCentralManagerState;
+-(CBManagerState)getCBCentralManagerState;
 @end
 
 

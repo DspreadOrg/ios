@@ -23,13 +23,13 @@
 		141825E02154E75000E77EB4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 141825DF2154E75000E77EB4 /* Security.framework */; };
 		1426226E27439340001F00F0 /* TLVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1426226A27439340001F00F0 /* TLVParser.m */; };
 		1426226F27439340001F00F0 /* TLV.m in Sources */ = {isa = PBXBuildFile; fileRef = 1426226C27439340001F00F0 /* TLV.m */; };
+		146B00A02A654236008259D5 /* libqpos-ios-release-sdk-v3.5.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B009F2A654236008259D5 /* libqpos-ios-release-sdk-v3.5.8.a */; };
+		146B00A42A654255008259D5 /* QPOS cute,CR100,D20,D30.xml in Resources */ = {isa = PBXBuildFile; fileRef = 146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */; };
+		146B00A52A654255008259D5 /* QPOS mini.xml in Resources */ = {isa = PBXBuildFile; fileRef = 146B00A22A654255008259D5 /* QPOS mini.xml */; };
+		146B00A62A654255008259D5 /* A27CAYC_S1_master.asc in Resources */ = {isa = PBXBuildFile; fileRef = 146B00A32A654255008259D5 /* A27CAYC_S1_master.asc */; };
 		146CBAD4211AA7420014BE8B /* TagCapk.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CBAD3211AA7420014BE8B /* TagCapk.m */; };
 		147C1757258DF283000C9097 /* rsa_public_key_pkcs8_test.pem in Resources */ = {isa = PBXBuildFile; fileRef = 147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */; };
 		147EF1D32486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml in Resources */ = {isa = PBXBuildFile; fileRef = 147EF1D22486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml */; };
-		14C447892A29C8A700CF423F /* QPOS mini.xml in Resources */ = {isa = PBXBuildFile; fileRef = 14C447862A29C8A700CF423F /* QPOS mini.xml */; };
-		14C4478A2A29C8A700CF423F /* QPOS cute,CR100,D20,D30.xml in Resources */ = {isa = PBXBuildFile; fileRef = 14C447872A29C8A700CF423F /* QPOS cute,CR100,D20,D30.xml */; };
-		14C4478B2A29C8A700CF423F /* A27CAYC_S1_master.asc in Resources */ = {isa = PBXBuildFile; fileRef = 14C447882A29C8A700CF423F /* A27CAYC_S1_master.asc */; };
-		14C6EBA8298A4C5C0081D586 /* libqpos-ios-release-sdk-v3.5.7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C6EBA7298A4C5C0081D586 /* libqpos-ios-release-sdk-v3.5.7.a */; };
 		14EFBE072118152E0093681E /* TagApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBE032118152D0093681E /* TagApp.m */; };
 		14EFBE082118152E0093681E /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBE042118152D0093681E /* GDataXMLNode.m */; };
 		14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EFBE09211816B80093681E /* libxml2.tbd */; };
@@ -82,15 +82,15 @@
 		1426226C27439340001F00F0 /* TLV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLV.m; sourceTree = "<group>"; };
 		1426226D27439340001F00F0 /* TLVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLVParser.h; sourceTree = "<group>"; };
 		14653EB6240E83D40020F788 /* QPOSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
+		146B009F2A654236008259D5 /* libqpos-ios-release-sdk-v3.5.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-release-sdk-v3.5.8.a"; sourceTree = "<group>"; };
+		146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "QPOS cute,CR100,D20,D30.xml"; sourceTree = "<group>"; };
+		146B00A22A654255008259D5 /* QPOS mini.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "QPOS mini.xml"; sourceTree = "<group>"; };
+		146B00A32A654255008259D5 /* A27CAYC_S1_master.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = A27CAYC_S1_master.asc; sourceTree = "<group>"; };
 		146CBAD2211AA7420014BE8B /* TagCapk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TagCapk.h; sourceTree = "<group>"; };
 		146CBAD3211AA7420014BE8B /* TagCapk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TagCapk.m; sourceTree = "<group>"; };
 		147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_public_key_pkcs8_test.pem; sourceTree = "<group>"; };
 		147EF1D22486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "emv_profile_tlv_20180717.xml 14-27-29-797.xml"; sourceTree = "<group>"; };
 		14A7785D29BADE1D005404F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		14C447862A29C8A700CF423F /* QPOS mini.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "QPOS mini.xml"; path = "../../../../Downloads/QPOS mini.xml"; sourceTree = "<group>"; };
-		14C447872A29C8A700CF423F /* QPOS cute,CR100,D20,D30.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "QPOS cute,CR100,D20,D30.xml"; path = "../../../../Downloads/QPOS cute,CR100,D20,D30.xml"; sourceTree = "<group>"; };
-		14C447882A29C8A700CF423F /* A27CAYC_S1_master.asc */ = {isa = PBXFileReference; lastKnownFileType = file; name = A27CAYC_S1_master.asc; path = ../../../../Downloads/A27CAYC_S1_master.asc; sourceTree = "<group>"; };
-		14C6EBA7298A4C5C0081D586 /* libqpos-ios-release-sdk-v3.5.7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-release-sdk-v3.5.7.a"; sourceTree = "<group>"; };
 		14D12C2422F2B70E00DB0EAB /* QPOSUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSUtil.h; sourceTree = "<group>"; };
 		14EFBE012118152D0093681E /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		14EFBE032118152D0093681E /* TagApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagApp.m; sourceTree = "<group>"; };
@@ -113,8 +113,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
+				146B00A02A654236008259D5 /* libqpos-ios-release-sdk-v3.5.8.a in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
-				14C6EBA8298A4C5C0081D586 /* libqpos-ios-release-sdk-v3.5.7.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,10 +256,10 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				14C447882A29C8A700CF423F /* A27CAYC_S1_master.asc */,
-				14C447872A29C8A700CF423F /* QPOS cute,CR100,D20,D30.xml */,
-				14C447862A29C8A700CF423F /* QPOS mini.xml */,
-				14C6EBA7298A4C5C0081D586 /* libqpos-ios-release-sdk-v3.5.7.a */,
+				146B00A32A654255008259D5 /* A27CAYC_S1_master.asc */,
+				146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */,
+				146B00A22A654255008259D5 /* QPOS mini.xml */,
+				146B009F2A654236008259D5 /* libqpos-ios-release-sdk-v3.5.8.a */,
 				147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */,
 				14653EB6240E83D40020F788 /* QPOSService.h */,
 				6BB1DC061A5942B6009F40CD /* BTDeviceFinder.h */,
@@ -350,16 +350,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				147EF1D32486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml in Resources */,
-				14C4478A2A29C8A700CF423F /* QPOS cute,CR100,D20,D30.xml in Resources */,
 				00A9004C183B08B100D22572 /* Images.xcassets in Resources */,
 				1404A643242B424900899293 /* Localizable.strings in Resources */,
+				146B00A52A654255008259D5 /* QPOS mini.xml in Resources */,
+				146B00A42A654255008259D5 /* QPOS cute,CR100,D20,D30.xml in Resources */,
 				147C1757258DF283000C9097 /* rsa_public_key_pkcs8_test.pem in Resources */,
-				14C447892A29C8A700CF423F /* QPOS mini.xml in Resources */,
 				1404A639242B3EF300899293 /* Main.storyboard in Resources */,
 				00A9003B183B08B100D22572 /* InfoPlist.strings in Resources */,
 				4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */,
 				6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */,
-				14C4478B2A29C8A700CF423F /* A27CAYC_S1_master.asc in Resources */,
+				146B00A62A654255008259D5 /* A27CAYC_S1_master.asc in Resources */,
 				1404A635242B3BE900899293 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

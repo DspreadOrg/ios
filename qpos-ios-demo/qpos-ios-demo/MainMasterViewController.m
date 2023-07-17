@@ -91,8 +91,8 @@ NSInteger   scanBluetoothTime = 15;
     if(is2ModeBluetooth){
         NSLog(@"蓝牙状态:%ld",(long)[bt getCBCentralManagerState]);
         [bt setBluetoothDelegate2Mode:self];
-        if ([bt getCBCentralManagerState] == CBCentralManagerStateUnknown) {
-            while ([bt getCBCentralManagerState]!= CBCentralManagerStatePoweredOn) {
+        if ([bt getCBCentralManagerState] == CBManagerStateUnknown) {
+            while ([bt getCBCentralManagerState]!= CBManagerStatePoweredOn) {
                 NSLog(@"Bluetooth state is not power on");
                 [self sleepMs:10];
                 if(delay++==10){
