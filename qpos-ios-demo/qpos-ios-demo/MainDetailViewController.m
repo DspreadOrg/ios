@@ -173,6 +173,7 @@ typedef enum : NSUInteger {
         // secure entry.
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:textField];
         textField.secureTextEntry = YES;
+        textField.keyboardType = UIKeyboardTypeNumberPad;
     }];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [pos cancelPinEntry];
@@ -181,10 +182,9 @@ typedef enum : NSUInteger {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:alertController.textFields.firstObject];
     }]];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //获取第1个输入框；
         NSString *pinblock = [self buildISO4PinBlock:self.pin dict:pos.getEncryptDataDict];
-        NSLog(@"pinblock = %@",pinblock);
-        [pos sendCvmPin:pinblock isEncrypted:YES];
+        NSData *dataPin = [pinblock dataUsingEncoding:NSUTF8StringEncoding];
+        [pos sendCvmPin:(Byte *)[dataPin bytes] pinLen:dataPin.length isEncrypted:YES];
         // Stop listening for text changed notifications.
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:alertController.textFields.firstObject];
     }]];
