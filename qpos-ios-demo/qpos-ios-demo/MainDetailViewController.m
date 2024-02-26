@@ -29,9 +29,9 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UIButton *btnGetPosInfo;
 @property (weak, nonatomic) IBOutlet UIButton *btnDisconnect;
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdateEMV;
-@property (nonatomic,assign)BOOL updateFWFlag;
-@property (nonatomic,strong)NSDictionary *pinDataDict;
-
+@property (nonatomic,assign) BOOL updateFWFlag;
+@property (nonatomic,strong) NSDictionary *pinDataDict;
+@property (nonatomic,copy) NSString *pin;
 @end
 
 @implementation MainDetailViewController{
@@ -164,20 +164,47 @@ typedef enum : NSUInteger {
 //callback of input pin on phone
 -(void) onRequestPinEntry{
     NSLog(@"onRequestPinEntry");
+    self.pin = @"";
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Please set pin", nil) message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    // Add the text field for the secure text entry.
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        // Listen for changes to the text field's text so that we can toggle the current
+        // action's enabled property based on whether the user has entered a sufficiently
+        // secure entry.
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:textField];
+        textField.secureTextEntry = YES;
+    }];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [pos cancelPinEntry];
         NSLog(@"cancel pin entry");
+        // Stop listening for text changed notifications.
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:alertController.textFields.firstObject];
     }]];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //获取第1个输入框；
-        UITextField *titleTextField = alertController.textFields.firstObject;
-        NSString *pinStr = titleTextField.text;
-        NSLog(@"pinStr = %@",pinStr);
-        [pos sendPinEntryResult:pinStr];
+        NSString *pinblock = [self buildISO4PinBlock:self.pin dict:pos.getEncryptDataDict];
+        NSLog(@"pinblock = %@",pinblock);
+        [pos sendCvmPin:pinblock isEncrypted:YES];
+        // Stop listening for text changed notifications.
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:alertController.textFields.firstObject];
     }]];
-    [alertController addTextFieldWithConfigurationHandler:nil];
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)handleTextFieldTextDidChangeNotification:(NSNotification *)notification {
+    UITextField *textField = notification.object;
+    NSString *pinStr = textField.text;
+    NSString *cvmKeyList = pos.getCvmKeyList;
+    NSString *newPin = @"";
+    if(![@"" isEqualToString:cvmKeyList] && ![@"" isEqualToString:pinStr]){
+        cvmKeyList = [QPOSUtil asciiFormatString:[QPOSUtil HexStringToByteArray:cvmKeyList]];
+        for (NSInteger i = 0; i < pinStr.length; i++) {
+            NSRange range = [cvmKeyList rangeOfString:[pinStr substringWithRange:NSMakeRange(i, 1)]];
+            newPin = [newPin stringByAppendingString:[QPOSUtil getHexByDecimal:range.location]];
+        }
+    }
+    self.pin = newPin;
+    NSLog(@"newPin: %@",self.pin);
 }
 
 // Prompt user to insert/swipe/tap card
@@ -277,6 +304,7 @@ typedef enum : NSUInteger {
             self.lableAmount.text = @"";
             NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
         }];
+//        [pos sendNfcProcessResult:@"8A02303091106C741A0100F69FF96C741A0100F69FF9720F860D84240000082129027736EDDA04"];
     }else if(result==DoTradeResult_NFC_DECLINED){
         self.textViewLog.text = @"Tap Card Declined";
         NSLog(@"onDoTradeResult: %@", self.textViewLog.text);
@@ -790,6 +818,14 @@ typedef enum : NSUInteger {
     }
 }
 
+- (void)generateTransportKey{
+    [pos generateTransportKey:10 dataBlock:^(NSDictionary *dataBlock) {
+        NSString *transportKey = [dataBlock objectForKey:@"transportKey"];
+        NSString *checkValue = [dataBlock objectForKey:@"checkValue"];
+        NSLog(@"transportKey: %@, checkValue = %@",transportKey,checkValue);
+    }];
+}
+
 //get encrypt data function
 - (void)getEncryptData{
     NSData *data = [@"123456789" dataUsingEncoding:NSUTF8StringEncoding];;
@@ -897,11 +933,11 @@ typedef enum : NSUInteger {
     return nil;
 }
 
-// use iso-4 format to encrypt pin
-- (NSString *)encryptedPinBlock:(NSString *)pin pan:(NSString *)pan random:(NSString *)random aesKey:(NSString *)aesKey{
-    NSString *pinStr=@"4";
-    NSString *pinLen = [NSString stringWithFormat:@"%lu", (unsigned long)pin.length];
-    pinStr = [[pinStr stringByAppendingString:pinLen] stringByAppendingString:pin];
+- (NSString *)buildISO4PinBlock:(NSString *)pin dict:(NSDictionary *)dict{
+    NSString *random = [dict objectForKey:@"RandomData"];
+    NSString *aesKey = [dict objectForKey:@"AESKey"];
+    NSString *pan = [dict objectForKey:@"PAN"];
+    NSString *pinStr = [NSString stringWithFormat:@"4%lu%@",pin.length,pin];
     NSInteger pinStrLen = 16 - pinStr.length;
     for (int i = 0; i < pinStrLen; i++) {
         pinStr = [pinStr stringByAppendingString:@"A"];
@@ -909,12 +945,18 @@ typedef enum : NSUInteger {
     NSString *newRandom = [random substringToIndex:16];
     pinStr = [pinStr stringByAppendingString:newRandom];
     NSString *panStr = @"";
-    NSString *panLen = [NSString stringWithFormat:@"%lu", (unsigned long)pan.length - 12];
-    panStr = [panStr stringByAppendingString:panLen];
-    panStr = [panStr stringByAppendingString:pan];
-    NSInteger panStrLen = 32-panStr.length;
-    for (int i = 0; i < panStrLen; i++) {
-       panStr = [panStr stringByAppendingString:@"0"];
+    if(pan.length < 12){
+        panStr = @"0";
+        for (int i = 0; i < 12 - pan.length; i++) {
+            [panStr stringByAppendingString:@"0"];
+        }
+        panStr = [[panStr stringByAppendingString:pan] stringByAppendingString:@"0000000000000000000"];
+    }else{
+        panStr = [NSString stringWithFormat:@"%lu%@",pan.length - 12,pan];
+        NSInteger panLen = 32-panStr.length;
+        for (int i = 0; i < panLen; i++) {
+           panStr = [panStr stringByAppendingString:@"0"];
+        }
     }
     NSString *blockA = [self encryptOperation:kCCEncrypt value:pinStr key:aesKey];
     NSString *blockB = [self pinxCreator:panStr withPinv:blockA];
@@ -924,7 +966,7 @@ typedef enum : NSUInteger {
 
 - (NSString *)pinxCreator:(NSString *)pan withPinv:(NSString *)pinv{
     if (pan.length != pinv.length){
-        return nil;
+        return @"";
     }
     const char *panchar = [pan UTF8String];
     const char *pinvchar = [pinv UTF8String];

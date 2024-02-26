@@ -395,6 +395,7 @@ typedef NS_ENUM(NSInteger,BuzzerType){
 -(void)onReturnPowerOnFelicaResult:(FelicaStatusCode)result;
 -(void)onReturnPowerOffFelicaResult:(FelicaStatusCode)result;
 -(void)onReturnSendApduFelicaResult:(FelicaStatusCode)result responseLen:(NSString *)responseLen responseData:(NSString *)responseData;
+-(void)onRequestNFCBatchData:(TransactionResult)transactionResult tlv:(NSString*)tlv;
 @end
 
 @interface QPOSService : NSObject
@@ -555,6 +556,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 
 -(BOOL)isQposPresent;
 -(NSDictionary *)anlysEmvIccData:(NSString *)tlv;
+-(NSDictionary *)anlysEmvIccDataFor18:(NSString *)tlv;
 //you can use this api to get progress of upgrade pos firmware
 //you can use this api to upgrade pos firmware.
 -(NSInteger)getUpdateProgress;
@@ -638,5 +640,6 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)setCustomLogoDisplay:(LcdModeAlign)alcdModeAlign customLogoStr:(NSString *)customLogoStr timeout:(NSInteger)timeout resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(NSString *)getRandomNumByLen:(NSInteger)length;
 -(void)getRandomNumByLen:(NSInteger)length resultBlock:(void(^)(NSString *randomStr))resultBlock;
+-(void)sendNfcProcessResult:(NSString *)tlv;
 @end
 
