@@ -332,6 +332,31 @@ typedef NS_ENUM(NSInteger,BuzzerType){
     BuzzerType_PAIRING_SUCCESS,
 };
 
+typedef NS_ENUM(NSInteger,KeyPart){
+    KeyPart_KEY_LEFT,
+    KeyPart_KEY_RIGHT,
+    KeyPart_KEY_ALL,
+};
+
+typedef NS_ENUM(NSInteger,CryptMode){
+    CryptMode_ECB_ENCRYPT,
+    CryptMode_ECB_DECRYPT,
+    CryptMode_CBC_ENCRYPT,
+    CryptMode_CBC_DECRYPT,
+};
+
+typedef NS_ENUM(NSInteger,KeyType){
+    KeyType_TRACK_KEY,
+    KeyType_PIN_KEY,
+    KeyType_EMV_KEY,
+    KeyType_MAC_KEY,
+};
+
+typedef NS_ENUM(NSInteger,KeyManager){
+    KeyManager_DEFAULT_KEY,
+    KeyManager_MKSK_KEY,
+    KeyManager_DUKPT_KEY,
+};
 
 @protocol QPOSServiceListener<NSObject>
 
@@ -641,5 +666,8 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(NSString *)getRandomNumByLen:(NSInteger)length;
 -(void)getRandomNumByLen:(NSInteger)length resultBlock:(void(^)(NSString *randomStr))resultBlock;
 -(void)sendNfcProcessResult:(NSString *)tlv;
+-(void)getDeviceECCPublicKey:(NSInteger)timeout resultBlock:(void(^)(NSString *devicePublicKey))resultBlock;
+-(void)updateServerECCPublicKey:(NSString *)serverPublicKeyStr timeout:(NSInteger)timeout resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)calculateMacWithKey:(KeyPart)keyPart cryptMode:(CryptMode)cryptMode keyManager:(KeyManager)keyManager keyType:(KeyType)keyType data:(NSString *)data resultBlock:(void(^)(NSDictionary *dataDict))resultBlock;
 @end
 
