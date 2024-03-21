@@ -412,6 +412,9 @@ typedef enum : NSUInteger {
 -(void) onRequestOnlineProcess: (NSString*) tlv{
     NSLog(@"onRequestOnlineProcess = %@",[[QPOSService sharedInstance] anlysEmvIccData:tlv]);
 /*
+    [pos calculateMacWithKey:KeyPart_KEY_ALL cryptMode:CryptMode_CBC_ENCRYPT keyManager:KeyManager_DUKPT_KEY keyType:KeyType_TRACK_KEY data:@"22222222222222222222222222222222" resultBlock:^(NSDictionary *dataDict) {
+        NSLog(@"dataDict: %@",dataDict);
+    }];
     NSArray *dict = [TLVParser parse:tlv];
     for (TLV *tlv in dict) {
         NSLog(@"tag: %@ length: %@ value: %@",tlv.tag,tlv.length,tlv.value);
