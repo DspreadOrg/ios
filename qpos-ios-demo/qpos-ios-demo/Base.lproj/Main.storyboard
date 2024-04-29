@@ -327,6 +327,18 @@
                                             <action selector="updateEMVConfig:" destination="mHT-30-Oa7" eventType="touchUpInside" id="Q1t-uP-VOY"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEJ-ju-w6D">
+                                        <rect key="frame" x="4" y="400" width="120" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.84060612469999996" green="1" blue="0.7553496904" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="updateFW">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="updatePosFirmware:" destination="mHT-30-Oa7" eventType="touchUpInside" id="Fwy-ZD-GCy"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="115" id="6X2-f1-vFO"/>

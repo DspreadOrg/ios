@@ -339,10 +339,14 @@ typedef NS_ENUM(NSInteger,KeyPart){
 };
 
 typedef NS_ENUM(NSInteger,CryptMode){
-    CryptMode_ECB_ENCRYPT,
-    CryptMode_ECB_DECRYPT,
-    CryptMode_CBC_ENCRYPT,
-    CryptMode_CBC_DECRYPT,
+    CryptMode_DES_ECB_ENCRYPT,
+    CryptMode_DES_ECB_DECRYPT,
+    CryptMode_DES_CBC_ENCRYPT,
+    CryptMode_DES_CBC_DECRYPT,
+    CryptMode_AES_ECB_ENCRYPT,
+    CryptMode_AES_ECB_DECRYPT,
+    CryptMode_AES_CBC_ENCRYPT,
+    CryptMode_AES_CBC_DECRYPT,
 };
 
 typedef NS_ENUM(NSInteger,KeyType){
@@ -356,6 +360,13 @@ typedef NS_ENUM(NSInteger,KeyManager){
     KeyManager_DEFAULT_KEY,
     KeyManager_MKSK_KEY,
     KeyManager_DUKPT_KEY,
+};
+
+typedef NS_ENUM(NSInteger,TR31KeyType){
+    TR31KeyType_NEW_KEY_ALL,
+    TR31KeyType_NEW_KEY_TMK,
+    TR31KeyType_NEW_KEY_PIN,
+    TR31KeyType_NEW_KEY_DATA,
 };
 
 @protocol QPOSServiceListener<NSObject>
@@ -421,6 +432,7 @@ typedef NS_ENUM(NSInteger,KeyManager){
 -(void)onReturnPowerOffFelicaResult:(FelicaStatusCode)result;
 -(void)onReturnSendApduFelicaResult:(FelicaStatusCode)result responseLen:(NSString *)responseLen responseData:(NSString *)responseData;
 -(void)onRequestNFCBatchData:(TransactionResult)transactionResult tlv:(NSString*)tlv;
+-(void)onGetCardInfoResult:(NSDictionary *)cardInfo;
 @end
 
 @interface QPOSService : NSObject
@@ -625,12 +637,12 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)getShutDownTimeOnConnected;
 -(void)updateKeyByTR_31:(NSInteger)keyIndex keyBlock:(NSString *)keyBlock;
 -(void)updateKeyByTR_31:(NSInteger)keyIndex keyBlock:(NSString *)keyBlock timeout:(NSInteger)timeout;
+-(void)updateKeyByTR_31:(TR31KeyType)keyType ksn:(NSString *)ksn keyBlock:(NSString *)keyBlock;
 -(void)generateSessionKeys;
 -(void)updateRSA:(NSString *)publicKey pemFile:(NSString *)pemFile;
 -(void)getEncryptData:(NSData *)data keyType:(NSString*)keyType keyIndex:(NSString *)keyIndex timeOut:(NSInteger)timeout;
 -(void)getMPUCardInfo:(void(^)(NSDictionary *dict))mpuInfoBlock;
 -(void)getMIccCardData:(NSString *)transactionTime;
--(void)updateKeyByTR_31VersionD:(NSInteger)keyIndex ksn:(NSString *)ksn keyBlock:(NSString *)keyBlock;
 -(void)powerOnFelica:(NSInteger)timeout;
 -(void)powerOffFelica:(NSInteger)timeout;
 -(void)sendApduByFelica:(NSString *)apduString timeout:(NSInteger)timeout;
@@ -654,6 +666,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)setIsSupportClsSelectEmvApp:(BOOL)isSupportClsSelectEmvApp;
 -(NSDictionary *)getEncryptDataDict;
 -(void)sendCvmPin:(Byte[])pin pinLen:(NSInteger)pinLen isEncrypted:(BOOL)isEncrypted;
+-(void)sendCvmPin:(NSString *)pinStr isEncrypted:(BOOL)isEncrypted;
 -(NSString *)getCvmKeyList;
 -(NSArray *)getCvmKeyListArr;
 -(NSInteger)getCvmPinTryLimit;
@@ -668,6 +681,12 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)sendNfcProcessResult:(NSString *)tlv;
 -(void)getDeviceECCPublicKey:(NSInteger)timeout resultBlock:(void(^)(NSString *devicePublicKey))resultBlock;
 -(void)updateServerECCPublicKey:(NSString *)serverPublicKeyStr timeout:(NSInteger)timeout resultBlock:(void(^)(BOOL isSuccess))resultBlock;
--(void)calculateMacWithKey:(KeyPart)keyPart cryptMode:(CryptMode)cryptMode keyManager:(KeyManager)keyManager keyType:(KeyType)keyType data:(NSString *)data resultBlock:(void(^)(NSDictionary *dataDict))resultBlock;
+-(NSDictionary *)calculateMacWithKey:(KeyPart)keyPart cryptMode:(CryptMode)cryptMode keyManager:(KeyManager)keyManager keyType:(KeyType)keyType data:(NSString *)data isAddKsn:(BOOL)isAddKsn;
+-(NSDictionary *)calculateDataWithKey:(KeyPart)keyPart cryptMode:(CryptMode)cryptMode keyManager:(KeyManager)keyManager keyType:(KeyType)keyType data:(NSString *)data isAddKsn:(BOOL)isAddKsn;
+-(NSDictionary *)getEncryptDataWithTag:(NSString *)tagName cardType:(int)cardType cryptMode:(CryptMode)cryptMode paddingStr:(NSString *)paddingStr;
+-(void)doTrade:(NSInteger)timeout isAddKsn:(BOOL)isAddKsn;
+-(void)getICCCardNumber:(NSString *)transactionTime;
+-(void)setSupportCashBack:(BOOL)supportCashBack;
+-(void)setCardInfoObtainFlag:(BOOL)isNeedReturnCardInfo;
 @end
 

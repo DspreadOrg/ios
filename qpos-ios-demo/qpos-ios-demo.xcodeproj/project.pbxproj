@@ -21,17 +21,14 @@
 		1404A639242B3EF300899293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1404A63B242B3EF300899293 /* Main.storyboard */; };
 		1404A643242B424900899293 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1404A645242B424900899293 /* Localizable.strings */; };
 		141825E02154E75000E77EB4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 141825DF2154E75000E77EB4 /* Security.framework */; };
-		1426226E27439340001F00F0 /* TLVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1426226A27439340001F00F0 /* TLVParser.m */; };
-		1426226F27439340001F00F0 /* TLV.m in Sources */ = {isa = PBXBuildFile; fileRef = 1426226C27439340001F00F0 /* TLV.m */; };
-		146B00A02A654236008259D5 /* libqpos-ios-release-sdk-v3.5.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B009F2A654236008259D5 /* libqpos-ios-release-sdk-v3.5.8.a */; };
 		146B00A42A654255008259D5 /* QPOS cute,CR100,D20,D30.xml in Resources */ = {isa = PBXBuildFile; fileRef = 146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */; };
 		146B00A52A654255008259D5 /* QPOS mini.xml in Resources */ = {isa = PBXBuildFile; fileRef = 146B00A22A654255008259D5 /* QPOS mini.xml */; };
-		146B00A62A654255008259D5 /* A27CAYC_S1_master.asc in Resources */ = {isa = PBXBuildFile; fileRef = 146B00A32A654255008259D5 /* A27CAYC_S1_master.asc */; };
-		146CBAD4211AA7420014BE8B /* TagCapk.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CBAD3211AA7420014BE8B /* TagCapk.m */; };
 		147C1757258DF283000C9097 /* rsa_public_key_pkcs8_test.pem in Resources */ = {isa = PBXBuildFile; fileRef = 147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */; };
-		147EF1D32486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml in Resources */ = {isa = PBXBuildFile; fileRef = 147EF1D22486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml */; };
-		14EFBE072118152E0093681E /* TagApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBE032118152D0093681E /* TagApp.m */; };
-		14EFBE082118152E0093681E /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EFBE042118152D0093681E /* GDataXMLNode.m */; };
+		147F798D2BDF51B10066039E /* TLV.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F798C2BDF51B10066039E /* TLV.m */; };
+		147F798F2BDF51C60066039E /* TLVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F798E2BDF51C60066039E /* TLVParser.m */; };
+		147F799D2BDF70340066039E /* DUKPT_2009_CBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F799B2BDF70340066039E /* DUKPT_2009_CBC.m */; };
+		147F79AE2BDF73520066039E /* libqpos-ios-release-sdk-v3.6.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 147F79AD2BDF73520066039E /* libqpos-ios-release-sdk-v3.6.8.a */; };
+		147F79B02BDF74D60066039E /* QPOS_Mini_Firmware.asc in Resources */ = {isa = PBXBuildFile; fileRef = 147F79AF2BDF74D60066039E /* QPOS_Mini_Firmware.asc */; };
 		14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EFBE09211816B80093681E /* libxml2.tbd */; };
 		4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4B86A8CA1B2E75AD00B95485 /* 1801.wav */; };
 		6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */; };
@@ -77,25 +74,20 @@
 		1404A644242B424900899293 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1404A646242B424A00899293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		141825DF2154E75000E77EB4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		1426226A27439340001F00F0 /* TLVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLVParser.m; sourceTree = "<group>"; };
 		1426226B27439340001F00F0 /* TLV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLV.h; sourceTree = "<group>"; };
-		1426226C27439340001F00F0 /* TLV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLV.m; sourceTree = "<group>"; };
 		1426226D27439340001F00F0 /* TLVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLVParser.h; sourceTree = "<group>"; };
 		14653EB6240E83D40020F788 /* QPOSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
-		146B009F2A654236008259D5 /* libqpos-ios-release-sdk-v3.5.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-release-sdk-v3.5.8.a"; sourceTree = "<group>"; };
 		146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "QPOS cute,CR100,D20,D30.xml"; sourceTree = "<group>"; };
 		146B00A22A654255008259D5 /* QPOS mini.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "QPOS mini.xml"; sourceTree = "<group>"; };
-		146B00A32A654255008259D5 /* A27CAYC_S1_master.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = A27CAYC_S1_master.asc; sourceTree = "<group>"; };
-		146CBAD2211AA7420014BE8B /* TagCapk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TagCapk.h; sourceTree = "<group>"; };
-		146CBAD3211AA7420014BE8B /* TagCapk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TagCapk.m; sourceTree = "<group>"; };
 		147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_public_key_pkcs8_test.pem; sourceTree = "<group>"; };
-		147EF1D22486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "emv_profile_tlv_20180717.xml 14-27-29-797.xml"; sourceTree = "<group>"; };
+		147F798C2BDF51B10066039E /* TLV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLV.m; sourceTree = "<group>"; };
+		147F798E2BDF51C60066039E /* TLVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLVParser.m; sourceTree = "<group>"; };
+		147F799B2BDF70340066039E /* DUKPT_2009_CBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DUKPT_2009_CBC.m; sourceTree = "<group>"; };
+		147F799C2BDF70340066039E /* DUKPT_2009_CBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DUKPT_2009_CBC.h; sourceTree = "<group>"; };
+		147F79AD2BDF73520066039E /* libqpos-ios-release-sdk-v3.6.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-release-sdk-v3.6.8.a"; sourceTree = "<group>"; };
+		147F79AF2BDF74D60066039E /* QPOS_Mini_Firmware.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = QPOS_Mini_Firmware.asc; sourceTree = "<group>"; };
 		14A7785D29BADE1D005404F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		14D12C2422F2B70E00DB0EAB /* QPOSUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSUtil.h; sourceTree = "<group>"; };
-		14EFBE012118152D0093681E /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		14EFBE032118152D0093681E /* TagApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagApp.m; sourceTree = "<group>"; };
-		14EFBE042118152D0093681E /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
-		14EFBE052118152D0093681E /* TagApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagApp.h; sourceTree = "<group>"; };
 		14EFBE09211816B80093681E /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		4B86A8CA1B2E75AD00B95485 /* 1801.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 1801.wav; sourceTree = "<group>"; };
 		6B2788B41883D4210095A338 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -113,7 +105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
-				146B00A02A654236008259D5 /* libqpos-ios-release-sdk-v3.5.8.a in Frameworks */,
+				147F79AE2BDF73520066039E /* libqpos-ios-release-sdk-v3.6.8.a in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,7 +128,6 @@
 			children = (
 				6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */,
 				143A25B0215A3E2900503E0E /* decryptDataTool */,
-				14EFBE002118152D0093681E /* decryptXml */,
 				6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */,
 				00A90036183B08B100D22572 /* qpos-ios-demo */,
 				00A90058183B08B100D22572 /* qpos-ios-demoTests */,
@@ -222,26 +213,14 @@
 		143A25B0215A3E2900503E0E /* decryptDataTool */ = {
 			isa = PBXGroup;
 			children = (
+				147F799C2BDF70340066039E /* DUKPT_2009_CBC.h */,
+				147F799B2BDF70340066039E /* DUKPT_2009_CBC.m */,
 				1426226B27439340001F00F0 /* TLV.h */,
-				1426226C27439340001F00F0 /* TLV.m */,
+				147F798C2BDF51B10066039E /* TLV.m */,
 				1426226D27439340001F00F0 /* TLVParser.h */,
-				1426226A27439340001F00F0 /* TLVParser.m */,
+				147F798E2BDF51C60066039E /* TLVParser.m */,
 			);
 			path = decryptDataTool;
-			sourceTree = "<group>";
-		};
-		14EFBE002118152D0093681E /* decryptXml */ = {
-			isa = PBXGroup;
-			children = (
-				147EF1D22486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml */,
-				14EFBE012118152D0093681E /* GDataXMLNode.h */,
-				14EFBE042118152D0093681E /* GDataXMLNode.m */,
-				14EFBE052118152D0093681E /* TagApp.h */,
-				14EFBE032118152D0093681E /* TagApp.m */,
-				146CBAD2211AA7420014BE8B /* TagCapk.h */,
-				146CBAD3211AA7420014BE8B /* TagCapk.m */,
-			);
-			path = decryptXml;
 			sourceTree = "<group>";
 		};
 		6B2EA682183C7C5000E152CD /* iPad */ = {
@@ -256,10 +235,10 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				146B00A32A654255008259D5 /* A27CAYC_S1_master.asc */,
+				147F79AD2BDF73520066039E /* libqpos-ios-release-sdk-v3.6.8.a */,
+				147F79AF2BDF74D60066039E /* QPOS_Mini_Firmware.asc */,
 				146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */,
 				146B00A22A654255008259D5 /* QPOS mini.xml */,
-				146B009F2A654236008259D5 /* libqpos-ios-release-sdk-v3.5.8.a */,
 				147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */,
 				14653EB6240E83D40020F788 /* QPOSService.h */,
 				6BB1DC061A5942B6009F40CD /* BTDeviceFinder.h */,
@@ -317,7 +296,7 @@
 				ORGANIZATIONNAME = Robin;
 				TargetAttributes = {
 					00A9002C183B08B100D22572 = {
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					00A90050183B08B100D22572 = {
 						TestTargetID = 00A9002C183B08B100D22572;
@@ -349,8 +328,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				147EF1D32486345300AD5BB7 /* emv_profile_tlv_20180717.xml 14-27-29-797.xml in Resources */,
 				00A9004C183B08B100D22572 /* Images.xcassets in Resources */,
+				147F79B02BDF74D60066039E /* QPOS_Mini_Firmware.asc in Resources */,
 				1404A643242B424900899293 /* Localizable.strings in Resources */,
 				146B00A52A654255008259D5 /* QPOS mini.xml in Resources */,
 				146B00A42A654255008259D5 /* QPOS cute,CR100,D20,D30.xml in Resources */,
@@ -359,7 +338,6 @@
 				00A9003B183B08B100D22572 /* InfoPlist.strings in Resources */,
 				4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */,
 				6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */,
-				146B00A62A654255008259D5 /* A27CAYC_S1_master.asc in Resources */,
 				1404A635242B3BE900899293 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,16 +356,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1426226E27439340001F00F0 /* TLVParser.m in Sources */,
 				00A9004A183B08B100D22572 /* MainDetailViewController.m in Sources */,
-				14EFBE082118152E0093681E /* GDataXMLNode.m in Sources */,
-				14EFBE072118152E0093681E /* TagApp.m in Sources */,
+				147F798F2BDF51C60066039E /* TLVParser.m in Sources */,
 				00A9003D183B08B100D22572 /* main.m in Sources */,
 				00A90047183B08B100D22572 /* MainMasterViewController.m in Sources */,
-				1426226F27439340001F00F0 /* TLV.m in Sources */,
+				147F799D2BDF70340066039E /* DUKPT_2009_CBC.m in Sources */,
 				75FE2A651ECEFC40001DA427 /* MainViewController.m in Sources */,
 				00A90041183B08B100D22572 /* MainAppDelegate.m in Sources */,
-				146CBAD4211AA7420014BE8B /* TagCapk.m in Sources */,
+				147F798D2BDF51B10066039E /* TLV.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,11 +509,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 8BWE69EUUJ;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G9A3SP6XT9;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G9A3SP6XT9;
 				ENABLE_BITCODE = YES;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -557,8 +531,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dspread.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = CommonCertificate;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AdHoc-Test";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -570,11 +543,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 8BWE69EUUJ;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G9A3SP6XT9;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G9A3SP6XT9;
 				ENABLE_BITCODE = YES;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -593,8 +564,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dspread.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = CommonCertificate;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AdHoc-Test";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;

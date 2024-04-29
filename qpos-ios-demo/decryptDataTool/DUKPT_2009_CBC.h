@@ -13,7 +13,7 @@
 + (NSData *)GetPinKeyVariantKsn:(NSData *) ksn ipek: (NSData *)ipek;
 + (NSData *) GenerateIPEKksn:(NSData *) ksn bdk: (NSData *)bdk;
 + (NSData *) GetDataKeyKsn:(NSData *) ksn ipek: (NSData *)ipek;
-+ (NSData *)GetDataKeyVariantKsn:(NSData *) ksn ipek: (NSData *)ipek;
++ (NSData *) GetDataKeyVariantKsn:(NSData *) ksn ipek: (NSData *)ipek;
 // 3DES加解密
 + (NSData*)DESOperation:(CCOperation)operation algorithm:(CCAlgorithm)algorithm keySize:(size_t)keySize data:(NSData*)data key:(NSData*)key;
 // 3DES解密 CBC

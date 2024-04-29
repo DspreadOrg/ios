@@ -9,9 +9,6 @@
 #import "MainDetailViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "QPOSUtil.h"
-#import "GDataXMLNode.h"
-#import "TagApp.h"
-#import "TagCapk.h"
 #import "TLVParser.h"
 #import <CommonCrypto/CommonCrypto.h>
 
@@ -153,7 +150,7 @@ typedef enum : NSUInteger {
         NSString *inputAmount = titleTextField.text;
         NSLog(@"inputAmount = %@",inputAmount);
         self.lableAmount.text = [NSString stringWithFormat:@"$%@", [self checkAmount:inputAmount]];
-        [pos setAmount:inputAmount aAmountDescribe:@"123" currency:_currencyCode transactionType:mTransType];
+        [pos setAmount:inputAmount aAmountDescribe:@"123" currency:_currencyCode transactionType:TransactionType_GOODS];
         self.amount = [NSString stringWithFormat:@"%@", [self checkAmount:inputAmount]];
         self.cashbackAmount = @"123";
     }]];
@@ -676,6 +673,11 @@ typedef enum : NSUInteger {
     NSLog(@"onQposInfoResult: %@",aStr);
 }
 
+- (void)onRequestGetCardNoResult:(NSString *)result{
+    NSLog(@"card no: %@",result);
+    [pos doEmvApp:EmvOption_START];
+}
+
 //eg: update TMK api in pos.
 -(void)setMasterKey:(NSInteger)keyIndex{
     NSLog(@"setMasterKey");
@@ -685,7 +687,6 @@ typedef enum : NSUInteger {
     pikCheck = @"ADC67D8473BF2F06";
     [pos setMasterKey:pik checkValue:pikCheck keyIndex:keyIndex];
 }
-
 // callback function of setMasterKey api
 -(void) onReturnSetMasterKeyResult: (BOOL)isSuccess{
     if(isSuccess){
@@ -772,9 +773,14 @@ typedef enum : NSUInteger {
     NSLog(@"onReturnCustomConfigResult: %@",self.textViewLog.text);
 }
 
+- (void)onGetCardInfoResult:(NSDictionary *)cardInfo{
+    NSLog(@"AID: %@, CardNo: %@", [cardInfo objectForKey:@"AID"],[cardInfo objectForKey:@"CardNo"]);
+}
+
 // update pos firmware api
-- (void)updatePosFirmware:(UIButton *)sender {
-    NSData *data = [self readLine:@"A27CAYC_S1_master"];//read a14upgrader.asc
+- (IBAction)updatePosFirmware:(UIButton *)sender {
+    NSLog(@"updatePosFirmware");
+    NSData *data = [self readLine:@"QPOS_Mini_Firmware"];//read QPOS_Mini_Firmware.asc
     if (data != nil) {
         [pos updatePosFirmware:data address:self.bluetoothAddress];
         self.updateFWFlag = true;

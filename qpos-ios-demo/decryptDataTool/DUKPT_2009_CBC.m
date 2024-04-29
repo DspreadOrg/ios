@@ -7,7 +7,7 @@
 //
 
 #import "DUKPT_2009_CBC.h"
-#import "Trace.h"
+//#import "Trace.h"
 static const char *HEXES = "0123456789ABCDEF";
 #define gIv  @"00000000"
 #define kSecrectKeyLength 24
@@ -312,12 +312,12 @@ void NRKGP(Byte *key, Byte *ksn)
     
     CCCryptorStatus ccStatus = CCCrypt(operation, algorithm, kCCOptionECBMode, (const void *)ptrKey, keySize, NULL, (const void *)plainText, plainTextBufferSize, (void *)bufferPtr, bufferPtrSize, &movedBytes);
     
-    if (ccStatus == kCCParamError) TraceBT(@"PARAM ERROR");
-    else if (ccStatus == kCCBufferTooSmall) TraceBT(@"BUFFER TOO SMALL");
-    else if (ccStatus == kCCMemoryFailure) TraceBT(@"MEMORY FAILURE");
-    else if (ccStatus == kCCAlignmentError); //NSLog(@"ALIGNMENT");
-    else if (ccStatus == kCCDecodeError) TraceBT(@"DECODE ERROR");
-    else if (ccStatus == kCCUnimplemented) TraceBT(@"UNIMPLEMENTED");
+    if (ccStatus == kCCParamError) NSLog(@"PARAM ERROR");
+    else if (ccStatus == kCCBufferTooSmall) NSLog(@"BUFFER TOO SMALL");
+    else if (ccStatus == kCCMemoryFailure) NSLog(@"MEMORY FAILURE");
+    else if (ccStatus == kCCAlignmentError) NSLog(@"ALIGNMENT");
+    else if (ccStatus == kCCDecodeError) NSLog(@"DECODE ERROR");
+    else if (ccStatus == kCCUnimplemented) NSLog(@"UNIMPLEMENTED");
     
     
     NSData* result = [NSData dataWithBytes:bufferPtr length:movedBytes];
