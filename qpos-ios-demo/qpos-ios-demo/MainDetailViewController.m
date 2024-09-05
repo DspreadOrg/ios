@@ -11,13 +11,14 @@
 #import "QPOSUtil.h"
 #import "TLVParser.h"
 #import <CommonCrypto/CommonCrypto.h>
+#import "DigitalEnvelope.h"
 
 typedef enum : NSUInteger {
     EMVAppXMl,
     EMVCapkXMl,
 } EMVXML;
 
-@interface MainDetailViewController ()
+@interface MainDetailViewController ()<UITextFieldDelegate>
 @property (nonatomic,copy)NSString *terminalTime;
 @property (nonatomic,copy)NSString *currencyCode;
 @property (weak, nonatomic) IBOutlet UILabel *labSDK;
@@ -116,7 +117,7 @@ typedef enum : NSUInteger {
 
 //connect lbluttooh fail
 -(void) onRequestQposDisconnected{
-    NSLog(@"onRequestQposDisconnected");
+    NSLog(@"callbcak onRequestQposDisconnected");
     self.textViewLog.text = NSLocalizedString(@"pos disconnected.", nil);
 }
 
@@ -162,32 +163,69 @@ typedef enum : NSUInteger {
 -(void) onRequestPinEntry{
     NSLog(@"onRequestPinEntry");
     self.pin = @"";
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Please set pin", nil) message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    // Add the text field for the secure text entry.
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        // Listen for changes to the text field's text so that we can toggle the current
-        // action's enabled property based on whether the user has entered a sufficiently
-        // secure entry.
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:textField];
-        textField.secureTextEntry = YES;
-        textField.keyboardType = UIKeyboardTypeNumberPad;
-    }];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [pos cancelPinEntry];
-        NSLog(@"cancel pin entry");
-        // Stop listening for text changed notifications.
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:alertController.textFields.firstObject];
-    }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSString *pinblock = [self buildISO4PinBlock:self.pin dict:pos.getEncryptDataDict];
-        NSData *dataPin = [pinblock dataUsingEncoding:NSUTF8StringEncoding];
-        [pos sendCvmPin:(Byte *)[dataPin bytes] pinLen:dataPin.length isEncrypted:YES];
-        // Stop listening for text changed notifications.
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:alertController.textFields.firstObject];
-    }]];
-    [self presentViewController:alertController animated:YES completion:nil];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Enter PIN"
+                                                                       message:@"Please enter your PIN"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        // 添加一个文本输入框
+        [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = @"Enter PIN";
+            textField.keyboardType = UIKeyboardTypeNumberPad;
+            textField.secureTextEntry = YES; // 启用掩码
+            textField.delegate = self; // 设置代理
+            
+            // 添加目标方法来监听文本框内容的变化
+            [textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        }];
+        
+        // 添加确定按钮
+        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Confirm"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction *action) {
+            UITextField *pinField = alert.textFields.firstObject;
+            NSLog(@"Final PIN: %@", pinField.text);
+            NSString *pinblock = [self buildISO4PinBlock:self.pin dict:pos.getEncryptDataDict];
+            //        NSData *dataPin = [pinblock dataUsingEncoding:NSUTF8StringEncoding];
+            //        [pos sendCvmPin:(Byte *)[dataPin bytes] pinLen:dataPin.length isEncrypted:YES];
+            NSLog(@"NSData: %@", [QPOSUtil HexStringToByteArray:pinblock]);
+            [pos sendCvmPin:[QPOSUtil HexStringToByteArray:pinblock] isEncrypted:YES];
+        }];
+        
+        // 添加取消按钮
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:nil];
+        
+        [alert addAction:confirmAction];
+        [alert addAction:cancelAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+}
+// 实时获取 PIN 输入变化
+- (void)textFieldDidChange:(UITextField *)textField {
+    NSString *pinStr = textField.text;
+    NSString *cvmKeyList = pos.getCvmKeyList;
+    NSString *newPin = @"";
+    if(![@"" isEqualToString:cvmKeyList] && ![@"" isEqualToString:pinStr]){
+        cvmKeyList = [QPOSUtil asciiFormatString:[QPOSUtil HexStringToByteArray:cvmKeyList]];
+        for (NSInteger i = 0; i < pinStr.length; i++) {
+            NSRange range = [cvmKeyList rangeOfString:[pinStr substringWithRange:NSMakeRange(i, 1)]];
+            newPin = [newPin stringByAppendingString:[QPOSUtil getHexByDecimal:range.location]];
+        }
+    }
+    self.pin = newPin;
+    NSLog(@"newPin: %@",self.pin);
 }
 
+// 限制 PIN 输入长度为 4 位
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    // 获取当前文本框中的内容
+        NSString *currentText = textField.text ?: @"";
+        // 计算替换后的文本长度
+        NSUInteger newLength = [currentText length] + [string length] - range.length;
+        // 限制输入的最大位数为 4 位
+        return newLength <= 12;
+}
 - (void)handleTextFieldTextDidChangeNotification:(NSNotification *)notification {
     UITextField *textField = notification.object;
     NSString *pinStr = textField.text;
@@ -381,6 +419,8 @@ typedef enum : NSUInteger {
         msg = NSLocalizedString(@"please input last offline pin", nil);
     }else if (displayMsg == Display_PROCESSING){
         msg = NSLocalizedString(@"processing...", nil);
+    }else{
+        msg = @"Not implemented";
     }
     self.textViewLog.text = msg;
     NSLog(@"onRequestDisplay: %@", msg);
@@ -490,6 +530,9 @@ typedef enum : NSUInteger {
     }else if(transactionResult == TransactionResult_MULTIPLE_CARDS) {
         [self clearDisplay];
         messageTextView = @"Multiple Cards";
+    }else{
+        [self clearDisplay];
+        messageTextView = @"Not implemented";
     }
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Transaction Result", nil) message:messageTextView preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:nil]];
@@ -567,12 +610,16 @@ typedef enum : NSUInteger {
         msg = @"CMD Timeout.";
     }else if(errorState == DHError_AMOUNT_OUT_OF_LIMIT){
         msg = @"Amount out of limit.";
+    }else if(errorState == DHError_CMD_NOT_AVAILABLE){
+        msg = @"CMD NOT AVAILABLE";
+    }else{
+        msg = @"Not implemented";
     }
     self.textViewLog.text = msg;
     NSLog(@"onError = %@",msg);
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:msg message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:msg message:msg preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alertController animated:YES completion:nil];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [alertController dismissViewControllerAnimated:YES completion:nil];
     });
 }
@@ -753,6 +800,40 @@ typedef enum : NSUInteger {
     [self updateEMVConfigByXML];
 }
 
+- (void)onGetDevicePublicKey:(NSDictionary *)clearKeys{
+    NSLog(@"clearKeys: %@", clearKeys);
+    
+    NSInteger count = 0; // 静态变量，用于保存计数值
+    count += 1; // 每次调用递增1
+    NSString *couterStr = [NSString stringWithFormat:@"%010ld", (long)count];
+    NSString *token = [@"0F4052300013" stringByAppendingString:couterStr];
+    token = [token stringByAppendingString:[self generateRandomHexadecimal]];
+    token = [token stringByAppendingString:@"020120"];
+    NSLog(@"token: %@", token);
+    
+    NSString *digitalEnvelope = [DigitalEnvelope getEncryptedDataByPublicKey:token publicKey:[clearKeys objectForKey:@"modules"]];
+    NSLog(@"digitalEnvelope: %@", digitalEnvelope);
+    [pos udpateWorkKey:digitalEnvelope];
+}
+
+- (NSString *)generateRandomHexadecimal {
+    NSMutableString *result = [NSMutableString stringWithCapacity:10];
+    NSString *hexChars = @"0123456789abcdef";
+    
+    for (int i = 0; i < 10; i++) {
+        u_int32_t randomIndex = arc4random_uniform((uint32_t)[hexChars length]);
+        unichar randomChar = [hexChars characterAtIndex:randomIndex];
+        [result appendFormat:@"%C", randomChar];
+    }
+    
+    return result;
+}
+
+- (IBAction)updateTokenAction:(id)sender {
+    [pos getDevicePublicKey:30];
+}
+
+
 //eg: read xml file to update emv configure
 - (void)updateEMVConfigByXML{
     self.textViewLog.text =  @"start update emv configure,pls wait";
@@ -780,7 +861,7 @@ typedef enum : NSUInteger {
 // update pos firmware api
 - (IBAction)updatePosFirmware:(UIButton *)sender {
     NSLog(@"updatePosFirmware");
-    NSData *data = [self readLine:@"QPOS_Mini_Firmware"];//read QPOS_Mini_Firmware.asc
+    NSData *data = [self readLine:@"CR100_softspace_firmware"];//read QPOS_Mini_Firmware.asc
     if (data != nil) {
         [pos updatePosFirmware:data address:self.bluetoothAddress];
         self.updateFWFlag = true;
@@ -946,7 +1027,7 @@ typedef enum : NSUInteger {
     NSString *random = [dict objectForKey:@"RandomData"];
     NSString *aesKey = [dict objectForKey:@"AESKey"];
     NSString *pan = [dict objectForKey:@"PAN"];
-    NSString *pinStr = [NSString stringWithFormat:@"4%lu%@",pin.length,pin];
+    NSString *pinStr = [NSString stringWithFormat:@"4%@%@",[QPOSUtil getHexByDecimal:pin.length],pin];
     NSInteger pinStrLen = 16 - pinStr.length;
     for (int i = 0; i < pinStrLen; i++) {
         pinStr = [pinStr stringByAppendingString:@"A"];

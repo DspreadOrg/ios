@@ -420,7 +420,7 @@ typedef NS_ENUM(NSInteger,TR31KeyType){
 -(void)onReturnPowerOffIccResult:(BOOL) isSuccess;
 -(void)onReturnApduResult:(BOOL)isSuccess APDU:(NSString *)apdu APDU_Len:(NSInteger) apduLen;
 -(void)onPinKeyTDESResult:(NSString *)encPin;
--(void)onGetDevicePublicKey:(NSString *)clearKeys;
+-(void)onGetDevicePublicKey:(NSDictionary *)clearKeys;
 -(void)onQposGenerateSessionKeysResult:(NSDictionary *)result;
 -(void)onDoSetRsaPublicKey:(BOOL)result;
 -(void)onReturnSetConnectedShutDownTimeResult:(BOOL)isSuccess;
@@ -553,7 +553,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)sendApduByNFC:(NSString *)apduString delay:(NSInteger)timeout withBlock:(void (^)(BOOL isSuccess, NSString *apdu, NSInteger apduLen))onNFCApduResultBlock;
 -(void)powerOnNFC:(NSInteger) isEncrypt delay:(NSInteger) timeout withBlock:(void (^)(BOOL isSuccess, NSString *ksn, NSString *atr, NSInteger atrLen))onPowerOnNFCResultBlock;
 
--(void)sendPinEntryResult:(NSString *)pin;
+-(void)sendPinEntryResult:(NSData *)pin;
 -(void)cancelPinEntry;
 -(void)bypassPinEntry;
 
@@ -665,8 +665,8 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)setIsOperateMifare:(BOOL)isOperateMifare;
 -(void)setIsSupportClsSelectEmvApp:(BOOL)isSupportClsSelectEmvApp;
 -(NSDictionary *)getEncryptDataDict;
+-(void)sendCvmPin:(NSData *)pin isEncrypted:(BOOL)isEncrypted;
 -(void)sendCvmPin:(Byte[])pin pinLen:(NSInteger)pinLen isEncrypted:(BOOL)isEncrypted;
--(void)sendCvmPin:(NSString *)pinStr isEncrypted:(BOOL)isEncrypted;
 -(NSString *)getCvmKeyList;
 -(NSArray *)getCvmKeyListArr;
 -(NSInteger)getCvmPinTryLimit;

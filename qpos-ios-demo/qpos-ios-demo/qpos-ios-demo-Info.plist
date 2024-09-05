@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Dspread Pay</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Dspread Pay</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -26,8 +26,6 @@
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>alway request bluetooth</string>
-	<key>NSMainNibFile~ipad</key>
-	<string>Main-iPad</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>microphoneDesciption</string>
 	<key>UILaunchStoryboardName</key>

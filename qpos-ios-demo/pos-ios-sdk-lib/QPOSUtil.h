@@ -41,4 +41,6 @@
 +(NSArray<NSString *> *)getArray:(NSString *)a;
 +(NSArray<NSString *> *)getReverseValue:(NSArray<NSString *> *)a;
 +(NSString *)getHexByDecimal:(NSInteger)decimal;
++(NSString *)int2Byte:(NSInteger)intValue;
++(NSData *)getSha1Bytes:(NSData *)plainText;
 @end
