@@ -369,6 +369,18 @@ typedef NS_ENUM(NSInteger,TR31KeyType){
     TR31KeyType_NEW_KEY_DATA,
 };
 
+typedef NS_ENUM(NSInteger,KeyUsage){
+    KeyUsage_NONE,
+    KeyUsage_ENCRYPT_DECRYPT,
+    KeyUsage_AES_CMAC,
+    KeyUsage_DES_CMAC,
+};
+
+typedef NS_ENUM(NSInteger,KeyCryptMode){
+    KeyCryptMode_DES,
+    KeyCryptMode_AES,
+};
+
 @protocol QPOSServiceListener<NSObject>
 
 @optional
@@ -688,5 +700,9 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)getICCCardNumber:(NSString *)transactionTime;
 -(void)setSupportCashBack:(BOOL)supportCashBack;
 -(void)setCardInfoObtainFlag:(BOOL)isNeedReturnCardInfo;
+-(void)setTransTypeValue:(NSString *)transType;
+-(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn sign:(NSString *)sign resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)updateDataWithKey:(BOOL)isEncrypt keyCryptMode:(KeyCryptMode)keyCryptMode keyUsage:(KeyUsage)keyUsage saveKsn:(BOOL)saveKsn data:(NSString *)data keyIndex:(NSInteger)keyIndex ksn:(NSString *)ksn sign:(NSString *)sign resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 @end
 
