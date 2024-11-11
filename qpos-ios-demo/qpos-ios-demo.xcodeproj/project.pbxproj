@@ -24,7 +24,6 @@
 		145EF9222C86BAA800CC552B /* DigitalEnvelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 145EF9212C86BAA800CC552B /* DigitalEnvelope.m */; };
 		145EF9252C86BE1600CC552B /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 145EF9242C86BE1600CC552B /* RSA.m */; };
 		145EF9712C89CA9A00CC552B /* CR100_softspace_firmware.asc in Resources */ = {isa = PBXBuildFile; fileRef = 145EF9702C89CA9A00CC552B /* CR100_softspace_firmware.asc */; };
-		145EF9732C89CC4E00CC552B /* libqpos-ios-release-sdk-v3.7.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 145EF9722C89CC4E00CC552B /* libqpos-ios-release-sdk-v3.7.2.a */; };
 		146B00A42A654255008259D5 /* QPOS cute,CR100,D20,D30.xml in Resources */ = {isa = PBXBuildFile; fileRef = 146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */; };
 		146B00A52A654255008259D5 /* QPOS mini.xml in Resources */ = {isa = PBXBuildFile; fileRef = 146B00A22A654255008259D5 /* QPOS mini.xml */; };
 		147C1757258DF283000C9097 /* rsa_public_key_pkcs8_test.pem in Resources */ = {isa = PBXBuildFile; fileRef = 147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */; };
@@ -34,6 +33,7 @@
 		147F79B02BDF74D60066039E /* QPOS_Mini_Firmware.asc in Resources */ = {isa = PBXBuildFile; fileRef = 147F79AF2BDF74D60066039E /* QPOS_Mini_Firmware.asc */; };
 		14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EFBE09211816B80093681E /* libxml2.tbd */; };
 		4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4B86A8CA1B2E75AD00B95485 /* 1801.wav */; };
+		50A9F0DD2CE1F8BF00F42A34 /* libqpos-ios-release-sdk-v3.7.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50A9F0DC2CE1F8BF00F42A34 /* libqpos-ios-release-sdk-v3.7.3.a */; };
 		6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */; };
 		75FE2A651ECEFC40001DA427 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE2A641ECEFC40001DA427 /* MainViewController.m */; };
 /* End PBXBuildFile section */
@@ -84,7 +84,6 @@
 		145EF9232C86BE1600CC552B /* RSA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
 		145EF9242C86BE1600CC552B /* RSA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
 		145EF9702C89CA9A00CC552B /* CR100_softspace_firmware.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = CR100_softspace_firmware.asc; sourceTree = "<group>"; };
-		145EF9722C89CC4E00CC552B /* libqpos-ios-release-sdk-v3.7.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-release-sdk-v3.7.2.a"; sourceTree = "<group>"; };
 		14653EB6240E83D40020F788 /* QPOSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
 		146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "QPOS cute,CR100,D20,D30.xml"; sourceTree = "<group>"; };
 		146B00A22A654255008259D5 /* QPOS mini.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "QPOS mini.xml"; sourceTree = "<group>"; };
@@ -98,6 +97,7 @@
 		14D12C2422F2B70E00DB0EAB /* QPOSUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPOSUtil.h; sourceTree = "<group>"; };
 		14EFBE09211816B80093681E /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		4B86A8CA1B2E75AD00B95485 /* 1801.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 1801.wav; sourceTree = "<group>"; };
+		50A9F0DC2CE1F8BF00F42A34 /* libqpos-ios-release-sdk-v3.7.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-release-sdk-v3.7.3.a"; sourceTree = "<group>"; };
 		6B2788B41883D4210095A338 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6B2788B61883D4290095A338 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "qpos-ios-demo/Images.xcassets/LaunchImage.launchimage/Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -112,8 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50A9F0DD2CE1F8BF00F42A34 /* libqpos-ios-release-sdk-v3.7.3.a in Frameworks */,
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
-				145EF9732C89CC4E00CC552B /* libqpos-ios-release-sdk-v3.7.2.a in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,7 +243,7 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				145EF9722C89CC4E00CC552B /* libqpos-ios-release-sdk-v3.7.2.a */,
+				50A9F0DC2CE1F8BF00F42A34 /* libqpos-ios-release-sdk-v3.7.3.a */,
 				145EF9702C89CA9A00CC552B /* CR100_softspace_firmware.asc */,
 				147F79AF2BDF74D60066039E /* QPOS_Mini_Firmware.asc */,
 				146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */,
