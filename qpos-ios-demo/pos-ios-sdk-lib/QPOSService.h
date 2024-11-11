@@ -381,6 +381,26 @@ typedef NS_ENUM(NSInteger,KeyCryptMode){
     KeyCryptMode_AES,
 };
 
+typedef NS_ENUM(NSInteger,MacKeyType){
+    MacKeyType_GENERATE_KEY,
+    MacKeyType_VERIFICATION_KEY,
+};
+
+typedef NS_ENUM(NSInteger,DataKeyType){
+    DataKeyType_DECRYPT_KEY,
+    DataKeyType_ENCRYPT_KEY,
+};
+
+typedef NS_ENUM(NSInteger,MacInputType){
+    MacInputType_ASCII,
+    MacInputType_HEX,
+};
+
+typedef NS_ENUM(NSInteger,DataInputType){
+    DataInputType_ASCII,
+    DataInputType_HEX,
+};
+
 @protocol QPOSServiceListener<NSObject>
 
 @optional
@@ -704,6 +724,8 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn sign:(NSString *)sign resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)updateDataWithKey:(BOOL)isEncrypt keyCryptMode:(KeyCryptMode)keyCryptMode keyUsage:(KeyUsage)keyUsage saveKsn:(BOOL)saveKsn data:(NSString *)data keyIndex:(NSInteger)keyIndex ksn:(NSString *)ksn sign:(NSString *)sign resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn sign:(NSString *)sign macKeyType:(MacKeyType)macKeyType dataKeyType:(DataKeyType)dataKeyType macInputType:(MacInputType)macInputType dataInputType:(DataInputType)dataInputType resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)updateDataWithKey:(BOOL)isEncrypt keyCryptMode:(KeyCryptMode)keyCryptMode keyUsage:(KeyUsage)keyUsage saveKsn:(BOOL)saveKsn data:(NSString *)data keyIndex:(NSInteger)keyIndex ksn:(NSString *)ksn sign:(NSString *)sign macKeyType:(MacKeyType)macKeyType dataKeyType:(DataKeyType)dataKeyType macInputType:(MacInputType)macInputType dataInputType:(DataInputType)dataInputType resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)setMerchantID:(NSString *)merchantID delay:(NSInteger)timeout block:(void (^)(BOOL isSuccess, NSDictionary *resultDic))merchantIDBlock;
 @end
 
