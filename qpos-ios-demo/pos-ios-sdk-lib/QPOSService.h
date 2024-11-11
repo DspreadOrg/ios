@@ -723,7 +723,6 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)setTransTypeValue:(NSString *)transType;
 -(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn sign:(NSString *)sign resultBlock:(void(^)(BOOL isSuccess))resultBlock;
--(void)updateDataWithKey:(BOOL)isEncrypt keyCryptMode:(KeyCryptMode)keyCryptMode keyUsage:(KeyUsage)keyUsage saveKsn:(BOOL)saveKsn data:(NSString *)data keyIndex:(NSInteger)keyIndex ksn:(NSString *)ksn sign:(NSString *)sign resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn sign:(NSString *)sign macKeyType:(MacKeyType)macKeyType dataKeyType:(DataKeyType)dataKeyType macInputType:(MacInputType)macInputType dataInputType:(DataInputType)dataInputType resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)updateDataWithKey:(BOOL)isEncrypt keyCryptMode:(KeyCryptMode)keyCryptMode keyUsage:(KeyUsage)keyUsage saveKsn:(BOOL)saveKsn data:(NSString *)data keyIndex:(NSInteger)keyIndex ksn:(NSString *)ksn sign:(NSString *)sign macKeyType:(MacKeyType)macKeyType dataKeyType:(DataKeyType)dataKeyType macInputType:(MacInputType)macInputType dataInputType:(DataInputType)dataInputType resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)setMerchantID:(NSString *)merchantID delay:(NSInteger)timeout block:(void (^)(BOOL isSuccess, NSDictionary *resultDic))merchantIDBlock;
