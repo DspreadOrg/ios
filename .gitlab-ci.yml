@@ -1,0 +1,33 @@
+stages:
+  - build
+  - beta
+
+cache:
+  key:
+    files:
+      - Gemfile.lock
+  paths:
+    - vendor/bundle
+
+build_ios:
+  image: macos-14-xcode-15
+  stage: build
+  script:
+    - bundle check --path vendor/bundle || bundle install --path vendor/bundle --jobs $(nproc)
+    - bundle exec fastlane build
+  tags: 
+    - saas-macos-medium-m1
+
+beta_ios:
+  image: macos-14-xcode-15
+  stage: beta
+  script:
+    - bundle check --path vendor/bundle || bundle install --path vendor/bundle --jobs $(nproc)
+    - bundle exec fastlane beta
+  tags: 
+    - saas-macos-medium-m1
+  when: manual
+  allow_failure: true
+  only:
+    refs:
+      - main
