@@ -15,7 +15,7 @@
 "K3B-x6-WVZ.text" = "sdk版本";
 
 /* Class = "UIButton"; normalTitle = "getPosInfo"; ObjectID = "UF1-TL-r3N"; */
-"UF1-TL-r3N.normalTitle" = "获取PosInfo";
+"UF1-TL-r3N.normalTitle" = "获取POS信息";
 
 /* Class = "UIButton"; normalTitle = "disconnect"; ObjectID = "WUz-KA-kpv"; */
 "WUz-KA-kpv.normalTitle" = "断开蓝牙";
@@ -27,10 +27,10 @@
 "eZ0-g9-e3d.text" = "标题";
 
 /* Class = "UILabel"; text = "mpos-demo"; ObjectID = "lhl-0G-kSB"; */
-"lhl-0G-kSB.text" = "mpos-demo";
+"lhl-0G-kSB.text" = "MPOS读卡器";
 
 /* Class = "UIViewController"; title = "Detail"; ObjectID = "mHT-30-Oa7"; */
-"mHT-30-Oa7.title" = "Detail";
+"mHT-30-Oa7.title" = "详情";
 
 /* Class = "UITextField"; placeholder = "请输入要搜索的设备名称"; ObjectID = "n3d-Iq-R2F"; */
 "n3d-Iq-R2F.placeholder" = "请输入要搜索的设备名称";

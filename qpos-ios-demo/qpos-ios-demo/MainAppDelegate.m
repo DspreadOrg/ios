@@ -13,8 +13,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
-    NSLog(@"%d",[[[UIDevice currentDevice] systemVersion] intValue]);
     return YES;
 }
 							

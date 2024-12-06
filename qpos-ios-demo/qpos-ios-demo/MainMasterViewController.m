@@ -10,7 +10,7 @@
 #import "MainMasterViewController.h"
 #import "MainDetailViewController.h"
 #import "BTDeviceFinder.h"
-
+#import "Trace.h"
 typedef enum{
     allFlag,
     usrPreFlag ,
@@ -51,8 +51,8 @@ NSInteger   scanBluetoothTime = 15;
     //    else{
     //        arr = [bt getAllOnlineQPosNameNew];
     //    }
-    NSLog(@"---------------------");
-    NSLog(@"begin name count = %lu",(unsigned long)[arr count]);
+    Trace(@"---------------------");
+    Trace(@"begin name count = %lu",(unsigned long)[arr count]);
     for (int i = 0; i < [arr count]; i++) {
         NSString *bluetoothAddress = [arr objectAtIndex:i];
         [self insertNewObject:bluetoothAddress];
@@ -89,11 +89,11 @@ NSInteger   scanBluetoothTime = 15;
     }
     NSInteger delay = 0;
     if(is2ModeBluetooth){
-        NSLog(@"蓝牙状态:%ld",(long)[bt getCBCentralManagerState]);
+        Trace(@"Bluetooth Status:%ld",(long)[bt getCBCentralManagerState]);
         [bt setBluetoothDelegate2Mode:self];
         if ([bt getCBCentralManagerState] == CBManagerStateUnknown) {
             while ([bt getCBCentralManagerState]!= CBManagerStatePoweredOn) {
-                NSLog(@"Bluetooth state is not power on");
+                Trace(@"Bluetooth state is not power on");
                 [self sleepMs:10];
                 if(delay++==10){
                     return;
@@ -292,7 +292,7 @@ NSInteger   scanBluetoothTime = 15;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //NSLog(@"+++prepareForSegue ");
+    //Trace(@"+++prepareForSegue ");
     [self stopBluetooth];
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -309,11 +309,11 @@ NSInteger   scanBluetoothTime = 15;
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-    NSLog(@"MainMasterViewController viewDidDisappear");
+    Trace(@"MainMasterViewController viewDidDisappear");
 }
 
 -(void)onBluetoothNameNew:(NSString *)bluetoothName{
-    NSLog(@"+++onBluetoothNameNew %@",bluetoothName);
+    Trace(@"+++onBluetoothNameNew %@",bluetoothName);
     [self insertNewObject:bluetoothName];
 }
 
@@ -323,7 +323,7 @@ NSInteger   scanBluetoothTime = 15;
 }
 
 -(void)onBluetoothName2Mode:(NSString *)bluetoothName{
-    NSLog(@"+++onBluetoothName2Mode %@",bluetoothName);
+    Trace(@"+++onBluetoothName2Mode %@",bluetoothName);
     
     dispatch_async(dispatch_get_main_queue(),  ^{
         if(isTestBluetooth){
@@ -380,7 +380,7 @@ NSInteger   scanBluetoothTime = 15;
 
 -(void)bluetoothIsPowerOff2Mode{
     dispatch_async(dispatch_get_main_queue(),  ^{
-        NSLog(@"+++bluetoothIsPowerOff2Mode");
+        Trace(@"+++bluetoothIsPowerOff2Mode");
         //        [bt setBluetoothDelegate2Mode:nil];
         [self stopBluetooth];
         //        bt = nil;
@@ -390,14 +390,14 @@ NSInteger   scanBluetoothTime = 15;
 
 -(void)bluetoothIsPowerOn2Mode{
     dispatch_async(dispatch_get_main_queue(),  ^{
-        NSLog(@"+++bluetoothIsPowerOn2Mode");
+        Trace(@"+++bluetoothIsPowerOn2Mode");
     });
     
 }
 
 -(void)bluetoothUnauthorized2Mode{
     dispatch_async(dispatch_get_main_queue(),  ^{
-        NSLog(@"+++bluetoothUnauthorized2Mode");
+        Trace(@"+++bluetoothUnauthorized2Mode");
         [waitScanBT stopAnimating];
     });
 }
@@ -423,20 +423,20 @@ NSInteger   scanBluetoothTime = 15;
     
     [self initQposs];
     [mQPOSService connectBT:bluetoothAddress];
-    NSLog(@"---------------------");
+    Trace(@"---------------------");
     
 }
 
 -(void) onRequestQposConnected{
-    NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>onRequestQposConnected");
+    Trace(@">>>>>>>>>>>>>>>>>>>>>>>>>onRequestQposConnected");
     
 }
 -(void) onRequestQposDisconnected{
-    NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>onRequestQposDisconnected");
+    Trace(@">>>>>>>>>>>>>>>>>>>>>>>>>onRequestQposDisconnected");
     
 }
 -(void) onRequestNoQposDetected{
-    NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>onRequestNoQposDetected");
+    Trace(@">>>>>>>>>>>>>>>>>>>>>>>>>onRequestNoQposDetected");
     
 }
 

@@ -22,14 +22,16 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>25</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>alway request bluetooth</string>
-	<key>NSMainNibFile~ipad</key>
-	<string>Main-iPad</string>
+	<string>App would like to access Bluetooth to connect a POS device and read card data, even when the app is in the background</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>App would like to access Bluetooth to connect a POS device and read card data</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>microphoneDesciption</string>
+	<string>App would like to access microphone to connect a POS device and read card data</string>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
 	<key>UIMainStoryboardFile</key>

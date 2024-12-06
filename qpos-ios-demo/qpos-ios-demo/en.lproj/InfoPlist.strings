@@ -6,4 +6,4 @@
   Copyright © 2020 Robin. All rights reserved.
 */
 // Localizable App Name是App在英语环境环境下显示的名称
-CFBundleDisplayName = "qpos-ios-demo";
+CFBundleDisplayName = "MPOS Reader";
