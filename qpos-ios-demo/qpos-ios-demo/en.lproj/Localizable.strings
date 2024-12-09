@@ -5,8 +5,8 @@
   Created by fangzhengwei on 2020/3/25.
   Copyright © 2020 Robin. All rights reserved.
 */
-"stop" = "stop scan";
-"connecting bluetooth..." = "connecting bluetooth...";
+"stop" = "Stop scan";
+"connecting bluetooth..." = "Connecting bluetooth...";
 "AudioType connected." = "AudioType connected.";
 "Bluetooth connected." = "Bluetooth connected.";
 "pos disconnected." = "pos disconnected.";
@@ -18,15 +18,15 @@
 "Confirm amount" = "Confirm amount";
 "Please set pin" = "Please set pin";
 "Please insert/swipe/tap card now." = "Please insert/swipe/tap card now.";
-"please input pin on pos" = "please input pin on pos";
+"please input pin on pos" = "Please input pin on pos";
 "Please wait..." = "Please wait...";
 "Please remove card" = "Please remove card";
 "Please try another interface" = "Please try another interface";
 "Terminated" = "Terminated";
-"please insert chip card on pos" = "please insert chip card on pos";
-"please input offline pin only" = "please input offline pin only";
+"please insert chip card on pos" = "Please insert chip card on pos";
+"please input offline pin only" = "Please input offline pin only";
 "Card Removed" = "Card Removed";
-"please input last offline pin" = "please input last offline pin";
+"please input last offline pin" = "Please input last offline pin";
 "Please select app" = "Please select app";
 "Request data to server." = "Request data to server.";
 "Transaction Result" = "Transaction Result";
@@ -61,6 +61,7 @@
 "Amount" = "Amount";
 "Cashback" = "Cashback";
 "Declined" = "Declined";
+"Fail (App fail)" = "Fail (App fail)";
 "Fail (CAPK fail)" = "Fail (CAPK fail)";
 "Pos Error" = "Pos Error";
 "Missing mandatory data" = "Missing mandatory data";
@@ -72,12 +73,12 @@
 "Token Invalid" = "Token Invalid";
 "APP Blocked" = "APP Blocked";
 "Multiple Cards" = "Multiple Cards";
-"batch data" = "batch data";
-"reversal data" = "reversal data";
+"batch data" = "Batch data";
+"reversal data" = "Reversal data";
 "onEmvICCExceptionData" = "onEmvICCExceptionData";
-"reset pos ... " = "reset pos ... ";
-"reset pos success" = "reset pos success";
-"reset pos fail" = "reset pos fail";
+"reset pos ... " = "Reset pos ... ";
+"reset pos success" = "Reset pos success";
+"reset pos fail" = "Reset pos fail";
 "Pos no response" = "Pos no response";
 "Pos reset" = "Pos reset";
 "Unknown error" = "Unknown error";
@@ -93,12 +94,12 @@
 "CMD Timeout" = "CMD Timeout";
 "Amount out of limit" = "Amount out of limit";
 "Not implemented" = "Not implemented";
-"posId" = "posId";
-"psamId" = "psamId";
-"merchantId" = "merchantId";
-"vendorCode" = "vendorCode";
-"deviceNumber" = "deviceNumber";
-"psamNo" = "psamNo";
+"posId" = "POSID";
+"psamId" = "PSAMID";
+"merchantId" = "MerchantId";
+"vendorCode" = "VendorCode";
+"deviceNumber" = "DeviceNumber";
+"psamNo" = "PSAMNo";
 "isSupportNFC" = "isSupportNFC";
 "BootloaderVersion" = "BootloaderVersion";
 "FirmwareVersion" = "FirmwareVersion";
@@ -109,5 +110,9 @@
 "isSupportedTrack1" = "isSupportedTrack1";
 "isSupportedTrack2" = "isSupportedTrack2";
 "isSupportedTrack3" = "isSupportedTrack3";
-"updateWorkKeyFlag" = "updateWorkKeyFlag";
+"updateWorkKeyFlag" = "UpdateWorkKeyFlag";
 "ModelInfo" = "DeviceModel";
+"updateEMV" = "Updating EMV ...";
+"start update emv configure,pls wait" = "Start update emv configure,pls wait";
+"Success" = "Success";
+"Fail" = "Fail";

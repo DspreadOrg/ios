@@ -23,15 +23,12 @@
 		145EF9832C9C20B100CC552B /* MainDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145EF9822C9C20B100CC552B /* MainDetailViewController.m */; };
 		146B00A42A654255008259D5 /* QPOS cute,CR100,D20,D30.xml in Resources */ = {isa = PBXBuildFile; fileRef = 146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */; };
 		146B00A52A654255008259D5 /* QPOS mini.xml in Resources */ = {isa = PBXBuildFile; fileRef = 146B00A22A654255008259D5 /* QPOS mini.xml */; };
-		147C1757258DF283000C9097 /* rsa_public_key_pkcs8_test.pem in Resources */ = {isa = PBXBuildFile; fileRef = 147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */; };
 		147F798D2BDF51B10066039E /* TLV.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F798C2BDF51B10066039E /* TLV.m */; };
 		147F798F2BDF51C60066039E /* TLVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F798E2BDF51C60066039E /* TLVParser.m */; };
 		147F799D2BDF70340066039E /* DUKPT_2009_CBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F799B2BDF70340066039E /* DUKPT_2009_CBC.m */; };
-		147F79B02BDF74D60066039E /* QPOS_Mini_Firmware.asc in Resources */ = {isa = PBXBuildFile; fileRef = 147F79AF2BDF74D60066039E /* QPOS_Mini_Firmware.asc */; };
 		14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EFBE09211816B80093681E /* libxml2.tbd */; };
 		4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4B86A8CA1B2E75AD00B95485 /* 1801.wav */; };
-		50F2C5852D00327B00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F2C5842D00327B00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a */; };
-		50F2C5892D0041A000F0C3D4 /* A27UC_S1(样机英文版)_master.asc in Resources */ = {isa = PBXBuildFile; fileRef = 50F2C5882D0041A000F0C3D4 /* A27UC_S1(样机英文版)_master.asc */; };
+		50F2C5952D06D6AD00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F2C5942D06D6AD00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a */; };
 		6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */; };
 		75FE2A651ECEFC40001DA427 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE2A641ECEFC40001DA427 /* MainViewController.m */; };
 /* End PBXBuildFile section */
@@ -70,7 +67,6 @@
 		1404A636242B3BE900899293 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1404A638242B3BEF00899293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		1404A63E242B3EFF00899293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1404A640242B413B00899293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		1404A644242B424900899293 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1404A646242B424A00899293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		141825DF2154E75000E77EB4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -79,21 +75,19 @@
 		145EF9822C9C20B100CC552B /* MainDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainDetailViewController.m; sourceTree = "<group>"; };
 		146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "QPOS cute,CR100,D20,D30.xml"; sourceTree = "<group>"; };
 		146B00A22A654255008259D5 /* QPOS mini.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "QPOS mini.xml"; sourceTree = "<group>"; };
-		147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_public_key_pkcs8_test.pem; sourceTree = "<group>"; };
 		147F798C2BDF51B10066039E /* TLV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLV.m; sourceTree = "<group>"; };
 		147F798E2BDF51C60066039E /* TLVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLVParser.m; sourceTree = "<group>"; };
 		147F799B2BDF70340066039E /* DUKPT_2009_CBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DUKPT_2009_CBC.m; sourceTree = "<group>"; };
 		147F799C2BDF70340066039E /* DUKPT_2009_CBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DUKPT_2009_CBC.h; sourceTree = "<group>"; };
-		147F79AF2BDF74D60066039E /* QPOS_Mini_Firmware.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = QPOS_Mini_Firmware.asc; sourceTree = "<group>"; };
 		14A7785D29BADE1D005404F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		14EFBE09211816B80093681E /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		4B86A8CA1B2E75AD00B95485 /* 1801.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 1801.wav; sourceTree = "<group>"; };
 		50F2C5832D00327500F0C3D4 /* BTDeviceFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTDeviceFinder.h; sourceTree = "<group>"; };
-		50F2C5842D00327B00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-v3.7.5.a"; sourceTree = "<group>"; };
 		50F2C5862D00329200F0C3D4 /* QPOSService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
 		50F2C5872D00329200F0C3D4 /* QPOSUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QPOSUtil.h; sourceTree = "<group>"; };
-		50F2C5882D0041A000F0C3D4 /* A27UC_S1(样机英文版)_master.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A27UC_S1(样机英文版)_master.asc"; sourceTree = "<group>"; };
 		50F2C58B2D02DD1B00F0C3D4 /* Trace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Trace.h; sourceTree = "<group>"; };
+		50F2C58D2D0690D000F0C3D4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		50F2C5942D06D6AD00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-v3.7.5.a"; sourceTree = "<group>"; };
 		50F731E32CF89738006EEE28 /* libqpos-ios-sdk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libqpos-ios-sdk.xcframework"; path = "../../libqpos-ios-sdk.xcframework"; sourceTree = "<group>"; };
 		6B2788B41883D4210095A338 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6B2788B61883D4290095A338 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -108,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50F2C5852D00327B00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a in Frameworks */,
+				50F2C5952D06D6AD00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a in Frameworks */,
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
 			);
@@ -241,15 +235,12 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				50F2C5882D0041A000F0C3D4 /* A27UC_S1(样机英文版)_master.asc */,
-				50F2C5842D00327B00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a */,
+				50F2C5942D06D6AD00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a */,
 				50F2C5832D00327500F0C3D4 /* BTDeviceFinder.h */,
 				50F2C5862D00329200F0C3D4 /* QPOSService.h */,
 				50F2C5872D00329200F0C3D4 /* QPOSUtil.h */,
-				147F79AF2BDF74D60066039E /* QPOS_Mini_Firmware.asc */,
 				146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */,
 				146B00A22A654255008259D5 /* QPOS mini.xml */,
-				147C1756258DF283000C9097 /* rsa_public_key_pkcs8_test.pem */,
 			);
 			path = "pos-ios-sdk-lib";
 			sourceTree = "<group>";
@@ -336,12 +327,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A9004C183B08B100D22572 /* Images.xcassets in Resources */,
-				50F2C5892D0041A000F0C3D4 /* A27UC_S1(样机英文版)_master.asc in Resources */,
-				147F79B02BDF74D60066039E /* QPOS_Mini_Firmware.asc in Resources */,
 				1404A643242B424900899293 /* Localizable.strings in Resources */,
 				146B00A52A654255008259D5 /* QPOS mini.xml in Resources */,
 				146B00A42A654255008259D5 /* QPOS cute,CR100,D20,D30.xml in Resources */,
-				147C1757258DF283000C9097 /* rsa_public_key_pkcs8_test.pem in Resources */,
 				1404A639242B3EF300899293 /* Main.storyboard in Resources */,
 				00A9003B183B08B100D22572 /* InfoPlist.strings in Resources */,
 				4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */,
@@ -416,8 +404,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				1404A63E242B3EFF00899293 /* Base */,
-				1404A640242B413B00899293 /* zh-Hans */,
 				14A7785D29BADE1D005404F1 /* en */,
+				50F2C58D2D0690D000F0C3D4 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

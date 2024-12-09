@@ -323,8 +323,9 @@ NSInteger   scanBluetoothTime = 15;
 }
 
 -(void)onBluetoothName2Mode:(NSString *)bluetoothName{
-    Trace(@"+++onBluetoothName2Mode %@",bluetoothName);
-    
+    if (bluetoothName != nil && bluetoothName.length != 0) {
+        Trace(@"+++onBluetoothName2Mode %@",bluetoothName);
+    }
     dispatch_async(dispatch_get_main_queue(),  ^{
         if(isTestBluetooth){
             if ([bluetoothName hasPrefix:@"QPOS0100000073"]) {

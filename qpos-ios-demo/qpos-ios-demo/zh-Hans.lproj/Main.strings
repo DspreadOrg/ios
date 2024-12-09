@@ -15,7 +15,7 @@
 "K3B-x6-WVZ.text" = "sdk版本";
 
 /* Class = "UIButton"; normalTitle = "getPosInfo"; ObjectID = "UF1-TL-r3N"; */
-"UF1-TL-r3N.normalTitle" = "获取POS信息";
+"UF1-TL-r3N.normalTitle" = "获取POSINFO";
 
 /* Class = "UIButton"; normalTitle = "disconnect"; ObjectID = "WUz-KA-kpv"; */
 "WUz-KA-kpv.normalTitle" = "断开蓝牙";
@@ -48,4 +48,7 @@
 "x8m-4I-e9X.title" = "Master";
 
 /* Class = "UIButton"; normalTitle = "getPosId"; ObjectID = "ydM-mS-I7Q"; */
-"ydM-mS-I7Q.normalTitle" = "获取PosId";
+"ydM-mS-I7Q.normalTitle" = "获取POSID";
+
+/* Class = "UIButton"; normalTitle = "updateEMV"; ObjectID = "SGf-lK-wrh"; */
+"SGf-lK-wrh.normalTitle" = "更新EMV";

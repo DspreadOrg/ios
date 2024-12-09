@@ -11,7 +11,7 @@
 "AudioType connected." = "音频已连接";
 "Bluetooth connected." = "蓝牙已连接";
 "pos disconnected." = "蓝牙已断开";
-"No pos detected." = "未检测到pos";
+"No pos detected." = "未检测到POS";
 "Starting..." = "开始中...";
 "Please set amount" = "请输入金额";
 "Confirm" = "确定";
@@ -19,12 +19,12 @@
 "Confirm amount" = "确定金额";
 "Please set pin" = "请输入密码";
 "Please insert/swipe/tap card now." = "请插卡/刷卡/拍卡...";
-"please input pin on pos" = "请在pos上输入密码";
+"please input pin on pos" = "请在POS上输入密码";
 "Please wait..." = "请稍等...";
 "Please remove card" = "请移除卡片";
 "Please try another interface" = "请尝试其他读卡方式";
 "Terminated" = "交易终止";
-"please insert chip card on pos" = "请在pos上插卡";
+"please insert chip card on pos" = "请在POS上插卡";
 "please input offline pin only" = "请输入脱机密码";
 "Card Removed" = "移除卡片";
 "please input last offline pin" = "请输入最后一次脱机密码";
@@ -61,6 +61,7 @@
 "Amount" = "交易金额";
 "Cashback" = "返现金额";
 "Declined" = "交易拒绝";
+"Fail (App fail)" = "卡片应用";
 "Fail (CAPK fail)" = "卡片公钥缺失";
 "Pos Error" = "POS异常";
 "Missing mandatory data" = "缺少强制数据";
@@ -111,3 +112,7 @@
 "isSupportedTrack3" = "是否支持磁道3";
 "updateWorkKeyFlag" = "是否更新工作密钥";
 "ModelInfo" = "设备型号";
+"updateEMV" = "更新EMV配置 ...";
+"start update emv configure,pls wait" = "开始更新EMV配置，请稍等";
+"Success" = "成功";
+"Fail" = "失败";

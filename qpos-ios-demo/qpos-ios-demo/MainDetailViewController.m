@@ -214,6 +214,7 @@ typedef enum : NSUInteger {
 
 //return NFC and swipe card data on this function.
 -(void) onDoTradeResult: (DoTradeResult)result DecodeData:(NSDictionary*)decodeData{
+    Trace(@"onDoTradeResult: %@", decodeData);
     if (result == DoTradeResult_NONE) {
         self.textViewLog.text = NSLocalizedString(@"No card detected", nil);
         Trace(@"onDoTradeResult: %@", self.textViewLog.text);
@@ -237,7 +238,7 @@ typedef enum : NSUInteger {
         NSString *encTrack3 = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"Encrypted Track 3", nil),decodeData[@"encTrack3"]];
         NSString *pinKsn = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"PIN KSN", nil),decodeData[@"pinKsn"]];
         NSString *trackksn = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"Track KSN", nil),decodeData[@"trackksn"]];
-        NSString *pinBlock = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"pinBlock", nil),decodeData[@"pinblock"]];
+        NSString *pinBlock = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"pinBlock", nil),decodeData[@"pinBlock"]];
         NSString *encPAN = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"encPAN", nil),decodeData[@"encPAN"]];
         NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Card Swiped:\n", nil)];
         msg = [msg stringByAppendingString:formatID];
@@ -273,7 +274,7 @@ typedef enum : NSUInteger {
         NSString *encTrack3 = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"Encrypted Track 3", nil),decodeData[@"encTrack3"]];
         NSString *pinKsn = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"PIN KSN", nil),decodeData[@"pinKsn"]];
         NSString *trackksn = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"Track KSN", nil),decodeData[@"trackksn"]];
-        NSString *pinBlock = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"pinBlock", nil),decodeData[@"pinblock"]];
+        NSString *pinBlock = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"pinBlock", nil),decodeData[@"pinBlock"]];
         NSString *encPAN = [NSString stringWithFormat:@"%@: %@\n",NSLocalizedString(@"encPAN", nil),decodeData[@"encPAN"]];
         NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"Tap Card:\n", nil)];
         msg = [msg stringByAppendingString:formatID];
@@ -541,6 +542,7 @@ typedef enum : NSUInteger {
 
 //Prompt error message in this function
 -(void) onDHError: (DHError)errorState{
+    [self dismissViewControllerAnimated:YES completion:nil]; // 关闭弹窗
     NSString *msg = @"";
     if(errorState ==DHError_TIMEOUT) {
         msg = NSLocalizedString(@"Pos no response", nil);
@@ -630,13 +632,16 @@ typedef enum : NSUInteger {
 -(void) onQposInfoResult: (NSDictionary*)posInfoData{
     if (self.isUpdateEMVByXML) {
         NSString *xmlStr = @"";
-        if ([@"QPOSMINI" isEqualToString:posInfoData[@"ModelInfo"]]) {
-            NSData *xmlData = [self readLine:@"QPOS mini"];
-            xmlStr = [QPOSUtil asciiFormatString:xmlData];
+        NSData *xmlData = [NSData data];
+        NSString *deviceModel = posInfoData[@"ModelInfo"];
+        if (deviceModel == nil || deviceModel.length == 0) {
+            xmlData = [self readLine:@"QPOS cute,CR100,D20,D30"];
+        }else if([@"QPOSMINI" isEqualToString:deviceModel] || [@"QPOSULTRA" isEqualToString:deviceModel]){
+            xmlData = [self readLine:@"QPOS mini"];
         }else{
-            NSData *xmlData = [self readLine:@"QPOS cute,CR100,D20,D30"];
-            xmlStr = [QPOSUtil asciiFormatString:xmlData];
+            xmlData = [self readLine:@"QPOS cute,CR100,D20,D30"];
         }
+        xmlStr = [QPOSUtil asciiFormatString:xmlData];
         [pos updateEMVConfigByXml:xmlStr];
         self.isUpdateEMVByXML = false;
     }else{
@@ -655,10 +660,10 @@ typedef enum : NSUInteger {
         if (batteryPercentage==nil || [@"" isEqualToString:batteryPercentage]) {
             aStr = [aStr stringByAppendingString:@"\n"];
             aStr = [NSString stringWithFormat:@"%@%@: ",aStr,NSLocalizedString(@"BatteryLevel", nil)];
-            aStr = [aStr stringByAppendingString:posInfoData[@"batteryLevel"]];
+            aStr = [aStr stringByAppendingString:posInfoData[@"batteryPercentage"]];
         }else{
             aStr = [aStr stringByAppendingString:@"\n"];
-            aStr = [NSString stringWithFormat:@"%@%@: ",aStr,NSLocalizedString(@"BatteryPercentage", nil)];
+            aStr = [NSString stringWithFormat:@"%@%@: ",aStr,NSLocalizedString(@"BatteryLevel", nil)];
             aStr = [aStr stringByAppendingString:posInfoData[@"batteryPercentage"]];
         }
         aStr = [aStr stringByAppendingString:@"\n"];
@@ -697,6 +702,15 @@ typedef enum : NSUInteger {
 - (void)onRequestGetCardNoResult:(NSString *)result{
     Trace(@"card no: %@",result);
     [pos doEmvApp:EmvOption_START];
+}
+
+- (void)showLoadingDialog:(NSString *)message {
+    // 创建 UIAlertController
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:NSLocalizedString(message, nil)
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    // 显示弹窗
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 //eg: update TMK api in pos.
@@ -776,19 +790,21 @@ typedef enum : NSUInteger {
 
 //eg: read xml file to update emv configure
 - (void)updateEMVConfigByXML{
-    self.textViewLog.text =  @"start update emv configure,pls wait";
+    self.textViewLog.text = NSLocalizedString(@"start update emv configure,pls wait", nil);
     Trace(@"updateEMVConfigByXML,pls wait");
+    [self showLoadingDialog:@"updateEMV"];
     self.isUpdateEMVByXML = true;
     [pos getQPosInfo];
 }
 
 // callback function of updateEmvConfig and updateEMVConfigByXml api.
 -(void)onReturnCustomConfigResult:(BOOL)isSuccess config:(NSString*)resutl{
+    [self dismissViewControllerAnimated:YES completion:nil]; // 关闭弹窗
     if(isSuccess){
-        self.textViewLog.text = @"Success";
+        self.textViewLog.text = NSLocalizedString(@"Success", nil);
         self.textViewLog.backgroundColor = [UIColor greenColor];
     }else{
-        self.textViewLog.text =  @"Failed";
+        self.textViewLog.text = NSLocalizedString(@"Fail", nil);
     }
     Trace(@"onReturnCustomConfigResult: %@",self.textViewLog.text);
 }

@@ -6,7 +6,7 @@
 "2Jl-JP-ARV.normalTitle" = "Start";
 
 /* Class = "UIButton"; normalTitle = "resetPos"; ObjectID = "AAo-Cb-rbe"; */
-"AAo-Cb-rbe.normalTitle" = "resetPos";
+"AAo-Cb-rbe.normalTitle" = "ResetPos";
 
 /* Class = "UIButton"; normalTitle = "AudioType"; ObjectID = "EmK-o2-xcG"; */
 "EmK-o2-xcG.normalTitle" = "AudioType";
@@ -15,13 +15,13 @@
 "K3B-x6-WVZ.text" = "sdkVersion";
 
 /* Class = "UIButton"; normalTitle = "getPosInfo"; ObjectID = "UF1-TL-r3N"; */
-"UF1-TL-r3N.normalTitle" = "getPosInfo";
+"UF1-TL-r3N.normalTitle" = "GetPosInfo";
 
 /* Class = "UIButton"; normalTitle = "disconnect"; ObjectID = "WUz-KA-kpv"; */
-"WUz-KA-kpv.normalTitle" = "disconnect";
+"WUz-KA-kpv.normalTitle" = "Disconnect";
 
 /* Class = "UIButton"; normalTitle = "hide"; ObjectID = "XEW-US-aMF"; */
-"XEW-US-aMF.normalTitle" = "hide";
+"XEW-US-aMF.normalTitle" = "Hide";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "eZ0-g9-e3d"; */
 "eZ0-g9-e3d.text" = "Title";
@@ -39,7 +39,7 @@
 "raO-Eh-f8K.normalTitle" = "BlueTooth";
 
 /* Class = "UIButton"; normalTitle = "scan"; ObjectID = "tdS-c2-8rr"; */
-"tdS-c2-8rr.normalTitle" = "scan";
+"tdS-c2-8rr.normalTitle" = "Scan";
 
 /* Class = "UINavigationItem"; title = "POS"; ObjectID = "wBt-sE-Juc"; */
 "wBt-sE-Juc.title" = "POS";
@@ -48,4 +48,7 @@
 "x8m-4I-e9X.title" = "Master";
 
 /* Class = "UIButton"; normalTitle = "getPosId"; ObjectID = "ydM-mS-I7Q"; */
-"ydM-mS-I7Q.normalTitle" = "getPosId";
+"ydM-mS-I7Q.normalTitle" = "GetPosId";
+
+/* Class = "UIButton"; normalTitle = "updateEMV"; ObjectID = "SGf-lK-wrh"; */
+"SGf-lK-wrh.normalTitle" = "UpdateEMV";
