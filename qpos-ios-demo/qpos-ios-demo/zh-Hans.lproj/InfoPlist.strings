@@ -1,8 +1,0 @@
-/* 
-  InfoPlist.strings
-  qpos-ios-demo
-
-  Created by fangzhengwei on 2020/3/25.
-  Copyright © 2020 Robin. All rights reserved.
-*/
-CFBundleDisplayName = "MPOS读卡器";
