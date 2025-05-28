@@ -331,69 +331,138 @@ typedef NS_ENUM(NSInteger,BuzzerType){
     BuzzerType_PAIRING_SUCCESS,
 };
 
+typedef NS_ENUM(NSInteger,KeyPart){
+    KeyPart_KEY_LEFT,
+    KeyPart_KEY_RIGHT,
+    KeyPart_KEY_ALL,
+};
 
+typedef NS_ENUM(NSInteger,CryptMode){
+    CryptMode_DES_ECB_ENCRYPT,
+    CryptMode_DES_ECB_DECRYPT,
+    CryptMode_DES_CBC_ENCRYPT,
+    CryptMode_DES_CBC_DECRYPT,
+    CryptMode_AES_ECB_ENCRYPT,
+    CryptMode_AES_ECB_DECRYPT,
+    CryptMode_AES_CBC_ENCRYPT,
+    CryptMode_AES_CBC_DECRYPT,
+};
+
+typedef NS_ENUM(NSInteger,KeyType){
+    KeyType_TRACK_KEY,
+    KeyType_PIN_KEY,
+    KeyType_EMV_KEY,
+    KeyType_MAC_KEY,
+};
+
+typedef NS_ENUM(NSInteger,KeyManager){
+    KeyManager_DEFAULT_KEY,
+    KeyManager_MKSK_KEY,
+    KeyManager_DUKPT_KEY,
+};
+
+typedef NS_ENUM(NSInteger,TR31KeyType){
+    TR31KeyType_NEW_KEY_ALL,
+    TR31KeyType_NEW_KEY_TMK,
+    TR31KeyType_NEW_KEY_PIN,
+    TR31KeyType_NEW_KEY_DATA,
+};
+
+typedef NS_ENUM(NSInteger,KeyUsage){
+    KeyUsage_NONE,
+    KeyUsage_ENCRYPT_DECRYPT,
+    KeyUsage_AES_CMAC,
+    KeyUsage_DES_CMAC,
+};
+
+typedef NS_ENUM(NSInteger,KeyCryptMode){
+    KeyCryptMode_DES,
+    KeyCryptMode_AES,
+};
+
+typedef NS_ENUM(NSInteger,MacKeyType){
+    MacKeyType_GENERATE_KEY,
+    MacKeyType_VERIFICATION_KEY,
+};
+
+typedef NS_ENUM(NSInteger,DataKeyType){
+    DataKeyType_DECRYPT_KEY,
+    DataKeyType_ENCRYPT_KEY,
+};
+
+typedef NS_ENUM(NSInteger,MacInputType){
+    MacInputType_ASCII,
+    MacInputType_HEX,
+};
+
+typedef NS_ENUM(NSInteger,DataInputType){
+    DataInputType_ASCII,
+    DataInputType_HEX,
+};
 @protocol QPOSServiceListener<NSObject>
 
 @optional
 -(void)onRequestWaitingUser;
 -(void)onRequestPinEntry;
--(void)onQposIdResult: (NSDictionary*)posId;
--(void)onQposInfoResult: (NSDictionary*)posInfoData;
--(void)onDoTradeResult: (DoTradeResult)result DecodeData:(NSDictionary*)decodeData;
+-(void)onQposIdResult: (NSDictionary*)posId NS_SWIFT_NAME(onQposIdResult(posId:));
+-(void)onQposInfoResult: (NSDictionary*)posInfoData NS_SWIFT_NAME(onQposInfoResult(posInfoData:));
+-(void)onDoTradeResult: (DoTradeResult)result DecodeData:(NSDictionary*)decodeData NS_SWIFT_NAME(onDoTradeResult(result:decodeData:));
 -(void)onRequestSetAmount;
--(void)onRequestSelectEmvApp: (NSArray*)appList;
+-(void)onRequestSelectEmvApp:(NSArray*)appList NS_SWIFT_NAME(onRequestSelectEmvApp(appList:));
 -(void)onRequestIsServerConnected;
 -(void)onRequestFinalConfirm;
--(void)onRequestOnlineProcess: (NSString*) tlv;
+-(void)onRequestOnlineProcess:(NSString*)tlv NS_SWIFT_NAME(onRequestOnlineProcess(tlv:));
 -(void)onRequestTime;
--(void)onRequestTransactionResult: (TransactionResult)transactionResult;
--(void)onRequestTransactionLog: (NSString*)tlv;
--(void)onRequestBatchData: (NSString*)tlv;
+-(void)onRequestTransactionResult:(TransactionResult)transactionResult NS_SWIFT_NAME(onRequestTransactionResult(transactionResult:));
+-(void)onRequestTransactionLog:(NSString*)tlv NS_SWIFT_NAME(onRequestTransactionLog(tlv:));
+-(void)onRequestBatchData:(NSString*)tlv NS_SWIFT_NAME(onRequestBatchData(tlv:));
 -(void)onRequestQposConnected;
 -(void)onRequestQposDisconnected;
 -(void)onRequestNoQposDetected;
--(void)onError: (Error)errorState;//pls del this Delegate
--(void)onDHError: (DHError)errorState;//replace function onError
--(void)onRequestDisplay: (Display)displayMsg;
--(void)onRequestUpdateWorkKeyResult:(UpdateInformationResult)updateInformationResult;
--(void)onRequestGetCardNoResult:(NSString *)result;
--(void)onRequestSignatureResult:(NSData *)result;
--(void)onReturnReversalData: (NSString*)tlv;
--(void)onReturnGetPinResult:(NSDictionary*)decodeData;
--(void)onReturnBuzzerStatusResult:(BOOL)isSuccess;//callback of Seting whether the buzzer
--(void)onReturnSetSleepTimeResult:(BOOL)isSuccess;
--(void)onReturnCustomConfigResult:(BOOL)isSuccess config:(NSString*)resutl;
--(void)onReturnSetMasterKeyResult: (BOOL)isSuccess;
--(void)onReturniccCashBack: (NSDictionary*)result;
--(void)onLcdShowCustomDisplay: (BOOL)isSuccess;
--(void)onUpdatePosFirmwareResult:(UpdateInformationResult)result;
--(void)onDownloadRsaPublicKeyResult:(NSDictionary *)result;
--(void)onGetPosComm:(NSInteger)mode amount:(NSString *)amt posId:(NSString*)aPosId;
--(void)onUpdateMasterKeyResult:(BOOL)isSuccess aDic:(NSDictionary *)resultDic;
--(void)onEmvICCExceptionData: (NSString*)tlv;
--(void)onAsyncResetPosStatus:(NSString *)isReset;
--(void)onGetKeyCheckValue:(NSDictionary *)checkValueResult;
--(void)onReturnGetEMVListResult:(NSString *)result;
--(void)onReturnUpdateEMVResult:(BOOL)isSuccess;
--(void)onReturnUpdateEMVRIDResult:(BOOL)isSuccess;
--(void)onReturnSetAESResult:(BOOL)isSuccess resultStr:(NSString *)result;
--(void)onReturnAESTransmissonKeyResult:(BOOL)isSuccess resultStr:(NSString *)result;
--(void)onGetShutDownTime:(NSString *)time;
--(void)onReturnPowerOnIccResult:(BOOL) isSuccess  KSN:(NSString *) ksn ATR:(NSString *)atr ATRLen:(NSInteger)atrLen;
--(void)onReturnPowerOffIccResult:(BOOL) isSuccess;
--(void)onReturnApduResult:(BOOL)isSuccess APDU:(NSString *)apdu APDU_Len:(NSInteger) apduLen;
--(void)onPinKeyTDESResult:(NSString *)encPin;
--(void)onGetDevicePublicKey:(NSString *)clearKeys;
--(void)onQposGenerateSessionKeysResult:(NSDictionary *)result;
--(void)onDoSetRsaPublicKey:(BOOL)result;
--(void)onReturnSetConnectedShutDownTimeResult:(BOOL)isSuccess;
--(void)onReturnGetConnectedShutDownTimeResult:(NSString *)time;
--(void)onReturnUpdateKeyByTR_31Result:(BOOL)result;
--(void)onReturnGetEncryptDataResult:(NSDictionary*)tlv;
--(void)onReturnBatchSendAPDUResult:(NSDictionary *)apduResponses;
--(void)onReturnPowerOnFelicaResult:(FelicaStatusCode)result;
--(void)onReturnPowerOffFelicaResult:(FelicaStatusCode)result;
--(void)onReturnSendApduFelicaResult:(FelicaStatusCode)result responseLen:(NSString *)responseLen responseData:(NSString *)responseData;
+-(void)onError: (Error)errorState NS_SWIFT_NAME(onError(errorState:));//pls del this Delegate
+-(void)onDHError: (DHError)errorState NS_SWIFT_NAME(onDHError(errorState:));//replace function onError
+-(void)onRequestDisplay: (Display)displayMsg NS_SWIFT_NAME(onRequestDisplay(displayMsg:));
+-(void)onRequestUpdateWorkKeyResult:(UpdateInformationResult)updateInformationResult NS_SWIFT_NAME(onRequestUpdateWorkKeyResult(updateInformationResult:));
+-(void)onRequestGetCardNoResult:(NSString *)result NS_SWIFT_NAME(onRequestGetCardNoResult(result:));
+-(void)onRequestSignatureResult:(NSData *)result NS_SWIFT_NAME(onRequestSignatureResult(result:));
+-(void)onReturnReversalData: (NSString*)tlv NS_SWIFT_NAME(onReturnReversalData(tlv:));
+-(void)onReturnGetPinResult:(NSDictionary*)decodeData NS_SWIFT_NAME(onReturnGetPinResult(decodeData:));
+-(void)onReturnBuzzerStatusResult:(BOOL)isSuccess NS_SWIFT_NAME(onReturnBuzzerStatusResult(isSuccess:));//callback of Seting whether the buzzer
+-(void)onReturnSetSleepTimeResult:(BOOL)isSuccess NS_SWIFT_NAME(onReturnSetSleepTimeResult(isSuccess:));
+-(void)onReturnCustomConfigResult:(BOOL)isSuccess config:(NSString*)resutl NS_SWIFT_NAME(onReturnCustomConfigResult(isSuccess:resutl:));
+-(void)onReturnSetMasterKeyResult: (BOOL)isSuccess NS_SWIFT_NAME(onReturnSetMasterKeyResult(isSuccess:));
+-(void)onReturniccCashBack: (NSDictionary*)result NS_SWIFT_NAME(onReturniccCashBack(result:));
+-(void)onLcdShowCustomDisplay: (BOOL)isSuccess NS_SWIFT_NAME(onLcdShowCustomDisplay(isSuccess:));
+-(void)onUpdatePosFirmwareResult:(UpdateInformationResult)result NS_SWIFT_NAME(onUpdatePosFirmwareResult(result:));
+-(void)onDownloadRsaPublicKeyResult:(NSDictionary *)result NS_SWIFT_NAME(onDownloadRsaPublicKeyResult(result:));
+-(void)onGetPosComm:(NSInteger)mode amount:(NSString *)amt posId:(NSString*)aPosId NS_SWIFT_NAME(onGetPosComm(mode:amt:aPosId:));
+-(void)onUpdateMasterKeyResult:(BOOL)isSuccess aDic:(NSDictionary *)resultDic NS_SWIFT_NAME(onUpdateMasterKeyResult(isSuccess:resultDic:));
+-(void)onEmvICCExceptionData: (NSString*)tlv NS_SWIFT_NAME(onEmvICCExceptionData(tlv:));
+-(void)onAsyncResetPosStatus:(NSString *)isReset NS_SWIFT_NAME(onAsyncResetPosStatus(isReset:));
+-(void)onGetKeyCheckValue:(NSDictionary *)checkValueResult NS_SWIFT_NAME(onGetKeyCheckValue(checkValueResult:));
+-(void)onReturnGetEMVListResult:(NSString *)result NS_SWIFT_NAME(onReturnGetEMVListResult(result:));
+-(void)onReturnUpdateEMVResult:(BOOL)isSuccess NS_SWIFT_NAME(onReturnUpdateEMVResult(isSuccess:));
+-(void)onReturnUpdateEMVRIDResult:(BOOL)isSuccess NS_SWIFT_NAME(onReturnUpdateEMVRIDResult(isSuccess:));
+-(void)onReturnSetAESResult:(BOOL)isSuccess resultStr:(NSString *)result NS_SWIFT_NAME(onReturnSetAESResult(isSuccess:result:));
+-(void)onReturnAESTransmissonKeyResult:(BOOL)isSuccess resultStr:(NSString *)result NS_SWIFT_NAME(onReturnAESTransmissonKeyResult(isSuccess:result:));
+-(void)onGetShutDownTime:(NSString *)time NS_SWIFT_NAME(onGetShutDownTime(time:));
+-(void)onReturnPowerOnIccResult:(BOOL)isSuccess KSN:(NSString *) ksn ATR:(NSString *)atr ATRLen:(NSInteger)atrLen NS_SWIFT_NAME(onReturnPowerOnIccResult(isSuccess:ksn:atr:atrLen:));
+-(void)onReturnPowerOffIccResult:(BOOL)isSuccess NS_SWIFT_NAME(onReturnPowerOffIccResult(isSuccess:));
+-(void)onReturnApduResult:(BOOL)isSuccess APDU:(NSString *)apdu APDU_Len:(NSInteger)apduLen NS_SWIFT_NAME(onReturnApduResult(isSuccess:apdu:apduLen:));
+-(void)onPinKeyTDESResult:(NSString *)encPin NS_SWIFT_NAME(onPinKeyTDESResult(encPin:));
+-(void)onGetDevicePublicKey:(NSString *)clearKeys NS_SWIFT_NAME(onGetDevicePublicKey(clearKeys:));
+-(void)onQposGenerateSessionKeysResult:(NSDictionary *)result NS_SWIFT_NAME(onQposGenerateSessionKeysResult(result:));
+-(void)onDoSetRsaPublicKey:(BOOL)result NS_SWIFT_NAME(onDoSetRsaPublicKey(result:));
+-(void)onReturnSetConnectedShutDownTimeResult:(BOOL)isSuccess NS_SWIFT_NAME(onReturnSetConnectedShutDownTimeResult(isSuccess:));
+-(void)onReturnGetConnectedShutDownTimeResult:(NSString *)time NS_SWIFT_NAME(onReturnGetConnectedShutDownTimeResult(isSuccess:));
+-(void)onReturnUpdateKeyByTR_31Result:(BOOL)result NS_SWIFT_NAME(onReturnUpdateKeyByTR_31Result(result:));
+-(void)onReturnGetEncryptDataResult:(NSDictionary*)tlv NS_SWIFT_NAME(onReturnGetEncryptDataResult(tlv:));
+-(void)onReturnBatchSendAPDUResult:(NSDictionary *)apduResponses NS_SWIFT_NAME(onReturnBatchSendAPDUResult(apduResponses:));
+-(void)onReturnPowerOnFelicaResult:(FelicaStatusCode)result NS_SWIFT_NAME(onReturnPowerOnFelicaResult(result:));
+-(void)onReturnPowerOffFelicaResult:(FelicaStatusCode)result NS_SWIFT_NAME(onReturnPowerOffFelicaResult(result:));
+-(void)onReturnSendApduFelicaResult:(FelicaStatusCode)result responseLen:(NSString *)responseLen responseData:(NSString *)responseData NS_SWIFT_NAME(onReturnSendApduFelicaResult(result:responseLen:responseData:));
+-(void)onRequestNFCBatchData:(TransactionResult)transactionResult tlv:(NSString*)tlv NS_SWIFT_NAME(onRequestNFCBatchData(transactionResult:tlv:));
+-(void)onGetCardInfoResult:(NSDictionary *)cardInfo NS_SWIFT_NAME(onGetCardInfoResult(cardInfo:));
 @end
 
 @interface QPOSService : NSObject
@@ -627,5 +696,27 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(NSString *)buildCvmPinBlock:(NSDictionary *)encryptedDataDict pin:(NSString *)pin;
 -(void)operateLEDByType:(LEDType)ledType colorValue:(NSString *)colorValue ledDirection:(LEDDirection)ledDirection ledStatus:(LEDStatus)ledStatus lightTime:(NSInteger)lightTime lightOffTime:(NSInteger)lightOffTime blinksTimes:(NSInteger)blinksTimes resultBlock:(void(^)(BOOL isSuccess))resultBlock;
 -(void)playBuzzerByType:(BuzzerType)buzzerType buzzerOnTime:(NSInteger)buzzerOnTime buzzerOffTime:(NSInteger)buzzerOffTime buzzerTimes:(NSInteger)buzzerTimes resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+
+-(NSDictionary *)getEncryptedTrack2Data;
+-(void)getEncryptedTrack2Data:(void(^)(NSString *ksn, NSString *track2Data))resultBlock;
+-(void)setCustomLogoDisplay:(LcdModeAlign)alcdModeAlign customLogoStr:(NSString *)customLogoStr timeout:(NSInteger)timeout resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(NSString *)getRandomNumByLen:(NSInteger)length;
+-(void)getRandomNumByLen:(NSInteger)length resultBlock:(void(^)(NSString *randomStr))resultBlock;
+-(void)sendNfcProcessResult:(NSString *)tlv;
+-(void)getDeviceECCPublicKey:(NSInteger)timeout resultBlock:(void(^)(NSString *devicePublicKey))resultBlock;
+-(void)updateServerECCPublicKey:(NSString *)serverPublicKeyStr timeout:(NSInteger)timeout resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(NSDictionary *)calculateMacWithKey:(KeyPart)keyPart cryptMode:(CryptMode)cryptMode keyManager:(KeyManager)keyManager keyType:(KeyType)keyType data:(NSString *)data isAddKsn:(BOOL)isAddKsn;
+-(NSDictionary *)calculateDataWithKey:(KeyPart)keyPart cryptMode:(CryptMode)cryptMode keyManager:(KeyManager)keyManager keyType:(KeyType)keyType data:(NSString *)data isAddKsn:(BOOL)isAddKsn;
+-(NSDictionary *)getEncryptDataWithTag:(NSString *)tagName cardType:(int)cardType cryptMode:(CryptMode)cryptMode paddingStr:(NSString *)paddingStr;
+-(void)doTrade:(NSInteger)timeout isAddKsn:(BOOL)isAddKsn;
+-(void)getICCCardNumber:(NSString *)transactionTime;
+-(void)setSupportCashBack:(BOOL)supportCashBack;
+-(void)setCardInfoObtainFlag:(BOOL)isNeedReturnCardInfo;
+-(void)setTransTypeValue:(NSString *)transType;
+-(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn sign:(NSString *)sign resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)updateDataWithKey:(NSInteger)keyIndex data:(NSString *)data ksn:(NSString *)ksn sign:(NSString *)sign macKeyType:(MacKeyType)macKeyType dataKeyType:(DataKeyType)dataKeyType macInputType:(MacInputType)macInputType dataInputType:(DataInputType)dataInputType resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)updateDataWithKey:(BOOL)isEncrypt keyCryptMode:(KeyCryptMode)keyCryptMode keyUsage:(KeyUsage)keyUsage saveKsn:(BOOL)saveKsn data:(NSString *)data keyIndex:(NSInteger)keyIndex ksn:(NSString *)ksn sign:(NSString *)sign macKeyType:(MacKeyType)macKeyType dataKeyType:(DataKeyType)dataKeyType macInputType:(MacInputType)macInputType dataInputType:(DataInputType)dataInputType resultBlock:(void(^)(BOOL isSuccess))resultBlock;
+-(void)setMerchantID:(NSString *)merchantID delay:(NSInteger)timeout block:(void (^)(BOOL isSuccess, NSDictionary *resultDic))merchantIDBlock;
 @end
 
