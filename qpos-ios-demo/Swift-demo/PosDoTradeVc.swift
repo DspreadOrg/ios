@@ -157,7 +157,7 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
         self.textViewLog?.text = "Please insert/swipe/tap card now."
     }
     
-    func onDHError(_ errorState: DHError) {
+    func onDHError(errorState: DHError) {
         var stateStr : String = "";
         if errorState == DHError.TIMEOUT {
             stateStr = "TIMEOUT";
@@ -201,7 +201,7 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
         self.textViewLog?.text = stateStr;
     }
     
-    func onRequest(_ displayMsg: Display) {
+    func onRequestDisplay(displayMsg: Display) {
         var msg : String = ""
         if displayMsg == Display.PLEASE_WAIT{
             msg = "Please wait...";
@@ -278,16 +278,16 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
        pos?.getQPosInfo();
     }
 
-    func onQposIdResult(_ posId: [AnyHashable : Any]!) {
+    func onQposIdResult(posId: [AnyHashable : Any]!) {
         self.textViewLog?.text="posid:\(posId["posId"] as! String)\npsamId:\(posId["psamId"] as! String)\ntmk0Status:\(posId["tmk0Status"] as! String)\ntmk1Status:\(posId["tmk1Status"] as! String)\ntmk2Status:\(posId["tmk2Status"] as! String)\ntmk3Status:\(posId["tmk3Status"]as! String)\ntmk4Status:\(posId["tmk4Status"]as! String)\nisKeyboard:\(posId["isKeyboard"]as! String)\nisSupportNFC:\(posId["isSupportNFC"]as! String)";
     }
     
-    func onQposInfoResult(_ posInfoData: [AnyHashable : Any]!) {
+    func onQposInfoResult(posInfoData: [AnyHashable : Any]!) {
         print(posInfoData);
         self.textViewLog?.text = "Bootloader Version:\(posInfoData["bootloaderVersion"]as! String)\nFirmware Version: \(posInfoData["firmwareVersion"]as! String)\nHardware Version:\(posInfoData["hardwareVersion"] as! String)\nbatteryLevel:\(posInfoData["batteryLevel"]as! String)\nbatteryPercentage:\(posInfoData["batteryPercentage"]as! String)\nSUB:\(posInfoData["SUB"]as! String)\nPCIHardwareVersion:\(posInfoData["PCIHardwareVersion"]as! String)\nisCharging:\(posInfoData["isCharging"]as! String)\nisSupportedTrack1:\(posInfoData["isSupportedTrack1"]as! String)\nisUsbConnected:\(posInfoData["isUsbConnected"]as! String)\nupdateWorkKeyFlag:\(posInfoData["updateWorkKeyFlag"]as! String)";
     }
-    
-    func onDoTradeResult(_ result: DoTradeResult, decodeData: [AnyHashable : Any]!) {
+
+    func onDoTradeResult(result: DoTradeResult, decodeData: [AnyHashable : Any]!) {
         print(("onDoTradeResult?>> result \(result)"))
         print(decodeData);
         if result == DoTradeResult.ICC {
@@ -336,12 +336,12 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
     }
     
     //pls select AID in this callback function
-    func onRequestSelectEmvApp(_ appList: [Any]!) {
-         print(appList);
-         pos?.selectEmvApp(0);
+    func onRequestSelectEmvApp(appList: [Any]!) {
+        print(appList);
+        pos?.selectEmvApp(0);
     }
     
-    func onRequestOnlineProcess(_ tlv: String!) {
+    func onRequestOnlineProcess(tlv: String!) {
         self.textViewLog?.text = "Online process requested."
         print("onRequestOnlineProcess: " + tlv)
         let hashtable:String = pos?.getICCTag(0, tagCount: 1, tagArrStr: "5F20")["tlv"] as! String;
@@ -349,79 +349,54 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
         self.pos?.sendOnlineProcessResult("8A023030")
     }
     
-    func onRequestBatchData(_ tlv: String!) {
+    func onRequestBatchData(tlv: String!) {
         self.batchData = tlv
         print("onRequestBatchData: "+tlv)
     }
     
-    func onRequest(_ transactionResult: TransactionResult) {
+    func onRequestTransactionResult(transactionResult: TransactionResult) {
         var message3 = "";
         if transactionResult == TransactionResult.APPROVED {
             message3 = "approve";
         }else if transactionResult == TransactionResult.TERMINATED{
-            
             message3 = "terminated";
-            
         }else if transactionResult == TransactionResult.DECLINED{
-    
             message3 = "decline";
         }else if transactionResult == TransactionResult.CANCEL{
-        
             message3 = "cancel";
         }else if transactionResult == TransactionResult.CAPK_FAIL{
-            
             message3 = "capk fail";
-            
         }else if transactionResult == TransactionResult.NOT_ICC{
-            
             message3 = "not icc";
-            
         }else if transactionResult == TransactionResult.SELECT_APP_FAIL{
-            
             message3 = "app fail";
-            
         }else if transactionResult == TransactionResult.DEVICE_ERROR{
-        
             message3 = "device error";
-            
         }else if transactionResult == TransactionResult.CARD_NOT_SUPPORTED{
-            
             message3 = "card not supported";
-            
         }else if transactionResult == TransactionResult.MISSING_MANDATORY_DATA{
-            
             message3 = "missing mandatory data";
-            
         }else if transactionResult == TransactionResult.CARD_BLOCKED_OR_NO_EMV_APPS{
-        
             message3 = "card blocked or no emv apps";
-            
         }else if transactionResult == TransactionResult.INVALID_ICC_DATA{
-            
             message3 = "invalid icc data";
-            
         }else if transactionResult == TransactionResult.FALLBACK{
-            
             message3 = "fallback";
-            
         }else if transactionResult == TransactionResult.NFC_TERMINATED{
-            
             message3 = "NFC terminated";
-            
         }else if transactionResult == TransactionResult.TRADE_LOG_FULL{
-            
             message3 = "trade log full";
         }
         print("transactionResult: "+message3);
         self.textViewLog?.text = "TransactionResult:\(message3)\ncardNumber:\(cardNumStr)\npin:\(pinblockStr)\nBatch Data:\(self.batchData)"
     }
     
-    func onEmvICCExceptionData(_ tlv: String!) {
-         print("onEmvICCExceptionData: "+tlv);
+    func onEmvICCExceptionData(tlv: String!) {
+        print("onEmvICCExceptionData: "+tlv);
     }
     
-    func onReturnReversalData(_ tlv: String!) {
-         print("Reversal Data: "+tlv);
+    func onReturnReversalData(tlv: String!) {
+        print("Reversal Data: "+tlv);
     }
     
     //inject TMK into pos
@@ -432,7 +407,7 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
     }
     
     // callback of setMasterKey
-    func onReturnSetMasterKeyResult(_ isSuccess: Bool) {
+    func onReturnSetMasterKeyResult(isSuccess: Bool) {
         if isSuccess {
             self.textViewLog?.text = "set masterkey success";
         }else{
@@ -476,7 +451,7 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
     }
     
     //callback of update work key
-    func onRequestUpdateWorkKeyResult(_ updateInformationResult: UpdateInformationResult) {
+    func onRequestUpdateWorkKeyResult(updateInformationResult: UpdateInformationResult) {
         print("onRequestUpdateWorkKeyResult %ld",updateInformationResult);
         if (updateInformationResult==UpdateInformationResult.UPDATE_SUCCESS) {
            self.textViewLog?.text = "update workkey Success";
@@ -496,7 +471,7 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
         pos?.updateEMVConfig(byXml: QPOSUtil.asciiFormatString(data));
     }
     
-    func onReturnCustomConfigResult(_ isSuccess: Bool, config resutl: String!) {
+    func onReturnCustomConfigResult(isSuccess: Bool, resutl: String!) {
         if isSuccess {
             self.textViewLog?.text = "Success";
         }else{
@@ -515,14 +490,7 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
         pos?.updateEmvCAPK(byTlv: EMVOperation.update, capkTlv: tlvData);
     }
     
-    //use bin file to update emv config
-//    func updateEMVConfigByBinFile(){
-//        let emvAppCfg = QPOSUtil.byteArray2Hex(readLine(name: "emv_app"));
-//        let emvCapkCfg = QPOSUtil.byteArray2Hex(readLine(name: "emv_capk"));
-//        pos?.updateEmvConfig(emvAppCfg, emvCapk: emvCapkCfg);
-//    }
-    
-    func onReturnUpdateEMVResult(_ isSuccess: Bool) {
+    func onReturnUpdateEMVResult(isSuccess: Bool) {
         if isSuccess {
             self.textViewLog?.text="UpdateEMVResult:SUCCESS";
         }else{
@@ -530,11 +498,11 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
         }
     }
     
-    func onReturnGetEMVListResult(_ result: String!) {
+    func onReturnGetEMVListResult(result: String!) {
         self.textViewLog?.text="EMVListResult:"+result;
     }
     
-    func onReturnUpdateEMVRIDResult(_ isSuccess: Bool) {
+    func onReturnUpdateEMVRIDResult(isSuccess: Bool) {
         if isSuccess {
             self.textViewLog?.text="UpdateEMVRIDResult:SUCCESS";
         }else{
