@@ -6,7 +6,7 @@
 "2Jl-JP-ARV.normalTitle" = "Start";
 
 /* Class = "UIButton"; normalTitle = "resetPos"; ObjectID = "AAo-Cb-rbe"; */
-"AAo-Cb-rbe.normalTitle" = "ResetPos";
+"AAo-Cb-rbe.normalTitle" = "CancelTrade";
 
 /* Class = "UIButton"; normalTitle = "AudioType"; ObjectID = "EmK-o2-xcG"; */
 "EmK-o2-xcG.normalTitle" = "AudioType";

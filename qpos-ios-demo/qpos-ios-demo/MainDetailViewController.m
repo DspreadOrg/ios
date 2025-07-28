@@ -424,6 +424,10 @@ typedef enum : NSUInteger {
     }];
 */
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Request data to server.", nil) message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //send transaction to bank and request bank approval
+        [pos cancelTrade:true];
+    }]];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //send transaction to bank and request bank approval
         [pos sendOnlineProcessResult:@"8A023030"];
@@ -529,15 +533,15 @@ typedef enum : NSUInteger {
 }
 
 //cancel transaction api.
-- (IBAction)resetpos:(id)sender {
-    Trace(@"resetpos");
+- (IBAction)cancelTransactionAction:(id)sender {
+    Trace(@"cancel Transaction");
     self.textViewLog.backgroundColor = [UIColor greenColor];
-    self.textViewLog.text = NSLocalizedString(@"reset pos ... ", nil);
-    if([pos resetPosStatus]){
-        self.textViewLog.text = NSLocalizedString(@"reset pos success", nil);
-    }else{
-        self.textViewLog.text = NSLocalizedString(@"reset pos fail", nil);
-    }
+    self.textViewLog.text = NSLocalizedString(@"cancel trade ... ", nil);
+    [pos cancelTrade];
+}
+
+- (void)onTradeCancelled{
+    self.textViewLog.text = NSLocalizedString(@"cancel trade success", nil);
 }
 
 //Prompt error message in this function

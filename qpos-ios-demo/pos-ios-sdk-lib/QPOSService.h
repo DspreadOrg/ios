@@ -465,6 +465,7 @@ typedef NS_ENUM(NSInteger,DataInputType){
 -(void)onReturnSendApduFelicaResult:(FelicaStatusCode)result responseLen:(NSString *)responseLen responseData:(NSString *)responseData;
 -(void)onRequestNFCBatchData:(TransactionResult)transactionResult tlv:(NSString*)tlv;
 -(void)onGetCardInfoResult:(NSDictionary *)cardInfo;
+-(void)onTradeCancelled;
 @end
 
 @interface QPOSService : NSObject
@@ -532,6 +533,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(NSArray *)getConnectedDevices;
 -(void)disconnectBT;
 -(BOOL)resetPosStatus;
+-(void)cancelTrade;
 -(BOOL)cancelTrade:(BOOL)isUserCancel;
 -(void)asynresetPosStatus;
 //you can set CardTradeMode before calling doTrade.

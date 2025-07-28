@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00A9002C183B08B100D22572"
-               BuildableName = "qpos-ios-demo.app"
+               BuildableName = "MPOS Reader.app"
                BlueprintName = "qpos-ios-demo"
                ReferencedContainer = "container:qpos-ios-demo.xcodeproj">
             </BuildableReference>
@@ -31,7 +31,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "00A9002C183B08B100D22572"
-            BuildableName = "qpos-ios-demo.app"
+            BuildableName = "MPOS Reader.app"
             BlueprintName = "qpos-ios-demo"
             ReferencedContainer = "container:qpos-ios-demo.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "00A9002C183B08B100D22572"
-            BuildableName = "qpos-ios-demo.app"
+            BuildableName = "MPOS Reader.app"
             BlueprintName = "qpos-ios-demo"
             ReferencedContainer = "container:qpos-ios-demo.xcodeproj">
          </BuildableReference>
@@ -81,7 +81,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "00A9002C183B08B100D22572"
-            BuildableName = "qpos-ios-demo.app"
+            BuildableName = "MPOS Reader.app"
             BlueprintName = "qpos-ios-demo"
             ReferencedContainer = "container:qpos-ios-demo.xcodeproj">
          </BuildableReference>

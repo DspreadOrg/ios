@@ -76,9 +76,9 @@
 "batch data" = "接触批数据";
 "reversal data" = "冲正数据";
 "onEmvICCExceptionData" = "EMV芯片异常数据";
-"reset pos ... " = "重置POS中...";
-"reset pos success" = "重置POS成功";
-"reset pos fail" = "重置POS失败";
+"cancel trade ... " = "取消交易中...";
+"cancel trade success" = "取消交易成功";
+"cancel trade fail" = "取消交易失败";
 "Pos no response" = "POS未回复";
 "Pos reset" = "POS已重置";
 "Unknown error" = "未知错误";

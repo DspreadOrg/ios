@@ -28,7 +28,7 @@
 		147F799D2BDF70340066039E /* DUKPT_2009_CBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 147F799B2BDF70340066039E /* DUKPT_2009_CBC.m */; };
 		14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EFBE09211816B80093681E /* libxml2.tbd */; };
 		4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4B86A8CA1B2E75AD00B95485 /* 1801.wav */; };
-		50F2C5952D06D6AD00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F2C5942D06D6AD00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a */; };
+		507813992E374EC000548F68 /* libqpos-ios-sdk-v3.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 507813982E374EC000548F68 /* libqpos-ios-sdk-v3.8.2.a */; };
 		6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */; };
 		75FE2A651ECEFC40001DA427 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE2A641ECEFC40001DA427 /* MainViewController.m */; };
 /* End PBXBuildFile section */
@@ -82,12 +82,12 @@
 		14A7785D29BADE1D005404F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		14EFBE09211816B80093681E /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		4B86A8CA1B2E75AD00B95485 /* 1801.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 1801.wav; sourceTree = "<group>"; };
+		507813982E374EC000548F68 /* libqpos-ios-sdk-v3.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-v3.8.2.a"; sourceTree = "<group>"; };
 		50F2C5832D00327500F0C3D4 /* BTDeviceFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTDeviceFinder.h; sourceTree = "<group>"; };
 		50F2C5862D00329200F0C3D4 /* QPOSService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
 		50F2C5872D00329200F0C3D4 /* QPOSUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QPOSUtil.h; sourceTree = "<group>"; };
 		50F2C58B2D02DD1B00F0C3D4 /* Trace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Trace.h; sourceTree = "<group>"; };
 		50F2C58D2D0690D000F0C3D4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		50F2C5942D06D6AD00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-v3.7.5.a"; sourceTree = "<group>"; };
 		50F731E32CF89738006EEE28 /* libqpos-ios-sdk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libqpos-ios-sdk.xcframework"; path = "../../libqpos-ios-sdk.xcframework"; sourceTree = "<group>"; };
 		6B2788B41883D4210095A338 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6B2788B61883D4290095A338 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -102,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50F2C5952D06D6AD00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a in Frameworks */,
+				507813992E374EC000548F68 /* libqpos-ios-sdk-v3.8.2.a in Frameworks */,
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
 			);
@@ -235,7 +235,7 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				50F2C5942D06D6AD00F0C3D4 /* libqpos-ios-sdk-v3.7.5.a */,
+				507813982E374EC000548F68 /* libqpos-ios-sdk-v3.8.2.a */,
 				50F2C5832D00327500F0C3D4 /* BTDeviceFinder.h */,
 				50F2C5862D00329200F0C3D4 /* QPOSService.h */,
 				50F2C5872D00329200F0C3D4 /* QPOSUtil.h */,

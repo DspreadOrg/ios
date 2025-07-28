@@ -289,11 +289,11 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.84060612469999996" green="1" blue="0.7553496904" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="resetPos">
+                                        <state key="normal" title="cancelTrade">
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="resetpos:" destination="mHT-30-Oa7" eventType="touchUpInside" id="Lgo-eb-15k"/>
+                                            <action selector="cancelTransactionAction:" destination="mHT-30-Oa7" eventType="touchUpInside" id="dDs-fU-LKC"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="sdkVersion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3B-x6-WVZ">
@@ -356,7 +356,6 @@
                         <outlet property="btnDisconnect" destination="WUz-KA-kpv" id="mNx-QU-Ds4"/>
                         <outlet property="btnGetPosId" destination="ydM-mS-I7Q" id="Cza-tb-AJ7"/>
                         <outlet property="btnGetPosInfo" destination="UF1-TL-r3N" id="GqR-h7-TGj"/>
-                        <outlet property="btnResetPos" destination="AAo-Cb-rbe" id="g0f-m0-vva"/>
                         <outlet property="btnStart" destination="2Jl-JP-ARV" id="Yno-3e-wl9"/>
                         <outlet property="btnUpdateEMV" destination="SGf-lK-wrh" id="bMe-uF-v2C"/>
                         <outlet property="labSDK" destination="K3B-x6-WVZ" id="OlU-Rz-3ph"/>

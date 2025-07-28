@@ -6,7 +6,7 @@
 "2Jl-JP-ARV.normalTitle" = "开始交易";
 
 /* Class = "UIButton"; normalTitle = "resetPos"; ObjectID = "AAo-Cb-rbe"; */
-"AAo-Cb-rbe.normalTitle" = "重置POS";
+"AAo-Cb-rbe.normalTitle" = "取消交易";
 
 /* Class = "UIButton"; normalTitle = "AudioType"; ObjectID = "EmK-o2-xcG"; */
 "EmK-o2-xcG.normalTitle" = "音频";

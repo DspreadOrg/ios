@@ -76,9 +76,9 @@
 "batch data" = "Batch data";
 "reversal data" = "Reversal data";
 "onEmvICCExceptionData" = "onEmvICCExceptionData";
-"reset pos ... " = "Reset pos ... ";
-"reset pos success" = "Reset pos success";
-"reset pos fail" = "Reset pos fail";
+"cancel trade ... " = "Cancel trade ... ";
+"cancel trade success" = "Cancel trade success";
+"cancel trade fail" = "Cancel trade fail";
 "Pos no response" = "Pos no response";
 "Pos reset" = "Pos reset";
 "Unknown error" = "Unknown error";
