@@ -28,6 +28,8 @@
 		14D6E7F0214B6A7800C6C45B /* TagApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D6E7EA214B6A7800C6C45B /* TagApp.m */; };
 		14F87C7223B5B5C5000DF3C6 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D6E7D5214B5CE500C6C45B /* libxml2.tbd */; };
 		50EE35D92DE6FC7800F2133F /* libqpos-ios-sdk-v3.7.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50EE35D82DE6FC7800F2133F /* libqpos-ios-sdk-v3.7.5.a */; };
+		50EE35ED2E0E383400F2133F /* SwiftGCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE35EC2E0E383400F2133F /* SwiftGCM.swift */; };
+		50EE35F02E0E3B1F00F2133F /* DUKPT_2009_CBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 50EE35EF2E0E3B1F00F2133F /* DUKPT_2009_CBC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,9 @@
 		14D6E7EA214B6A7800C6C45B /* TagApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagApp.m; sourceTree = "<group>"; };
 		14D6E7EB214B6A7800C6C45B /* ParseXMLTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseXMLTool.h; sourceTree = "<group>"; };
 		50EE35D82DE6FC7800F2133F /* libqpos-ios-sdk-v3.7.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-sdk-v3.7.5.a"; sourceTree = "<group>"; };
+		50EE35EC2E0E383400F2133F /* SwiftGCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGCM.swift; sourceTree = "<group>"; };
+		50EE35EE2E0E3B1F00F2133F /* DUKPT_2009_CBC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DUKPT_2009_CBC.h; sourceTree = "<group>"; };
+		50EE35EF2E0E3B1F00F2133F /* DUKPT_2009_CBC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DUKPT_2009_CBC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +87,8 @@
 		1401C82A2797E97900ACD5A1 /* decryptDataTool */ = {
 			isa = PBXGroup;
 			children = (
+				50EE35EE2E0E3B1F00F2133F /* DUKPT_2009_CBC.h */,
+				50EE35EF2E0E3B1F00F2133F /* DUKPT_2009_CBC.m */,
 				1401C82B2797E97900ACD5A1 /* TLVParser.m */,
 				1401C82C2797E97900ACD5A1 /* TLV.m */,
 				1401C82D2797E97900ACD5A1 /* TLVParser.h */,
@@ -114,6 +121,7 @@
 		144631EC212AB7EC00F04D5C /* Swift-demo */ = {
 			isa = PBXGroup;
 			children = (
+				50EE35EC2E0E383400F2133F /* SwiftGCM.swift */,
 				144631ED212AB7EC00F04D5C /* AppDelegate.swift */,
 				144631EF212AB7EC00F04D5C /* ViewController.swift */,
 				1446320A212AC9F400F04D5C /* BTSearchPage.swift */,
@@ -247,12 +255,14 @@
 				1446320B212AC9F400F04D5C /* BTSearchPage.swift in Sources */,
 				144631F0212AB7EC00F04D5C /* ViewController.swift in Sources */,
 				14D6E7EC214B6A7800C6C45B /* TagCapk.m in Sources */,
+				50EE35F02E0E3B1F00F2133F /* DUKPT_2009_CBC.m in Sources */,
 				14D6E7EE214B6A7800C6C45B /* GDataXMLNode.m in Sources */,
 				14D6E7F0214B6A7800C6C45B /* TagApp.m in Sources */,
 				1401C8302797E97900ACD5A1 /* TLV.m in Sources */,
 				14D6E7ED214B6A7800C6C45B /* ParseXMLTool.m in Sources */,
 				144631EE212AB7EC00F04D5C /* AppDelegate.swift in Sources */,
 				1446320D212AFB6500F04D5C /* PosDoTradeVc.swift in Sources */,
+				50EE35ED2E0E383400F2133F /* SwiftGCM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

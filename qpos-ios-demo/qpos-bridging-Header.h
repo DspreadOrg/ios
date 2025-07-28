@@ -15,5 +15,6 @@
 #import "TagApp.h"
 #import "TLV.h"
 #import "TLVParser.h"
+#import "DUKPT_2009_CBC.h"
 #endif /* qpos_bridging_Header_h */
 
