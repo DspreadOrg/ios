@@ -33,5 +33,8 @@
 
 //cardNumber decrypt function
 + (NSString*)decryptionTrackDataCBC:(NSString*)ksn BDK:(NSString*)mBDK data:(NSString*)mData;
-
+//use AWS service to decrypt transaction data
++ (void)decryptDataWithAWS:(NSString *)ksn ciphertext:(NSString *)ciphertext resultBlock:(void (^)(NSDictionary *decryptionResult))resultBlock;
+//use AWS service to generate TR31 block and update key
++ (void)getTR31BlockFromAWS:(NSString *)ksn resultBlock:(void (^)(NSDictionary *tr31Block))resultBlock;
 @end

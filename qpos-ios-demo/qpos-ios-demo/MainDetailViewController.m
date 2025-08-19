@@ -12,6 +12,7 @@
 #import "TLVParser.h"
 #import <CommonCrypto/CommonCrypto.h>
 #import "Trace.h"
+#import "DUKPT_2009_CBC.h"
 typedef enum : NSUInteger {
     EMVAppXMl,
     EMVCapkXMl,
@@ -415,12 +416,14 @@ typedef enum : NSUInteger {
     [pos calculateMacWithKey:KeyPart_KEY_ALL cryptMode:CryptMode_CBC_ENCRYPT keyManager:KeyManager_DUKPT_KEY keyType:KeyType_TRACK_KEY data:@"22222222222222222222222222222222" resultBlock:^(NSDictionary *dataDict) {
         Trace(@"dataDict: %@",dataDict);
     }];
-    NSArray *dict = [TLVParser parse:tlv];
-    for (TLV *tlv in dict) {
+    NSArray *tlvList = [TLVParser parse:tlv];
+    for (TLV *tlv in tlvList) {
         Trace(@"tag: %@ length: %@ value: %@",tlv.tag,tlv.length,tlv.value);
     }
-    [pos getEncryptedTrack2Data:^(NSString *ksn, NSString *track2Data) {
-        Trace(@"ksn: %@ track2Data: %@",ksn,track2Data);
+    NSString *C0 = [TLVParser searchTLV:tlvList searchTag:@"C0"].value;
+    NSString *C2 = [TLVParser searchTLV:tlvList searchTag:@"C2"].value;
+    [DUKPT_2009_CBC decryptDataWithAWS:C0 ciphertext:C2 resultBlock:^(NSDictionary *decryptionResult) {
+        Trace(@"plaintext str: %@",decryptionResult[@"plaintext"]);
     }];
 */
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Request data to server.", nil) message:@"" preferredStyle:UIAlertControllerStyleAlert];
@@ -709,11 +712,11 @@ typedef enum : NSUInteger {
 }
 
 - (void)showLoadingDialog:(NSString *)message {
-    // 创建 UIAlertController
+    // create UIAlertController
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:NSLocalizedString(message, nil)
                                                                       preferredStyle:UIAlertControllerStyleAlert];
-    // 显示弹窗
+    // show alert
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
@@ -772,7 +775,7 @@ typedef enum : NSUInteger {
 //update ipek
 - (void)updateIpek{
     Trace(@"updateIpek");
-     [pos doUpdateIPEKOperation:@"00" tracksn:@"00000510F462F8400004" trackipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" trackipekCheckValue:@"93906AA157EE2604" emvksn:@"00000510F462F8400004" emvipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" emvipekcheckvalue:@"93906AA157EE2604" pinksn:@"00000510F462F8400004" pinipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" pinipekcheckValue:@"93906AA157EE2604" block:^(BOOL isSuccess, NSString *stateStr) {
+     [pos doUpdateIPEKOperation:@"00" tracksn:@"09120200630001E00001" trackipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" trackipekCheckValue:@"93906AA157EE2604" emvksn:@"09120200630001E00001" emvipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" emvipekcheckvalue:@"93906AA157EE2604" pinksn:@"09120200630001E00001" pinipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" pinipekcheckValue:@"93906AA157EE2604" block:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
             self.textViewLog.text = stateStr;
         }
@@ -782,12 +785,20 @@ typedef enum : NSUInteger {
 //update ipek by key type
 - (void)updateIpekByKeyType{
     Trace(@"updateIpekByKeyType");
-     [pos updateIPEKOperationByKeyType:@"00" tracksn:@"00000510F462F8400004" trackipek:@"98357D2CA022B6E298357D2CA022B6E2" trackipekCheckValue:@"82E13665B4624DF5" emvksn:@"00000510F462F8400004" emvipek:@"98357D2CA022B6E298357D2CA022B6E2" emvipekcheckvalue:@"82E13665B4624DF5" pinksn:@"" pinipek:@"" pinipekcheckValue:@"" block:^(BOOL isSuccess, NSString *stateStr) {
+     [pos updateIPEKOperationByKeyType:@"00" tracksn:@"09120200630001E00001" trackipek:@"98357D2CA022B6E298357D2CA022B6E2" trackipekCheckValue:@"82E13665B4624DF5" emvksn:@"09120200630001E00001" emvipek:@"98357D2CA022B6E298357D2CA022B6E2" emvipekcheckvalue:@"82E13665B4624DF5" pinksn:@"" pinipek:@"" pinipekcheckValue:@"" block:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
             self.textViewLog.text = stateStr;
         }
     }];
 }
+//update key by TR31 block
+- (void)updateKeyByTR31{
+    [DUKPT_2009_CBC getTR31BlockFromAWS:@"09120200630001E00001" resultBlock:^(NSDictionary *tr31Block) {
+        Trace(@"tr31Block: %@",tr31Block[@"exportedKeyMaterial"]);
+        [pos updateKeyByTR_31:0 keyBlock:tr31Block[@"exportedKeyMaterial"]];
+    }];
+}
+
 - (IBAction)updateEMVConfig:(id)sender {
     [self updateEMVConfigByXML];
 }
@@ -873,33 +884,6 @@ typedef enum : NSUInteger {
         NSString *checkValue = [dataBlock objectForKey:@"checkValue"];
         Trace(@"transportKey: %@, checkValue = %@",transportKey,checkValue);
     }];
-}
-
-//get encrypt data function
-- (void)getEncryptData{
-    NSData *data = [@"123456789" dataUsingEncoding:NSUTF8StringEncoding];;
-    [pos getEncryptData:data keyType:@"2" keyIndex:@"0" timeOut:10];
-}
-
-- (void)onReturnGetEncryptDataResult:(NSDictionary *)tlv{
-    Trace(@"onReturnGetEncryptDataResult: %@", tlv);
-}
-
-//update public key into pos
-- (void)updateRSATest{
-    NSString *pemStr = [QPOSUtil asciiFormatString: [self readLine:@"rsa_public_key_pkcs8_test"]];
-    Trace(@"pemStr: %@", pemStr);
-    [pos updateRSA:pemStr pemFile:@"rsa_public_key_pkcs8_test.pem"];
-}
-
-// callback function of updateRSA function
--(void)onDoSetRsaPublicKey:(BOOL)result{
-    Trace(@"onDoSetRsaPublicKey: %d", result);
-    if (result) {
-        self.textViewLog.text = @"success";
-    }else{
-        self.textViewLog.text = @"fail";
-    }
 }
 
 //generate Session Keys from pos

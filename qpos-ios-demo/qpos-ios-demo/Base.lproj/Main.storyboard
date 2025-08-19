@@ -356,6 +356,7 @@
                         <outlet property="btnDisconnect" destination="WUz-KA-kpv" id="mNx-QU-Ds4"/>
                         <outlet property="btnGetPosId" destination="ydM-mS-I7Q" id="Cza-tb-AJ7"/>
                         <outlet property="btnGetPosInfo" destination="UF1-TL-r3N" id="GqR-h7-TGj"/>
+                        <outlet property="btnResetPos" destination="AAo-Cb-rbe" id="o3n-GU-e5I"/>
                         <outlet property="btnStart" destination="2Jl-JP-ARV" id="Yno-3e-wl9"/>
                         <outlet property="btnUpdateEMV" destination="SGf-lK-wrh" id="bMe-uF-v2C"/>
                         <outlet property="labSDK" destination="K3B-x6-WVZ" id="OlU-Rz-3ph"/>

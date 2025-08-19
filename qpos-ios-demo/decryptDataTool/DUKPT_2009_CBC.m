@@ -7,11 +7,54 @@
 //
 
 #import "DUKPT_2009_CBC.h"
-//#import "Trace.h"
+#import <AFNetworking/AFNetworking.h>
 static const char *HEXES = "0123456789ABCDEF";
 #define gIv  @"00000000"
 #define kSecrectKeyLength 24
 @implementation DUKPT_2009_CBC
+
++ (void)decryptDataWithAWS:(NSString *)ksn ciphertext:(NSString *)ciphertext resultBlock:(void (^)(NSDictionary *decryptionResult))resultBlock{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    NSDictionary *params = @{
+        @"keyIdentifier": @"arn:aws:payment-cryptography:us-east-1:750226982526:key/rmzbbqjxd7euatrh",
+        @"ciphertext": ciphertext,
+        @"dukptData": @{
+          @"ksn": ksn,
+          @"mode": @"CBC",
+          @"keyDerivationType": @"TDES_2KEY"
+        }
+      };
+    NSString *url = @"https://ypparbjfugzgwijijfnb.supabase.co/functions/v1/dukpt-decrypt";
+    [manager POST:url parameters:params headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSLog(@"uploadProgress: %@", uploadProgress.description);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        resultBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 网络错误处理
+        resultBlock(error.userInfo);
+    }];
+}
+
++ (void)getTR31BlockFromAWS:(NSString *)ksn resultBlock:(void (^)(NSDictionary *tr31Block))resultBlock{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    NSDictionary *params = @{
+        @"exportKeyIdentifier": @"arn:aws:payment-cryptography:us-east-1:750226982526:key/rmzbbqjxd7euatrh",
+        @"wrappingKeyIdentifier": @"arn:aws:payment-cryptography:us-east-1:750226982526:key/2u53xd3gnk5v3qkv",
+        @"keySerialNumber": ksn
+      };
+    NSString *url = @"https://ypparbjfugzgwijijfnb.supabase.co/functions/v1/export-tr31";
+    [manager POST:url parameters:params headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSLog(@"uploadProgress: %@", uploadProgress.description);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"responseObject: %@",responseObject);
+        resultBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 网络错误处理
+        resultBlock(error.userInfo);
+    }];
+}
 
 +(NSData *)generateIPEKwithKSNStr:(NSString *)ksn bdk:(NSString *)bdk{
     return [self GenerateIPEKksn:[self parseHexStr2Byte:ksn] bdk:[self parseHexStr2Byte:bdk]];
