@@ -255,7 +255,7 @@ typedef enum : NSUInteger {
         msg = [msg stringByAppendingString:pinBlock];
         msg = [msg stringByAppendingString:encPAN];
         NSString *a = [QPOSUtil byteArray2Hex:[QPOSUtil stringFormatTAscii:maskedPAN]];
-        [pos getPin:1 keyIndex:0 maxLen:6 typeFace:@"Pls Input Pin" cardNo:a data:@"" delay:30 withResultBlock:^(BOOL isSuccess, NSDictionary *result) {
+        [pos getPin:1 keyIndex:0 maxLen:6 typeFace:@"PLS INPUT PIN" cardNo:a data:@"" delay:30 withResultBlock:^(BOOL isSuccess, NSDictionary *result) {
             Trace(@"result: %@",result);
             self.textViewLog.backgroundColor = [UIColor greenColor];
             [self playAudio];
@@ -721,13 +721,12 @@ typedef enum : NSUInteger {
 }
 
 //eg: update TMK api in pos.
--(void)setMasterKey:(NSInteger)keyIndex{
+-(void)setMasterKey{
     Trace(@"setMasterKey");
-    NSString *pik = @"89EEF94D28AA2DC189EEF94D28AA2DC1";//111111111111111111111111
-    NSString *pikCheck = @"82E13665B4624DF5";
-    pik = @"F679786E2411E3DEF679786E2411E3DE";//33333333333333333333333333333
-    pikCheck = @"ADC67D8473BF2F06";
-    [pos setMasterKey:pik checkValue:pikCheck keyIndex:keyIndex];
+    NSInteger keyIndex = 0;// keyIndex is 0-9,0 is default keyIndex
+    NSString *encryptedNewMasterKey = @"B4ABA2BB791C50E7B4ABA2BB791C50E7";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 22222222222222222222222222222222(New Master Key) to get B4ABA2BB791C50E7B4ABA2BB791C50E7
+    NSString *newMasterKeyKCV = @"00962B60AA556E65";//22222222222222222222222222222222(New Master Key) 3des encrypt 0000000000000000 to get 00962B60AA556E65
+    [pos setMasterKey:encryptedNewMasterKey checkValue:newMasterKeyKCV keyIndex:keyIndex];
 }
 // callback function of setMasterKey api
 -(void) onReturnSetMasterKeyResult: (BOOL)isSuccess{
@@ -739,53 +738,76 @@ typedef enum : NSUInteger {
     Trace(@"onReturnSetMasterKeyResult: %@",self.textViewLog.text);
 }
 
-//eg: update work key in pos.
--(void)updateWorkKey:(NSInteger)keyIndex{
+//eg: update work key in pos for MK/SK
+-(void)updateWorkKey{
     Trace(@"updateWorkKey");
-    NSString * pik = @"89EEF94D28AA2DC189EEF94D28AA2DC1";
-    NSString * pikCheck = @"82E13665B4624DF5";
+    NSInteger keyIndex = 0;// keyIndex is 0-9,0 is default keyIndex
+    NSString * pik = @"9B3A7B883A100F739B3A7B883A100F73";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 11111111111111111111111111111111(PIN Key) to get 9B3A7B883A100F739B3A7B883A100F73
+    NSString * pikCheck = @"82E13665B4624DF5";//11111111111111111111111111111111(PIN Key) 3des encrypt 0000000000000000 to get 82E13665B4624DF5
     
-    pik = @"89EEF94D28AA2DC189EEF94D28AA2DC1";
-    pikCheck = @"82E13665B4624DF5";
+    NSString * trk = @"9B3A7B883A100F739B3A7B883A100F73";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 11111111111111111111111111111111(Track Key) to get 9B3A7B883A100F739B3A7B883A100F73
+    NSString * trkCheck = @"82E13665B4624DF5";//11111111111111111111111111111111(Track Key) 3des encrypt 0000000000000000 to get 82E13665B4624DF5
     
-    NSString * trk = @"89EEF94D28AA2DC189EEF94D28AA2DC1";
-    NSString * trkCheck = @"82E13665B4624DF5";
-    
-    NSString * mak = @"89EEF94D28AA2DC189EEF94D28AA2DC1";
-    NSString * makCheck = @"82E13665B4624DF5";
+    NSString * mak = @"9B3A7B883A100F739B3A7B883A100F73";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 11111111111111111111111111111111(Mac Key) to get 9B3A7B883A100F739B3A7B883A100F73
+    NSString * makCheck = @"82E13665B4624DF5";//11111111111111111111111111111111(Mac Key) 3des encrypt 0000000000000000 to get 82E13665B4624DF5
     [pos udpateWorkKey:pik pinKeyCheck:pikCheck trackKey:trk trackKeyCheck:trkCheck macKey:mak macKeyCheck:makCheck keyIndex:keyIndex];
 }
 
 // callback function of updateWorkKey api.
 -(void) onRequestUpdateWorkKeyResult:(UpdateInformationResult)updateInformationResult{
     if (updateInformationResult==UpdateInformationResult_UPDATE_SUCCESS) {
-        self.textViewLog.text = @" update workkey Success";
+        self.textViewLog.text = @"Update workkey success";
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_FAIL){
-        self.textViewLog.text =  @"Failed";
+        self.textViewLog.text = @"Failed";
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_PACKET_LEN_ERROR){
-        self.textViewLog.text =  @"Packet len error";
+        self.textViewLog.text = @"Packet len error";
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_PACKET_VEFIRY_ERROR){
-        [pos getUpdateCheckValueBlock:^(BOOL isSuccess, NSString *stateStr) {
-            self.textViewLog.text = [@"Packet vefiry error " stringByAppendingString:stateStr];
-        }];
+        self.textViewLog.text = @"Packet verify error";
+        [pos getKeyCheckValue:DUKPT_MKSK_ALLTYPE keyIndex:0];
     }
     Trace(@"onRequestUpdateWorkKeyResult %@",self.textViewLog.text);
 }
 
-//update ipek
+//update ipek for DUKPT
 - (void)updateIpek{
     Trace(@"updateIpek");
-     [pos doUpdateIPEKOperation:@"00" tracksn:@"09120200630001E00001" trackipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" trackipekCheckValue:@"93906AA157EE2604" emvksn:@"09120200630001E00001" emvipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" emvipekcheckvalue:@"93906AA157EE2604" pinksn:@"09120200630001E00001" pinipek:@"293C2D8B1D7ABCF83E665A7C5C6532C9" pinipekcheckValue:@"93906AA157EE2604" block:^(BOOL isSuccess, NSString *stateStr) {
+    NSString *keyGroup = @"00";
+    NSString *demoTrackKsn = @"09120200630001E00001";
+    NSString *encDemoTrackIpek = @"FF811AB9745399D6A5096AC1E6EE0AA7";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 5AF93691729D99703E3F2E386B619DFC(track Key) to get FF811AB9745399D6A5096AC1E6EE0AA7
+    NSString *demoTrackIpekKcv = @"377EE009F1772396";//5AF93691729D99703E3F2E386B619DFC(track Key) 3des encrypt 0000000000000000 to get 377EE009F1772396
+    
+    NSString *demoEmvKsn = @"09120200630001E00001";
+    NSString *encDemoEmvIpek = @"39A694D57E565D2BDB85447BF856F074";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt FA21E5290EE89881AF360574087496EA(emv Key) to get 39A694D57E565D2BDB85447BF856F074
+    NSString *demoEmvIpekKcv = @"AE8F91382DABB105";//FA21E5290EE89881AF360574087496EA(emv Key) 3des encrypt 0000000000000000 to get AE8F91382DABB105
+    
+    NSString *demoPinKsn = @"09120200630001E00001";
+    NSString *encDemoPinIpek = @"E1AAE4AB1550A8776CF693BE6EA9C9FB";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 0F3E0B885C29062A5C32263A06FB7533(pin Key) to get E1AAE4AB1550A8776CF693BE6EA9C9FB
+    NSString *demoPinIpekKcv = @"7DD75C1861CEFE04";//0F3E0B885C29062A5C32263A06FB7533(pin Key) 3des encrypt 0000000000000000 to get 7DD75C1861CEFE04
+    
+    [pos doUpdateIPEKOperation:keyGroup tracksn:demoTrackKsn trackipek:encDemoTrackIpek trackipekCheckValue:demoTrackIpekKcv emvksn:demoEmvKsn emvipek:encDemoEmvIpek emvipekcheckvalue:demoEmvIpekKcv pinksn:demoPinKsn pinipek:encDemoPinIpek pinipekcheckValue:demoPinIpekKcv block:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
             self.textViewLog.text = stateStr;
         }
     }];
 }
 
-//update ipek by key type
+//update ipek by key type for DUKPT
 - (void)updateIpekByKeyType{
     Trace(@"updateIpekByKeyType");
-     [pos updateIPEKOperationByKeyType:@"00" tracksn:@"09120200630001E00001" trackipek:@"98357D2CA022B6E298357D2CA022B6E2" trackipekCheckValue:@"82E13665B4624DF5" emvksn:@"09120200630001E00001" emvipek:@"98357D2CA022B6E298357D2CA022B6E2" emvipekcheckvalue:@"82E13665B4624DF5" pinksn:@"" pinipek:@"" pinipekcheckValue:@"" block:^(BOOL isSuccess, NSString *stateStr) {
+    NSString *keyGroup = @"00";
+    NSString *demoTrackKsn = @"09120200630001E00001";
+    NSString *encDemoTrackIpek = @"FF811AB9745399D6A5096AC1E6EE0AA7";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 5AF93691729D99703E3F2E386B619DFC(track Key) to get FF811AB9745399D6A5096AC1E6EE0AA7
+    NSString *demoTrackIpekKcv = @"377EE009F1772396";//5AF93691729D99703E3F2E386B619DFC(track Key) 3des encrypt 0000000000000000 to get 377EE009F1772396
+    
+    NSString *demoEmvKsn = @"09120200630001E00001";
+    NSString *encDemoEmvIpek = @"39A694D57E565D2BDB85447BF856F074";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt FA21E5290EE89881AF360574087496EA(emv Key) to get 39A694D57E565D2BDB85447BF856F074
+    NSString *demoEmvIpekKcv = @"AE8F91382DABB105";//FA21E5290EE89881AF360574087496EA(emv Key) 3des encrypt 0000000000000000 to get AE8F91382DABB105
+    
+    NSString *demoPinKsn = @"09120200630001E00001";
+    NSString *encDemoPinIpek = @"E1AAE4AB1550A8776CF693BE6EA9C9FB";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 0F3E0B885C29062A5C32263A06FB7533(pin Key) to get E1AAE4AB1550A8776CF693BE6EA9C9FB
+    NSString *demoPinIpekKcv = @"7DD75C1861CEFE04";//0F3E0B885C29062A5C32263A06FB7533(pin Key) 3des encrypt 0000000000000000 to get 7DD75C1861CEFE04
+    
+    [pos updateIPEKOperationByKeyType:keyGroup tracksn:demoTrackKsn trackipek:encDemoTrackIpek trackipekCheckValue:demoTrackIpekKcv emvksn:demoEmvKsn emvipek:encDemoEmvIpek emvipekcheckvalue:demoEmvIpekKcv pinksn:@"" pinipek:@"" pinipekcheckValue:@"" block:^(BOOL isSuccess, NSString *stateStr) {
         if (isSuccess) {
             self.textViewLog.text = stateStr;
         }
@@ -824,6 +846,15 @@ typedef enum : NSUInteger {
     Trace(@"onReturnCustomConfigResult: %@",self.textViewLog.text);
 }
 
+- (void)onGetKeyCheckValue:(NSDictionary *)checkValueResult{
+    NSString *kcvInfo = @"";
+    for (NSString *key in checkValueResult) {
+        kcvInfo = [kcvInfo stringByAppendingFormat:@"%@: %@\n",key,[checkValueResult objectForKey:key]];
+    }
+    self.textViewLog.text = kcvInfo;
+    Trace(@"%@",kcvInfo);
+}
+
 - (void)onGetCardInfoResult:(NSDictionary *)cardInfo{
     Trace(@"AID: %@, CardNo: %@", [cardInfo objectForKey:@"AID"],[cardInfo objectForKey:@"CardNo"]);
 }
@@ -831,7 +862,7 @@ typedef enum : NSUInteger {
 // update pos firmware api
 - (IBAction)updatePosFirmware:(UIButton *)sender {
     Trace(@"updatePosFirmware");
-    NSData *data = [self readLine:@"A27UC_S1(样机英文版)_master"];//read QPOS_Mini_Firmware.asc
+    NSData *data = [self readLine:@"QPOS_Cute_V591.25.241.66_release_202508141112"];//read QPOS_Mini_Firmware.asc
     if (data != nil) {
         [pos updatePosFirmware:data address:self.bluetoothAddress];
         self.updateFWFlag = true;
@@ -871,6 +902,9 @@ typedef enum : NSUInteger {
         self.textViewLog.text =  @"Packet len error";
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_PACKET_VEFIRY_ERROR){
         self.textViewLog.text =  @"Packer vefiry error";
+        [pos getUpdateCheckValueBlock:^(BOOL isSuccess, NSString *stateStr) {
+            self.textViewLog.text = [@"Packet vefiry error " stringByAppendingString:stateStr];
+        }];
     }else if(updateInformationResult==UpdateInformationResult_UPDATE_PLEASE_PLUG_INTO_POWER){
         self.textViewLog.text =  @"Please plug into power";
     }else{

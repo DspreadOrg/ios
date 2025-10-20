@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,7 +29,8 @@
 		14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EFBE09211816B80093681E /* libxml2.tbd */; };
 		1B2B630EBFE668B7D4A9D4C5 /* Pods_qpos_ios_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B0623FCA1DE32DABD39CB8A /* Pods_qpos_ios_demo.framework */; };
 		4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4B86A8CA1B2E75AD00B95485 /* 1801.wav */; };
-		5064994A2E54617800E47680 /* libqpos-ios-release-sdk-v3.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506499492E54617800E47680 /* libqpos-ios-release-sdk-v3.8.3.a */; };
+		5004DA442EA5DE190081C282 /* libqpos-ios-sdk-v3.8.3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5004DA422EA5DB9E0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework */; };
+		5004DA462EA5F19A0081C282 /* QPOS_Cute_V591.25.241.66_release_202508141112.asc in Resources */ = {isa = PBXBuildFile; fileRef = 5004DA452EA5F19A0081C282 /* QPOS_Cute_V591.25.241.66_release_202508141112.asc */; };
 		6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */; };
 		75FE2A651ECEFC40001DA427 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE2A641ECEFC40001DA427 /* MainViewController.m */; };
 		8085CE7B90CF4D1ADE561033 /* Pods_qpos_ios_demoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2774F44810BBE4647B598A /* Pods_qpos_ios_demoTests.framework */; };
@@ -87,10 +88,8 @@
 		3B0623FCA1DE32DABD39CB8A /* Pods_qpos_ios_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_qpos_ios_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D976FCE21B220BAB642802B /* Pods-qpos-ios-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qpos-ios-demo.debug.xcconfig"; path = "Target Support Files/Pods-qpos-ios-demo/Pods-qpos-ios-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		4B86A8CA1B2E75AD00B95485 /* 1801.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 1801.wav; sourceTree = "<group>"; };
-		506499492E54617800E47680 /* libqpos-ios-release-sdk-v3.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libqpos-ios-release-sdk-v3.8.3.a"; sourceTree = "<group>"; };
-		50F2C5832D00327500F0C3D4 /* BTDeviceFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTDeviceFinder.h; sourceTree = "<group>"; };
-		50F2C5862D00329200F0C3D4 /* QPOSService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QPOSService.h; sourceTree = "<group>"; };
-		50F2C5872D00329200F0C3D4 /* QPOSUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QPOSUtil.h; sourceTree = "<group>"; };
+		5004DA422EA5DB9E0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libqpos-ios-sdk-v3.8.3.xcframework"; path = "../../libqpos-ios-sdk-v3.8.3.xcframework"; sourceTree = "<group>"; };
+		5004DA452EA5F19A0081C282 /* QPOS_Cute_V591.25.241.66_release_202508141112.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = QPOS_Cute_V591.25.241.66_release_202508141112.asc; sourceTree = "<group>"; };
 		50F2C58B2D02DD1B00F0C3D4 /* Trace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Trace.h; sourceTree = "<group>"; };
 		50F2C58D2D0690D000F0C3D4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		50F731E32CF89738006EEE28 /* libqpos-ios-sdk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libqpos-ios-sdk.xcframework"; path = "../../libqpos-ios-sdk.xcframework"; sourceTree = "<group>"; };
@@ -110,9 +109,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5004DA442EA5DE190081C282 /* libqpos-ios-sdk-v3.8.3.xcframework in Frameworks */,
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
-				5064994A2E54617800E47680 /* libqpos-ios-release-sdk-v3.8.3.a in Frameworks */,
 				1B2B630EBFE668B7D4A9D4C5 /* Pods_qpos_ios_demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +156,7 @@
 		00A9002F183B08B100D22572 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5004DA422EA5DB9E0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework */,
 				50F731E32CF89738006EEE28 /* libqpos-ios-sdk.xcframework */,
 				141825DF2154E75000E77EB4 /* Security.framework */,
 				14EFBE09211816B80093681E /* libxml2.tbd */,
@@ -248,11 +248,8 @@
 		6BB1DC051A5942B6009F40CD /* pos-ios-sdk-lib */ = {
 			isa = PBXGroup;
 			children = (
-				506499492E54617800E47680 /* libqpos-ios-release-sdk-v3.8.3.a */,
-				50F2C5832D00327500F0C3D4 /* BTDeviceFinder.h */,
-				50F2C5862D00329200F0C3D4 /* QPOSService.h */,
-				50F2C5872D00329200F0C3D4 /* QPOSUtil.h */,
 				146B00A12A654255008259D5 /* QPOS cute,CR100,D20,D30.xml */,
+				5004DA452EA5F19A0081C282 /* QPOS_Cute_V591.25.241.66_release_202508141112.asc */,
 				146B00A22A654255008259D5 /* QPOS mini.xml */,
 			);
 			path = "pos-ios-sdk-lib";
@@ -362,6 +359,7 @@
 				4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */,
 				6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */,
 				1404A635242B3BE900899293 /* InfoPlist.strings in Resources */,
+				5004DA462EA5F19A0081C282 /* QPOS_Cute_V591.25.241.66_release_202508141112.asc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
