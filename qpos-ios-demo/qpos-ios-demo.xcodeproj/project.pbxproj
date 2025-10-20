@@ -29,8 +29,8 @@
 		14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EFBE09211816B80093681E /* libxml2.tbd */; };
 		1B2B630EBFE668B7D4A9D4C5 /* Pods_qpos_ios_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B0623FCA1DE32DABD39CB8A /* Pods_qpos_ios_demo.framework */; };
 		4B86A8CB1B2E75AD00B95485 /* 1801.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4B86A8CA1B2E75AD00B95485 /* 1801.wav */; };
-		5004DA442EA5DE190081C282 /* libqpos-ios-sdk-v3.8.3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5004DA422EA5DB9E0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework */; };
 		5004DA462EA5F19A0081C282 /* QPOS_Cute_V591.25.241.66_release_202508141112.asc in Resources */ = {isa = PBXBuildFile; fileRef = 5004DA452EA5F19A0081C282 /* QPOS_Cute_V591.25.241.66_release_202508141112.asc */; };
+		5004DA482EA5FA5D0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5004DA472EA5FA5D0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework */; };
 		6B92F87B1C2E70B3008EC77B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */; };
 		75FE2A651ECEFC40001DA427 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FE2A641ECEFC40001DA427 /* MainViewController.m */; };
 		8085CE7B90CF4D1ADE561033 /* Pods_qpos_ios_demoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2774F44810BBE4647B598A /* Pods_qpos_ios_demoTests.framework */; };
@@ -88,11 +88,10 @@
 		3B0623FCA1DE32DABD39CB8A /* Pods_qpos_ios_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_qpos_ios_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D976FCE21B220BAB642802B /* Pods-qpos-ios-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qpos-ios-demo.debug.xcconfig"; path = "Target Support Files/Pods-qpos-ios-demo/Pods-qpos-ios-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		4B86A8CA1B2E75AD00B95485 /* 1801.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 1801.wav; sourceTree = "<group>"; };
-		5004DA422EA5DB9E0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libqpos-ios-sdk-v3.8.3.xcframework"; path = "../../libqpos-ios-sdk-v3.8.3.xcframework"; sourceTree = "<group>"; };
 		5004DA452EA5F19A0081C282 /* QPOS_Cute_V591.25.241.66_release_202508141112.asc */ = {isa = PBXFileReference; lastKnownFileType = file; path = QPOS_Cute_V591.25.241.66_release_202508141112.asc; sourceTree = "<group>"; };
+		5004DA472EA5FA5D0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "libqpos-ios-sdk-v3.8.3.xcframework"; sourceTree = "<group>"; };
 		50F2C58B2D02DD1B00F0C3D4 /* Trace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Trace.h; sourceTree = "<group>"; };
 		50F2C58D2D0690D000F0C3D4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		50F731E32CF89738006EEE28 /* libqpos-ios-sdk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "libqpos-ios-sdk.xcframework"; path = "../../libqpos-ios-sdk.xcframework"; sourceTree = "<group>"; };
 		6B2788B41883D4210095A338 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6B2788B61883D4290095A338 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6B92F87A1C2E70B3008EC77B /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "qpos-ios-demo/Images.xcassets/LaunchImage.launchimage/Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -109,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5004DA442EA5DE190081C282 /* libqpos-ios-sdk-v3.8.3.xcframework in Frameworks */,
+				5004DA482EA5FA5D0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework in Frameworks */,
 				141825E02154E75000E77EB4 /* Security.framework in Frameworks */,
 				14EFBE0A211816B80093681E /* libxml2.tbd in Frameworks */,
 				1B2B630EBFE668B7D4A9D4C5 /* Pods_qpos_ios_demo.framework in Frameworks */,
@@ -156,8 +155,7 @@
 		00A9002F183B08B100D22572 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5004DA422EA5DB9E0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework */,
-				50F731E32CF89738006EEE28 /* libqpos-ios-sdk.xcframework */,
+				5004DA472EA5FA5D0081C282 /* libqpos-ios-sdk-v3.8.3.xcframework */,
 				141825DF2154E75000E77EB4 /* Security.framework */,
 				14EFBE09211816B80093681E /* libxml2.tbd */,
 				6B95E13E190F94E500055ACC /* MediaPlayer.framework */,
