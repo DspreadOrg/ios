@@ -134,7 +134,6 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
     }
     
     func onRequestSetAmount() {
-        
         let alertVc = UIAlertController(title: "please set amount", message: nil, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "confirm", style: .default) { (_) in
             for text in alertVc.textFields! {
@@ -311,7 +310,6 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
     }
     
     func printTransactionData(dict : NSDictionary,operationAction:OperationAction) {
-        
         if dict.count <= 1 {
             return
         }
@@ -401,9 +399,9 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
     
     //inject TMK into pos
     func updateMasterKeyAction(){
-        let newEnMaterKey = "89EEF94D28AA2DC189EEF94D28AA2DC1";
-        let newEnMaterKeyKCV = "82E13665B4624DF5";
-        pos?.setMasterKey(newEnMaterKey, checkValue: newEnMaterKeyKCV);
+        let encryptedNewMasterKey = "B4ABA2BB791C50E7B4ABA2BB791C50E7";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 22222222222222222222222222222222(New Master Key) to get B4ABA2BB791C50E7B4ABA2BB791C50E7
+        let newMasterKeyKCV = "00962B60AA556E65";//22222222222222222222222222222222(New Master Key) 3des encrypt 0000000000000000 to get 00962B60AA556E65
+        pos?.setMasterKey(encryptedNewMasterKey, checkValue: newMasterKeyKCV);
     }
     
     // callback of setMasterKey
@@ -416,38 +414,39 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
     }
     
     func updateIPEKKeyAction(){
-        let groupKey = "00";
-        let tracksn = "00000510F462F8400004";
-        let trackipek = "293C2D8B1D7ABCF83E665A7C5C6532C9";
-        let trackipekCheckValue = "93906AA157EE2604";
+        let keyGroup = "00";
+        let demoTrackKsn = "09120200630001E00001";
+        let encDemoTrackIpek = "FF811AB9745399D6A5096AC1E6EE0AA7";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 5AF93691729D99703E3F2E386B619DFC(track Key) to get FF811AB9745399D6A5096AC1E6EE0AA7
+        let demoTrackIpekKcv = "377EE009F1772396";//5AF93691729D99703E3F2E386B619DFC(track Key) 3des encrypt 0000000000000000 to get 377EE009F1772396
         
-        let emvksn = "00000510F462F8400004";
-        let emvipek = "293C2D8B1D7ABCF83E665A7C5C6532C9";
-        let emvipekcheckvalue = "93906AA157EE2604";
+        let demoEmvKsn = "09120200630001E00001";
+        let encDemoEmvIpek = "39A694D57E565D2BDB85447BF856F074";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt FA21E5290EE89881AF360574087496EA(emv Key) to get 39A694D57E565D2BDB85447BF856F074
+        let demoEmvIpekKcv = "AE8F91382DABB105";//FA21E5290EE89881AF360574087496EA(emv Key) 3des encrypt 0000000000000000 to get AE8F91382DABB105
         
-        let pinksn = "00000510F462F8400004";
-        let pinipek = "293C2D8B1D7ABCF83E665A7C5C6532C9";
-        let pinipekcheckValue = "93906AA157EE2604";
+        let demoPinKsn = "09120200630001E00001";
+        let encDemoPinIpek = "E1AAE4AB1550A8776CF693BE6EA9C9FB";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 0F3E0B885C29062A5C32263A06FB7533(pin Key) to get E1AAE4AB1550A8776CF693BE6EA9C9FB
+        let demoPinIpekKcv = "7DD75C1861CEFE04";//0F3E0B885C29062A5C32263A06FB7533(pin Key) 3des encrypt 0000000000000000 to get 7DD75C1861CEFE04
         
-        pos?.doUpdateIPEKOperation(groupKey, tracksn: tracksn, trackipek: trackipek, trackipekCheckValue: trackipekCheckValue, emvksn: emvksn, emvipek: emvipek, emvipekcheckvalue: emvipekcheckvalue, pinksn: pinksn, pinipek: pinipek, pinipekcheckValue: pinipekcheckValue, block: { (isSuccess, stateStr) in
-            if (isSuccess) {
-                self.textViewLog?.text = stateStr;
+        pos?.doUpdateIPEKOperation(keyGroup, tracksn: demoTrackKsn, trackipek: encDemoTrackIpek, trackipekCheckValue: demoTrackIpekKcv, emvksn: demoEmvKsn, emvipek: encDemoEmvIpek, emvipekcheckvalue: demoEmvIpekKcv, pinksn: demoPinKsn, pinipek: encDemoPinIpek, pinipekcheckValue: demoPinIpekKcv, block: { (isSuccess, stateStr) in
+            self.textViewLog?.text = stateStr;
+            if (!isSuccess) {
+                self.pos?.getKeyCheckValue(CHECKVALUE_KEYTYPE.DUKPT_MKSK_ALLTYPE, keyIndex: 0)
             }
         })
     }
     
     //update work key into pos
     func updateWorkKeyAction(){
-        let pik = "89EEF94D28AA2DC189EEF94D28AA2DC1";
-        let pinKeyCheck = "82E13665B4624DF5";
+        let pik = "9B3A7B883A100F739B3A7B883A100F73";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 11111111111111111111111111111111(PIN Key) to get 9B3A7B883A100F739B3A7B883A100F73
+        let pikCheck = "82E13665B4624DF5";//11111111111111111111111111111111(PIN Key) 3des encrypt 0000000000000000 to get 82E13665B4624DF5
+           
+        let trk = "9B3A7B883A100F739B3A7B883A100F73";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 11111111111111111111111111111111(Track Key) to get 9B3A7B883A100F739B3A7B883A100F73
+        let trkCheck = "82E13665B4624DF5";//11111111111111111111111111111111(Track Key) 3des encrypt 0000000000000000 to get 82E13665B4624DF5
+           
+        let mak = "9B3A7B883A100F739B3A7B883A100F73";//0123456789ABCDEFFEDCBA9876543210(Default Master Key) 3des encrypt 11111111111111111111111111111111(Mac Key) to get 9B3A7B883A100F739B3A7B883A100F73
+        let makCheck = "82E13665B4624DF5";//11111111111111111111111111111111(Mac Key) 3des encrypt 0000000000000000 to get 82E13665B4624DF5
         
-        let trackKey = "89EEF94D28AA2DC189EEF94D28AA2DC1";
-        let trackKeyCheck = "82E13665B4624DF5";
-        
-        let macKey = "89EEF94D28AA2DC189EEF94D28AA2DC1";
-        let macKeyCheck = "82E13665B4624DF5";
-        
-        pos?.udpateWorkKey(pik, pinKeyCheck: pinKeyCheck, trackKey: trackKey, trackKeyCheck: trackKeyCheck, macKey: macKey, macKeyCheck: macKeyCheck);
+        pos?.udpateWorkKey(pik, pinKeyCheck: pikCheck, trackKey: trk, trackKeyCheck: trkCheck, macKey: mak, macKeyCheck: makCheck);
     }
     
     //callback of update work key
@@ -461,7 +460,42 @@ class PosDoTradeVc: UIViewController,QPOSServiceListener{
            self.textViewLog?.text =  "Packet len error";
         }else if(updateInformationResult==UpdateInformationResult.UPDATE_PACKET_VEFIRY_ERROR){
            self.textViewLog?.text =  "Packet vefiry error";
+           self.pos?.getKeyCheckValue(CHECKVALUE_KEYTYPE.DUKPT_MKSK_ALLTYPE, keyIndex: 0)
         }
+    }
+    
+    //update key by tr31
+    func updateKeyByTR31(){
+        DUKPT_2009_CBC.getTR31Block(fromAWS: "09120200630001E00001") { isSuccess, result in
+            if isSuccess{
+                if let resultDict = result, let exportedKeyMaterial = resultDict["exportedKeyMaterial"] as? String {
+                   self.pos?.updateKey(byTR_31: 0, keyBlock: exportedKeyMaterial)
+                } else {
+                   print("Result dictionary is nil or malformed")
+                }
+            }
+        }
+    }
+    
+    func onReturnUpdateKeyByTR_31Result(result: Bool) {
+        var resultMessage = "";
+        if result {
+           resultMessage = "Success";
+        }else{
+           resultMessage = "fail";
+           self.pos?.getKeyCheckValue(CHECKVALUE_KEYTYPE.DUKPT_MKSK_ALLTYPE, keyIndex: 0)
+        }
+        self.textViewLog?.text = resultMessage;
+        print("onReturnUpdateKeyByTR_31Result: " + resultMessage);
+    }
+    
+    func onGetKeyCheckValue(checkValueResult: [AnyHashable : Any]!) {
+        var keyInfo = "";
+        for (key, value) in checkValueResult {
+            keyInfo += "\(key): \(value)";
+        }
+        self.textViewLog?.text = keyInfo;
+        print(keyInfo);
     }
     
     //use xml file to update emv config

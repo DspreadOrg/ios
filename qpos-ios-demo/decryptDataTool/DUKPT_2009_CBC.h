@@ -36,4 +36,8 @@
 +(NSString*)decryptionTrackDataCBC:(NSString*)ksn BDK:(NSString*)mBDK data:(NSString*)mData;
 
 +(NSString *)pinxCreator:(NSString *)pan withPinv:(NSString *)pinv;
+
++(void)decryptDataWithAWS:(NSString *)ksn ciphertext:(NSString *)ciphertext resultBlock:(void (^)(BOOL isSuccess,NSDictionary *decryptionResult))resultBlock;
+
++(void)getTR31BlockFromAWS:(NSString *)ksn resultBlock:(void (^)(BOOL isSuccess,NSDictionary *tr31Block))resultBlock;
 @end
