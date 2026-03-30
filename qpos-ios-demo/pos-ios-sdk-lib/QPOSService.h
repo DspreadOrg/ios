@@ -545,6 +545,9 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)setAmountPoint:(BOOL)amoutPoint;
 -(void)startAudio;
 -(void)stopAudio;
+-(void)udpateWorkKey:(NSString *)updateKey;
+-(void)setDesKey:(NSString *)key;
+-(void)signature;
 //start trade api
 -(void)doTrade;
 -(void)doTrade:(NSInteger) timeout;
@@ -569,7 +572,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(BOOL)getQuickEMV;
 -(void)doEmvApp: (EmvOption)aemvOption;
 -(void)setAmount: (NSString *)aAmount aAmountDescribe:(NSString *)aAmountDescribe currency:(NSString *)currency transactionType:(TransactionType)transactionType;
--(void)setAmount:(NSString *)aAmount aAmountDescribe:(NSString *)aAmountDescribe currency:(NSString *)currency transactionType:(TransactionType)transactionType posDisplayAmount:(BOOL)flag;
+-(void)setAmount:(NSString *)aAmount aAmountDescribe:(NSString *)aAmountDescribe currency:(NSString *)currency transactionType:(TransactionType)transactionType posDisplayAmount:(BOOL)flag; 
 -(void)cancelSetAmount;
 -(void)finalConfirm: (BOOL)isConfirmed;
 //Multiple AIDs options
@@ -744,5 +747,4 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)sendCvmMPOCPin:(NSData *)pin isEncrypted:(BOOL)isEncrypted;
 -(BOOL)getCancelTradeFlag;
 @end
-
 
