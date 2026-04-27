@@ -713,7 +713,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)setIsSupportClsSelectEmvApp:(BOOL)isSupportClsSelectEmvApp;
 -(NSDictionary *)getEncryptDataDict;
 -(void)sendCvmPin:(Byte[])pin pinLen:(NSInteger)pinLen isEncrypted:(BOOL)isEncrypted;
--(void)sendCvmPin:(NSString *)pinStr isEncrypted:(BOOL)isEncrypted;
+-(void)sendCvmPin:(NSData *)pinStr isEncrypted:(BOOL)isEncrypted;
 -(NSString *)getCvmKeyList;
 -(NSArray *)getCvmKeyListArr;
 -(NSInteger)getCvmPinTryLimit;

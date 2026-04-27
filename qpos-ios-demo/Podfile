@@ -1,15 +1,45 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
+source 'https://cdn.cocoapods.org/'
+
 target 'qpos-ios-demo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for qpos-ios-demo
-pod 'AFNetworking', '~> 4.0.1'
+pod 'AFNetworking'
   target 'qpos-ios-demoTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
 end
+
+post_install do |installer|
+
+  # ... 其他配置 ...
+ 
+  # 修复新版 Xcode SDK 中 netinet6/in6.h 私有头文件问题
+
+  Dir.glob('Pods/**/*.{m,mm}').each do |file|
+
+    content = File.read(file)
+
+    if content.include?("#import <netinet6/in6.h>")
+
+      content.gsub!("#import <netinet6/in6.h>\n", '')
+
+      File.chmod(0644, file)
+
+      File.write(file, content)
+
+      puts "✅ 已修复 #{file} 的 netinet6/in6.h 问题"
+
+    end
+
+  end
+
+end
+
+ 

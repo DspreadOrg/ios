@@ -184,7 +184,7 @@ typedef enum : NSUInteger {
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSString *pinblock = [self buildISO4PinBlock:self.pin dict:pos.getEncryptDataDict];
         NSData *dataPin = [pinblock dataUsingEncoding:NSUTF8StringEncoding];
-        [pos sendCvmPin:(Byte *)[dataPin bytes] pinLen:dataPin.length isEncrypted:YES];
+        [pos sendCvmPin:dataPin isEncrypted:YES];
         // Stop listening for text changed notifications.
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:alertController.textFields.firstObject];
     }]];
