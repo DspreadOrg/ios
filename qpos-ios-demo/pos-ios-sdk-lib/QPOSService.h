@@ -668,6 +668,7 @@ trackipekCheckValue:(NSString *)trackipekCheckValue
 -(void)cbc_mac_cn_all:(NSInteger)keyLen atype:(NSInteger)algorithmType otype:(NSInteger)operatorType data:(NSString *)dataStr delay:(NSInteger)timeout withResultBlock:(void (^)(NSString *))cbcmacBlock;
 -(void)getKsn:(void(^)(BOOL isSuccess,NSDictionary *dict))getKsnBlock;
 -(void)getIccCardNo: (NSString *)aterminalTime;
+-(void)getIccCardNo: (NSString *)transactionTime frontLength:(NSInteger)frontLength backLength:(NSInteger)backLength;
 -(void)iccCashBack:(NSString *)transactionTime random:(NSString *)aRandom;
 #pragma mark init emv app
 -(NSMutableDictionary *)getEMVAPPDict;
